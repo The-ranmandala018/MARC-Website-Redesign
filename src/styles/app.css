@@ -20,23 +20,23 @@
     color-scheme: light;
 
     --color-base-100: #ffffff;
-    --color-base-200: #f8fafc;
-    --color-base-300: #e2e8f0;
-    --color-base-content: #0f172a;
+    --color-base-200: #f7f8ff;
+    --color-base-300: #dbe2f2;
+    --color-base-content: #0B0405;
 
-    --color-primary: #087ea4;
+    --color-primary: #004AAD;
     --color-primary-content: #ffffff;
 
-    --color-secondary: #0f172a;
+    --color-secondary: #7C0E24;
     --color-secondary-content: #ffffff;
 
-    --color-accent: #087ea4;
+    --color-accent: #5170FF;
     --color-accent-content: #ffffff;
 
-    --color-neutral: #1e293b;
+    --color-neutral: #0B0405;
     --color-neutral-content: #ffffff;
 
-    --color-info: #087ea4;
+    --color-info: #004AAD;
     --color-success: #16a34a;
     --color-warning: #d97706;
     --color-error: #dc2626;
@@ -54,24 +54,24 @@
     name: "marc-dark";
     color-scheme: dark;
 
-    --color-base-100: #0b1220;
-    --color-base-200: #111827;
-    --color-base-300: #1e293b;
-    --color-base-content: #e5edf6;
+    --color-base-100: #0B0405;
+    --color-base-200: #17070b;
+    --color-base-300: #32101a;
+    --color-base-content: #f8f8ff;
 
-    --color-primary: #38bdf8;
+    --color-primary: #5170FF;
     --color-primary-content: #06283a;
 
-    --color-secondary: #e2e8f0;
+    --color-secondary: #f3dfe4;
     --color-secondary-content: #0b1220;
 
-    --color-accent: #38bdf8;
+    --color-accent: #004AAD;
     --color-accent-content: #06283a;
 
-    --color-neutral: #172033;
+    --color-neutral: #16070a;
     --color-neutral-content: #f8fafc;
 
-    --color-info: #38bdf8;
+    --color-info: #5170FF;
     --color-success: #4ade80;
     --color-warning: #fbbf24;
     --color-error: #f87171;
@@ -103,12 +103,12 @@ html {
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
     background: #ffffff;
-    color: #0f172a;
+    color: #0B0405;
 }
 
 html[data-theme="marc-dark"] {
-    background: #0b1220;
-    color: #e5edf6;
+    background: #0B0405;
+    color: #f8f8ff;
 }
 
 body {
@@ -159,9 +159,9 @@ body {
 .text-gradient {
     background-image: linear-gradient(
         110deg,
-        #087ea4 0%,
-        #0b8fb8 50%,
-        #087ea4 100%
+        #004AAD 0%,
+        #5170FF 50%,
+        #7C0E24 100%
     );
 
     -webkit-background-clip: text;
@@ -183,8 +183,8 @@ body {
 .surface-hover:hover {
     transform: translateY(-3px);
     box-shadow:
-        0 20px 45px -20px rgba(8, 126, 164, 0.14),
-        0 5px 15px -8px rgba(15, 23, 42, 0.10);
+        0 20px 45px -20px rgba(0, 74, 173, 0.14),
+        0 5px 15px -8px rgba(11, 4, 5, 0.10);
 }
 
 /* =========================================================
@@ -195,7 +195,7 @@ body {
     background-image:
         linear-gradient(
             to right,
-            rgba(8, 126, 164, 0.035) 1px,
+            rgba(0, 74, 173, 0.035) 1px,
             transparent 1px
         ),
         linear-gradient(
@@ -215,7 +215,7 @@ body {
     background: rgba(255, 255, 255, 0.88);
     backdrop-filter: blur(18px);
     -webkit-backdrop-filter: blur(18px);
-    border: 1px solid rgba(15, 23, 42, 0.08);
+    border: 1px solid rgba(11, 4, 5, 0.08);
     box-shadow: 0 20px 60px -30px rgba(15, 23, 42, 0.16);
 }
 
@@ -229,14 +229,14 @@ html[data-theme="marc-dark"] .glass {
    ========================================================= */
 
 .btn-primary {
-    background: #087ea4;
+    background: #004AAD;
     border: none;
     color: #ffffff;
-    box-shadow: 0 10px 25px -10px rgba(8, 126, 164, 0.35);
+    box-shadow: 0 10px 25px -10px rgba(0, 74, 173, 0.35);
 }
 
 .btn-primary:hover {
-    background: #076d8d;
+    background: #003d91;
     transform: translateY(-1px);
 }
 
