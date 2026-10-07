@@ -484,42 +484,62 @@ const stats = [
        ========================================================= */
 
     /* =========================================================
-       PARTICLE VORTEX — LIGHT MARC THEME
+       3D-LIKE PARTICLE FLOW — LIGHT MARC THEME
        ========================================================= */
 
     .particle-vortex-glow {
         position:absolute;
-        width:42vw;
-        height:34vw;
-        min-width:360px;
-        min-height:280px;
-        left:58%;
-        top:52%;
+        width:52vw;
+        height:44vw;
+        min-width:520px;
+        min-height:360px;
+        left:67%;
+        top:53%;
         transform:translate(-50%,-50%);
         border-radius:50%;
-        background:radial-gradient(circle,rgba(124,58,237,.12) 0%,rgba(59,130,246,.06) 34%,rgba(34,211,238,.035) 55%,transparent 74%);
-        filter:blur(28px);
+        background:
+            radial-gradient(
+                ellipse,
+                rgba(124,58,237,.14) 0%,
+                rgba(79,70,229,.07) 32%,
+                rgba(6,182,212,.035) 54%,
+                transparent 74%
+            );
+        filter:blur(34px);
         pointer-events:none;
     }
 
     .particle-vortex-core {
         position:absolute;
-        width:210px;
-        height:150px;
-        left:64%;
+        width:270px;
+        height:190px;
+        left:67%;
         top:54%;
         transform:translate(-50%,-50%);
         border-radius:50%;
-        background:radial-gradient(ellipse,rgba(255,255,255,.95) 0%,rgba(167,139,250,.48) 12%,rgba(59,130,246,.16) 35%,transparent 72%);
-        filter:blur(18px);
-        opacity:.75;
+        background:
+            radial-gradient(
+                ellipse,
+                rgba(255,255,255,.96) 0%,
+                rgba(167,139,250,.34) 15%,
+                rgba(59,130,246,.10) 38%,
+                transparent 73%
+            );
+        filter:blur(22px);
+        opacity:.72;
         pointer-events:none;
-        animation:vortexCore 7s ease-in-out infinite;
+        animation:vortexCore 8s ease-in-out infinite;
     }
 
     @keyframes vortexCore {
-        0%,100% { transform:translate(-50%,-50%) scale(1); opacity:.62; }
-        50% { transform:translate(-50%,-50%) scale(1.14); opacity:.9; }
+        0%,100% {
+            transform:translate(-50%,-50%) scale(1);
+            opacity:.55;
+        }
+        50% {
+            transform:translate(-50%,-50%) scale(1.18);
+            opacity:.82;
+        }
     }
 
     /* =========================================================
@@ -580,263 +600,583 @@ const stats = [
 <!-- ============================================================= -->
 
 <script>
+    /*
+     * Premium WebGL particle-flow hero.
+     * The field is intentionally broad: particles travel through a
+     * 3D-like vortex, with depth, glow and long directional flow.
+     */
     const canvas =
         document.getElementById("particleCanvas") as HTMLCanvasElement | null;
 
     if (canvas) {
-        const ctx = canvas.getContext("2d");
+        const gl = canvas.getContext("webgl", {
+            alpha: true,
+            antialias: true,
+            premultipliedAlpha: false,
+        });
 
-        if (ctx) {
-            type Particle = {
-                radius: number;
-                angle: number;
-                speed: number;
-                size: number;
-                alpha: number;
-                hue: number;
-                wobble: number;
-                phase: number;
-            };
+        if (gl) {
+            const vertexShaderSource = \`
+                attribute vec3 aPosition;
+                attribute float aSeed;
+                attribute float aSize;
 
-            let particles: Particle[] = [];
-            let animationFrame = 0;
-            let width = 0;
-            let height = 0;
-            let dpr = 1;
+                uniform float uTime;
+                uniform vec2 uResolution;
+                uniform float uPixelRatio;
 
-            const reducedMotion =
-                window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+                varying float vAlpha;
+                varying float vColor;
 
-            const center = () => ({
-                x: width * 0.66,
-                y: height * 0.54,
-            });
-
-            const createParticles = () => {
-                const mobile = width < 768;
-                const amount = mobile ? 650 : 1500;
-                const maxRadius = Math.min(width, height) * (mobile ? 0.48 : 0.58);
-
-                particles = [];
-
-                for (let i = 0; i < amount; i++) {
-                    const radius =
-                        22 +
-                        Math.pow(Math.random(), 0.58) *
-                            (maxRadius - 22);
-
-                    particles.push({
-                        radius,
-                        angle: Math.random() * Math.PI * 2,
-                        speed:
-                            0.0018 +
-                            (1 - radius / maxRadius) * 0.008 +
-                            Math.random() * 0.0025,
-                        size:
-                            Math.random() < 0.08
-                                ? Math.random() * 2.4 + 1.4
-                                : Math.random() * 1.25 + 0.35,
-                        alpha:
-                            Math.random() * 0.55 + 0.22,
-                        hue: Math.random(),
-                        wobble:
-                            Math.random() * 0.7 + 0.25,
-                        phase: Math.random() * Math.PI * 2,
-                    });
+                float hash(float n) {
+                    return fract(sin(n) * 43758.5453123);
                 }
-            };
 
-            const resizeCanvas = () => {
-                dpr = Math.min(window.devicePixelRatio || 1, 2);
-                width = window.innerWidth;
-                height = window.innerHeight;
+                float noise(float x) {
+                    return hash(floor(x)) * 0.6
+                         + hash(floor(x) + 1.0) * 0.4;
+                }
 
-                canvas.width = width * dpr;
-                canvas.height = height * dpr;
-                canvas.style.width = width + "px";
-                canvas.style.height = height + "px";
+                void main() {
+                    float t = uTime * (0.055 + aSeed * 0.025);
 
-                ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-                createParticles();
-            };
+                    // Broad radial distance. The central region becomes denser.
+                    float r = length(aPosition.xy);
+                    float angle = atan(aPosition.y, aPosition.x);
 
-            const drawParticle = (
-                x: number,
-                y: number,
-                size: number,
-                alpha: number,
-                hue: number,
-            ) => {
-                const gradient = ctx.createRadialGradient(
-                    x, y, 0,
-                    x, y, size * 5,
-                );
+                    // Stronger angular velocity near the vortex eye.
+                    float swirl = 0.18 / (r + 0.18);
+                    swirl += 0.045 * sin(aSeed * 19.0 + uTime * 0.15);
 
-                const color =
-                    hue < 0.42
-                        ? "99,102,241"
-                        : hue < 0.72
-                            ? "124,58,237"
-                            : "6,182,212";
+                    float a = angle + swirl * t * 10.0;
 
-                gradient.addColorStop(0, "rgba(255,255,255," + alpha + ")");
-                gradient.addColorStop(
-                    0.22,
-                    "rgba(" + color + "," + alpha * 0.8 + ")",
-                );
-                gradient.addColorStop(
-                    1,
-                    "rgba(" + color + ",0)",
-                );
+                    // Organic waves bend the otherwise radial flow.
+                    float bend =
+                        sin(a * 3.0 + aSeed * 17.0 + uTime * 0.18) *
+                        (0.025 + r * 0.055);
 
-                ctx.fillStyle = gradient;
-                ctx.beginPath();
-                ctx.arc(x, y, size * 5, 0, Math.PI * 2);
-                ctx.fill();
+                    float rr = r + bend;
 
-                ctx.fillStyle =
-                    "rgba(255,255,255," +
-                    Math.min(1, alpha + 0.15) +
-                    ")";
-                ctx.beginPath();
-                ctx.arc(x, y, Math.max(0.35, size), 0, Math.PI * 2);
-                ctx.fill();
-            };
+                    vec3 p;
+                    p.x = cos(a) * rr;
+                    p.y = sin(a) * rr * 0.62;
 
-            const draw = (time = 0) => {
-                ctx.fillStyle = "rgba(255,255,255,0.13)";
-                ctx.fillRect(0, 0, width, height);
+                    // Depth gives the field its 3D character.
+                    float depth =
+                        sin(aSeed * 23.0 + t * 1.7) * 0.55 +
+                        cos(a * 2.0 + aSeed * 7.0) * 0.18;
 
-                const { x: cx, y: cy } = center();
-                const maxRadius = Math.min(width, height) * 0.58;
+                    p.z = depth + sin(a * 4.0 + aSeed * 13.0) * 0.12;
 
-                particles.forEach((particle) => {
-                    const previousRadius = particle.radius;
+                    // Slow translation makes the entire cloud breathe.
+                    p.x += sin(uTime * 0.08 + aSeed * 9.0) * 0.035;
+                    p.y += cos(uTime * 0.07 + aSeed * 11.0) * 0.025;
 
-                    particle.angle += particle.speed;
-                    particle.radius -=
-                        0.025 +
-                        (1 - particle.radius / maxRadius) * 0.055;
+                    // Perspective projection.
+                    float perspective = 1.0 / (1.65 - p.z * 0.48);
 
-                    if (particle.radius < 18) {
-                        particle.radius =
-                            maxRadius * (0.72 + Math.random() * 0.30);
-                        particle.angle =
-                            Math.random() * Math.PI * 2;
+                    vec2 pos = p.xy * perspective;
+
+                    // Place the vortex toward the visual right so the MARC copy remains clear.
+                    pos.x *= 0.92;
+                    pos += vec2(0.28, 0.01);
+
+                    gl_Position = vec4(pos, p.z * 0.08, 1.0);
+
+                    float core = 1.0 - smoothstep(0.03, 0.42, r);
+                    float edge = smoothstep(0.08, 0.85, r);
+
+                    vAlpha =
+                        (0.28 + aSeed * 0.62) *
+                        (0.55 + core * 0.95) *
+                        (1.0 - edge * 0.16);
+
+                    // 0 = cyan, 1 = indigo, 2 = violet.
+                    vColor = mod(
+                        aSeed * 3.0 +
+                        core * 0.55 +
+                        sin(a * 2.0) * 0.12,
+                        3.0
+                    );
+
+                    gl_PointSize =
+                        max(
+                            0.65,
+                            aSize *
+                            uPixelRatio *
+                            perspective *
+                            (1.0 + core * 1.8)
+                        );
+                }
+            \`;
+
+            const fragmentShaderSource = \`
+                precision mediump float;
+
+                varying float vAlpha;
+                varying float vColor;
+
+                vec3 palette(float c) {
+                    if (c < 1.0) {
+                        return mix(
+                            vec3(0.02, 0.72, 0.92),
+                            vec3(0.24, 0.38, 1.00),
+                            c
+                        );
                     }
 
-                    const normalized =
-                        particle.radius / maxRadius;
+                    if (c < 2.0) {
+                        return mix(
+                            vec3(0.24, 0.38, 1.00),
+                            vec3(0.50, 0.20, 0.95),
+                            c - 1.0
+                        );
+                    }
 
-                    const spiral =
-                        Math.sin(
-                            particle.angle * 2.2 +
-                                particle.phase +
-                                time * 0.00018,
-                        ) *
-                        particle.wobble *
-                        (12 + normalized * 42);
+                    return mix(
+                        vec3(0.50, 0.20, 0.95),
+                        vec3(0.82, 0.40, 1.00),
+                        c - 2.0
+                    );
+                }
 
-                    const x =
-                        cx +
-                        Math.cos(particle.angle) *
-                            particle.radius +
-                        spiral;
+                void main() {
+                    vec2 uv = gl_PointCoord - 0.5;
+                    float d = length(uv);
 
-                    const y =
-                        cy +
-                        Math.sin(particle.angle) *
-                            particle.radius *
-                            0.54 +
-                        Math.sin(
-                            particle.angle * 3 +
-                                particle.phase,
-                        ) *
-                            10 *
-                            normalized;
+                    if (d > 0.5) discard;
+
+                    float glow =
+                        pow(1.0 - smoothstep(0.0, 0.5, d), 2.7);
+
+                    vec3 color = palette(vColor);
+
+                    // White-hot center with MARC spectrum around it.
+                    color = mix(
+                        color,
+                        vec3(0.96, 0.98, 1.0),
+                        smoothstep(0.10, 0.0, d) * 0.72
+                    );
+
+                    gl_FragColor =
+                        vec4(color, glow * vAlpha);
+                }
+            \`;
+
+            const compile = (
+                type: number,
+                source: string,
+            ) => {
+                const shader = gl.createShader(type);
+
+                if (!shader) return null;
+
+                gl.shaderSource(shader, source);
+                gl.compileShader(shader);
+
+                if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
+                    console.warn(
+                        "MARC particle shader:",
+                        gl.getShaderInfoLog(shader),
+                    );
+                    gl.deleteShader(shader);
+                    return null;
+                }
+
+                return shader;
+            };
+
+            const vertexShader =
+                compile(
+                    gl.VERTEX_SHADER,
+                    vertexShaderSource,
+                );
+
+            const fragmentShader =
+                compile(
+                    gl.FRAGMENT_SHADER,
+                    fragmentShaderSource,
+                );
+
+            if (vertexShader && fragmentShader) {
+                const program =
+                    gl.createProgram();
+
+                if (program) {
+                    gl.attachShader(
+                        program,
+                        vertexShader,
+                    );
+                    gl.attachShader(
+                        program,
+                        fragmentShader,
+                    );
+                    gl.linkProgram(program);
 
                     if (
-                        previousRadius > 70 &&
-                        particle.size > 0.8 &&
-                        Math.random() < 0.34
+                        gl.getProgramParameter(
+                            program,
+                            gl.LINK_STATUS,
+                        )
                     ) {
-                        const tailAngle =
-                            particle.angle - 0.07;
-                        const tx =
-                            cx +
-                            Math.cos(tailAngle) *
-                                (particle.radius + 7) +
-                            spiral;
-                        const ty =
-                            cy +
-                            Math.sin(tailAngle) *
-                                (particle.radius + 7) *
-                                0.54;
+                        const positionLocation =
+                            gl.getAttribLocation(
+                                program,
+                                "aPosition",
+                            );
 
-                        ctx.beginPath();
-                        ctx.moveTo(tx, ty);
-                        ctx.lineTo(x, y);
-                        ctx.strokeStyle =
-                            "rgba(99,102,241," +
-                            particle.alpha * 0.10 +
-                            ")";
-                        ctx.lineWidth =
-                            Math.max(0.35, particle.size * 0.45);
-                        ctx.stroke();
+                        const seedLocation =
+                            gl.getAttribLocation(
+                                program,
+                                "aSeed",
+                            );
+
+                        const sizeLocation =
+                            gl.getAttribLocation(
+                                program,
+                                "aSize",
+                            );
+
+                        const timeLocation =
+                            gl.getUniformLocation(
+                                program,
+                                "uTime",
+                            );
+
+                        const resolutionLocation =
+                            gl.getUniformLocation(
+                                program,
+                                "uResolution",
+                            );
+
+                        const pixelRatioLocation =
+                            gl.getUniformLocation(
+                                program,
+                                "uPixelRatio",
+                            );
+
+                        let animationFrame = 0;
+                        let startTime = performance.now();
+
+                        const reducedMotion =
+                            window.matchMedia(
+                                "(prefers-reduced-motion: reduce)",
+                            ).matches;
+
+                        const resize = () => {
+                            const dpr =
+                                Math.min(
+                                    window.devicePixelRatio || 1,
+                                    2,
+                                );
+
+                            canvas.width =
+                                window.innerWidth * dpr;
+
+                            canvas.height =
+                                window.innerHeight * dpr;
+
+                            canvas.style.width =
+                                window.innerWidth + "px";
+
+                            canvas.style.height =
+                                window.innerHeight + "px";
+
+                            gl.viewport(
+                                0,
+                                0,
+                                canvas.width,
+                                canvas.height,
+                            );
+
+                            if (resolutionLocation) {
+                                gl.uniform2f(
+                                    resolutionLocation,
+                                    window.innerWidth,
+                                    window.innerHeight,
+                                );
+                            }
+
+                            if (pixelRatioLocation) {
+                                gl.uniform1f(
+                                    pixelRatioLocation,
+                                    dpr,
+                                );
+                            }
+                        };
+
+                        const createField = () => {
+                            const mobile =
+                                window.innerWidth < 768;
+
+                            const count =
+                                mobile
+                                    ? 4200
+                                    : 8200;
+
+                            const positions =
+                                new Float32Array(
+                                    count * 3,
+                                );
+
+                            const seeds =
+                                new Float32Array(
+                                    count,
+                                );
+
+                            const sizes =
+                                new Float32Array(
+                                    count,
+                                );
+
+                            for (
+                                let i = 0;
+                                i < count;
+                                i++
+                            ) {
+                                /*
+                                 * A broad cloud with a denser middle.
+                                 * The square-root distribution keeps the
+                                 * outer field populated like the reference.
+                                 */
+                                const u =
+                                    Math.random();
+
+                                const radius =
+                                    0.055 +
+                                    Math.pow(
+                                        u,
+                                        0.62,
+                                    ) *
+                                        0.94;
+
+                                const angle =
+                                    Math.random() *
+                                    Math.PI *
+                                    2;
+
+                                positions[i * 3] =
+                                    Math.cos(angle) *
+                                    radius;
+
+                                positions[i * 3 + 1] =
+                                    Math.sin(angle) *
+                                    radius;
+
+                                positions[i * 3 + 2] =
+                                    (Math.random() -
+                                        0.5) *
+                                    1.15;
+
+                                seeds[i] =
+                                    Math.random();
+
+                                sizes[i] =
+                                    Math.random() < 0.035
+                                        ? 2.8 +
+                                          Math.random() *
+                                              3.8
+                                        : 0.7 +
+                                          Math.random() *
+                                              1.9;
+                            }
+
+                            const positionBuffer =
+                                gl.createBuffer();
+
+                            const seedBuffer =
+                                gl.createBuffer();
+
+                            const sizeBuffer =
+                                gl.createBuffer();
+
+                            gl.bindBuffer(
+                                gl.ARRAY_BUFFER,
+                                positionBuffer,
+                            );
+                            gl.bufferData(
+                                gl.ARRAY_BUFFER,
+                                positions,
+                                gl.STATIC_DRAW,
+                            );
+
+                            gl.bindBuffer(
+                                gl.ARRAY_BUFFER,
+                                seedBuffer,
+                            );
+                            gl.bufferData(
+                                gl.ARRAY_BUFFER,
+                                seeds,
+                                gl.STATIC_DRAW,
+                            );
+
+                            gl.bindBuffer(
+                                gl.ARRAY_BUFFER,
+                                sizeBuffer,
+                            );
+                            gl.bufferData(
+                                gl.ARRAY_BUFFER,
+                                sizes,
+                                gl.STATIC_DRAW,
+                            );
+
+                            return {
+                                count,
+                                positionBuffer,
+                                seedBuffer,
+                                sizeBuffer,
+                            };
+                        };
+
+                        const field =
+                            createField();
+
+                        const draw = (
+                            now: number,
+                        ) => {
+                            const elapsed =
+                                (now -
+                                    startTime) /
+                                1000;
+
+                            gl.clearColor(
+                                0,
+                                0,
+                                0,
+                                0,
+                            );
+
+                            gl.clear(
+                                gl.COLOR_BUFFER_BIT,
+                            );
+
+                            gl.useProgram(
+                                program,
+                            );
+
+                            if (timeLocation) {
+                                gl.uniform1f(
+                                    timeLocation,
+                                    reducedMotion
+                                        ? 0
+                                        : elapsed,
+                                );
+                            }
+
+                            gl.enable(
+                                gl.BLEND,
+                            );
+
+                            gl.blendFunc(
+                                gl.SRC_ALPHA,
+                                gl.ONE,
+                            );
+
+                            gl.enable(
+                                gl.PROGRAM_POINT_SIZE,
+                            );
+
+                            gl.bindBuffer(
+                                gl.ARRAY_BUFFER,
+                                field.positionBuffer,
+                            );
+                            gl.enableVertexAttribArray(
+                                positionLocation,
+                            );
+                            gl.vertexAttribPointer(
+                                positionLocation,
+                                3,
+                                gl.FLOAT,
+                                false,
+                                0,
+                                0,
+                            );
+
+                            gl.bindBuffer(
+                                gl.ARRAY_BUFFER,
+                                field.seedBuffer,
+                            );
+                            gl.enableVertexAttribArray(
+                                seedLocation,
+                            );
+                            gl.vertexAttribPointer(
+                                seedLocation,
+                                1,
+                                gl.FLOAT,
+                                false,
+                                0,
+                                0,
+                            );
+
+                            gl.bindBuffer(
+                                gl.ARRAY_BUFFER,
+                                field.sizeBuffer,
+                            );
+                            gl.enableVertexAttribArray(
+                                sizeLocation,
+                            );
+                            gl.vertexAttribPointer(
+                                sizeLocation,
+                                1,
+                                gl.FLOAT,
+                                false,
+                                0,
+                                0,
+                            );
+
+                            gl.drawArrays(
+                                gl.POINTS,
+                                0,
+                                field.count,
+                            );
+
+                            if (!reducedMotion) {
+                                animationFrame =
+                                    requestAnimationFrame(
+                                        draw,
+                                    );
+                            }
+                        };
+
+                        resize();
+
+                        window.addEventListener(
+                            "resize",
+                            resize,
+                        );
+
+                        draw(performance.now());
+
+                        document.addEventListener(
+                            "astro:before-swap",
+                            () => {
+                                cancelAnimationFrame(
+                                    animationFrame,
+                                );
+
+                                window.removeEventListener(
+                                    "resize",
+                                    resize,
+                                );
+
+                                gl.deleteBuffer(
+                                    field.positionBuffer,
+                                );
+                                gl.deleteBuffer(
+                                    field.seedBuffer,
+                                );
+                                gl.deleteBuffer(
+                                    field.sizeBuffer,
+                                );
+                                gl.deleteProgram(
+                                    program,
+                                );
+                            },
+                            { once: true },
+                        );
                     }
-
-                    const coreBoost =
-                        normalized < 0.20
-                            ? 0.42
-                            : normalized < 0.42
-                                ? 0.18
-                                : 0;
-
-                    drawParticle(
-                        x,
-                        y,
-                        particle.size * (1 + coreBoost),
-                        Math.min(0.95, particle.alpha + coreBoost),
-                        particle.hue,
-                    );
-                });
-
-                for (let i = 0; i < 90; i++) {
-                    const angle =
-                        time * 0.00022 +
-                        i * 0.19;
-                    const radius =
-                        10 + (i % 18) * 2.2;
-
-                    drawParticle(
-                        cx + Math.cos(angle) * radius,
-                        cy + Math.sin(angle) * radius * 0.46,
-                        0.45 + (i % 3) * 0.18,
-                        0.42,
-                        i % 2 === 0 ? 0.25 : 0.55,
-                    );
                 }
-
-                if (!reducedMotion) {
-                    animationFrame = requestAnimationFrame(draw);
-                }
-            };
-
-            resizeCanvas();
-            ctx.fillStyle = "rgba(255,255,255,1)";
-            ctx.fillRect(0, 0, width, height);
-            draw(performance.now());
-
-            window.addEventListener("resize", resizeCanvas);
-
-            document.addEventListener(
-                "astro:before-swap",
-                () => {
-                    cancelAnimationFrame(animationFrame);
-                    window.removeEventListener("resize", resizeCanvas);
-                },
-                { once: true },
-            );
+            }
         }
     }
 </script>
