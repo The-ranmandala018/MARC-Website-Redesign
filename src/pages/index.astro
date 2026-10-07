@@ -669,7 +669,7 @@ if (canvas) {
 
             ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
-            const count = w < 768 ? 850 : 1900;
+            const count = w < 768 ? 1200 : 2800;
 
             particles = Array.from({ length: count }, () => {
                 const u = Math.random();
@@ -699,7 +699,7 @@ if (canvas) {
             // Keep the particle sphere on the right side of the hero.
             const cx = w * 0.72;
             const cy = h * 0.52;
-            const radius = Math.min(w, h) * (w < 768 ? 0.29 : 0.36);
+            const radius = Math.min(w, h) * (w < 768 ? 0.34 : 0.43);
 
             const cosY = Math.cos(time * 0.75);
             const sinY = Math.sin(time * 0.75);
@@ -736,8 +736,8 @@ if (canvas) {
                     Math.sin(time * 3.2 + p.phase) * 0.22;
 
                 const alpha = Math.max(
-                    0.04,
-                    Math.min(0.95, p.alpha * twinkle)
+                    0.10,
+                    Math.min(1, p.alpha * twinkle * 1.25)
                 );
 
                 // Stronger MARC blue/wine particles for better visibility.
