@@ -79,28 +79,36 @@ const isActive = (href: string) => {
                             href={link.href}
                             class={`
                                 relative
-                                px-3.5
+                                isolate
+                                px-4
                                 py-2.5
                                 rounded-full
                                 text-sm
                                 font-medium
                                 transition-all
                                 duration-300
-
+                                overflow-hidden
+                                border
+                                border-white/70
+                                bg-gradient-to-r from-sky-100/75 via-blue-100/65 to-violet-100/60
+                                backdrop-blur-xl
+                                shadow-[inset_0_1px_1px_rgba(255,255,255,0.95),inset_0_-1px_8px_rgba(255,255,255,0.45),0_4px_16px_rgba(59,130,246,0.08)]
+                                hover:-translate-y-0.5
+                                hover:shadow-[inset_0_1px_1px_rgba(255,255,255,1),inset_0_-1px_10px_rgba(255,255,255,0.55),0_8px_24px_rgba(59,130,246,0.16)]
                                 ${
                                      isActive(link.href)
-                                        ? "bg-white/70 !text-sky-700 border border-white/80 shadow-sm backdrop-blur-md"
-                                        : "!text-slate-700 hover:!text-slate-950 hover:bg-white/40"
+                                        ? "!text-slate-950 ring-1 ring-sky-200/70"
+                                        : "!text-slate-700"
                                 }
                             `}
                         >
+                            <span class="pointer-events-none absolute inset-0 rounded-full bg-gradient-to-r from-white/55 via-transparent to-white/40 opacity-80"></span>
+                            <span class="relative z-10">{link.label}</span>
                             {link.label}
 
                             {
                                 isActive(link.href) && (
-                                    <span
-                                        class="absolute left-1/2 -bottom-1 -translate-x-1/2 w-6 h-0.5 rounded-full bg-gradient-to-r from-sky-500 to-violet-500"
-                                    ></span>
+                                    <span class="absolute inset-x-4 bottom-1 h-0.5 rounded-full bg-gradient-to-r from-sky-400 via-blue-500 to-violet-400 opacity-80"></span>
                                 )
                             }
                         </a>
