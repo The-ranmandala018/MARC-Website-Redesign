@@ -2,6 +2,8 @@
 
 @plugin "@tailwindcss/typography";
 
+@custom-variant dark (&:where([data-theme="marc-dark"], [data-theme="marc-dark"] *));
+
 @plugin "daisyui" {
     themes: marc --default, marc-dark;
 }
