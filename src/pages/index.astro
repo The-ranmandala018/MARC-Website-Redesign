@@ -4,7 +4,6 @@ import ResearchAreaCard from "../components/ResearchAreaCard.astro";
 import Section from "../components/ui/Section.astro";
 import { getCollection } from "astro:content";
 import { Image } from "astro:assets";
-import heroImage from "../assets/Home_page_Design.jpeg";
 
 const researchAreas = Object.values(
     import.meta.glob("./Research/*.md", { eager: true }),
@@ -55,26 +54,6 @@ const stats = [
         <!-- ===================================================== -->
 
         <div class="absolute inset-0 overflow-hidden">
-
-            <!-- Original MARC research image -->
-            <Image
-                src={heroImage}
-                alt="MARC research"
-                class="absolute inset-0 w-full h-full object-cover opacity-0"
-                loading="eager"
-            />
-
-            <!-- Very subtle light gradient -->
-            <div class="hero-gradient absolute inset-0"></div>
-
-            <!-- Soft blue glow -->
-            <div class="orb orb-one"></div>
-
-            <!-- Soft purple glow -->
-            <div class="orb orb-two"></div>
-
-            <!-- Soft cyan glow -->
-            <div class="orb orb-three"></div>
 
             <!-- Particle canvas -->
             <canvas
@@ -518,184 +497,8 @@ const stats = [
 <style>
 
     /* =========================================================
-       MOVING LIGHT GRADIENT
+       HERO — CLEAN LIGHT BACKGROUND
        ========================================================= */
-
-    .hero-gradient {
-        background:
-            radial-gradient(
-                circle at 72% 35%,
-                rgba(14, 165, 233, 0.09),
-                transparent 32%
-            ),
-            radial-gradient(
-                circle at 30% 70%,
-                rgba(124, 58, 237, 0.06),
-                transparent 32%
-            );
-
-        animation: gradientMove 14s ease-in-out infinite alternate;
-    }
-
-
-    @keyframes gradientMove {
-
-        0% {
-            transform: scale(1);
-        }
-
-        50% {
-            transform: scale(1.06);
-        }
-
-        100% {
-            transform: scale(1);
-        }
-
-    }
-
-
-    /* =========================================================
-       SOFT ORBS
-       ========================================================= */
-
-    .orb {
-        position: absolute;
-        border-radius: 50%;
-        filter: blur(100px);
-        pointer-events: none;
-    }
-
-
-    .orb-one {
-        width: 420px;
-        height: 420px;
-
-        background: rgba(14, 165, 233, 0.10);
-
-        top: 10%;
-        right: 5%;
-
-        animation:
-            orbOne 12s ease-in-out infinite alternate;
-    }
-
-
-    .orb-two {
-        width: 350px;
-        height: 350px;
-
-        background: rgba(124, 58, 237, 0.07);
-
-        bottom: 0;
-        left: 10%;
-
-        animation:
-            orbTwo 16s ease-in-out infinite alternate;
-    }
-
-
-    .orb-three {
-        width: 240px;
-        height: 240px;
-
-        background: rgba(6, 182, 212, 0.08);
-
-        top: 40%;
-        right: 30%;
-
-        animation:
-            orbThree 10s ease-in-out infinite alternate;
-    }
-
-
-    @keyframes orbOne {
-
-        from {
-            transform: translate(0, 0);
-        }
-
-        to {
-            transform: translate(-70px, 50px);
-        }
-
-    }
-
-
-    @keyframes orbTwo {
-
-        from {
-            transform: translate(0, 0);
-        }
-
-        to {
-            transform: translate(90px, -60px);
-        }
-
-    }
-
-
-    @keyframes orbThree {
-
-        from {
-            transform: translate(0, 0) scale(1);
-        }
-
-        to {
-            transform: translate(-35px, 25px) scale(1.2);
-        }
-
-    }
-
-
-    /* =========================================================
-       HERO LIGHT GRID
-       ========================================================= */
-
-    .hero-grid {
-        background-image:
-            linear-gradient(
-                rgba(15, 23, 42, 0.025) 1px,
-                transparent 1px
-            ),
-            linear-gradient(
-                90deg,
-                rgba(15, 23, 42, 0.025) 1px,
-                transparent 1px
-            );
-
-        background-size: 70px 70px;
-
-        mask-image:
-            radial-gradient(
-                ellipse at center,
-                black 0%,
-                transparent 75%
-            );
-
-        pointer-events: none;
-    }
-
-
-    /* =========================================================
-       LIGHT FADE
-       ========================================================= */
-
-    .hero-light-fade {
-        position: absolute;
-        inset: 0;
-
-        background:
-            linear-gradient(
-                to right,
-                rgba(255,255,255,0.94),
-                rgba(255,255,255,0.72),
-                rgba(255,255,255,0.45)
-            );
-
-        pointer-events: none;
-    }
-
 
     /* =========================================================
        3D AI SPHERE
@@ -997,42 +800,6 @@ const stats = [
                 scale(1.12);
         }
 
-    }
-
-
-    /* =========================================================
-       CTA GLOWS
-       ========================================================= */
-
-    .cta-glow-blue {
-
-        position: absolute;
-
-        border-radius: 9999px;
-
-        background: #0ea5e9;
-
-        filter: blur(100px);
-
-        opacity: 0.12;
-
-        pointer-events: none;
-    }
-
-
-    .cta-glow-purple {
-
-        position: absolute;
-
-        border-radius: 9999px;
-
-        background: #7c3aed;
-
-        filter: blur(100px);
-
-        opacity: 0.10;
-
-        pointer-events: none;
     }
 
 
