@@ -740,13 +740,13 @@ if (canvas) {
                     Math.min(0.95, p.alpha * twinkle)
                 );
 
-                // Mostly white, with very subtle MARC blue/wine accents.
+                // Stronger MARC blue/wine particles for better visibility.
                 const accent =
-                    p.phase % 3.2 < 0.22
+                    p.phase % 3.2 < 0.34
                         ? "124,14,36"
-                        : p.phase % 3.2 < 0.62
-                          ? "81,112,255"
-                          : "255,255,255";
+                        : p.phase % 3.2 < 0.72
+                          ? "0,74,173"
+                          : "81,112,255";
 
                 const glow = ctx.createRadialGradient(
                     p.x,
@@ -783,7 +783,7 @@ if (canvas) {
 
                 ctx.fillStyle =
                     "rgba(255,255,255," +
-                    Math.min(1, alpha + 0.12) +
+                    Math.min(1, alpha + 0.22) +
                     ")";
 
                 ctx.beginPath();
