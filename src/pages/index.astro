@@ -56,10 +56,23 @@ const stats = [
         <div class="absolute inset-0 overflow-hidden">
 
             <!-- Particle canvas -->
-            <canvas
-                id="particleCanvas"
-                class="absolute inset-0 w-full h-full z-[10] pointer-events-none"
-            ></canvas>
+            <!--
+                Original particle canvas animation — kept here for reference.
+                The new Numbers in Motion GIF is used instead.
+
+                <canvas
+                    id="particleCanvas"
+                    class="absolute inset-0 w-full h-full z-[10] pointer-events-none"
+                ></canvas>
+            -->
+
+            <!-- Numbers in Motion background -->
+            <img
+                src="/Numbers%20in%20Motion.gif"
+                alt=""
+                aria-hidden="true"
+                class="absolute inset-0 w-full h-full object-cover object-center z-[10] pointer-events-none opacity-80"
+            />
 
             <!-- Particle vortex inspired by the supplied reference -->
             <div class="particle-vortex-glow" aria-hidden="true"></div>
@@ -631,6 +644,7 @@ const stats = [
 <!-- PARTICLE / NEURAL NETWORK SCRIPT -->
 <!-- ============================================================= -->
 
+<!--
 <script>
 const canvas=document.getElementById("particleCanvas") as HTMLCanvasElement|null;
 if(canvas){
@@ -706,4 +720,5 @@ if(canvas){
   document.addEventListener("astro:before-swap",()=>{cancelAnimationFrame(raf);window.removeEventListener("resize",resize)},{once:true});
  }
 }
-</script>
+</script
+-->>
