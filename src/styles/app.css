@@ -3,12 +3,13 @@
 @plugin "@tailwindcss/typography";
 
 @plugin "daisyui" {
-    themes: marc --default;
+    themes: marc --default, marc-dark;
 }
 
 /* =========================================================
-   MARC — LIGHT AI RESEARCH THEME
-   Designed around the existing MARC logo
+   MARC — CLEAN LIGHT ACADEMIC THEME
+   Light mode is the default.
+   Dark mode is available from the navbar toggle.
    ========================================================= */
 
 @plugin "daisyui/theme" {
@@ -16,34 +17,62 @@
     default: true;
     color-scheme: light;
 
-    /* Main surfaces */
     --color-base-100: #ffffff;
-    --color-base-200: #f7f9fc;
-    --color-base-300: #e8edf5;
+    --color-base-200: #f8fafc;
+    --color-base-300: #e2e8f0;
+    --color-base-content: #0f172a;
 
-    /* Main text */
-    --color-base-content: #0b1220;
-
-    /* MARC / AI blue */
     --color-primary: #087ea4;
     --color-primary-content: #ffffff;
 
-    /* Dark navy */
-    --color-secondary: #0b1220;
+    --color-secondary: #0f172a;
     --color-secondary-content: #ffffff;
 
-    /* AI purple */
-    --color-accent: #6d4aff;
+    --color-accent: #087ea4;
     --color-accent-content: #ffffff;
 
-    /* Neutral */
-    --color-neutral: #172033;
+    --color-neutral: #1e293b;
     --color-neutral-content: #ffffff;
 
     --color-info: #087ea4;
     --color-success: #16a34a;
     --color-warning: #d97706;
     --color-error: #dc2626;
+
+    --radius-selector: 0.75rem;
+    --radius-field: 0.625rem;
+    --radius-box: 1rem;
+
+    --border: 1px;
+    --depth: 0;
+    --noise: 0;
+}
+
+@plugin "daisyui/theme" {
+    name: "marc-dark";
+    color-scheme: dark;
+
+    --color-base-100: #0b1220;
+    --color-base-200: #111827;
+    --color-base-300: #1e293b;
+    --color-base-content: #e5edf6;
+
+    --color-primary: #38bdf8;
+    --color-primary-content: #06283a;
+
+    --color-secondary: #e2e8f0;
+    --color-secondary-content: #0b1220;
+
+    --color-accent: #38bdf8;
+    --color-accent-content: #06283a;
+
+    --color-neutral: #172033;
+    --color-neutral-content: #f8fafc;
+
+    --color-info: #38bdf8;
+    --color-success: #4ade80;
+    --color-warning: #fbbf24;
+    --color-error: #f87171;
 
     --radius-selector: 0.75rem;
     --radius-field: 0.625rem;
@@ -71,14 +100,18 @@ html {
 
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
-
     background: #ffffff;
-    color: #0b1220;
+    color: #0f172a;
+}
+
+html[data-theme="marc-dark"] {
+    background: #0b1220;
+    color: #e5edf6;
 }
 
 body {
-    background: #ffffff;
-    color: #0b1220;
+    background: var(--color-base-100);
+    color: var(--color-base-content);
 }
 
 /* =========================================================
@@ -113,21 +146,20 @@ body {
     font-weight: 600;
     letter-spacing: 0.16em;
     text-transform: uppercase;
-    color: #0b1220;
+    color: var(--color-base-content);
     opacity: 0.65;
 }
 
 /* =========================================================
-   GRADIENT TEXT
+   MARC BLUE TEXT
    ========================================================= */
 
 .text-gradient {
     background-image: linear-gradient(
         110deg,
         #087ea4 0%,
-        #4169e1 45%,
-        #6d4aff 75%,
-        #9b5de5 100%
+        #0b8fb8 50%,
+        #087ea4 100%
     );
 
     -webkit-background-clip: text;
@@ -148,26 +180,25 @@ body {
 
 .surface-hover:hover {
     transform: translateY(-3px);
-
     box-shadow:
-        0 20px 45px -20px rgba(8, 126, 164, 0.18),
-        0 5px 15px -8px rgba(11, 18, 32, 0.12);
+        0 20px 45px -20px rgba(8, 126, 164, 0.14),
+        0 5px 15px -8px rgba(15, 23, 42, 0.10);
 }
 
 /* =========================================================
-   LIGHT AI GRID
+   VERY SUBTLE GRID
    ========================================================= */
 
 .bg-grid {
     background-image:
         linear-gradient(
             to right,
-            rgba(8, 126, 164, 0.045) 1px,
+            rgba(8, 126, 164, 0.035) 1px,
             transparent 1px
         ),
         linear-gradient(
             to bottom,
-            rgba(109, 74, 255, 0.045) 1px,
+            rgba(8, 126, 164, 0.035) 1px,
             transparent 1px
         );
 
@@ -175,56 +206,20 @@ body {
 }
 
 /* =========================================================
-   HERO / AI BACKGROUND
-   ========================================================= */
-
-
-
-/* =========================================================
-   AI GLOW BLOBS
-   ========================================================= */
-
-.blob {
-    position: absolute;
-    border-radius: 9999px;
-    filter: blur(80px);
-    opacity: 0.22;
-    pointer-events: none;
-    z-index: 0;
-}
-
-.blob-blue {
-    background: #087ea4;
-}
-
-.blob-purple {
-    background: #6d4aff;
-}
-
-/* =========================================================
    GLASS
    ========================================================= */
 
 .glass {
-    background: rgba(255, 255, 255, 0.72);
+    background: rgba(255, 255, 255, 0.88);
     backdrop-filter: blur(18px);
     -webkit-backdrop-filter: blur(18px);
-
-    border: 1px solid rgba(11, 18, 32, 0.08);
-
-    box-shadow:
-        0 20px 60px -30px rgba(11, 18, 32, 0.18),
-        0 5px 20px -10px rgba(8, 126, 164, 0.10);
+    border: 1px solid rgba(15, 23, 42, 0.08);
+    box-shadow: 0 20px 60px -30px rgba(15, 23, 42, 0.16);
 }
 
-/* =========================================================
-   AI GLOW
-   ========================================================= */
-
-.ai-glow {
-    box-shadow:
-        0 0 30px rgba(8, 126, 164, 0.15),
-        0 0 80px rgba(109, 74, 255, 0.08);
+html[data-theme="marc-dark"] .glass {
+    background: rgba(17, 24, 39, 0.88);
+    border-color: rgba(255, 255, 255, 0.08);
 }
 
 /* =========================================================
@@ -232,25 +227,14 @@ body {
    ========================================================= */
 
 .btn-primary {
-    background: linear-gradient(
-        135deg,
-        #087ea4,
-        #4169e1
-    );
-
+    background: #087ea4;
     border: none;
-
-    box-shadow:
-        0 10px 25px -10px rgba(8, 126, 164, 0.45);
+    color: #ffffff;
+    box-shadow: 0 10px 25px -10px rgba(8, 126, 164, 0.35);
 }
 
 .btn-primary:hover {
-    background: linear-gradient(
-        135deg,
-        #076d8d,
-        #5a45d6
-    );
-
+    background: #076d8d;
     transform: translateY(-1px);
 }
 
@@ -261,11 +245,10 @@ body {
 .divider-soft {
     height: 1px;
     width: 100%;
-
     background: linear-gradient(
         to right,
         transparent,
-        rgba(11, 18, 32, 0.15),
+        rgba(15, 23, 42, 0.12),
         transparent
     );
 }
