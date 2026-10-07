@@ -1,5 +1,5 @@
 ---
-import brandLogo from "../assets/marc-brand-lockup.png";
+import logo from "../assets/logo.png";
 import { Image } from "astro:assets";
 
 const links = [
@@ -42,14 +42,24 @@ const isActive = (href: string) => {
 
             <a
                 href="/"
-                class="flex items-center shrink-0"
+                class="flex items-center gap-3 shrink-0"
                 aria-label="MARC Home"
             >
                 <Image
-                    src={brandLogo}
-                    alt="Multidisciplinary AI Research Centre, University of Peradeniya"
+                    src={logo}
+                    alt="MARC logo"
                     class="h-14 sm:h-16 lg:h-[72px] w-auto object-contain"
                 />
+
+                <div class="leading-tight">
+                    <div class="text-lg sm:text-xl lg:text-2xl font-extrabold tracking-tight text-base-content whitespace-nowrap">
+                        Multidisciplinary AI Research Centre
+                    </div>
+
+                    <div class="mt-1 text-xs sm:text-sm lg:text-base font-semibold text-base-content/65 whitespace-nowrap">
+                        University of Peradeniya
+                    </div>
+                </div>
             </a>
 
 
