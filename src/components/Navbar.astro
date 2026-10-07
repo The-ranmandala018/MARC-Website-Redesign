@@ -71,7 +71,7 @@ const isActive = (href: string) => {
                  ===================================================== -->
 
             <nav
-                class="hidden lg:flex items-center gap-1"
+                class="hidden lg:flex items-center gap-1.5 shrink-0"
             >
                 {
                     links.map((link) => (
@@ -79,7 +79,7 @@ const isActive = (href: string) => {
                             href={link.href}
                             class={`
                                 relative
-                                px-4
+                                px-3.5
                                 py-2.5
                                 rounded-full
                                 text-sm
@@ -88,9 +88,9 @@ const isActive = (href: string) => {
                                 duration-300
 
                                 ${
-                                    isActive(link.href)
-                                        ? "bg-white/55 text-primary border border-white/70 shadow-sm backdrop-blur-md"
-                                        : "text-base-content/70 hover:text-base-content hover:bg-white/35"
+                                     isActive(link.href)
+                                        ? "bg-white/65 text-sky-700 border border-white/80 shadow-sm backdrop-blur-md"
+                                        : "text-slate-700 hover:text-slate-950 hover:bg-white/40"
                                 }
                             `}
                         >
