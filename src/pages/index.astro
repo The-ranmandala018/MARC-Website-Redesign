@@ -120,7 +120,6 @@ const stats = [
                     AI · Intelligence · Innovation
                 </div>
             </div>
-            </div>
 
             <!--
                 IMPORTANT:
@@ -145,7 +144,7 @@ const stats = [
 
             <!-- Clean content area -->
             <div
-                class="relative overflow-hidden rounded-[2rem] border border-slate-200/80 bg-white/75 dark:border-white/10 dark:bg-slate-900/60 backdrop-blur-xl shadow-[0_30px_100px_-40px_rgba(15,23,42,0.25)]"
+                class="relative overflow-hidden rounded-[2rem] border border-white/20 bg-white/5 dark:border-white/10 dark:bg-slate-950/20 backdrop-blur-[2px] shadow-[0_30px_100px_-40px_rgba(15,23,42,0.35)]"
             >
 
                 <div
@@ -159,7 +158,7 @@ const stats = [
                              ================================================= -->
 
                         <div
-                            class="inline-flex items-center gap-3 rounded-full border border-slate-200 bg-white/80 px-4 py-2 mb-8 shadow-sm dark:border-slate-700 dark:bg-slate-800/70"
+                            class="inline-flex items-center gap-3 rounded-full border border-white/15 bg-white/10 px-4 py-2 mb-8 shadow-sm backdrop-blur-md"
                         >
 
                             <span
@@ -167,7 +166,7 @@ const stats = [
                             ></span>
 
                             <span
-                                class="text-xs sm:text-sm tracking-wide text-slate-600 dark:text-slate-300"
+                                class="text-xs sm:text-sm tracking-wide text-slate-200"
                             >
                                 University of Peradeniya · Faculty of Engineering
                             </span>
@@ -180,7 +179,7 @@ const stats = [
                              ================================================= -->
 
                         <h1
-                            class="font-display text-5xl sm:text-6xl md:text-7xl lg:text-[6.5rem] leading-[0.88] tracking-tight max-w-5xl text-slate-900 dark:text-white"
+                            class="font-display text-5xl sm:text-6xl md:text-7xl lg:text-[6.5rem] leading-[0.88] tracking-tight max-w-5xl text-white"
                         >
 
                             Multidisciplinary
@@ -193,7 +192,7 @@ const stats = [
 
                             <br />
 
-                            <span class="text-slate-700 dark:text-white/90">
+                            <span class="text-white/90">
                                 for a human future.
                             </span>
 
@@ -253,7 +252,7 @@ const stats = [
 
                             <a
                                 href="/contact"
-                                class="inline-flex items-center gap-3 rounded-full border border-slate-300 bg-white/80 px-7 py-3.5 text-sm font-medium text-slate-700 backdrop-blur-md transition-all duration-300 hover:bg-slate-50 hover:border-sky-300 dark:border-slate-700 dark:bg-slate-900/70 dark:text-slate-200 dark:hover:bg-slate-800"
+                                class="inline-flex items-center gap-3 rounded-full border border-white/20 bg-white/10 px-7 py-3.5 text-sm font-medium text-white/85 backdrop-blur-md transition-all duration-300 hover:bg-white/15 hover:border-sky-300/50"
                             >
                                 Contact Us
                             </a>
@@ -270,7 +269,7 @@ const stats = [
                      ================================================= -->
 
                 <div
-                    class="relative z-20 border-t border-slate-200/80 px-7 py-5 sm:px-12 lg:px-20 flex flex-col sm:flex-row justify-between gap-4 text-xs sm:text-sm text-slate-500 dark:border-white/10 dark:text-slate-400"
+                    class="relative z-20 border-t border-white/10 px-7 py-5 sm:px-12 lg:px-20 flex flex-col sm:flex-row justify-between gap-4 text-xs sm:text-sm text-white/45"
                 >
 
                     <span>
@@ -543,39 +542,46 @@ const stats = [
 
     .liquid-ai-visual {
         position: absolute;
-        width: 620px;
-        height: 560px;
-        right: -55px;
-        top: 50%;
-        transform: translateY(-50%);
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 4;
         overflow: hidden;
-        border-radius: 42px;
+        border-radius: 0;
         pointer-events: none;
         background:
-            radial-gradient(circle at 68% 50%, rgba(91,33,182,0.22), transparent 42%),
-            radial-gradient(circle at 42% 46%, rgba(14,165,233,0.16), transparent 45%),
-            linear-gradient(145deg, #030712 0%, #070b1d 52%, #020617 100%);
-        box-shadow:
-            inset 0 0 80px rgba(59,130,246,0.08),
-            0 30px 90px rgba(15,23,42,0.20);
-        animation: liquidFloat 9s ease-in-out infinite;
+            radial-gradient(circle at 72% 48%, rgba(168,85,247,0.30), transparent 34%),
+            radial-gradient(circle at 38% 55%, rgba(14,165,233,0.20), transparent 40%),
+            linear-gradient(135deg, #020617 0%, #050816 48%, #020617 100%);
+        box-shadow: inset 0 0 140px rgba(37,99,235,0.12);
+        animation: liquidBackgroundFloat 12s ease-in-out infinite;
     }
 
     .liquid-ai-visual::before {
         content: "";
         position: absolute;
-        inset: 1px;
-        border-radius: 41px;
-        border: 1px solid rgba(255,255,255,0.10);
-        background: linear-gradient(120deg, rgba(255,255,255,0.05), transparent 35%, rgba(139,92,246,0.04));
+        inset: 0;
+        z-index: 8;
+        background:
+            linear-gradient(90deg, rgba(2,6,23,0.86) 0%, rgba(2,6,23,0.52) 34%, rgba(2,6,23,0.12) 68%, rgba(2,6,23,0.28) 100%),
+            radial-gradient(circle at 70% 52%, transparent 0%, rgba(2,6,23,0.10) 52%, rgba(2,6,23,0.55) 100%);
+    }
+
+    .liquid-ai-visual::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        z-index: 9;
+        pointer-events: none;
+        background: linear-gradient(180deg, rgba(255,255,255,0.04), transparent 22%, transparent 78%, rgba(0,0,0,0.18));
     }
 
     .liquid-glow {
         position: absolute;
-        width: 430px;
-        height: 300px;
-        left: 95px;
-        top: 120px;
+        width: min(58vw, 760px);
+        height: min(42vw, 430px);
+        left: 34%;
+        top: 24%;
         border-radius: 50%;
         background:
             radial-gradient(circle,
@@ -589,10 +595,10 @@ const stats = [
 
     .liquid-core {
         position: absolute;
-        width: 310px;
-        height: 105px;
-        left: 75px;
-        top: 190px;
+        width: min(46vw, 650px);
+        height: min(13vw, 150px);
+        left: 8%;
+        top: 39%;
         border-radius: 50%;
         background: radial-gradient(ellipse, rgba(255,255,255,0.96) 0%, rgba(216,180,254,0.82) 16%, rgba(168,85,247,0.45) 40%, transparent 72%);
         filter: blur(18px);
@@ -602,22 +608,22 @@ const stats = [
 
     .liquid-band {
         position: absolute;
-        left: -10%;
-        width: 125%;
-        height: 58px;
+        left: -8%;
+        width: 116%;
+        height: clamp(70px, 8vw, 120px);
         border-radius: 50%;
         filter: blur(13px);
         transform-origin: center;
     }
 
     .liquid-band-top {
-        top: 155px;
+        top: 30%;
         background: linear-gradient(90deg, transparent 0%, rgba(124,58,237,0.55) 22%, rgba(255,255,255,0.92) 48%, rgba(34,211,238,0.45) 72%, transparent 100%);
         animation: bandSweep 7s ease-in-out infinite;
     }
 
     .liquid-band-bottom {
-        top: 365px;
+        top: 64%;
         background: linear-gradient(90deg, transparent 0%, rgba(14,165,233,0.42) 20%, rgba(129,140,248,0.75) 48%, rgba(168,85,247,0.55) 70%, transparent 100%);
         animation: bandSweepReverse 8s ease-in-out infinite;
     }
@@ -639,7 +645,7 @@ const stats = [
 
     .wave-back {
         stroke: url(#liquidWaveTwo);
-        stroke-width: 26;
+        stroke-width: clamp(30px, 3vw, 52px);
         opacity: 0.20;
         filter: url(#liquidBlur);
         animation-duration: 13s;
@@ -647,14 +653,14 @@ const stats = [
 
     .wave-main {
         stroke: url(#liquidWaveOne);
-        stroke-width: 17;
+        stroke-width: clamp(22px, 2.2vw, 38px);
         opacity: 0.82;
         filter: url(#liquidGlow);
     }
 
     .wave-light {
         stroke: rgba(255,255,255,0.86);
-        stroke-width: 2.2;
+        stroke-width: clamp(2px, 0.22vw, 4px);
         opacity: 0.82;
         filter: url(#liquidGlow);
         animation-duration: 7s;
@@ -662,7 +668,7 @@ const stats = [
 
     .wave-top {
         stroke: url(#liquidWaveTwo);
-        stroke-width: 8;
+        stroke-width: clamp(10px, 1vw, 18px);
         opacity: 0.36;
         filter: url(#liquidGlow);
         animation-duration: 11s;
@@ -670,6 +676,7 @@ const stats = [
 
     .liquid-particle {
         position: absolute;
+        z-index: 7;
         width: 6px;
         height: 6px;
         border-radius: 50%;
@@ -688,8 +695,9 @@ const stats = [
 
     .liquid-ai-label {
         position: absolute;
-        right: 32px;
-        bottom: 28px;
+        z-index: 10;
+        right: 6%;
+        bottom: 7%;
         display: flex;
         align-items: center;
         gap: 8px;
@@ -714,9 +722,9 @@ const stats = [
         box-shadow: 0 0 12px rgba(56,189,248,0.9);
     }
 
-    @keyframes liquidFloat {
-        0%,100% { transform: translateY(-50%) translate3d(0,0,0); }
-        50% { transform: translateY(calc(-50% - 8px)) translate3d(-4px,0,0); }
+    @keyframes liquidBackgroundFloat {
+        0%,100% { transform: scale(1) translate3d(0,0,0); }
+        50% { transform: scale(1.025) translate3d(-8px,-4px,0); }
     }
 
     @keyframes liquidGlow {
@@ -755,20 +763,18 @@ const stats = [
 
     @media (max-width: 1100px) {
         .liquid-ai-visual {
-            width: 500px;
-            height: 460px;
-            right: -130px;
-            opacity: 0.72;
+            opacity: 0.92;
+        }
+
+        .liquid-ai-label {
+            right: 5%;
+            bottom: 6%;
         }
     }
 
     @media (max-width: 900px) {
         .liquid-ai-visual {
-            width: 430px;
-            height: 390px;
-            right: -160px;
-            top: 28%;
-            opacity: 0.38;
+            opacity: 0.72;
         }
 
         .liquid-ai-label {
@@ -778,12 +784,7 @@ const stats = [
 
     @media (max-width: 640px) {
         .liquid-ai-visual {
-            width: 330px;
-            height: 310px;
-            right: -125px;
-            top: 25%;
-            opacity: 0.24;
-            border-radius: 28px;
+            opacity: 0.52;
         }
     }
 
