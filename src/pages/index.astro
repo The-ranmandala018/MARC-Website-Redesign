@@ -63,68 +63,16 @@ const stats = [
 
             <!-- AI sphere -->
             <div class="liquid-ai-visual" aria-hidden="true">
-                <div class="liquid-glow"></div>
-                <div class="liquid-core"></div>
-                <div class="liquid-band liquid-band-top"></div>
-                <div class="liquid-band liquid-band-bottom"></div>
-
-                <svg class="liquid-waves" viewBox="0 0 620 560" preserveAspectRatio="none" role="presentation">
-                    <defs>
-                        <linearGradient id="liquidWaveOne" x1="0%" y1="0%" x2="100%" y2="0%">
-                            <stop offset="0%" stop-color="#312e81" />
-                            <stop offset="35%" stop-color="#7c3aed" />
-                            <stop offset="62%" stop-color="#22d3ee" />
-                            <stop offset="100%" stop-color="#2563eb" />
-                        </linearGradient>
-
-                        <linearGradient id="liquidWaveTwo" x1="0%" y1="0%" x2="100%" y2="0%">
-                            <stop offset="0%" stop-color="#0ea5e9" />
-                            <stop offset="45%" stop-color="#8b5cf6" />
-                            <stop offset="100%" stop-color="#4338ca" />
-                        </linearGradient>
-
-                        <filter id="liquidBlur">
-                            <feGaussianBlur stdDeviation="8" />
-                        </filter>
-
-                        <filter id="liquidGlow">
-                            <feGaussianBlur stdDeviation="4" result="blur" />
-                            <feMerge>
-                                <feMergeNode in="blur" />
-                                <feMergeNode in="SourceGraphic" />
-                            </feMerge>
-                        </filter>
-                    </defs>
-
-                    <path class="liquid-wave wave-back"
-                        d="M-40 385 C85 300 105 300 205 350 S355 455 455 390 S570 280 660 315" />
-
-                    <path class="liquid-wave wave-main"
-                        d="M-40 415 C75 355 120 315 220 345 S340 445 430 390 S550 275 660 295" />
-
-                    <path class="liquid-wave wave-light"
-                        d="M-40 402 C85 340 130 318 220 350 S350 430 435 382 S555 280 660 300" />
-
-                    <path class="liquid-wave wave-top"
-                        d="M-30 215 C90 205 120 180 230 205 S380 265 475 225 S570 165 660 185" />
-
-                    <path class="liquid-wave wave-glass"
-                        d="M-50 455 C70 420 145 365 245 390 S365 470 470 425 S575 345 680 365" />
-
-                    <path class="liquid-wave wave-glint"
-                        d="M-30 392 C80 332 140 305 225 338 S350 420 438 370 S555 268 680 290" />
-                </svg>
-
-                <span class="liquid-particle particle-a"></span>
-                <span class="liquid-particle particle-b"></span>
-                <span class="liquid-particle particle-c"></span>
-                <span class="liquid-particle particle-d"></span>
-                <span class="liquid-particle particle-e"></span>
-
-                <div class="liquid-ai-label">
-                    <span class="liquid-ai-dot"></span>
-                    AI · Intelligence · Innovation
-                </div>
+                <div class="liquid-orb orb-one"></div>
+                <div class="liquid-orb orb-two"></div>
+                <div class="liquid-orb orb-three"></div>
+                <div class="liquid-ribbon ribbon-one"></div>
+                <div class="liquid-ribbon ribbon-two"></div>
+                <div class="liquid-ribbon ribbon-three"></div>
+                <div class="liquid-highlight highlight-one"></div>
+                <div class="liquid-highlight highlight-two"></div>
+                <div class="liquid-grain"></div>
+            </div>v>
             </div>
 
             <!--
@@ -543,248 +491,113 @@ const stats = [
        ========================================================= */
 
     /* =========================================================
-       LIQUID AI VISUAL — ABSTRACT INTELLIGENCE
+       PREMIUM LIQUID AI LIGHT
        ========================================================= */
 
     .liquid-ai-visual {
         position: absolute;
         inset: 0;
-        width: 100%;
-        height: 100%;
-        z-index: 4;
         overflow: hidden;
-        border-radius: 0;
         pointer-events: none;
         background:
-            radial-gradient(ellipse 48% 38% at 74% 48%, rgba(139,92,246,0.30) 0%, rgba(139,92,246,0.13) 42%, transparent 72%),
-            radial-gradient(ellipse 42% 32% at 40% 54%, rgba(34,211,238,0.22) 0%, rgba(14,165,233,0.08) 45%, transparent 75%),
-            radial-gradient(ellipse 30% 24% at 58% 28%, rgba(236,72,153,0.10) 0%, transparent 72%),
-            linear-gradient(135deg, #ffffff 0%, #f9fbff 38%, #f1f7ff 68%, #fbf7ff 100%);
-        box-shadow:
-            inset 0 0 160px rgba(99,102,241,0.08),
-            inset 0 -80px 140px rgba(14,165,233,0.04);
-        animation: liquidBackgroundFloat 14s ease-in-out infinite;
+            radial-gradient(ellipse at 70% 45%, rgba(124,58,237,.13), transparent 38%),
+            radial-gradient(ellipse at 36% 58%, rgba(6,182,212,.11), transparent 42%),
+            linear-gradient(135deg,#fff 0%,#f9fbff 45%,#f5f1ff 100%);
     }
 
-    .liquid-ai-visual::before {
-        content: "";
-        position: absolute;
-        inset: 0;
-        z-index: 8;
-        background:
-            linear-gradient(90deg, rgba(255,255,255,0.88) 0%, rgba(255,255,255,0.46) 30%, rgba(255,255,255,0.10) 66%, rgba(255,255,255,0.30) 100%),
-            radial-gradient(circle at 72% 52%, transparent 0%, rgba(255,255,255,0.02) 46%, rgba(255,255,255,0.34) 100%),
-            linear-gradient(180deg, rgba(255,255,255,0.18), transparent 35%);
+    .liquid-orb,
+    .liquid-ribbon,
+    .liquid-highlight {
+        position:absolute;
+        border-radius:999px;
+        will-change:transform;
     }
 
-    .liquid-ai-visual::after {
-        content: "";
-        position: absolute;
-        inset: 0;
-        z-index: 9;
-        pointer-events: none;
-        background: linear-gradient(180deg, rgba(255,255,255,0.55), transparent 22%, transparent 78%, rgba(255,255,255,0.18));
+    .liquid-orb {
+        filter: blur(22px);
+        mix-blend-mode:multiply;
     }
 
-    .liquid-glow {
-        position: absolute;
-        width: min(64vw, 920px);
-        height: min(48vw, 540px);
-        left: 28%;
-        top: 18%;
-        border-radius: 50%;
-        background:
-            radial-gradient(circle at 52% 50%,
-                rgba(255,255,255,0.96) 0%,
-                rgba(216,180,254,0.62) 10%,
-                rgba(168,85,247,0.30) 28%,
-                rgba(99,102,241,0.16) 48%,
-                rgba(14,165,233,0.08) 62%,
-                transparent 78%);
-        filter: blur(42px);
-        mix-blend-mode: screen;
-        animation: liquidGlow 7s ease-in-out infinite;
+    .orb-one {
+        width:52%; height:46%; left:48%; top:25%;
+        background:radial-gradient(ellipse,rgba(139,92,246,.30),rgba(99,102,241,.10) 48%,transparent 72%);
+        animation:orbOne 11s ease-in-out infinite;
     }
 
-    .liquid-core {
-        position: absolute;
-        width: min(55vw, 820px);
-        height: min(15vw, 180px);
-        left: 4%;
-        top: 40%;
-        border-radius: 50%;
-        background: radial-gradient(ellipse, rgba(255,255,255,0.98) 0%, rgba(233,213,255,0.90) 16%, rgba(168,85,247,0.42) 40%, transparent 72%);
-        filter: blur(18px);
-        opacity: 0.9;
-        animation: coreBreath 5s ease-in-out infinite;
+    .orb-two {
+        width:46%; height:42%; left:25%; top:42%;
+        background:radial-gradient(ellipse,rgba(34,211,238,.24),rgba(14,165,233,.08) 48%,transparent 72%);
+        animation:orbTwo 13s ease-in-out infinite;
     }
 
-    .liquid-band {
-        position: absolute;
-        left: -8%;
-        width: 116%;
-        height: clamp(80px, 9vw, 150px);
-        border-radius: 50%;
-        filter: blur(13px);
-        transform-origin: center;
+    .orb-three {
+        width:32%; height:30%; left:55%; top:55%;
+        background:radial-gradient(ellipse,rgba(236,72,153,.13),rgba(168,85,247,.08) 48%,transparent 72%);
+        animation:orbThree 15s ease-in-out infinite;
     }
 
-    .liquid-band-top {
-        top: 30%;
-        background: linear-gradient(90deg, transparent 0%, rgba(124,58,237,0.55) 22%, rgba(255,255,255,0.92) 48%, rgba(34,211,238,0.45) 72%, transparent 100%);
-        animation: bandSweep 7s ease-in-out infinite;
+    .liquid-ribbon {
+        height:clamp(55px,7vw,105px);
+        filter:blur(7px);
+        opacity:.72;
+        background:linear-gradient(90deg,transparent 0%,rgba(34,211,238,.08) 10%,rgba(99,102,241,.35) 32%,rgba(255,255,255,.92) 48%,rgba(168,85,247,.30) 68%,transparent 100%);
+        box-shadow:0 0 45px rgba(99,102,241,.16);
     }
 
-    .liquid-band-bottom {
-        top: 64%;
-        background: linear-gradient(90deg, transparent 0%, rgba(14,165,233,0.42) 20%, rgba(129,140,248,0.75) 48%, rgba(168,85,247,0.55) 70%, transparent 100%);
-        animation: bandSweepReverse 8s ease-in-out infinite;
+    .ribbon-one {
+        width:110%; left:-4%; top:37%;
+        transform:rotate(-9deg);
+        animation:ribbonOne 12s ease-in-out infinite;
     }
 
-    .liquid-waves {
-        position: absolute;
-        inset: 0;
-        width: 100%;
-        height: 100%;
+    .ribbon-two {
+        width:105%; left:3%; top:53%;
+        opacity:.55;
+        transform:rotate(8deg);
+        background:linear-gradient(90deg,transparent,rgba(14,165,233,.20),rgba(255,255,255,.85),rgba(139,92,246,.28),transparent);
+        animation:ribbonTwo 14s ease-in-out infinite;
     }
 
-    .liquid-wave {
-        fill: none;
-        stroke-linecap: round;
-        stroke-linejoin: round;
-        stroke-dasharray: 900;
-        animation: waveFlow 9s linear infinite;
+    .ribbon-three {
+        width:88%; left:20%; top:27%;
+        height:clamp(22px,2.8vw,44px);
+        opacity:.42;
+        transform:rotate(-17deg);
+        background:linear-gradient(90deg,transparent,rgba(168,85,247,.20),rgba(255,255,255,.9),rgba(34,211,238,.20),transparent);
+        animation:ribbonThree 10s ease-in-out infinite;
     }
 
-    .wave-back {
-        stroke: url(#liquidWaveTwo);
-        stroke-width: clamp(42px, 4vw, 68px);
-        opacity: 0.20;
-        filter: url(#liquidBlur);
-        animation-duration: 13s;
+    .liquid-highlight {
+        width:30%; height:8%;
+        left:51%; top:39%;
+        background:rgba(255,255,255,.82);
+        filter:blur(15px);
+        transform:rotate(-12deg);
+        animation:highlightMove 8s ease-in-out infinite;
     }
 
-    .wave-main {
-        stroke: url(#liquidWaveOne);
-        stroke-width: clamp(30px, 2.8vw, 52px);
-        opacity: 0.82;
-        filter: url(#liquidGlow);
+    .highlight-two {
+        width:20%; height:5%;
+        left:68%; top:58%;
+        opacity:.7;
+        animation-delay:-3s;
     }
 
-    .wave-light {
-        stroke: rgba(255,255,255,0.86);
-        stroke-width: clamp(2px, 0.25vw, 4.5px);
-        opacity: 0.82;
-        filter: url(#liquidGlow);
-        animation-duration: 7s;
+    .liquid-grain {
+        position:absolute;
+        inset:0;
+        opacity:.035;
+        background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 160 160' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.8'/%3E%3C/svg%3E");
+        mix-blend-mode:multiply;
     }
 
-    .wave-top {
-        stroke: url(#liquidWaveTwo);
-        stroke-width: clamp(12px, 1.2vw, 22px);
-        opacity: 0.36;
-        filter: url(#liquidGlow);
-        animation-duration: 11s;
-    }
-
-    .wave-glass {
-        stroke: rgba(255,255,255,0.30);
-        stroke-width: clamp(18px, 1.7vw, 30px);
-        opacity: 0.38;
-        filter: url(#liquidBlur);
-        animation-duration: 15s;
-    }
-
-    .wave-glint {
-        stroke: rgba(255,255,255,0.95);
-        stroke-width: clamp(1.5px, 0.16vw, 3px);
-        opacity: 0.72;
-        filter: url(#liquidGlow);
-        animation-duration: 8s;
-    }
-
-    .liquid-particle {
-        position: absolute;
-        z-index: 7;
-        width: 6px;
-        height: 6px;
-        border-radius: 50%;
-        background: #38bdf8;
-        box-shadow:
-            0 0 8px #38bdf8,
-            0 0 22px rgba(56,189,248,0.65);
-        animation: particleFloat 5s ease-in-out infinite;
-    }
-
-    .particle-a { left: 76%; top: 24%; animation-delay: -1s; }
-    .particle-b { left: 83%; top: 54%; animation-delay: -2.4s; }
-    .particle-c { left: 70%; top: 76%; animation-delay: -3.2s; }
-    .particle-d { left: 57%; top: 33%; width: 4px; height: 4px; animation-delay: -0.8s; }
-    .particle-e { left: 91%; top: 38%; width: 4px; height: 4px; animation-delay: -4s; }
-
-    .liquid-ai-label {
-        position: absolute;
-        z-index: 10;
-        right: 6%;
-        bottom: 7%;
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        padding: 8px 13px;
-        border-radius: 999px;
-        border: 1px solid rgba(255,255,255,0.14);
-        background: rgba(255,255,255,0.58);
-        backdrop-filter: blur(14px);
-        color: rgba(51,65,85,0.78);
-        font-size: 10px;
-        font-weight: 600;
-        letter-spacing: 0.08em;
-        text-transform: uppercase;
-        box-shadow: 0 8px 30px rgba(71,85,105,0.12);
-    }
-
-    .liquid-ai-dot {
-        width: 6px;
-        height: 6px;
-        border-radius: 50%;
-        background: linear-gradient(135deg,#22d3ee,#a855f7);
-        box-shadow: 0 0 12px rgba(56,189,248,0.9);
-    }
-
-    @keyframes liquidBackgroundFloat {
-        0%,100% { transform: scale(1) translate3d(0,0,0); }
-        50% { transform: scale(1.025) translate3d(-8px,-4px,0); }
-    }
-
-    @keyframes liquidGlow {
-        0%,100% { opacity: 0.65; transform: scale(0.92); }
-        50% { opacity: 1; transform: scale(1.08); }
-    }
-
-    @keyframes coreBreath {
-        0%,100% { opacity: 0.65; transform: scale(0.92) translateX(-8px); }
-        50% { opacity: 1; transform: scale(1.08) translateX(10px); }
-    }
-
-    @keyframes bandSweep {
-        0%,100% { transform: translateX(-8%) scaleY(0.82); opacity: 0.65; }
-        50% { transform: translateX(7%) scaleY(1.08); opacity: 1; }
-    }
-
-    @keyframes bandSweepReverse {
-        0%,100% { transform: translateX(7%) scaleY(0.88); opacity: 0.65; }
-        50% { transform: translateX(-7%) scaleY(1.1); opacity: 1; }
-    }
-
-    @keyframes waveFlow {
-        from { stroke-dashoffset: 0; }
-        to { stroke-dashoffset: -900; }
-    }
-
-    @keyframes particleFloat {
-        0%,100% { transform: translate3d(0,0,0) scale(0.8); opacity: 0.45; }
-        50% { transform: translate3d(-18px,-20px,0) scale(1.35); opacity: 1; }
-    }
+    @keyframes orbOne{0%,100%{transform:translate3d(0,0,0) scale(1)}50%{transform:translate3d(-45px,18px,0) scale(1.08)}}
+    @keyframes orbTwo{0%,100%{transform:translate3d(0,0,0) scale(1)}50%{transform:translate3d(38px,-28px,0) scale(1.1)}}
+    @keyframes orbThree{0%,100%{transform:translate3d(0,0,0)}50%{transform:translate3d(-30px,-20px,0) scale(1.12)}}
+    @keyframes ribbonOne{0%,100%{transform:translate3d(-2%,0,0) rotate(-9deg)}50%{transform:translate3d(5%,18px,0) rotate(-5deg)}}
+    @keyframes ribbonTwo{0%,100%{transform:translate3d(3%,0,0) rotate(8deg)}50%{transform:translate3d(-5%,-15px,0) rotate(4deg)}}
+    @keyframes ribbonThree{0%,100%{transform:translate3d(0,0,0) rotate(-17deg)}50%{transform:translate3d(-4%,24px,0) rotate(-11deg)}}
+    @keyframes highlightMove{0%,100%{transform:translate3d(0,0,0) rotate(-12deg);opacity:.45}50%{transform:translate3d(55px,18px,0) rotate(-7deg);opacity:.9}}
 
     /* =========================================================
        MOBILE
