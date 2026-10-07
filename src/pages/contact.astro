@@ -1,0 +1,164 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout
+    title="Contact"
+    description="Get in touch with the Multidisciplinary AI Research Centre at the University of Peradeniya."
+>
+    <section class="pt-8 lg:pt-12">
+        <div class="max-w-6xl mx-auto">
+            <!-- Header -->
+            <div class="max-w-3xl mb-12">
+                <p class="text-sm font-semibold uppercase tracking-[0.2em] text-primary mb-4">
+                    Get in touch
+                </p>
+
+                <h1 class="text-5xl md:text-6xl font-bold tracking-tight mb-6">
+                    Let’s talk about
+                    <span class="text-primary">AI & research.</span>
+                </h1>
+
+                <p class="text-lg text-base-content/70 leading-relaxed">
+                    Interested in our research, collaborations, projects, or
+                    opportunities? We would love to hear from you.
+                </p>
+            </div>
+
+            <div class="grid lg:grid-cols-2 gap-8">
+                <!-- Contact information -->
+                <div class="space-y-5">
+                    <div class="rounded-3xl border border-base-content/10 bg-base-200/40 p-7">
+                        <div class="w-12 h-12 rounded-2xl bg-primary/10 flex items-center justify-center mb-5">
+                            <span class="text-xl">📍</span>
+                        </div>
+
+                        <h2 class="text-xl font-semibold mb-2">
+                            Visit us
+                        </h2>
+
+                        <p class="text-base-content/70 leading-relaxed">
+                            Multidisciplinary AI Research Centre<br />
+                            Faculty of Engineering<br />
+                            University of Peradeniya<br />
+                            Sri Lanka
+                        </p>
+                    </div>
+
+                    <div class="rounded-3xl border border-base-content/10 bg-base-200/40 p-7">
+                        <div class="w-12 h-12 rounded-2xl bg-primary/10 flex items-center justify-center mb-5">
+                            <span class="text-xl">🌐</span>
+                        </div>
+
+                        <h2 class="text-xl font-semibold mb-2">
+                            Connect with MARC
+                        </h2>
+
+                        <p class="text-base-content/70 mb-5">
+                            Follow our latest research, projects, and updates.
+                        </p>
+
+                        <div class="flex flex-wrap gap-3">
+                            <a
+                                href="https://www.linkedin.com/company/multidisciplinaryai"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                class="btn btn-sm rounded-full"
+                            >
+                                LinkedIn
+                            </a>
+
+                            <a
+                                href="https://www.youtube.com/@MARCUoP"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                class="btn btn-sm rounded-full"
+                            >
+                                YouTube
+                            </a>
+
+                            <a
+                                href="https://www.facebook.com/p/Multidisciplinary-AI-Research-Center-MARC-61566611961677/"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                class="btn btn-sm rounded-full"
+                            >
+                                Facebook
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contact form -->
+                <div class="rounded-3xl border border-base-content/10 bg-base-200/40 p-7 lg:p-9">
+                    <h2 class="text-2xl font-semibold mb-2">
+                        Send us a message
+                    </h2>
+
+                    <p class="text-base-content/60 mb-7">
+                        Tell us a little about your inquiry.
+                    </p>
+
+                    <form class="space-y-5">
+                        <div>
+                            <label for="name" class="label">
+                                <span class="label-text font-medium">
+                                    Your name
+                                </span>
+                            </label>
+
+                            <input
+                                id="name"
+                                type="text"
+                                placeholder="Enter your name"
+                                class="input input-bordered w-full rounded-2xl"
+                            />
+                        </div>
+
+                        <div>
+                            <label for="email" class="label">
+                                <span class="label-text font-medium">
+                                    Email address
+                                </span>
+                            </label>
+
+                            <input
+                                id="email"
+                                type="email"
+                                placeholder="you@example.com"
+                                class="input input-bordered w-full rounded-2xl"
+                            />
+                        </div>
+
+                        <div>
+                            <label for="message" class="label">
+                                <span class="label-text font-medium">
+                                    Message
+                                </span>
+                            </label>
+
+                            <textarea
+                                id="message"
+                                rows="6"
+                                placeholder="Tell us about your inquiry..."
+                                class="textarea textarea-bordered w-full rounded-2xl"
+                            ></textarea>
+                        </div>
+
+                        <button
+                            type="button"
+                            class="btn btn-primary rounded-full px-7"
+                        >
+                            Send message
+                        </button>
+
+                        <p class="text-xs text-base-content/50">
+                            The contact form will be connected to the MARC
+                            email/backend after the design is finalized.
+                        </p>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+</BaseLayout>

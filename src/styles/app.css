@@ -3,35 +3,44 @@
 @plugin "@tailwindcss/typography";
 
 @plugin "daisyui" {
-    themes: marc --default, marc-dark --prefersdark;
+    themes: marc --default;
 }
 
-/* ──────────────────────────────────────────────────────────────
-   MARC light theme — editorial, DeepMind-inspired
-   ────────────────────────────────────────────────────────────── */
+/* =========================================================
+   MARC — LIGHT AI RESEARCH THEME
+   Designed around the existing MARC logo
+   ========================================================= */
+
 @plugin "daisyui/theme" {
     name: "marc";
     default: true;
     color-scheme: light;
 
+    /* Main surfaces */
     --color-base-100: #ffffff;
-    --color-base-200: #f6f7f9;
-    --color-base-300: #eceef2;
+    --color-base-200: #f7f9fc;
+    --color-base-300: #e8edf5;
+
+    /* Main text */
     --color-base-content: #0b1220;
 
-    --color-primary: #06A3DA;
+    /* MARC / AI blue */
+    --color-primary: #087ea4;
     --color-primary-content: #ffffff;
 
-    --color-secondary: #0B1220;
+    /* Dark navy */
+    --color-secondary: #0b1220;
     --color-secondary-content: #ffffff;
 
-    --color-accent: #7C3AED;
+    /* AI purple */
+    --color-accent: #6d4aff;
     --color-accent-content: #ffffff;
 
-    --color-neutral: #1a2332;
+    /* Neutral */
+    --color-neutral: #172033;
     --color-neutral-content: #ffffff;
 
-    --color-info: #06A3DA;
+    --color-info: #087ea4;
     --color-success: #16a34a;
     --color-warning: #d97706;
     --color-error: #dc2626;
@@ -45,60 +54,53 @@
     --noise: 0;
 }
 
-/* ──────────────────────────────────────────────────────────────
-   MARC dark theme
-   ────────────────────────────────────────────────────────────── */
-@plugin "daisyui/theme" {
-    name: "marc-dark";
-    color-scheme: dark;
-
-    --color-base-100: #0b1220;
-    --color-base-200: #111a2e;
-    --color-base-300: #1a2440;
-    --color-base-content: #e6ecf5;
-
-    --color-primary: #38bdf8;
-    --color-primary-content: #08131f;
-
-    --color-secondary: #f5f6fa;
-    --color-secondary-content: #0b1220;
-
-    --color-accent: #a78bfa;
-    --color-accent-content: #1a1033;
-
-    --color-neutral: #e6ecf5;
-    --color-neutral-content: #0b1220;
-
-    --radius-selector: 0.75rem;
-    --radius-field: 0.625rem;
-    --radius-box: 1rem;
-
-    --border: 1px;
-    --depth: 0;
-    --noise: 0;
-}
-
-/* ──────────────────────────────────────────────────────────────
-   Typography — Inter (sans) + Instrument Serif (display)
-   ────────────────────────────────────────────────────────────── */
-@theme {
-    --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI",
-        Roboto, sans-serif;
-    --font-serif: "Instrument Serif", "Times New Roman", serif;
-}
+/* =========================================================
+   GLOBAL
+   ========================================================= */
 
 html {
-    font-family: var(--font-sans);
+    font-family:
+        "Inter",
+        ui-sans-serif,
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        Roboto,
+        sans-serif;
+
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
+
+    background: #ffffff;
+    color: #0b1220;
 }
 
 body {
-    background: var(--color-base-100);
-    color: var(--color-base-content);
+    background: #ffffff;
+    color: #0b1220;
 }
 
-/* Display headings — editorial serif */
+/* =========================================================
+   TYPOGRAPHY
+   ========================================================= */
+
+@theme {
+    --font-sans:
+        "Inter",
+        ui-sans-serif,
+        system-ui,
+        -apple-system,
+        "Segoe UI",
+        Roboto,
+        sans-serif;
+
+    --font-serif:
+        "Instrument Serif",
+        "Times New Roman",
+        serif;
+}
+
 .font-display {
     font-family: var(--font-serif);
     font-weight: 400;
@@ -106,74 +108,199 @@ body {
     line-height: 1.02;
 }
 
-/* Eyebrow label */
 .eyebrow {
     font-size: 0.75rem;
     font-weight: 600;
     letter-spacing: 0.16em;
     text-transform: uppercase;
-    color: var(--color-base-content);
-    opacity: 0.7;
+    color: #0b1220;
+    opacity: 0.65;
 }
 
-/* Gradient text accent */
+/* =========================================================
+   GRADIENT TEXT
+   ========================================================= */
+
 .text-gradient {
     background-image: linear-gradient(
         110deg,
-        var(--color-primary) 0%,
-        var(--color-accent) 60%,
-        #ec4899 100%
+        #087ea4 0%,
+        #4169e1 45%,
+        #6d4aff 75%,
+        #9b5de5 100%
     );
+
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
 }
 
-/* Soft surface hover */
+/* =========================================================
+   SOFT SURFACES
+   ========================================================= */
+
 .surface-hover {
     transition:
         transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1),
         box-shadow 0.4s ease,
         border-color 0.3s ease;
 }
+
 .surface-hover:hover {
     transform: translateY(-3px);
+
     box-shadow:
-        0 12px 32px -12px rgba(11, 18, 32, 0.18),
-        0 2px 6px -2px rgba(11, 18, 32, 0.08);
+        0 20px 45px -20px rgba(8, 126, 164, 0.18),
+        0 5px 15px -8px rgba(11, 18, 32, 0.12);
 }
 
-/* Subtle grid background */
+/* =========================================================
+   LIGHT AI GRID
+   ========================================================= */
+
 .bg-grid {
     background-image:
-        linear-gradient(to right, rgba(11, 18, 32, 0.04) 1px, transparent 1px),
-        linear-gradient(to bottom, rgba(11, 18, 32, 0.04) 1px, transparent 1px);
+        linear-gradient(
+            to right,
+            rgba(8, 126, 164, 0.045) 1px,
+            transparent 1px
+        ),
+        linear-gradient(
+            to bottom,
+            rgba(109, 74, 255, 0.045) 1px,
+            transparent 1px
+        );
+
     background-size: 48px 48px;
 }
-[data-theme="marc-dark"] .bg-grid {
-    background-image:
-        linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
-        linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
-}
 
-/* Glow blob */
+/* =========================================================
+   HERO / AI BACKGROUND
+   ========================================================= */
+
+
+
+/* =========================================================
+   AI GLOW BLOBS
+   ========================================================= */
+
 .blob {
     position: absolute;
     border-radius: 9999px;
-    filter: blur(72px);
-    opacity: 0.35;
+    filter: blur(80px);
+    opacity: 0.22;
     pointer-events: none;
     z-index: 0;
 }
 
-/* Accessible focus ring */
+.blob-blue {
+    background: #087ea4;
+}
+
+.blob-purple {
+    background: #6d4aff;
+}
+
+/* =========================================================
+   GLASS
+   ========================================================= */
+
+.glass {
+    background: rgba(255, 255, 255, 0.72);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+
+    border: 1px solid rgba(11, 18, 32, 0.08);
+
+    box-shadow:
+        0 20px 60px -30px rgba(11, 18, 32, 0.18),
+        0 5px 20px -10px rgba(8, 126, 164, 0.10);
+}
+
+/* =========================================================
+   AI GLOW
+   ========================================================= */
+
+.ai-glow {
+    box-shadow:
+        0 0 30px rgba(8, 126, 164, 0.15),
+        0 0 80px rgba(109, 74, 255, 0.08);
+}
+
+/* =========================================================
+   BUTTONS
+   ========================================================= */
+
+.btn-primary {
+    background: linear-gradient(
+        135deg,
+        #087ea4,
+        #4169e1
+    );
+
+    border: none;
+
+    box-shadow:
+        0 10px 25px -10px rgba(8, 126, 164, 0.45);
+}
+
+.btn-primary:hover {
+    background: linear-gradient(
+        135deg,
+        #076d8d,
+        #5a45d6
+    );
+
+    transform: translateY(-1px);
+}
+
+/* =========================================================
+   SECTION DIVIDER
+   ========================================================= */
+
+.divider-soft {
+    height: 1px;
+    width: 100%;
+
+    background: linear-gradient(
+        to right,
+        transparent,
+        rgba(11, 18, 32, 0.15),
+        transparent
+    );
+}
+
+/* =========================================================
+   FOCUS
+   ========================================================= */
+
 :where(a, button, input, select, textarea):focus-visible {
-    outline: 2px solid var(--color-primary);
+    outline: 2px solid #087ea4;
     outline-offset: 2px;
     border-radius: 6px;
 }
 
-/* Reduce motion */
+/* =========================================================
+   SCROLL RAIL
+   ========================================================= */
+
+.scroll-rail {
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+}
+
+.scroll-rail::-webkit-scrollbar {
+    display: none;
+}
+
+.scroll-rail > * {
+    scroll-snap-align: start;
+}
+
+/* =========================================================
+   REDUCE MOTION
+   ========================================================= */
+
 @media (prefers-reduced-motion: reduce) {
     *,
     *::before,
@@ -181,28 +308,4 @@ body {
         animation-duration: 0.001ms !important;
         transition-duration: 0.001ms !important;
     }
-}
-
-/* Marquee / horizontal scroll snap rail */
-.scroll-rail {
-    scroll-snap-type: x mandatory;
-    scrollbar-width: none;
-}
-.scroll-rail::-webkit-scrollbar {
-    display: none;
-}
-.scroll-rail > * {
-    scroll-snap-align: start;
-}
-
-/* Section divider */
-.divider-soft {
-    height: 1px;
-    width: 100%;
-    background: linear-gradient(
-        to right,
-        transparent,
-        color-mix(in srgb, var(--color-base-content) 18%, transparent),
-        transparent
-    );
 }

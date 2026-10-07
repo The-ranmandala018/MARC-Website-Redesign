@@ -14,10 +14,12 @@ const researchImages = import.meta.glob<{ default: ImageMetadata }>(
     "/src/assets/*.{jpeg,jpg,png,gif}",
     { eager: true },
 );
+
 const getResearchImage = (filename: string) =>
     researchImages[`/src/assets/${filename}`]?.default;
 
 const allNews = await getCollection("news");
+
 const latestNews = allNews
     .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
     .slice(0, 4);
@@ -39,124 +41,297 @@ const stats = [
     description="MARC advances multidisciplinary AI research at the Faculty of Engineering, University of Peradeniya — across computer vision, generative AI, biomedical, smart grid, MSI and socioeconomic systems."
     fullWidth={true}
 >
-    <!-- ─────────────────────────────  HERO  ───────────────────────────── -->
-    <section class="relative overflow-hidden bg-base-100">
-        <div class="bg-grid absolute inset-0 opacity-60"></div>
-        <div
-            class="blob bg-primary -top-32 -left-32 w-[36rem] h-[36rem]"
-        ></div>
-        <div
-            class="blob bg-accent top-40 -right-24 w-[28rem] h-[28rem] opacity-25"
-        ></div>
 
-        <div
-            class="relative container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-20 lg:pt-32 pb-24 lg:pb-40"
-        >
-            <p class="eyebrow text-primary mb-6">
-                University of Peradeniya · Faculty of Engineering
-            </p>
+    <!-- ========================================================= -->
+    <!-- HERO -->
+    <!-- ========================================================= -->
 
-            <h1
-                class="font-display text-[3.25rem] sm:text-7xl lg:text-[6.5rem] leading-[0.95] tracking-tight max-w-5xl"
-            >
-                Multidisciplinary
-                <em class="not-italic text-gradient">AI research</em>
-                for a human future.
-            </h1>
+    <section
+        class="relative min-h-screen overflow-hidden bg-white text-slate-900 dark:bg-slate-950 dark:text-white"
+    >
 
-            <p
-                class="mt-10 max-w-2xl text-lg md:text-xl text-base-content/70 leading-relaxed"
-            >
-                MARC brings together engineers, scientists and clinicians to
-                build AI systems that are useful, trustworthy, and grounded in
-                real-world problems — from healthcare to smart grids.
-            </p>
+        <!-- ===================================================== -->
+        <!-- BACKGROUND -->
+        <!-- ===================================================== -->
 
-            <div class="mt-12 flex flex-wrap items-center gap-4">
-                <a
-                    href="/Research"
-                    class="inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-secondary text-secondary-content text-sm font-medium hover:opacity-90 transition"
-                >
-                    Explore research
-                    <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        class="w-4 h-4"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                        stroke-width="2"
-                    >
-                        <path
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            d="M5 12h14M13 5l7 7-7 7"></path>
-                    </svg>
-                </a>
-                <a
-                    href="/projects"
-                    class="inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-base-200 text-base-content text-sm font-medium hover:bg-base-300 transition"
-                >
-                    View projects
-                </a>
-            </div>
+        <div class="absolute inset-0 overflow-hidden">
 
-            <!-- Hero visual -->
-            <div class="relative mt-20 lg:mt-28 rounded-3xl overflow-hidden">
-                <Image
-                    src={heroImage}
-                    alt="MARC research"
-                    class="w-full h-[28rem] lg:h-[34rem] object-cover"
-                    loading="eager"
-                />
-                <div
-                    class="absolute inset-x-0 bottom-0 p-8 lg:p-12 bg-gradient-to-t from-secondary/90 via-secondary/40 to-transparent text-white"
-                >
-                    <p class="eyebrow opacity-80 mb-2">Featured</p>
-                    <p
-                        class="font-display text-2xl md:text-3xl lg:text-4xl max-w-2xl leading-tight"
-                    >
-                        Building AI that serves people, science, and society.
-                    </p>
+            <!-- Original MARC research image -->
+            <Image
+                src={heroImage}
+                alt="MARC research"
+                class="absolute inset-0 w-full h-full object-cover opacity-0"
+                loading="eager"
+            />
+
+            <!-- Very subtle light gradient -->
+            <div class="hero-gradient absolute inset-0"></div>
+
+            <!-- Soft blue glow -->
+            <div class="orb orb-one"></div>
+
+            <!-- Soft purple glow -->
+            <div class="orb orb-two"></div>
+
+            <!-- Soft cyan glow -->
+            <div class="orb orb-three"></div>
+
+            <!-- Particle canvas -->
+            <canvas
+                id="particleCanvas"
+                class="absolute inset-0 w-full h-full"
+            ></canvas>
+
+            <!-- AI sphere -->
+            <div class="ai-sphere-container">
+
+                <div class="ai-sphere">
+
+                    <div class="sphere-ring ring-one"></div>
+                    <div class="sphere-ring ring-two"></div>
+                    <div class="sphere-ring ring-three"></div>
+
+                    <div class="sphere-core"></div>
+
+                    <span class="node node-1"></span>
+                    <span class="node node-2"></span>
+                    <span class="node node-3"></span>
+                    <span class="node node-4"></span>
+                    <span class="node node-5"></span>
+                    <span class="node node-6"></span>
+                    <span class="node node-7"></span>
+                    <span class="node node-8"></span>
+
                 </div>
+
             </div>
+
+            <!--
+                IMPORTANT:
+                No dark overlay here.
+            -->
+
+          
+
+            <!-- Light grid -->
+            <div class="hero-grid absolute inset-0"></div>
+
         </div>
+
+
+        <!-- ===================================================== -->
+        <!-- HERO CONTENT -->
+        <!-- ===================================================== -->
+
+        <div
+            class="relative z-20 container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-28 lg:pt-36 pb-20"
+        >
+
+            <!-- Clean content area -->
+            <div
+                class="relative overflow-hidden rounded-[2rem] border border-slate-200/80 bg-white/75 dark:border-white/10 dark:bg-slate-900/60 backdrop-blur-xl shadow-[0_30px_100px_-40px_rgba(15,23,42,0.25)]"
+            >
+
+                <div
+                    class="relative min-h-[650px] lg:min-h-[720px] flex items-center px-7 py-20 sm:px-12 lg:px-20"
+                >
+
+                    <div class="max-w-5xl">
+
+                        <!-- =================================================
+                             UNIVERSITY
+                             ================================================= -->
+
+                        <div
+                            class="inline-flex items-center gap-3 rounded-full border border-slate-200 bg-white/80 px-4 py-2 mb-8 shadow-sm dark:border-slate-700 dark:bg-slate-800/70"
+                        >
+
+                            <span
+                                class="w-2 h-2 rounded-full bg-cyan-500 shadow-[0_0_12px_rgba(6,182,212,0.6)]"
+                            ></span>
+
+                            <span
+                                class="text-xs sm:text-sm tracking-wide text-slate-600 dark:text-slate-300"
+                            >
+                                University of Peradeniya · Faculty of Engineering
+                            </span>
+
+                        </div>
+
+
+                        <!-- =================================================
+                             MAIN HEADING
+                             ================================================= -->
+
+                        <h1
+                            class="font-display text-5xl sm:text-6xl md:text-7xl lg:text-[6.5rem] leading-[0.88] tracking-tight max-w-5xl text-slate-900 dark:text-white"
+                        >
+
+                            Multidisciplinary
+
+                            <br />
+
+                            <span class="text-gradient">
+                                AI Research
+                            </span>
+
+                            <br />
+
+                            <span class="text-slate-700 dark:text-white/90">
+                                for a human future.
+                            </span>
+
+                        </h1>
+
+
+                        <!-- =================================================
+                             DESCRIPTION
+                             ================================================= -->
+
+                        <p
+                            class="mt-8 max-w-2xl text-base sm:text-lg lg:text-xl text-slate-600 dark:text-slate-300 leading-relaxed"
+                        >
+                            MARC brings together engineers, scientists and
+                            researchers to develop intelligent systems that
+                            address real-world challenges through
+                            interdisciplinary AI research.
+                        </p>
+
+
+                        <!-- =================================================
+                             BUTTONS
+                             ================================================= -->
+
+                        <div
+                            class="mt-10 flex flex-wrap items-center gap-4"
+                        >
+
+                            <!-- Research -->
+
+                            <a
+                                href="/Research"
+                                class="group inline-flex items-center gap-3 rounded-full bg-gradient-to-r from-sky-600 to-blue-700 text-white px-7 py-3.5 text-sm font-semibold transition-all duration-300 hover:scale-105 hover:shadow-[0_0_35px_rgba(14,165,233,0.25)]"
+                            >
+
+                                Explore Research
+
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    class="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    stroke="currentColor"
+                                    stroke-width="2"
+                                >
+                                    <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        d="M5 12h14M13 5l7 7-7 7"
+                                    ></path>
+                                </svg>
+
+                            </a>
+
+
+                            <!-- Contact -->
+
+                            <a
+                                href="/contact"
+                                class="inline-flex items-center gap-3 rounded-full border border-slate-300 bg-white/80 px-7 py-3.5 text-sm font-medium text-slate-700 backdrop-blur-md transition-all duration-300 hover:bg-slate-50 hover:border-sky-300 dark:border-slate-700 dark:bg-slate-900/70 dark:text-slate-200 dark:hover:bg-slate-800"
+                            >
+                                Contact Us
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- =================================================
+                     BOTTOM INFORMATION
+                     ================================================= -->
+
+                <div
+                    class="relative z-20 border-t border-slate-200/80 px-7 py-5 sm:px-12 lg:px-20 flex flex-col sm:flex-row justify-between gap-4 text-xs sm:text-sm text-slate-500 dark:border-white/10 dark:text-slate-400"
+                >
+
+                    <span>
+                        Multidisciplinary Artificial Intelligence Research
+                    </span>
+
+                    <span>
+                        MARC · UoP
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
     </section>
 
-    <!-- ─────────────────────────────  STATS  ───────────────────────────── -->
-    <section class="border-y border-base-200 bg-base-200/50">
+
+    <!-- ========================================================= -->
+    <!-- STATS -->
+    <!-- ========================================================= -->
+
+    <section
+        class="border-y border-slate-200 bg-slate-50/70 dark:border-slate-800 dark:bg-slate-900/50"
+    >
+
         <div
             class="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12 lg:py-16"
         >
+
             <div
-                class="grid grid-cols-2 md:grid-cols-4 gap-8 divide-y md:divide-y-0 md:divide-x divide-base-300"
+                class="grid grid-cols-2 md:grid-cols-4 gap-8 divide-y md:divide-y-0 md:divide-x divide-slate-200 dark:divide-slate-800"
             >
+
                 {
                     stats.map((s) => (
                         <div class="px-6 py-4 md:py-0 first:pt-0">
-                            <div class="font-display text-5xl md:text-6xl text-base-content">
+
+                            <div class="font-display text-5xl md:text-6xl text-slate-900 dark:text-white">
                                 {s.value}
                             </div>
-                            <div class="mt-2 text-sm text-base-content/60">
+
+                            <div class="mt-2 text-sm text-slate-500 dark:text-slate-400">
                                 {s.label}
                             </div>
+
                         </div>
                     ))
                 }
+
             </div>
+
         </div>
+
     </section>
 
-    <!-- ─────────────────────────────  RESEARCH PILLARS  ───────────────────────────── -->
-    <div class="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+
+    <!-- ========================================================= -->
+    <!-- RESEARCH PILLARS -->
+    <!-- ========================================================= -->
+
+    <div
+        class="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8"
+    >
+
         <Section
             eyebrow="Research"
             title="Six pillars, one shared mission"
             description="Our work spans foundational AI and applied research across critical domains where intelligence meets impact."
             cta={{ href: "/Research", label: "All research areas" }}
         >
+
             <div
                 class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8"
             >
+
                 {
                     researchAreas.map((Area: any) => (
                         <ResearchAreaCard
@@ -170,26 +345,38 @@ const stats = [
                         </ResearchAreaCard>
                     ))
                 }
+
             </div>
+
         </Section>
 
-        <!-- ─────────────────────────────  LATEST NEWS  ───────────────────────────── -->
+
+        <!-- ========================================================= -->
+        <!-- LATEST NEWS -->
+        <!-- ========================================================= -->
+
         <Section
             eyebrow="The latest"
             title="News & milestones"
             description="Awards, papers, talks and stories from the lab."
             cta={{ href: "/news", label: "All news" }}
         >
+
             <div
                 class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
             >
+
                 {
                     latestNews.map((newsItem) => (
                         <a
                             href={`/news/${newsItem.id}`}
-                            class="group surface-hover flex flex-col rounded-2xl bg-base-100 border border-base-200 overflow-hidden h-full"
+                            class="group surface-hover flex flex-col rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 overflow-hidden h-full"
                         >
-                            <div class="aspect-[4/3] overflow-hidden bg-base-200">
+
+                            <div
+                                class="aspect-[4/3] overflow-hidden bg-slate-100 dark:bg-slate-800"
+                            >
+
                                 {newsItem.data.cover && (
                                     <Image
                                         src={newsItem.data.cover}
@@ -197,9 +384,17 @@ const stats = [
                                         class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                                     />
                                 )}
+
                             </div>
-                            <div class="p-5 flex flex-col flex-grow">
-                                <p class="text-xs text-base-content/50 mb-2">
+
+
+                            <div
+                                class="p-5 flex flex-col flex-grow"
+                            >
+
+                                <p
+                                    class="text-xs text-slate-400 dark:text-slate-500 mb-2"
+                                >
                                     {newsItem.data.date.toLocaleDateString(
                                         "en-US",
                                         {
@@ -209,45 +404,83 @@ const stats = [
                                         },
                                     )}
                                 </p>
-                                <h3 class="font-medium text-base leading-snug group-hover:text-primary transition-colors mb-2">
+
+                                <h3
+                                    class="font-medium text-base leading-snug text-slate-900 dark:text-white group-hover:text-primary transition-colors mb-2"
+                                >
                                     {newsItem.data.title}
                                 </h3>
-                                <p class="text-sm text-base-content/60 line-clamp-2 mt-auto">
+
+                                <p
+                                    class="text-sm text-slate-500 dark:text-slate-400 line-clamp-2 mt-auto"
+                                >
                                     {newsItem.data.short}
                                 </p>
+
                             </div>
+
                         </a>
                     ))
                 }
+
             </div>
+
         </Section>
 
-        <!-- ─────────────────────────────  CTA STRIP  ───────────────────────────── -->
+
+        <!-- ========================================================= -->
+        <!-- CTA -->
+        <!-- ========================================================= -->
+
         <section class="pb-24 lg:pb-32">
+
             <div
-                class="relative overflow-hidden rounded-3xl bg-secondary text-secondary-content p-10 md:p-16"
+                class="relative overflow-hidden rounded-3xl bg-slate-950 text-white p-10 md:p-16 dark:bg-slate-900"
             >
+
+                <!-- subtle blue glow -->
+
                 <div
-                    class="blob bg-primary -top-20 -right-10 w-96 h-96 opacity-30"
+                    class="cta-glow-blue absolute -top-20 -right-10 w-96 h-96"
                 ></div>
+
+                <!-- subtle purple glow -->
+
                 <div
-                    class="blob bg-accent -bottom-20 -left-10 w-96 h-96 opacity-25"
+                    class="cta-glow-purple absolute -bottom-20 -left-10 w-96 h-96"
                 ></div>
-                <div class="relative grid md:grid-cols-3 gap-8 items-end">
+
+
+                <div
+                    class="relative grid md:grid-cols-3 gap-8 items-end"
+                >
+
                     <div class="md:col-span-2">
-                        <p class="eyebrow opacity-70 mb-4">Get involved</p>
+
+                        <p
+                            class="eyebrow text-sky-300 opacity-90 mb-4"
+                        >
+                            Get involved
+                        </p>
+
                         <h2
                             class="font-display text-4xl md:text-5xl leading-tight"
                         >
                             Collaborate, research, or join the team.
                         </h2>
+
                     </div>
+
+
                     <div class="flex md:justify-end">
+
                         <a
                             href="/people"
-                            class="inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-white text-secondary text-sm font-medium hover:opacity-90 transition"
+                            class="inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-white text-slate-950 text-sm font-medium hover:scale-105 transition"
                         >
+
                             Meet our people
+
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 class="w-4 h-4"
@@ -259,12 +492,947 @@ const stats = [
                                 <path
                                     stroke-linecap="round"
                                     stroke-linejoin="round"
-                                    d="M5 12h14M13 5l7 7-7 7"></path>
+                                    d="M5 12h14M13 5l7 7-7 7"
+                                ></path>
                             </svg>
+
                         </a>
+
                     </div>
+
                 </div>
+
             </div>
+
         </section>
+
     </div>
+
 </BaseLayout>
+
+
+<!-- ============================================================= -->
+<!-- HERO ANIMATION -->
+<!-- ============================================================= -->
+
+<style>
+
+    /* =========================================================
+       MOVING LIGHT GRADIENT
+       ========================================================= */
+
+    .hero-gradient {
+        background:
+            radial-gradient(
+                circle at 72% 35%,
+                rgba(14, 165, 233, 0.09),
+                transparent 32%
+            ),
+            radial-gradient(
+                circle at 30% 70%,
+                rgba(124, 58, 237, 0.06),
+                transparent 32%
+            );
+
+        animation: gradientMove 14s ease-in-out infinite alternate;
+    }
+
+
+    @keyframes gradientMove {
+
+        0% {
+            transform: scale(1);
+        }
+
+        50% {
+            transform: scale(1.06);
+        }
+
+        100% {
+            transform: scale(1);
+        }
+
+    }
+
+
+    /* =========================================================
+       SOFT ORBS
+       ========================================================= */
+
+    .orb {
+        position: absolute;
+        border-radius: 50%;
+        filter: blur(100px);
+        pointer-events: none;
+    }
+
+
+    .orb-one {
+        width: 420px;
+        height: 420px;
+
+        background: rgba(14, 165, 233, 0.10);
+
+        top: 10%;
+        right: 5%;
+
+        animation:
+            orbOne 12s ease-in-out infinite alternate;
+    }
+
+
+    .orb-two {
+        width: 350px;
+        height: 350px;
+
+        background: rgba(124, 58, 237, 0.07);
+
+        bottom: 0;
+        left: 10%;
+
+        animation:
+            orbTwo 16s ease-in-out infinite alternate;
+    }
+
+
+    .orb-three {
+        width: 240px;
+        height: 240px;
+
+        background: rgba(6, 182, 212, 0.08);
+
+        top: 40%;
+        right: 30%;
+
+        animation:
+            orbThree 10s ease-in-out infinite alternate;
+    }
+
+
+    @keyframes orbOne {
+
+        from {
+            transform: translate(0, 0);
+        }
+
+        to {
+            transform: translate(-70px, 50px);
+        }
+
+    }
+
+
+    @keyframes orbTwo {
+
+        from {
+            transform: translate(0, 0);
+        }
+
+        to {
+            transform: translate(90px, -60px);
+        }
+
+    }
+
+
+    @keyframes orbThree {
+
+        from {
+            transform: translate(0, 0) scale(1);
+        }
+
+        to {
+            transform: translate(-35px, 25px) scale(1.2);
+        }
+
+    }
+
+
+    /* =========================================================
+       HERO LIGHT GRID
+       ========================================================= */
+
+    .hero-grid {
+        background-image:
+            linear-gradient(
+                rgba(15, 23, 42, 0.025) 1px,
+                transparent 1px
+            ),
+            linear-gradient(
+                90deg,
+                rgba(15, 23, 42, 0.025) 1px,
+                transparent 1px
+            );
+
+        background-size: 70px 70px;
+
+        mask-image:
+            radial-gradient(
+                ellipse at center,
+                black 0%,
+                transparent 75%
+            );
+
+        pointer-events: none;
+    }
+
+
+    /* =========================================================
+       LIGHT FADE
+       ========================================================= */
+
+    .hero-light-fade {
+        position: absolute;
+        inset: 0;
+
+        background:
+            linear-gradient(
+                to right,
+                rgba(255,255,255,0.94),
+                rgba(255,255,255,0.72),
+                rgba(255,255,255,0.45)
+            );
+
+        pointer-events: none;
+    }
+
+
+    /* =========================================================
+       3D AI SPHERE
+       ========================================================= */
+
+    .ai-sphere-container {
+
+        position: absolute;
+
+        width: 560px;
+        height: 560px;
+
+        right: -70px;
+        top: 50%;
+
+        transform: translateY(-50%);
+
+        perspective: 1000px;
+
+        opacity: 0.55;
+
+        pointer-events: none;
+    }
+
+
+    .ai-sphere {
+
+        position: relative;
+
+        width: 100%;
+        height: 100%;
+
+        transform-style: preserve-3d;
+
+        animation:
+            sphereFloat 8s ease-in-out infinite;
+    }
+
+
+    /* =========================================================
+       SPHERE CORE
+       ========================================================= */
+
+    .sphere-core {
+
+        position: absolute;
+
+        width: 180px;
+        height: 180px;
+
+        left: 50%;
+        top: 50%;
+
+        transform:
+            translate(-50%, -50%);
+
+        border-radius: 50%;
+
+        background:
+            radial-gradient(
+                circle at 35% 30%,
+                rgba(255,255,255,0.95),
+                rgba(56,189,248,0.65) 20%,
+                rgba(59,130,246,0.35) 50%,
+                transparent 75%
+            );
+
+        filter: blur(2px);
+
+        box-shadow:
+            0 0 35px rgba(14,165,233,0.35),
+            0 0 90px rgba(99,102,241,0.20),
+            0 0 150px rgba(14,165,233,0.12);
+
+        animation:
+            corePulse 4s ease-in-out infinite;
+    }
+
+
+    /* =========================================================
+       SPHERE RINGS
+       ========================================================= */
+
+    .sphere-ring {
+
+        position: absolute;
+
+        left: 50%;
+        top: 50%;
+
+        width: 420px;
+        height: 180px;
+
+        transform-style: preserve-3d;
+
+        border-radius: 50%;
+
+        border:
+            1px solid rgba(14,165,233,0.25);
+
+        box-shadow:
+            0 0 15px rgba(14,165,233,0.08),
+            inset 0 0 15px rgba(99,102,241,0.05);
+    }
+
+
+    .ring-one {
+
+        transform:
+            translate(-50%, -50%)
+            rotateX(65deg);
+
+        animation:
+            ringOne 9s linear infinite;
+    }
+
+
+    .ring-two {
+
+        transform:
+            translate(-50%, -50%)
+            rotateY(65deg);
+
+        animation:
+            ringTwo 12s linear infinite;
+    }
+
+
+    .ring-three {
+
+        transform:
+            translate(-50%, -50%)
+            rotateX(65deg)
+            rotateZ(60deg);
+
+        animation:
+            ringThree 15s linear infinite reverse;
+    }
+
+
+    /* =========================================================
+       SPHERE NODES
+       ========================================================= */
+
+    .node {
+
+        position: absolute;
+
+        width: 8px;
+        height: 8px;
+
+        border-radius: 50%;
+
+        background: #38bdf8;
+
+        box-shadow:
+            0 0 8px #38bdf8,
+            0 0 20px rgba(14,165,233,0.45);
+    }
+
+
+    .node-1 {
+        left: 25%;
+        top: 25%;
+    }
+
+    .node-2 {
+        left: 70%;
+        top: 20%;
+    }
+
+    .node-3 {
+        left: 80%;
+        top: 48%;
+    }
+
+    .node-4 {
+        left: 68%;
+        top: 75%;
+    }
+
+    .node-5 {
+        left: 30%;
+        top: 78%;
+    }
+
+    .node-6 {
+        left: 18%;
+        top: 52%;
+    }
+
+    .node-7 {
+        left: 45%;
+        top: 15%;
+    }
+
+    .node-8 {
+        left: 50%;
+        top: 85%;
+    }
+
+
+    /* =========================================================
+       SPHERE ANIMATION
+       ========================================================= */
+
+    @keyframes sphereFloat {
+
+        0% {
+            transform:
+                translateY(0)
+                rotateZ(0deg);
+        }
+
+        50% {
+            transform:
+                translateY(-18px)
+                rotateZ(3deg);
+        }
+
+        100% {
+            transform:
+                translateY(0)
+                rotateZ(0deg);
+        }
+
+    }
+
+
+    @keyframes ringOne {
+
+        from {
+            transform:
+                translate(-50%, -50%)
+                rotateX(65deg)
+                rotateZ(0deg);
+        }
+
+        to {
+            transform:
+                translate(-50%, -50%)
+                rotateX(65deg)
+                rotateZ(360deg);
+        }
+
+    }
+
+
+    @keyframes ringTwo {
+
+        from {
+            transform:
+                translate(-50%, -50%)
+                rotateY(65deg)
+                rotateZ(0deg);
+        }
+
+        to {
+            transform:
+                translate(-50%, -50%)
+                rotateY(65deg)
+                rotateZ(360deg);
+        }
+
+    }
+
+
+    @keyframes ringThree {
+
+        from {
+            transform:
+                translate(-50%, -50%)
+                rotateX(65deg)
+                rotateZ(60deg);
+        }
+
+        to {
+            transform:
+                translate(-50%, -50%)
+                rotateX(65deg)
+                rotateZ(420deg);
+        }
+
+    }
+
+
+    @keyframes corePulse {
+
+        0%,
+        100% {
+            transform:
+                translate(-50%, -50%)
+                scale(1);
+        }
+
+        50% {
+            transform:
+                translate(-50%, -50%)
+                scale(1.12);
+        }
+
+    }
+
+
+    /* =========================================================
+       CTA GLOWS
+       ========================================================= */
+
+    .cta-glow-blue {
+
+        position: absolute;
+
+        border-radius: 9999px;
+
+        background: #0ea5e9;
+
+        filter: blur(100px);
+
+        opacity: 0.12;
+
+        pointer-events: none;
+    }
+
+
+    .cta-glow-purple {
+
+        position: absolute;
+
+        border-radius: 9999px;
+
+        background: #7c3aed;
+
+        filter: blur(100px);
+
+        opacity: 0.10;
+
+        pointer-events: none;
+    }
+
+
+    /* =========================================================
+       MOBILE
+       ========================================================= */
+
+    @media (max-width: 900px) {
+
+        .ai-sphere-container {
+
+            width: 380px;
+            height: 380px;
+
+            right: -150px;
+            top: 28%;
+
+            opacity: 0.25;
+        }
+
+    }
+
+
+    @media (max-width: 640px) {
+
+        .ai-sphere-container {
+
+            width: 300px;
+            height: 300px;
+
+            right: -120px;
+            top: 25%;
+
+            opacity: 0.18;
+        }
+
+    }
+
+
+    /* =========================================================
+       REDUCE MOTION
+       ========================================================= */
+
+    @media (prefers-reduced-motion: reduce) {
+
+        .hero-gradient,
+        .orb,
+        .ai-sphere,
+        .sphere-ring,
+        .sphere-core {
+
+            animation: none !important;
+        }
+
+    }
+
+</style>
+
+
+<!-- ============================================================= -->
+<!-- PARTICLE / NEURAL NETWORK SCRIPT -->
+<!-- ============================================================= -->
+
+<script>
+
+    const canvas =
+        document.getElementById(
+            "particleCanvas",
+        ) as HTMLCanvasElement | null;
+
+
+    if (canvas) {
+
+        const ctx =
+            canvas.getContext("2d");
+
+
+        if (ctx) {
+
+            let particles: {
+                x: number;
+                y: number;
+                vx: number;
+                vy: number;
+                size: number;
+            }[] = [];
+
+
+            let animationFrame: number;
+
+
+            /* =================================================
+               RESIZE
+               ================================================= */
+
+            const resizeCanvas = () => {
+
+                const dpr =
+                    Math.min(
+                        window.devicePixelRatio || 1,
+                        2,
+                    );
+
+
+                canvas.width =
+                    window.innerWidth * dpr;
+
+
+                canvas.height =
+                    window.innerHeight * dpr;
+
+
+                canvas.style.width =
+                    `${window.innerWidth}px`;
+
+
+                canvas.style.height =
+                    `${window.innerHeight}px`;
+
+
+                ctx.setTransform(
+                    dpr,
+                    0,
+                    0,
+                    dpr,
+                    0,
+                    0,
+                );
+
+
+                createParticles();
+            };
+
+
+            /* =================================================
+               CREATE PARTICLES
+               ================================================= */
+
+            const createParticles = () => {
+
+                const amount =
+                    window.innerWidth < 768
+                        ? 35
+                        : 75;
+
+
+                particles = [];
+
+
+                for (
+                    let i = 0;
+                    i < amount;
+                    i++
+                ) {
+
+                    particles.push({
+
+                        x:
+                            Math.random() *
+                            window.innerWidth,
+
+                        y:
+                            Math.random() *
+                            window.innerHeight,
+
+                        vx:
+                            (Math.random() - 0.5) *
+                            0.25,
+
+                        vy:
+                            (Math.random() - 0.5) *
+                            0.25,
+
+                        size:
+                            Math.random() *
+                                1.8 +
+                            0.5,
+
+                    });
+
+                }
+
+            };
+
+
+            /* =================================================
+               DRAW
+               ================================================= */
+
+            const draw = () => {
+
+                ctx.clearRect(
+                    0,
+                    0,
+                    window.innerWidth,
+                    window.innerHeight,
+                );
+
+
+                /* =============================================
+                   MOVE PARTICLES
+                   ============================================= */
+
+                particles.forEach(
+                    (particle) => {
+
+                        particle.x +=
+                            particle.vx;
+
+                        particle.y +=
+                            particle.vy;
+
+
+                        if (
+                            particle.x < 0
+                        ) {
+                            particle.x =
+                                window.innerWidth;
+                        }
+
+
+                        if (
+                            particle.x >
+                            window.innerWidth
+                        ) {
+                            particle.x = 0;
+                        }
+
+
+                        if (
+                            particle.y < 0
+                        ) {
+                            particle.y =
+                                window.innerHeight;
+                        }
+
+
+                        if (
+                            particle.y >
+                            window.innerHeight
+                        ) {
+                            particle.y = 0;
+                        }
+
+
+                        /* Particle */
+
+                        ctx.beginPath();
+
+
+                        ctx.arc(
+                            particle.x,
+                            particle.y,
+                            particle.size,
+                            0,
+                            Math.PI * 2,
+                        );
+
+
+                        /*
+                         * Light blue particles
+                         */
+
+                        ctx.fillStyle =
+                            "rgba(14,165,233,0.28)";
+
+
+                        ctx.fill();
+
+                    },
+                );
+
+
+                /* =============================================
+                   CONNECTIONS
+                   ============================================= */
+
+                for (
+                    let i = 0;
+                    i < particles.length;
+                    i++
+                ) {
+
+                    for (
+                        let j = i + 1;
+                        j < particles.length;
+                        j++
+                    ) {
+
+                        const a =
+                            particles[i];
+
+                        const b =
+                            particles[j];
+
+
+                        const dx =
+                            a.x - b.x;
+
+                        const dy =
+                            a.y - b.y;
+
+
+                        const distance =
+                            Math.sqrt(
+                                dx * dx +
+                                dy * dy,
+                            );
+
+
+                        if (
+                            distance < 130
+                        ) {
+
+                            const opacity =
+                                (1 -
+                                    distance /
+                                        130) *
+                                0.10;
+
+
+                            ctx.beginPath();
+
+
+                            ctx.moveTo(
+                                a.x,
+                                a.y,
+                            );
+
+
+                            ctx.lineTo(
+                                b.x,
+                                b.y,
+                            );
+
+
+                            ctx.strokeStyle =
+                                `rgba(14,165,233,${opacity})`;
+
+
+                            ctx.lineWidth =
+                                0.7;
+
+
+                            ctx.stroke();
+
+                        }
+
+                    }
+
+                }
+
+
+                animationFrame =
+                    requestAnimationFrame(
+                        draw,
+                    );
+
+            };
+
+
+            /* =================================================
+               EVENTS
+               ================================================= */
+
+            window.addEventListener(
+                "resize",
+                resizeCanvas,
+            );
+
+
+            resizeCanvas();
+
+            draw();
+
+
+            /* =================================================
+               CLEANUP
+               ================================================= */
+
+            document.addEventListener(
+                "astro:before-swap",
+                () => {
+
+                    cancelAnimationFrame(
+                        animationFrame,
+                    );
+
+
+                    window.removeEventListener(
+                        "resize",
+                        resizeCanvas,
+                    );
+
+                },
+                { once: true },
+            );
+
+        }
+
+    }
+
+</script>
