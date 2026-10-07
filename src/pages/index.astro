@@ -61,20 +61,9 @@ const stats = [
                 class="absolute inset-0 w-full h-full"
             ></canvas>
 
-            <!-- AI sphere -->
-            <div class="liquid-ai-visual" aria-hidden="true">
-                <div class="liquid-orb orb-one"></div>
-                <div class="liquid-orb orb-two"></div>
-                <div class="liquid-orb orb-three"></div>
-                <div class="liquid-ribbon ribbon-one"></div>
-                <div class="liquid-ribbon ribbon-two"></div>
-                <div class="liquid-ribbon ribbon-three"></div>
-                <div class="liquid-highlight highlight-one"></div>
-                <div class="liquid-highlight highlight-two"></div>
-                <div class="liquid-grain"></div>
-            </div>v>
-            </div>
-
+            <!-- Particle vortex inspired by the supplied reference -->
+            <div class="particle-vortex-glow" aria-hidden="true"></div>
+            <div class="particle-vortex-core" aria-hidden="true"></div>
             <!--
                 IMPORTANT:
                 No dark overlay here.
@@ -494,124 +483,44 @@ const stats = [
        PREMIUM LIQUID AI LIGHT
        ========================================================= */
 
-    .liquid-ai-visual {
+    /* =========================================================
+       PARTICLE VORTEX — LIGHT MARC THEME
+       ========================================================= */
+
+    .particle-vortex-glow {
         position:absolute;
-        inset:0;
-        overflow:hidden;
+        width:42vw;
+        height:34vw;
+        min-width:360px;
+        min-height:280px;
+        left:58%;
+        top:52%;
+        transform:translate(-50%,-50%);
+        border-radius:50%;
+        background:radial-gradient(circle,rgba(124,58,237,.12) 0%,rgba(59,130,246,.06) 34%,rgba(34,211,238,.035) 55%,transparent 74%);
+        filter:blur(28px);
         pointer-events:none;
-        background:
-            radial-gradient(ellipse 55% 48% at 72% 45%,rgba(124,58,237,.16),transparent 70%),
-            radial-gradient(ellipse 48% 42% at 32% 60%,rgba(6,182,212,.13),transparent 72%),
-            linear-gradient(135deg,#ffffff 0%,#fbfcff 46%,#f7f4ff 100%);
     }
 
-    .liquid-orb,.liquid-ribbon,.liquid-highlight {
+    .particle-vortex-core {
         position:absolute;
-        border-radius:999px;
-        will-change:transform;
+        width:210px;
+        height:150px;
+        left:64%;
+        top:54%;
+        transform:translate(-50%,-50%);
+        border-radius:50%;
+        background:radial-gradient(ellipse,rgba(255,255,255,.95) 0%,rgba(167,139,250,.48) 12%,rgba(59,130,246,.16) 35%,transparent 72%);
+        filter:blur(18px);
+        opacity:.75;
+        pointer-events:none;
+        animation:vortexCore 7s ease-in-out infinite;
     }
 
-    .liquid-orb {
-        filter:blur(30px);
-        mix-blend-mode:multiply;
+    @keyframes vortexCore {
+        0%,100% { transform:translate(-50%,-50%) scale(1); opacity:.62; }
+        50% { transform:translate(-50%,-50%) scale(1.14); opacity:.9; }
     }
-
-    .orb-one {
-        width:55%;height:48%;left:47%;top:23%;
-        background:radial-gradient(ellipse,rgba(124,58,237,.24),rgba(99,102,241,.09) 46%,transparent 72%);
-        animation:orbOne 13s ease-in-out infinite;
-    }
-
-    .orb-two {
-        width:48%;height:43%;left:22%;top:43%;
-        background:radial-gradient(ellipse,rgba(6,182,212,.21),rgba(14,165,233,.06) 48%,transparent 74%);
-        animation:orbTwo 15s ease-in-out infinite;
-    }
-
-    .orb-three {
-        width:34%;height:30%;left:56%;top:53%;
-        background:radial-gradient(ellipse,rgba(236,72,153,.11),rgba(168,85,247,.07) 48%,transparent 72%);
-        animation:orbThree 17s ease-in-out infinite;
-    }
-
-    .liquid-ribbon {
-        height:clamp(65px,8vw,120px);
-        filter:blur(7px);
-        opacity:.78;
-        background:linear-gradient(90deg,
-            transparent 0%,
-            rgba(34,211,238,.06) 8%,
-            rgba(59,130,246,.22) 24%,
-            rgba(124,58,237,.32) 38%,
-            rgba(255,255,255,.88) 49%,
-            rgba(168,85,247,.30) 63%,
-            rgba(34,211,238,.16) 78%,
-            transparent 100%);
-        box-shadow:0 0 60px rgba(99,102,241,.16);
-    }
-
-    .ribbon-one {
-        width:115%;left:-8%;top:35%;
-        transform:rotate(-10deg);
-        animation:ribbonOne 14s ease-in-out infinite;
-    }
-
-    .ribbon-two {
-        width:110%;left:-1%;top:51%;
-        opacity:.62;
-        transform:rotate(8deg);
-        background:linear-gradient(90deg,
-            transparent,
-            rgba(14,165,233,.18),
-            rgba(255,255,255,.78),
-            rgba(139,92,246,.27),
-            transparent);
-        animation:ribbonTwo 16s ease-in-out infinite;
-    }
-
-    .ribbon-three {
-        width:94%;left:13%;top:25%;
-        height:clamp(24px,3vw,48px);
-        opacity:.48;
-        transform:rotate(-17deg);
-        background:linear-gradient(90deg,
-            transparent,
-            rgba(168,85,247,.18),
-            rgba(255,255,255,.9),
-            rgba(34,211,238,.17),
-            transparent);
-        animation:ribbonThree 12s ease-in-out infinite;
-    }
-
-    .liquid-highlight {
-        width:32%;height:9%;left:49%;top:38%;
-        background:rgba(255,255,255,.86);
-        filter:blur(15px);
-        transform:rotate(-12deg);
-        animation:highlightMove 9s ease-in-out infinite;
-    }
-
-    .highlight-two {
-        width:21%;height:5%;left:67%;top:58%;
-        opacity:.65;
-        animation-delay:-3.5s;
-    }
-
-    .liquid-grain {
-        position:absolute;
-        inset:0;
-        opacity:.028;
-        background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 160 160' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.7'/%3E%3C/svg%3E");
-        mix-blend-mode:multiply;
-    }
-
-    @keyframes orbOne{0%,100%{transform:translate3d(0,0,0) scale(1)}50%{transform:translate3d(-42px,20px,0) scale(1.09)}}
-    @keyframes orbTwo{0%,100%{transform:translate3d(0,0,0) scale(1)}50%{transform:translate3d(40px,-25px,0) scale(1.1)}}
-    @keyframes orbThree{0%,100%{transform:translate3d(0,0,0)}50%{transform:translate3d(-32px,-18px,0) scale(1.1)}}
-    @keyframes ribbonOne{0%,100%{transform:translate3d(-2%,0,0) rotate(-10deg)}50%{transform:translate3d(5%,20px,0) rotate(-5deg)}}
-    @keyframes ribbonTwo{0%,100%{transform:translate3d(2%,0,0) rotate(8deg)}50%{transform:translate3d(-5%,-16px,0) rotate(4deg)}}
-    @keyframes ribbonThree{0%,100%{transform:translate3d(0,0,0) rotate(-17deg)}50%{transform:translate3d(-4%,22px,0) rotate(-11deg)}}
-    @keyframes highlightMove{0%,100%{transform:translate3d(0,0,0) rotate(-12deg);opacity:.42}50%{transform:translate3d(58px,18px,0) rotate(-7deg);opacity:.9}}
 
     /* =========================================================
        MOBILE
@@ -671,342 +580,263 @@ const stats = [
 <!-- ============================================================= -->
 
 <script>
-
     const canvas =
-        document.getElementById(
-            "particleCanvas",
-        ) as HTMLCanvasElement | null;
-
+        document.getElementById("particleCanvas") as HTMLCanvasElement | null;
 
     if (canvas) {
-
-        const ctx =
-            canvas.getContext("2d");
-
+        const ctx = canvas.getContext("2d");
 
         if (ctx) {
-
-            let particles: {
-                x: number;
-                y: number;
-                vx: number;
-                vy: number;
+            type Particle = {
+                radius: number;
+                angle: number;
+                speed: number;
                 size: number;
-            }[] = [];
-
-
-            let animationFrame: number;
-
-
-            /* =================================================
-               RESIZE
-               ================================================= */
-
-            const resizeCanvas = () => {
-
-                const dpr =
-                    Math.min(
-                        window.devicePixelRatio || 1,
-                        2,
-                    );
-
-
-                canvas.width =
-                    window.innerWidth * dpr;
-
-
-                canvas.height =
-                    window.innerHeight * dpr;
-
-
-                canvas.style.width =
-                    `${window.innerWidth}px`;
-
-
-                canvas.style.height =
-                    `${window.innerHeight}px`;
-
-
-                ctx.setTransform(
-                    dpr,
-                    0,
-                    0,
-                    dpr,
-                    0,
-                    0,
-                );
-
-
-                createParticles();
+                alpha: number;
+                hue: number;
+                wobble: number;
+                phase: number;
             };
 
+            let particles: Particle[] = [];
+            let animationFrame = 0;
+            let width = 0;
+            let height = 0;
+            let dpr = 1;
 
-            /* =================================================
-               CREATE PARTICLES
-               ================================================= */
+            const reducedMotion =
+                window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+            const center = () => ({
+                x: width * 0.66,
+                y: height * 0.54,
+            });
 
             const createParticles = () => {
-
-                const amount =
-                    window.innerWidth < 768
-                        ? 35
-                        : 75;
-
+                const mobile = width < 768;
+                const amount = mobile ? 650 : 1500;
+                const maxRadius = Math.min(width, height) * (mobile ? 0.48 : 0.58);
 
                 particles = [];
 
-
-                for (
-                    let i = 0;
-                    i < amount;
-                    i++
-                ) {
+                for (let i = 0; i < amount; i++) {
+                    const radius =
+                        22 +
+                        Math.pow(Math.random(), 0.58) *
+                            (maxRadius - 22);
 
                     particles.push({
-
-                        x:
-                            Math.random() *
-                            window.innerWidth,
-
-                        y:
-                            Math.random() *
-                            window.innerHeight,
-
-                        vx:
-                            (Math.random() - 0.5) *
-                            0.25,
-
-                        vy:
-                            (Math.random() - 0.5) *
-                            0.25,
-
+                        radius,
+                        angle: Math.random() * Math.PI * 2,
+                        speed:
+                            0.0018 +
+                            (1 - radius / maxRadius) * 0.008 +
+                            Math.random() * 0.0025,
                         size:
-                            Math.random() *
-                                1.8 +
-                            0.5,
-
+                            Math.random() < 0.08
+                                ? Math.random() * 2.4 + 1.4
+                                : Math.random() * 1.25 + 0.35,
+                        alpha:
+                            Math.random() * 0.55 + 0.22,
+                        hue: Math.random(),
+                        wobble:
+                            Math.random() * 0.7 + 0.25,
+                        phase: Math.random() * Math.PI * 2,
                     });
-
                 }
-
             };
 
+            const resizeCanvas = () => {
+                dpr = Math.min(window.devicePixelRatio || 1, 2);
+                width = window.innerWidth;
+                height = window.innerHeight;
 
-            /* =================================================
-               DRAW
-               ================================================= */
+                canvas.width = width * dpr;
+                canvas.height = height * dpr;
+                canvas.style.width = width + "px";
+                canvas.style.height = height + "px";
 
-            const draw = () => {
+                ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+                createParticles();
+            };
 
-                ctx.clearRect(
-                    0,
-                    0,
-                    window.innerWidth,
-                    window.innerHeight,
+            const drawParticle = (
+                x: number,
+                y: number,
+                size: number,
+                alpha: number,
+                hue: number,
+            ) => {
+                const gradient = ctx.createRadialGradient(
+                    x, y, 0,
+                    x, y, size * 5,
                 );
 
+                const color =
+                    hue < 0.42
+                        ? "99,102,241"
+                        : hue < 0.72
+                            ? "124,58,237"
+                            : "6,182,212";
 
-                /* =============================================
-                   MOVE PARTICLES
-                   ============================================= */
-
-                particles.forEach(
-                    (particle) => {
-
-                        particle.x +=
-                            particle.vx;
-
-                        particle.y +=
-                            particle.vy;
-
-
-                        if (
-                            particle.x < 0
-                        ) {
-                            particle.x =
-                                window.innerWidth;
-                        }
-
-
-                        if (
-                            particle.x >
-                            window.innerWidth
-                        ) {
-                            particle.x = 0;
-                        }
-
-
-                        if (
-                            particle.y < 0
-                        ) {
-                            particle.y =
-                                window.innerHeight;
-                        }
-
-
-                        if (
-                            particle.y >
-                            window.innerHeight
-                        ) {
-                            particle.y = 0;
-                        }
-
-
-                        /* Particle */
-
-                        ctx.beginPath();
-
-
-                        ctx.arc(
-                            particle.x,
-                            particle.y,
-                            particle.size,
-                            0,
-                            Math.PI * 2,
-                        );
-
-
-                        /*
-                         * Light blue particles
-                         */
-
-                        ctx.fillStyle =
-                            "rgba(14,165,233,0.18)";
-
-
-                        ctx.fill();
-
-                    },
+                gradient.addColorStop(0, "rgba(255,255,255," + alpha + ")");
+                gradient.addColorStop(
+                    0.22,
+                    "rgba(" + color + "," + alpha * 0.8 + ")",
+                );
+                gradient.addColorStop(
+                    1,
+                    "rgba(" + color + ",0)",
                 );
 
+                ctx.fillStyle = gradient;
+                ctx.beginPath();
+                ctx.arc(x, y, size * 5, 0, Math.PI * 2);
+                ctx.fill();
 
-                /* =============================================
-                   CONNECTIONS
-                   ============================================= */
+                ctx.fillStyle =
+                    "rgba(255,255,255," +
+                    Math.min(1, alpha + 0.15) +
+                    ")";
+                ctx.beginPath();
+                ctx.arc(x, y, Math.max(0.35, size), 0, Math.PI * 2);
+                ctx.fill();
+            };
 
-                for (
-                    let i = 0;
-                    i < particles.length;
-                    i++
-                ) {
+            const draw = (time = 0) => {
+                ctx.fillStyle = "rgba(255,255,255,0.13)";
+                ctx.fillRect(0, 0, width, height);
 
-                    for (
-                        let j = i + 1;
-                        j < particles.length;
-                        j++
-                    ) {
+                const { x: cx, y: cy } = center();
+                const maxRadius = Math.min(width, height) * 0.58;
 
-                        const a =
-                            particles[i];
+                particles.forEach((particle) => {
+                    const previousRadius = particle.radius;
 
-                        const b =
-                            particles[j];
+                    particle.angle += particle.speed;
+                    particle.radius -=
+                        0.025 +
+                        (1 - particle.radius / maxRadius) * 0.055;
 
-
-                        const dx =
-                            a.x - b.x;
-
-                        const dy =
-                            a.y - b.y;
-
-
-                        const distance =
-                            Math.sqrt(
-                                dx * dx +
-                                dy * dy,
-                            );
-
-
-                        if (
-                            distance < 130
-                        ) {
-
-                            const opacity =
-                                (1 -
-                                    distance /
-                                        130) *
-                                0.10;
-
-
-                            ctx.beginPath();
-
-
-                            ctx.moveTo(
-                                a.x,
-                                a.y,
-                            );
-
-
-                            ctx.lineTo(
-                                b.x,
-                                b.y,
-                            );
-
-
-                            ctx.strokeStyle =
-                                `rgba(14,165,233,${opacity})`;
-
-
-                            ctx.lineWidth =
-                                0.7;
-
-
-                            ctx.stroke();
-
-                        }
-
+                    if (particle.radius < 18) {
+                        particle.radius =
+                            maxRadius * (0.72 + Math.random() * 0.30);
+                        particle.angle =
+                            Math.random() * Math.PI * 2;
                     }
 
+                    const normalized =
+                        particle.radius / maxRadius;
+
+                    const spiral =
+                        Math.sin(
+                            particle.angle * 2.2 +
+                                particle.phase +
+                                time * 0.00018,
+                        ) *
+                        particle.wobble *
+                        (12 + normalized * 42);
+
+                    const x =
+                        cx +
+                        Math.cos(particle.angle) *
+                            particle.radius +
+                        spiral;
+
+                    const y =
+                        cy +
+                        Math.sin(particle.angle) *
+                            particle.radius *
+                            0.54 +
+                        Math.sin(
+                            particle.angle * 3 +
+                                particle.phase,
+                        ) *
+                            10 *
+                            normalized;
+
+                    if (
+                        previousRadius > 70 &&
+                        particle.size > 0.8 &&
+                        Math.random() < 0.34
+                    ) {
+                        const tailAngle =
+                            particle.angle - 0.07;
+                        const tx =
+                            cx +
+                            Math.cos(tailAngle) *
+                                (particle.radius + 7) +
+                            spiral;
+                        const ty =
+                            cy +
+                            Math.sin(tailAngle) *
+                                (particle.radius + 7) *
+                                0.54;
+
+                        ctx.beginPath();
+                        ctx.moveTo(tx, ty);
+                        ctx.lineTo(x, y);
+                        ctx.strokeStyle =
+                            "rgba(99,102,241," +
+                            particle.alpha * 0.10 +
+                            ")";
+                        ctx.lineWidth =
+                            Math.max(0.35, particle.size * 0.45);
+                        ctx.stroke();
+                    }
+
+                    const coreBoost =
+                        normalized < 0.20
+                            ? 0.42
+                            : normalized < 0.42
+                                ? 0.18
+                                : 0;
+
+                    drawParticle(
+                        x,
+                        y,
+                        particle.size * (1 + coreBoost),
+                        Math.min(0.95, particle.alpha + coreBoost),
+                        particle.hue,
+                    );
+                });
+
+                for (let i = 0; i < 90; i++) {
+                    const angle =
+                        time * 0.00022 +
+                        i * 0.19;
+                    const radius =
+                        10 + (i % 18) * 2.2;
+
+                    drawParticle(
+                        cx + Math.cos(angle) * radius,
+                        cy + Math.sin(angle) * radius * 0.46,
+                        0.45 + (i % 3) * 0.18,
+                        0.42,
+                        i % 2 === 0 ? 0.25 : 0.55,
+                    );
                 }
 
-
-                animationFrame =
-                    requestAnimationFrame(
-                        draw,
-                    );
-
+                if (!reducedMotion) {
+                    animationFrame = requestAnimationFrame(draw);
+                }
             };
 
-
-            /* =================================================
-               EVENTS
-               ================================================= */
-
-            window.addEventListener(
-                "resize",
-                resizeCanvas,
-            );
-
-
             resizeCanvas();
+            ctx.fillStyle = "rgba(255,255,255,1)";
+            ctx.fillRect(0, 0, width, height);
+            draw(performance.now());
 
-            draw();
-
-
-            /* =================================================
-               CLEANUP
-               ================================================= */
+            window.addEventListener("resize", resizeCanvas);
 
             document.addEventListener(
                 "astro:before-swap",
                 () => {
-
-                    cancelAnimationFrame(
-                        animationFrame,
-                    );
-
-
-                    window.removeEventListener(
-                        "resize",
-                        resizeCanvas,
-                    );
-
+                    cancelAnimationFrame(animationFrame);
+                    window.removeEventListener("resize", resizeCanvas);
                 },
                 { once: true },
             );
-
         }
-
     }
-
 </script>
