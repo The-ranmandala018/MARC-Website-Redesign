@@ -3,12 +3,11 @@ import logo from "../assets/MARC_Logo.png";
 import { Image } from "astro:assets";
 
 const links = [
-    { href: "/", label: "Home" },
+    { href: "/#about", label: "About" },
     { href: "/Research", label: "Research" },
     { href: "/projects", label: "Projects" },
     { href: "/publications", label: "Publications" },
     { href: "/people", label: "People" },
-    { href: "/news", label: "News" },
     { href: "/contact", label: "Contact" },
 ];
 
@@ -65,7 +64,7 @@ const isActive = (href: string) => {
                  ===================================================== -->
 
             <nav
-                class="relative z-20 hidden lg:flex items-center gap-1 shrink-0"
+                class="relative z-20 hidden lg:flex items-center gap-1.5 shrink-0"
             >
                 {
                     links.map((link) => (
@@ -74,21 +73,21 @@ const isActive = (href: string) => {
                             class={`
                                 relative
                                 isolate
-                                px-3
+                                px-3.5
                                 py-2
                                 rounded-full
-                                text-[13px]
+                                text-[12px]
                                 font-medium
                                 transition-all
                                 duration-300
                                 overflow-hidden
                                 border
                                 border-white/70
-                                bg-gradient-to-r from-sky-100/75 via-blue-100/65 to-violet-100/60
+                                bg-gradient-to-b from-white/70 via-sky-100/55 to-violet-100/45
                                 backdrop-blur-xl
-                                shadow-[inset_0_1px_1px_rgba(255,255,255,0.95),inset_0_-1px_8px_rgba(255,255,255,0.45),0_4px_16px_rgba(59,130,246,0.08)]
+                                shadow-[inset_0_1px_2px_rgba(255,255,255,0.98),inset_0_-2px_8px_rgba(99,102,241,0.08),0_4px_14px_rgba(59,130,246,0.08)]
                                 hover:-translate-y-0.5
-                                hover:shadow-[inset_0_1px_1px_rgba(255,255,255,1),inset_0_-1px_10px_rgba(255,255,255,0.55),0_8px_24px_rgba(59,130,246,0.16)]
+                                hover:shadow-[inset_0_1px_2px_rgba(255,255,255,1),inset_0_-2px_12px_rgba(99,102,241,0.12),0_8px_22px_rgba(59,130,246,0.14)]
                                 ${
                                      isActive(link.href)
                                         ? "!text-slate-950 ring-1 ring-sky-200/70"
@@ -119,7 +118,7 @@ const isActive = (href: string) => {
                 <!-- AI Research indicator -->
 
                 <div
-                    class="hidden lg:flex items-center gap-2 px-3 py-2 rounded-full bg-white/35 backdrop-blur-md border border-white/60 shadow-sm"
+                    class="hidden xl:flex items-center gap-2 px-3 py-2 rounded-full bg-white/35 backdrop-blur-md border border-white/60 shadow-sm"
                 >
                     <span
                         class="w-2 h-2 rounded-full bg-gradient-to-r from-sky-500 to-violet-500 animate-pulse"
