@@ -33,7 +33,7 @@ const isActive = (href: string) => {
     </div>
 
     <div
-        class="relative z-10 container mx-auto max-w-[1500px] px-4 sm:px-6 lg:px-8"
+        class="relative z-20 container mx-auto max-w-[1500px] px-4 sm:px-6 lg:px-8"
     >
 
         <div
@@ -46,7 +46,7 @@ const isActive = (href: string) => {
 
 <a
     href="/"
-    class="flex items-center gap-2 shrink-0"
+    class="relative z-20 flex items-center gap-2 shrink-0"
     aria-label="MARC Home"
 >
     <Image
@@ -71,7 +71,7 @@ const isActive = (href: string) => {
                  ===================================================== -->
 
             <nav
-                class="hidden lg:flex items-center gap-1.5 shrink-0"
+                class="relative z-20 hidden lg:flex items-center gap-1.5 shrink-0"
             >
                 {
                     links.map((link) => (
@@ -89,8 +89,8 @@ const isActive = (href: string) => {
 
                                 ${
                                      isActive(link.href)
-                                        ? "bg-white/65 text-sky-700 border border-white/80 shadow-sm backdrop-blur-md"
-                                        : "text-slate-700 hover:text-slate-950 hover:bg-white/40"
+                                        ? "bg-white/70 !text-sky-700 border border-white/80 shadow-sm backdrop-blur-md"
+                                        : "!text-slate-700 hover:!text-slate-950 hover:bg-white/40"
                                 }
                             `}
                         >
