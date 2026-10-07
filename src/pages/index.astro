@@ -62,23 +62,33 @@ const stats = [
             ></canvas>
 
             <!-- AI sphere -->
-            <div class="neural-brain-container" aria-hidden="true">
-                <div class="brain-glow"></div>
-                <svg class="neural-brain" viewBox="0 0 620 520" role="presentation">
+            <div class="liquid-ai-visual" aria-hidden="true">
+                <div class="liquid-glow"></div>
+                <div class="liquid-core"></div>
+                <div class="liquid-band liquid-band-top"></div>
+                <div class="liquid-band liquid-band-bottom"></div>
+
+                <svg class="liquid-waves" viewBox="0 0 620 560" preserveAspectRatio="none" role="presentation">
                     <defs>
-                        <radialGradient id="brainCoreGlow">
-                            <stop offset="0%" stop-color="#ffffff" stop-opacity="0.95" />
-                            <stop offset="28%" stop-color="#38bdf8" stop-opacity="0.9" />
-                            <stop offset="65%" stop-color="#6366f1" stop-opacity="0.32" />
-                            <stop offset="100%" stop-color="#6366f1" stop-opacity="0" />
-                        </radialGradient>
-                        <linearGradient id="brainStroke" x1="0%" y1="0%" x2="100%" y2="100%">
-                            <stop offset="0%" stop-color="#22d3ee" />
-                            <stop offset="50%" stop-color="#3b82f6" />
-                            <stop offset="100%" stop-color="#8b5cf6" />
+                        <linearGradient id="liquidWaveOne" x1="0%" y1="0%" x2="100%" y2="0%">
+                            <stop offset="0%" stop-color="#312e81" />
+                            <stop offset="35%" stop-color="#7c3aed" />
+                            <stop offset="62%" stop-color="#22d3ee" />
+                            <stop offset="100%" stop-color="#2563eb" />
                         </linearGradient>
-                        <filter id="neuralGlow">
-                            <feGaussianBlur stdDeviation="5" result="blur" />
+
+                        <linearGradient id="liquidWaveTwo" x1="0%" y1="0%" x2="100%" y2="0%">
+                            <stop offset="0%" stop-color="#0ea5e9" />
+                            <stop offset="45%" stop-color="#8b5cf6" />
+                            <stop offset="100%" stop-color="#4338ca" />
+                        </linearGradient>
+
+                        <filter id="liquidBlur">
+                            <feGaussianBlur stdDeviation="8" />
+                        </filter>
+
+                        <filter id="liquidGlow">
+                            <feGaussianBlur stdDeviation="4" result="blur" />
                             <feMerge>
                                 <feMergeNode in="blur" />
                                 <feMergeNode in="SourceGraphic" />
@@ -86,47 +96,30 @@ const stats = [
                         </filter>
                     </defs>
 
-                    <ellipse cx="310" cy="260" rx="245" ry="205" fill="url(#brainCoreGlow)" opacity="0.42" />
+                    <path class="liquid-wave wave-back"
+                        d="M-40 385 C85 300 105 300 205 350 S355 455 455 390 S570 280 660 315" />
 
-                    <g class="neural-connections">
-                        <path d="M112 242 C155 175 205 160 258 205 S350 320 405 230 S500 155 535 235" />
-                        <path d="M100 300 C160 350 195 250 255 280 S350 390 430 300 S500 260 540 315" />
-                        <path d="M145 175 C205 235 235 125 300 185 S385 280 455 175" />
-                        <path d="M150 365 C210 300 250 390 315 330 S405 260 480 365" />
-                        <path d="M225 115 C250 175 315 145 340 220 S400 350 455 405" />
-                        <path d="M395 120 C355 175 420 205 390 265 S330 355 285 410" />
-                    </g>
+                    <path class="liquid-wave wave-main"
+                        d="M-40 415 C75 355 120 315 220 345 S340 445 430 390 S550 275 660 295" />
 
-                    <g class="brain-outline" filter="url(#neuralGlow)">
-                        <path d="M307 104 C274 76 218 88 199 126 C160 116 127 145 132 184 C101 204 104 250 133 270 C112 308 134 352 176 357 C181 398 221 420 257 400 C281 432 321 428 341 400" />
-                        <path d="M313 104 C348 75 402 89 421 126 C460 116 493 145 488 184 C519 204 516 250 487 270 C508 308 486 352 444 357 C439 398 399 420 363 400 C339 432 299 428 279 400" />
-                        <path d="M310 106 C296 155 323 180 307 220 C291 258 326 284 307 325 C292 356 312 386 301 410" />
-                        <path d="M200 160 C226 145 249 158 255 183 S236 221 260 237 S278 276 249 289 S220 330 247 350" />
-                        <path d="M420 160 C394 145 371 158 365 183 S384 221 360 237 S342 276 371 289 S400 330 373 350" />
-                    </g>
+                    <path class="liquid-wave wave-light"
+                        d="M-40 402 C85 340 130 318 220 350 S350 430 435 382 S555 280 660 300" />
 
-                    <g class="synapses">
-                        <circle cx="155" cy="205" r="6" />
-                        <circle cx="205" cy="145" r="5" />
-                        <circle cx="255" cy="205" r="7" />
-                        <circle cx="307" cy="220" r="6" />
-                        <circle cx="365" cy="183" r="7" />
-                        <circle cx="420" cy="160" r="5" />
-                        <circle cx="475" cy="215" r="6" />
-                        <circle cx="230" cy="330" r="6" />
-                        <circle cx="307" cy="325" r="8" />
-                        <circle cx="390" cy="300" r="6" />
-                        <circle cx="445" cy="350" r="5" />
-                    </g>
-
-                    <circle class="brain-core" cx="307" cy="260" r="38" />
-                    <circle class="brain-core-pulse" cx="307" cy="260" r="58" />
+                    <path class="liquid-wave wave-top"
+                        d="M-30 215 C90 205 120 180 230 205 S380 265 475 225 S570 165 660 185" />
                 </svg>
 
-                <div class="brain-label">
-                    <span class="brain-label-dot"></span>
-                    Neural Intelligence
+                <span class="liquid-particle particle-a"></span>
+                <span class="liquid-particle particle-b"></span>
+                <span class="liquid-particle particle-c"></span>
+                <span class="liquid-particle particle-d"></span>
+                <span class="liquid-particle particle-e"></span>
+
+                <div class="liquid-ai-label">
+                    <span class="liquid-ai-dot"></span>
+                    AI · Intelligence · Innovation
                 </div>
+            </div>
             </div>
 
             <!--
@@ -545,153 +538,215 @@ const stats = [
        ========================================================= */
 
     /* =========================================================
-       NEURAL BRAIN — AI VISUAL
+       LIQUID AI VISUAL — ABSTRACT INTELLIGENCE
        ========================================================= */
 
-    .neural-brain-container {
+    .liquid-ai-visual {
         position: absolute;
         width: 620px;
-        height: 520px;
-        right: -35px;
+        height: 560px;
+        right: -55px;
         top: 50%;
         transform: translateY(-50%);
+        overflow: hidden;
+        border-radius: 42px;
         pointer-events: none;
-        opacity: 0.9;
-        filter: drop-shadow(0 25px 60px rgba(37, 99, 235, 0.12));
+        background:
+            radial-gradient(circle at 68% 50%, rgba(91,33,182,0.22), transparent 42%),
+            radial-gradient(circle at 42% 46%, rgba(14,165,233,0.16), transparent 45%),
+            linear-gradient(145deg, #030712 0%, #070b1d 52%, #020617 100%);
+        box-shadow:
+            inset 0 0 80px rgba(59,130,246,0.08),
+            0 30px 90px rgba(15,23,42,0.20);
+        animation: liquidFloat 9s ease-in-out infinite;
     }
 
-    .brain-glow {
+    .liquid-ai-visual::before {
+        content: "";
         position: absolute;
-        inset: 18% 12%;
-        border-radius: 50%;
-        background: radial-gradient(circle, rgba(56,189,248,0.20) 0%, rgba(99,102,241,0.13) 38%, transparent 72%);
-        filter: blur(28px);
-        animation: brainGlow 5s ease-in-out infinite;
+        inset: 1px;
+        border-radius: 41px;
+        border: 1px solid rgba(255,255,255,0.10);
+        background: linear-gradient(120deg, rgba(255,255,255,0.05), transparent 35%, rgba(139,92,246,0.04));
     }
 
-    .neural-brain {
+    .liquid-glow {
+        position: absolute;
+        width: 430px;
+        height: 300px;
+        left: 95px;
+        top: 120px;
+        border-radius: 50%;
+        background:
+            radial-gradient(circle,
+                rgba(168,85,247,0.45) 0%,
+                rgba(99,102,241,0.20) 32%,
+                rgba(14,165,233,0.10) 55%,
+                transparent 75%);
+        filter: blur(35px);
+        animation: liquidGlow 6s ease-in-out infinite;
+    }
+
+    .liquid-core {
+        position: absolute;
+        width: 310px;
+        height: 105px;
+        left: 75px;
+        top: 190px;
+        border-radius: 50%;
+        background: radial-gradient(ellipse, rgba(255,255,255,0.96) 0%, rgba(216,180,254,0.82) 16%, rgba(168,85,247,0.45) 40%, transparent 72%);
+        filter: blur(18px);
+        opacity: 0.9;
+        animation: coreBreath 5s ease-in-out infinite;
+    }
+
+    .liquid-band {
+        position: absolute;
+        left: -10%;
+        width: 125%;
+        height: 58px;
+        border-radius: 50%;
+        filter: blur(13px);
+        transform-origin: center;
+    }
+
+    .liquid-band-top {
+        top: 155px;
+        background: linear-gradient(90deg, transparent 0%, rgba(124,58,237,0.55) 22%, rgba(255,255,255,0.92) 48%, rgba(34,211,238,0.45) 72%, transparent 100%);
+        animation: bandSweep 7s ease-in-out infinite;
+    }
+
+    .liquid-band-bottom {
+        top: 365px;
+        background: linear-gradient(90deg, transparent 0%, rgba(14,165,233,0.42) 20%, rgba(129,140,248,0.75) 48%, rgba(168,85,247,0.55) 70%, transparent 100%);
+        animation: bandSweepReverse 8s ease-in-out infinite;
+    }
+
+    .liquid-waves {
+        position: absolute;
+        inset: 0;
         width: 100%;
         height: 100%;
-        overflow: visible;
-        animation: brainFloat 7s ease-in-out infinite;
     }
 
-    .neural-connections path {
+    .liquid-wave {
         fill: none;
-        stroke: url(#brainStroke);
-        stroke-width: 1.2;
-        stroke-linecap: round;
-        opacity: 0.28;
-        stroke-dasharray: 7 10;
-        animation: signalFlow 5s linear infinite;
-    }
-
-    .neural-connections path:nth-child(2) { animation-delay: -1s; }
-    .neural-connections path:nth-child(3) { animation-delay: -2s; }
-    .neural-connections path:nth-child(4) { animation-delay: -3s; }
-    .neural-connections path:nth-child(5) { animation-delay: -4s; }
-    .neural-connections path:nth-child(6) { animation-delay: -2.5s; }
-
-    .brain-outline path {
-        fill: none;
-        stroke: url(#brainStroke);
-        stroke-width: 2.2;
         stroke-linecap: round;
         stroke-linejoin: round;
-        opacity: 0.68;
+        stroke-dasharray: 900;
+        animation: waveFlow 9s linear infinite;
     }
 
-    .synapses circle {
-        fill: #67e8f9;
-        stroke: rgba(255,255,255,0.75);
-        stroke-width: 1;
-        filter: drop-shadow(0 0 8px rgba(34,211,238,0.9));
-        animation: synapsePulse 2.8s ease-in-out infinite;
+    .wave-back {
+        stroke: url(#liquidWaveTwo);
+        stroke-width: 26;
+        opacity: 0.20;
+        filter: url(#liquidBlur);
+        animation-duration: 13s;
     }
 
-    .synapses circle:nth-child(2) { animation-delay: -0.4s; }
-    .synapses circle:nth-child(3) { animation-delay: -0.8s; }
-    .synapses circle:nth-child(4) { animation-delay: -1.2s; }
-    .synapses circle:nth-child(5) { animation-delay: -1.6s; }
-    .synapses circle:nth-child(6) { animation-delay: -2s; }
-    .synapses circle:nth-child(7) { animation-delay: -2.4s; }
-    .synapses circle:nth-child(8) { animation-delay: -0.6s; }
-    .synapses circle:nth-child(9) { animation-delay: -1.4s; }
-    .synapses circle:nth-child(10) { animation-delay: -2.2s; }
-    .synapses circle:nth-child(11) { animation-delay: -1s; }
-
-    .brain-core {
-        fill: url(#brainCoreGlow);
-        stroke: rgba(125,211,252,0.8);
-        stroke-width: 1.5;
-        filter: drop-shadow(0 0 18px rgba(56,189,248,0.7));
-        animation: corePulse 3.2s ease-in-out infinite;
-        transform-origin: 307px 260px;
+    .wave-main {
+        stroke: url(#liquidWaveOne);
+        stroke-width: 17;
+        opacity: 0.82;
+        filter: url(#liquidGlow);
     }
 
-    .brain-core-pulse {
-        fill: none;
-        stroke: rgba(99,102,241,0.32);
-        stroke-width: 1;
-        transform-origin: 307px 260px;
-        animation: coreRipple 3.2s ease-out infinite;
+    .wave-light {
+        stroke: rgba(255,255,255,0.86);
+        stroke-width: 2.2;
+        opacity: 0.82;
+        filter: url(#liquidGlow);
+        animation-duration: 7s;
     }
 
-    .brain-label {
+    .wave-top {
+        stroke: url(#liquidWaveTwo);
+        stroke-width: 8;
+        opacity: 0.36;
+        filter: url(#liquidGlow);
+        animation-duration: 11s;
+    }
+
+    .liquid-particle {
         position: absolute;
-        right: 125px;
-        bottom: 48px;
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: #38bdf8;
+        box-shadow:
+            0 0 8px #38bdf8,
+            0 0 22px rgba(56,189,248,0.65);
+        animation: particleFloat 5s ease-in-out infinite;
+    }
+
+    .particle-a { left: 76%; top: 24%; animation-delay: -1s; }
+    .particle-b { left: 83%; top: 54%; animation-delay: -2.4s; }
+    .particle-c { left: 70%; top: 76%; animation-delay: -3.2s; }
+    .particle-d { left: 57%; top: 33%; width: 4px; height: 4px; animation-delay: -0.8s; }
+    .particle-e { left: 91%; top: 38%; width: 4px; height: 4px; animation-delay: -4s; }
+
+    .liquid-ai-label {
+        position: absolute;
+        right: 32px;
+        bottom: 28px;
         display: flex;
         align-items: center;
         gap: 8px;
-        padding: 8px 14px;
-        border: 1px solid rgba(255,255,255,0.65);
+        padding: 8px 13px;
         border-radius: 999px;
-        background: rgba(255,255,255,0.48);
+        border: 1px solid rgba(255,255,255,0.14);
+        background: rgba(3,7,18,0.42);
         backdrop-filter: blur(12px);
-        color: rgba(30,64,175,0.82);
-        font-size: 11px;
+        color: rgba(226,232,240,0.72);
+        font-size: 10px;
         font-weight: 600;
-        letter-spacing: 0.04em;
-        box-shadow: 0 8px 30px rgba(37,99,235,0.10);
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        box-shadow: 0 8px 30px rgba(0,0,0,0.24);
     }
 
-    .brain-label-dot {
-        width: 7px;
-        height: 7px;
+    .liquid-ai-dot {
+        width: 6px;
+        height: 6px;
         border-radius: 50%;
-        background: linear-gradient(135deg,#22d3ee,#6366f1);
-        box-shadow: 0 0 12px rgba(56,189,248,0.8);
+        background: linear-gradient(135deg,#22d3ee,#a855f7);
+        box-shadow: 0 0 12px rgba(56,189,248,0.9);
     }
 
-    @keyframes brainFloat {
-        0%,100% { transform: translateY(0) rotate(0deg); }
-        50% { transform: translateY(-10px) rotate(0.8deg); }
+    @keyframes liquidFloat {
+        0%,100% { transform: translateY(-50%) translate3d(0,0,0); }
+        50% { transform: translateY(calc(-50% - 8px)) translate3d(-4px,0,0); }
     }
 
-    @keyframes signalFlow {
-        from { stroke-dashoffset: 80; }
-        to { stroke-dashoffset: 0; }
-    }
-
-    @keyframes synapsePulse {
-        0%,100% { opacity: 0.45; transform: scale(0.85); }
-        50% { opacity: 1; transform: scale(1.35); }
-    }
-
-    @keyframes brainGlow {
-        0%,100% { opacity: 0.55; transform: scale(0.95); }
+    @keyframes liquidGlow {
+        0%,100% { opacity: 0.65; transform: scale(0.92); }
         50% { opacity: 1; transform: scale(1.08); }
     }
 
-    @keyframes corePulse {
-        0%,100% { opacity: 0.72; transform: scale(0.92); }
-        50% { opacity: 1; transform: scale(1.08); }
+    @keyframes coreBreath {
+        0%,100% { opacity: 0.65; transform: scale(0.92) translateX(-8px); }
+        50% { opacity: 1; transform: scale(1.08) translateX(10px); }
     }
 
-    @keyframes coreRipple {
-        0% { opacity: 0.65; transform: scale(0.7); }
-        100% { opacity: 0; transform: scale(1.8); }
+    @keyframes bandSweep {
+        0%,100% { transform: translateX(-8%) scaleY(0.82); opacity: 0.65; }
+        50% { transform: translateX(7%) scaleY(1.08); opacity: 1; }
+    }
+
+    @keyframes bandSweepReverse {
+        0%,100% { transform: translateX(7%) scaleY(0.88); opacity: 0.65; }
+        50% { transform: translateX(-7%) scaleY(1.1); opacity: 1; }
+    }
+
+    @keyframes waveFlow {
+        from { stroke-dashoffset: 0; }
+        to { stroke-dashoffset: -900; }
+    }
+
+    @keyframes particleFloat {
+        0%,100% { transform: translate3d(0,0,0) scale(0.8); opacity: 0.45; }
+        50% { transform: translate3d(-18px,-20px,0) scale(1.35); opacity: 1; }
     }
 
     /* =========================================================
@@ -699,40 +754,36 @@ const stats = [
        ========================================================= */
 
     @media (max-width: 1100px) {
-        .neural-brain-container {
+        .liquid-ai-visual {
             width: 500px;
-            height: 430px;
-            right: -100px;
-            opacity: 0.58;
-        }
-
-        .brain-label {
-            right: 90px;
-            bottom: 35px;
+            height: 460px;
+            right: -130px;
+            opacity: 0.72;
         }
     }
 
     @media (max-width: 900px) {
-        .neural-brain-container {
-            width: 380px;
-            height: 330px;
-            right: -130px;
-            top: 26%;
-            opacity: 0.30;
+        .liquid-ai-visual {
+            width: 430px;
+            height: 390px;
+            right: -160px;
+            top: 28%;
+            opacity: 0.38;
         }
 
-        .brain-label {
+        .liquid-ai-label {
             display: none;
         }
     }
 
     @media (max-width: 640px) {
-        .neural-brain-container {
-            width: 300px;
-            height: 270px;
-            right: -105px;
-            top: 24%;
-            opacity: 0.20;
+        .liquid-ai-visual {
+            width: 330px;
+            height: 310px;
+            right: -125px;
+            top: 25%;
+            opacity: 0.24;
+            border-radius: 28px;
         }
     }
 
@@ -743,12 +794,12 @@ const stats = [
 
     @media (prefers-reduced-motion: reduce) {
 
-        .neural-brain,
-        .neural-connections path,
-        .synapses circle,
-        .brain-core,
-        .brain-core-pulse,
-        .brain-glow {
+        .liquid-ai-visual,
+        .liquid-glow,
+        .liquid-core,
+        .liquid-band,
+        .liquid-wave,
+        .liquid-particle {
 
             animation: none !important;
         }
