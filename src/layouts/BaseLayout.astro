@@ -95,10 +95,32 @@ const canonical = Astro.url.href;
         />
 
         <title>{fullTitle}</title>
+
+        <script is:inline>
+            (() => {
+                try {
+                    const stored = localStorage.getItem("marc-theme");
+                    const theme =
+                        stored === "marc-dark" || stored === "marc"
+                            ? stored
+                            : "marc";
+
+                    document.documentElement.setAttribute(
+                        "data-theme",
+                        theme,
+                    );
+                } catch (_) {
+                    document.documentElement.setAttribute(
+                        "data-theme",
+                        "marc",
+                    );
+                }
+            })();
+        </script>
     </head>
 
     <body
-        class="flex flex-col min-h-screen bg-white text-base-content"
+        class="flex flex-col min-h-screen bg-base-100 text-base-content"
     >
         <Navbar />
 
