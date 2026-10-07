@@ -241,7 +241,7 @@ const stats = [
         <div class="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div class="grid lg:grid-cols-[0.8fr_1.2fr] gap-10 lg:gap-20 items-start">
                 <div>
-                    <p class="eyebrow text-sky-600 dark:text-sky-400 mb-4">About MARC</p>
+                    <p class="eyebrow text-[#004AAD] dark:text-[#5170FF] mb-4">About MARC</p>
                     <h2 class="font-display text-4xl md:text-5xl leading-tight text-slate-900 dark:text-white">
                         AI research across disciplines.
                     </h2>
@@ -257,7 +257,7 @@ const stats = [
                         research with practical challenges in engineering, science, health,
                         energy and society.
                     </p>
-                    <a href="/Research" class="inline-flex items-center gap-2 text-sm font-semibold text-sky-700 dark:text-sky-400 hover:gap-3 transition-all">
+                    <a href="/Research" class="inline-flex items-center gap-2 text-sm font-semibold text-[#004AAD] dark:text-[#5170FF] hover:gap-3 transition-all">
                         Explore our research
                         <span aria-hidden="true">→</span>
                     </a>
@@ -427,7 +427,7 @@ const stats = [
         <section class="pb-24 lg:pb-32">
 
             <div
-                class="relative overflow-hidden rounded-3xl bg-slate-950 text-white p-10 md:p-16 dark:bg-slate-900"
+                class="relative overflow-hidden rounded-3xl bg-[#0B0405] text-white p-10 md:p-16 dark:bg-slate-900"
             >
 
                 <!-- subtle blue glow -->
@@ -450,7 +450,7 @@ const stats = [
                     <div class="md:col-span-2">
 
                         <p
-                            class="eyebrow text-sky-300 opacity-90 mb-4"
+                            class="eyebrow text-[#5170FF] opacity-90 mb-4"
                         >
                             Get involved
                         </p>
@@ -534,9 +534,9 @@ const stats = [
         background:
             radial-gradient(
                 ellipse,
-                rgba(124,58,237,.20) 0%,
-                rgba(79,70,229,.07) 32%,
-                rgba(6,182,212,.07) 54%,
+                rgba(124,14,36,.20) 0%,
+                rgba(81,112,255,.07) 32%,
+                rgba(0,74,173,.07) 54%,
                 transparent 74%
             );
         filter:blur(24px);
@@ -555,8 +555,8 @@ const stats = [
             radial-gradient(
                 ellipse,
                 rgba(255,255,255,1) 0%,
-                rgba(167,139,250,.34) 15%,
-                rgba(59,130,246,.10) 38%,
+                rgba(81,112,255,.34) 15%,
+                rgba(0,74,173,.10) 38%,
                 transparent 73%
             );
         filter:blur(22px);
@@ -673,7 +673,7 @@ if(canvas){
     const angle=p.a+.9/(p.r/120+1);
     const x=cx+Math.cos(angle)*p.r+spiral;
     const y=cy+Math.sin(angle)*p.r*.48+Math.sin(p.a*4+p.phase)*12*q;
-    const rgb=p.color<.33?"6,182,212":p.color<.66?"59,130,246":"124,58,237";
+    const rgb=p.color<.33?"0,74,173":p.color<.66?"81,112,255":"124,14,36";
     const alpha=Math.min(1,p.alpha+(q<.16?.3:0));
     if(old>100&&p.size>.8){
       ctx.beginPath();
@@ -697,8 +697,8 @@ if(canvas){
    });
    const core=ctx.createRadialGradient(cx,cy,0,cx,cy,180);
    core.addColorStop(0,"rgba(255,255,255,.95)");
-   core.addColorStop(.08,"rgba(124,58,237,.28)");
-   core.addColorStop(.28,"rgba(59,130,246,.10)");
+   core.addColorStop(.08,"rgba(124,14,36,.28)");
+   core.addColorStop(.28,"rgba(0,74,173,.10)");
    core.addColorStop(1,"rgba(255,255,255,0)");
    ctx.fillStyle=core;ctx.beginPath();ctx.arc(cx,cy,180,0,Math.PI*2);ctx.fill();
    raf=requestAnimationFrame(draw);
