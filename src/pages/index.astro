@@ -643,12 +643,12 @@ if (canvas) {
         let w = 0, h = 0, dpr = 1, raf = 0, time = 0;
 
         type Particle = {
-            x: number;
-            z: number;
+            lat: number;
+            lon: number;
+            r: number;
             size: number;
             alpha: number;
             phase: number;
-            layer: number;
         };
 
         let particles: Particle[] = [];
@@ -657,161 +657,110 @@ if (canvas) {
             dpr = Math.min(window.devicePixelRatio || 1, 2);
             w = window.innerWidth;
             h = window.innerHeight;
-
             canvas.width = w * dpr;
             canvas.height = h * dpr;
             canvas.style.width = w + "px";
             canvas.style.height = h + "px";
             ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
-            const count = w < 768 ? 1800 : 5200;
+            const count = w < 768 ? 1400 : 4000;
 
-            particles = Array.from({ length: count }, () => ({
-                x: (Math.random() - 0.5) * 2.35,
-                z: (Math.random() - 0.5) * 2.0,
-                size: 0.35 + Math.random() * 1.55,
-                alpha: 0.22 + Math.random() * 0.78,
-                phase: Math.random() * Math.PI * 2,
-                layer: Math.random(),
-            }));
+            particles = Array.from({ length: count }, () => {
+                const lat = (Math.random() - 0.5) * Math.PI;
+                return {
+                    lat,
+                    lon: Math.random() * Math.PI * 2,
+                    r: 0.82 + Math.random() * 0.18,
+                    size: 0.45 + Math.random() * 1.65,
+                    alpha: 0.25 + Math.random() * 0.75,
+                    phase: Math.random() * Math.PI * 2,
+                };
+            });
         };
 
         const draw = () => {
-            time += 0.010;
+            time += 0.012;
             ctx.clearRect(0, 0, w, h);
 
-            // Large fluid particle landscape inspired by the supplied reference:
-            // several broad waves continuously deform around a bright central core.
             const cx = w * 0.74;
             const cy = h * 0.53;
-            const sx = Math.min(w, h) * 0.28;
-            const sy = Math.min(w, h) * 0.30;
+            const R = Math.min(w, h) * (w < 768 ? 0.38 : 0.48);
 
             const points = particles.map((p) => {
-                const radial = Math.sqrt(p.x * p.x + p.z * p.z);
-                const angle = Math.atan2(p.z, p.x);
+                /*
+                 * Motion is intentionally irregular:
+                 * the sphere rotates, breathes, and its surface
+                 * continuously ripples like the supplied reference.
+                 */
+                const wave1 = Math.sin(p.lat * 8 + p.lon * 3 + time * 2.0 + p.phase) * 0.075;
+                const wave2 = Math.sin(p.lat * 15 - time * 1.35 + p.phase * 1.7) * 0.035;
+                const breathing = Math.sin(time * 0.9 + p.phase) * 0.025;
 
-                const waveA =
-                    Math.sin(p.x * 5.0 + time * 1.25 + p.phase) * 0.15;
+                const lon =
+                    p.lon +
+                    time * 0.32 +
+                    Math.sin(p.lat * 5 + time * 1.1) * 0.14 +
+                    wave1;
 
-                const waveB =
-                    Math.sin(p.x * 10.0 - time * 1.05 + p.z * 4.0) * 0.075;
+                const lat =
+                    p.lat +
+                    Math.sin(p.lon * 4 + time * 1.25 + p.phase) * 0.055 +
+                    wave2;
 
-                const waveC =
-                    Math.cos(radial * 8.0 - time * 1.7 + p.phase) * 0.055;
+                const rr = p.r + breathing + wave1 * 0.45;
 
-                const ridge =
-                    Math.exp(
-                        -Math.pow((p.x + 0.15) / 0.65, 2)
-                    ) *
-                    Math.sin(p.x * 7.0 + time * 0.9) *
-                    0.16;
+                let x = rr * Math.cos(lat) * Math.cos(lon);
+                let y = rr * Math.sin(lat);
+                let z = rr * Math.cos(lat) * Math.sin(lon);
 
-                const flowingY =
-                    p.z * 0.12 +
-                    waveA +
-                    waveB +
-                    waveC +
-                    ridge;
+                const tilt = Math.sin(time * 0.42) * 0.12;
+                const y2 = y * Math.cos(tilt) - z * Math.sin(tilt);
+                const z2 = y * Math.sin(tilt) + z * Math.cos(tilt);
 
-                const breathing =
-                    Math.sin(time * 0.7 + p.phase) * 0.018;
-
-                // Perspective: distant particles are smaller/fainter.
-                const depth = 1 / (1.45 - p.z * 0.20);
-                const px = cx + p.x * sx * depth;
-                const py = cy + (flowingY + breathing) * sy * depth;
-                const depthAlpha =
-                    0.22 +
-                    (p.z + 1) * 0.28;
-
-                // Dense particles gather around the flowing wave surfaces.
-                const waveDistance =
-                    Math.abs(
-                        Math.sin(p.x * 5.0 + time * 1.25 + p.phase)
-                    );
-
-                const alpha =
-                    p.alpha *
-                    depthAlpha *
-                    (0.45 + waveDistance * 0.55);
+                const perspective = 1 / (1.32 - z2 * 0.30);
 
                 return {
-                    x: px,
-                    y: py,
-                    z: p.z,
-                    size: p.size * depth,
-                    alpha,
+                    x: cx + x * R * perspective,
+                    y: cy + y2 * R * perspective,
+                    z: z2,
+                    size: p.size * perspective,
+                    alpha: p.alpha * (0.18 + (z2 + 1) * 0.46),
                     phase: p.phase,
-                    radial,
-                    angle,
                 };
             });
 
             points.sort((a, b) => a.z - b.z);
 
             for (const p of points) {
-                const flicker =
-                    0.72 +
-                    Math.sin(time * 3.0 + p.phase) * 0.28;
-
-                const alpha = Math.max(
-                    0.012,
-                    Math.min(0.92, p.alpha * flicker)
-                );
+                const flicker = 0.65 + Math.sin(time * 3.4 + p.phase) * 0.35;
+                const alpha = Math.max(0.015, Math.min(1, p.alpha * flicker));
 
                 const color =
-                    p.phase % 5.0 < 0.28
+                    p.phase % 4.5 < 0.22
                         ? "124,14,36"
-                        : p.phase % 5.0 < 0.95
+                        : p.phase % 4.5 < 0.72
                             ? "81,112,255"
                             : "255,255,255";
 
-                ctx.fillStyle =
-                    "rgba(" +
-                    color +
-                    "," +
-                    alpha +
-                    ")";
-
-                ctx.beginPath();
-                ctx.arc(
-                    p.x,
-                    p.y,
-                    Math.max(0.4, p.size),
-                    0,
-                    Math.PI * 2
+                const glow = ctx.createRadialGradient(
+                    p.x, p.y, 0,
+                    p.x, p.y, Math.max(2, p.size * 4)
                 );
+
+                glow.addColorStop(0, "rgba(" + color + "," + alpha + ")");
+                glow.addColorStop(0.25, "rgba(" + color + "," + alpha * 0.38 + ")");
+                glow.addColorStop(1, "rgba(" + color + ",0)");
+
+                ctx.fillStyle = glow;
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, Math.max(2, p.size * 4), 0, Math.PI * 2);
+                ctx.fill();
+
+                ctx.fillStyle = "rgba(255,255,255," + Math.min(1, alpha + 0.08) + ")";
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, Math.max(0.4, p.size), 0, Math.PI * 2);
                 ctx.fill();
             }
-
-            // Bright central ring, matching the reference composition.
-            const ringX = cx;
-            const ringY = cy + 4;
-
-            const glow = ctx.createRadialGradient(
-                ringX,
-                ringY,
-                0,
-                ringX,
-                ringY,
-                34
-            );
-
-            glow.addColorStop(0, "rgba(255,255,255,0.28)");
-            glow.addColorStop(0.35, "rgba(255,255,255,0.10)");
-            glow.addColorStop(1, "rgba(255,255,255,0)");
-
-            ctx.fillStyle = glow;
-            ctx.beginPath();
-            ctx.arc(ringX, ringY, 34, 0, Math.PI * 2);
-            ctx.fill();
-
-            ctx.beginPath();
-            ctx.arc(ringX, ringY, 10, 0, Math.PI * 2);
-            ctx.strokeStyle = "rgba(255,255,255,0.78)";
-            ctx.lineWidth = 1.6;
-            ctx.stroke();
 
             raf = requestAnimationFrame(draw);
         };
