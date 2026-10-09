@@ -3,6 +3,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import ResearchAreaCard from "../components/ResearchAreaCard.astro";
 import Section from "../components/ui/Section.astro";
 import HeroBlobs from "../components/HeroBlobs.astro";
+import HeroOrbVisual from "../components/HeroOrbVisual.astro";
 import { getCollection } from "astro:content";
 import { Image } from "astro:assets";
 
@@ -74,10 +75,10 @@ const stats = [
             <div class="relative">
 
                 <div
-                    class="relative min-h-[650px] lg:min-h-[720px] flex items-center justify-center px-7 py-20 sm:px-12 lg:px-8"
+                    class="relative min-h-[650px] lg:min-h-[720px] grid lg:grid-cols-[1.05fr_0.95fr] items-center gap-10 px-7 py-20 sm:px-12 lg:px-8"
                 >
 
-                    <div class="relative z-20 max-w-3xl mx-auto text-center flex flex-col items-center">
+                    <div class="relative z-20 max-w-2xl mx-auto lg:mx-0 text-center lg:text-left flex flex-col items-center lg:items-start">
 
                         <!-- =================================================
                              MAIN HEADING
@@ -123,7 +124,7 @@ const stats = [
                              ================================================= -->
 
                         <div
-                            class="mt-8 flex flex-wrap items-center justify-center gap-4"
+                            class="mt-8 flex flex-wrap items-center justify-center lg:justify-start gap-4"
                         >
 
                             <!-- Research -->
@@ -164,6 +165,14 @@ const stats = [
 
                         </div>
 
+                    </div>
+
+                    <!-- =================================================
+                         HERO VISUAL — orbital/scientific orb
+                         ================================================= -->
+
+                    <div class="relative z-20 hidden lg:block">
+                        <HeroOrbVisual />
                     </div>
 
                 </div>
