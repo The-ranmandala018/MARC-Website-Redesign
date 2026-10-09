@@ -55,63 +55,36 @@ const stats = [
 
         <div class="absolute inset-0 overflow-hidden">
 
-            <!-- Monochrome dotted hands reaching toward one another -->
+            <!-- Minimal monochrome dotted-wave artwork inspired by the reference -->
             <div class="hero-hands-art" aria-hidden="true">
                 <svg viewBox="0 0 1200 620" preserveAspectRatio="xMidYMid meet" role="presentation">
                     <defs>
-                        <pattern id="hand-dots" width="9" height="9" patternUnits="userSpaceOnUse">
-                            <circle cx="2.2" cy="2.2" r="1.35" fill="#343943" />
+                        <pattern id="hand-dots" width="8" height="8" patternUnits="userSpaceOnUse">
+                            <circle cx="2" cy="2" r="1.2" fill="#343943" />
                         </pattern>
-                        <linearGradient id="hand-fade-left" x1="0" y1="0" x2="1" y2="0">
-                            <stop offset="0" stop-color="#343943" stop-opacity=".12" />
-                            <stop offset=".72" stop-color="#343943" stop-opacity=".82" />
-                            <stop offset="1" stop-color="#343943" stop-opacity=".5" />
+                        <linearGradient id="wave-fade-left" x1="0" y1="0" x2="1" y2="0">
+                            <stop offset="0" stop-color="#343943" stop-opacity=".68" />
+                            <stop offset="1" stop-color="#343943" stop-opacity=".18" />
                         </linearGradient>
-                        <linearGradient id="hand-fade-right" x1="1" y1="0" x2="0" y2="0">
-                            <stop offset="0" stop-color="#343943" stop-opacity=".12" />
-                            <stop offset=".72" stop-color="#343943" stop-opacity=".82" />
-                            <stop offset="1" stop-color="#343943" stop-opacity=".5" />
+                        <linearGradient id="wave-fade-right" x1="1" y1="0" x2="0" y2="0">
+                            <stop offset="0" stop-color="#343943" stop-opacity=".68" />
+                            <stop offset="1" stop-color="#343943" stop-opacity=".18" />
                         </linearGradient>
-                        <filter id="contact-glow" x="-300%" y="-300%" width="600%" height="600%">
-                            <feGaussianBlur stdDeviation="5" result="blur" />
-                            <feMerge><feMergeNode in="blur" /><feMergeNode in="SourceGraphic" /></feMerge>
-                        </filter>
                     </defs>
 
-                    <!-- Left forearm and hand -->
-                    <g class="reaching-hand hand-left">
-                        <path d="M-35 470 C85 424 174 385 270 345 C315 326 348 300 379 278
-                            L430 241 C444 231 459 237 459 249 C459 256 453 263 446 270
-                            L404 307 L478 267 C494 258 509 269 499 283
-                            L442 321 L504 298 C521 292 532 307 517 319
-                            L453 351 L490 342 C507 338 516 354 498 365
-                            C451 394 415 425 378 445 C296 489 194 526 92 560 L-35 590 Z"
-                            fill="url(#hand-dots)" stroke="#343943" stroke-opacity=".26" stroke-width="1.4" />
-                        <path d="M-20 474 C90 432 178 391 270 352 C322 329 358 300 404 265"
-                            fill="none" stroke="url(#hand-fade-left)" stroke-width="2" stroke-dasharray="2 8" />
-                    </g>
+                    <!-- Flowing dotted wave on the left -->
+                    <path d="M-50 280 C70 190 150 160 230 225 C300 280 345 365 425 350
+                        C365 420 295 430 230 380 C145 315 100 300 -50 400 Z"
+                        fill="url(#hand-dots)" />
+                    <path d="M-40 330 C75 245 150 225 225 275 C290 320 345 400 420 385"
+                        fill="none" stroke="url(#wave-fade-left)" stroke-width="2" stroke-dasharray="2 8" />
 
-                    <!-- Right forearm and hand -->
-                    <g class="reaching-hand hand-right">
-                        <path d="M1235 470 C1115 424 1026 385 930 345 C885 326 852 300 821 278
-                            L770 241 C756 231 741 237 741 249 C741 256 747 263 754 270
-                            L796 307 L722 267 C706 258 691 269 701 283
-                            L758 321 L696 298 C679 292 668 307 683 319
-                            L747 351 L710 342 C693 338 684 354 702 365
-                            C749 394 785 425 822 445 C904 489 1006 526 1108 560 L1235 590 Z"
-                            fill="url(#hand-dots)" stroke="#343943" stroke-opacity=".26" stroke-width="1.4" />
-                        <path d="M1220 474 C1110 432 1022 391 930 352 C878 329 842 300 796 265"
-                            fill="none" stroke="url(#hand-fade-right)" stroke-width="2" stroke-dasharray="2 8" />
-                    </g>
-
-                    <!-- Small pulse where the fingertips almost meet -->
-                    <g class="hand-connection">
-                        <circle class="connection-halo" cx="600" cy="252" r="20" fill="#5170FF" opacity=".12" />
-                        <circle class="connection-ring" cx="600" cy="252" r="11" fill="none" stroke="#5170FF" stroke-width="1.5" />
-                        <circle cx="600" cy="252" r="3.2" fill="#004AAD" />
-                        <path class="connection-rays" d="M600 231 V222 M600 273 V282 M579 252 H570 M621 252 H630 M585 237 L579 231 M615 267 L621 273 M615 237 L621 231 M585 267 L579 273"
-                            stroke="#5170FF" stroke-width="1.6" stroke-linecap="round" />
-                    </g>
+                    <!-- Flowing dotted wave on the right -->
+                    <path d="M1250 280 C1130 190 1050 160 970 225 C900 280 855 365 775 350
+                        C835 420 905 430 970 380 C1055 315 1100 300 1250 400 Z"
+                        fill="url(#hand-dots)" />
+                    <path d="M1240 330 C1125 245 1050 225 975 275 C910 320 855 400 780 385"
+                        fill="none" stroke="url(#wave-fade-right)" stroke-width="2" stroke-dasharray="2 8" />
                 </svg>
             </div>
             <!--
@@ -139,17 +112,17 @@ const stats = [
             <div class="relative">
 
                 <div
-                    class="relative min-h-[650px] lg:min-h-[720px] flex items-center px-7 py-20 sm:px-12 lg:px-8 lg:-translate-x-12"
+                    class="relative min-h-[650px] lg:min-h-[720px] flex items-center justify-center px-7 py-20 sm:px-12 lg:px-8"
                 >
 
-                    <div class="max-w-5xl">
+                    <div class="relative z-20 max-w-3xl mx-auto text-center flex flex-col items-center">
 
                         <!-- =================================================
                              MAIN HEADING
                              ================================================= -->
 
                         <h1
-                            class="font-display font-semibold text-5xl sm:text-6xl md:text-7xl lg:text-[6.5rem] leading-[0.88] tracking-tight max-w-5xl text-[#0F172A] dark:text-white"
+                            class="font-display font-semibold text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-[0.98] tracking-tight max-w-4xl text-[#0F172A] dark:text-white"
                         >
 
                             Multidisciplinary
@@ -174,7 +147,7 @@ const stats = [
                              ================================================= -->
 
                         <p
-                            class="mt-8 max-w-2xl text-base sm:text-lg lg:text-xl text-slate-600 leading-relaxed"
+                            class="mt-6 max-w-2xl text-base sm:text-lg text-slate-600 leading-relaxed"
                         >
                             MARC brings together engineers, scientists and
                             researchers to develop intelligent systems that
@@ -188,7 +161,7 @@ const stats = [
                              ================================================= -->
 
                         <div
-                            class="mt-10 flex flex-wrap items-center gap-4"
+                            class="mt-8 flex flex-wrap items-center justify-center gap-4"
                         >
 
                             <!-- Research -->
@@ -535,97 +508,39 @@ const stats = [
 <!-- ============================================================= -->
 
 <style>
-    /* Dotted hands inspired by the minimal monochrome reference */
+    /* Subtle monochrome dotted waves frame the centered hero content */
     .hero-hands-art {
         position: absolute;
         z-index: 10;
-        top: 27%;
-        right: -10%;
-        width: min(66vw, 900px);
-        height: 66%;
+        inset: 12% 0 8%;
+        width: 100%;
+        height: 80%;
         pointer-events: none;
-        opacity: .48;
-        overflow: visible;
+        opacity: .64;
+        overflow: hidden;
     }
 
     .hero-hands-art svg {
         display: block;
         width: 100%;
         height: 100%;
-        overflow: visible;
-    }
-
-    .reaching-hand {
-        transform-box: fill-box;
-        transform-origin: center;
-        animation: hands-reach 4.8s ease-in-out infinite alternate;
-    }
-
-    .hand-right {
-        animation-delay: -.35s;
-    }
-
-    .connection-halo {
-        transform-origin: 600px 252px;
-        animation: contact-pulse 2.2s ease-out infinite;
-    }
-
-    .connection-ring {
-        transform-origin: 600px 252px;
-        animation: contact-ring 2.2s ease-out infinite;
-    }
-
-    .connection-rays {
-        transform-origin: 600px 252px;
-        animation: contact-rays 2.2s ease-in-out infinite;
-    }
-
-    @keyframes hands-reach {
-        from { translate: 0 0; }
-        to { translate: 0 -5px; }
-    }
-
-    @keyframes contact-pulse {
-        0%, 100% { opacity: .12; transform: scale(.8); }
-        50% { opacity: .5; transform: scale(1.5); }
-    }
-
-    @keyframes contact-ring {
-        0%, 100% { opacity: .45; transform: scale(.8); }
-        50% { opacity: 1; transform: scale(1.2); }
-    }
-
-    @keyframes contact-rays {
-        0%, 100% { opacity: .4; }
-        50% { opacity: 1; }
     }
 
     @media (max-width: 900px) {
         .hero-hands-art {
-            width: 78vw;
-            right: -19%;
-            top: 34%;
-            height: 58%;
-            opacity: .32;
+            inset: 22% -8% 10%;
+            width: 116%;
+            height: 70%;
+            opacity: .35;
         }
     }
 
     @media (max-width: 640px) {
         .hero-hands-art {
-            width: 88vw;
-            right: -27%;
-            top: 39%;
-            height: 48%;
-            opacity: .18;
-        }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-        .reaching-hand,
-        .connection-halo,
-        .connection-ring,
-        .connection-rays {
-            animation: none !important;
+            inset: 30% -20% 12%;
+            width: 140%;
+            height: 58%;
+            opacity: .22;
         }
     }
 </style>
