@@ -1,0 +1,38 @@
+---
+/**
+ * PageHeader
+ * Shared header for inner pages: eyebrow with accent rule, large display
+ * title (put a <span class="text-gradient"> in the "title" slot for the
+ * gradient line), optional lead text on the right, and an optional
+ * "after" slot below (chips, filters, meta).
+ */
+interface Props {
+    eyebrow: string;
+    lead?: string;
+}
+
+const { eyebrow, lead } = Astro.props;
+---
+
+<header class="page-header">
+    <p class="eyebrow flex items-center gap-3 !opacity-100 text-[#004AAD] dark:text-[#5170FF]">
+        <span class="inline-block h-0.5 w-8 rounded-full bg-current"></span>
+        {eyebrow}
+    </p>
+
+    <div class={`mt-6 grid gap-8 lg:items-end ${lead ? "lg:grid-cols-[1.3fr_0.7fr]" : ""}`}>
+        <h1 class="font-display text-5xl sm:text-6xl lg:text-7xl text-base-content">
+            <slot name="title" />
+        </h1>
+
+        {
+            lead && (
+                <p class="text-base sm:text-lg leading-relaxed text-base-content/70 max-w-md">
+                    {lead}
+                </p>
+            )
+        }
+    </div>
+
+    <slot name="after" />
+</header>
