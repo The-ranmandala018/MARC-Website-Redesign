@@ -8,6 +8,12 @@ import mdx from "@astrojs/mdx";
 import preact from "@astrojs/preact";
 
 export default defineConfig({
+  // Projects now live inside their research areas on /Research.
+  // Keep the old index URL working.
+  redirects: {
+    "/projects": "/Research",
+  },
+
   vite: {
     plugins: [tailwindcss()],
   },

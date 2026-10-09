@@ -55,7 +55,8 @@ const otherProjects = (await getCollection("projects"))
 >
     <Breadcrumb>
         <li><a href="/">Home</a></li>
-        <li><a href="/projects">Projects</a></li>
+        <li><a href="/Research">Research</a></li>
+        {areaUrl && <li><a href={areaUrl}>{project.data.researchArea}</a></li>}
         <li class="truncate max-w-[220px]">{project.data.project}</li>
     </Breadcrumb>
 
@@ -233,7 +234,7 @@ const otherProjects = (await getCollection("projects"))
             <section class="mt-20">
                 <div class="mb-6 flex items-end justify-between gap-4">
                     <h2 class="font-display text-3xl sm:text-4xl text-base-content">More projects</h2>
-                    <ArrowPill label="All projects" href="/projects" />
+                    <ArrowPill label="All research" href="/Research" />
                 </div>
 
                 <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
