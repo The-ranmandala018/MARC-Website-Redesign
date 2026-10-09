@@ -17,7 +17,8 @@
     "preact": "^10.28.1",
     "rehype-katex": "^7.0.1",
     "remark-math": "^6.0.0",
-    "tailwindcss": "^4.1.18"
+    "tailwindcss": "^4.1.18",
+    "three": "^0.180.0"
   },
   "devDependencies": {
     "@tailwindcss/typography": "^0.5.19"
