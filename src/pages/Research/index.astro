@@ -1,38 +1,238 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import "../../styles/app.css";
-import ResearchAreaCard from "../../components/ResearchAreaCard.astro";
 import Breadcrumb from "../../components/Breadcrumb.astro";
+import { Image } from "astro:assets";
+
 const researchAreas = Object.values(
     import.meta.glob("./*.md", { eager: true }),
-);
+) as any[];
+
 const images = import.meta.glob<{ default: ImageMetadata }>(
     "/src/assets/*.{jpeg,jpg,png,gif}",
     { eager: true },
 );
-const imagekey_to_src = (imageKey: string) => {
-    imageKey = `/src/assets/${imageKey}`;
-    return images[imageKey].default;
-};
+
+const imagekey_to_src = (imageKey: string) =>
+    images[`/src/assets/${imageKey}`]?.default;
+
+// Stable anchor id for each area, used by the jump links.
+const slugify = (s: string) =>
+    s.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
+
+const areas = researchAreas.map((Area, i) => ({
+    index: String(i + 1).padStart(2, "0"),
+    title: Area.frontmatter.title as string,
+    short: Area.frontmatter.short as string,
+    image: imagekey_to_src(Area.frontmatter.coverImage),
+    url: Area.url as string,
+    id: slugify(Area.frontmatter.title),
+}));
 ---
 
-<BaseLayout>
+<BaseLayout
+    title="Research Areas"
+    description="MARC's research areas — foundational AI and applied research across critical domains where intelligence meets impact."
+>
     <Breadcrumb>
         <li><a href="/">Home</a></li>
         <li>Research Areas</li>
     </Breadcrumb>
-    <main class="flex flex-col gap-10">
-        <h1 class="text-6xl font-bold mb-4">Research Areas</h1>
+
+    <!-- ===================================================== -->
+    <!-- PAGE HEADER -->
+    <!-- ===================================================== -->
+
+    <header class="research-header">
+        <p class="eyebrow flex items-center gap-3 text-[#004AAD] dark:text-[#5170FF]">
+            <span class="inline-block h-0.5 w-8 rounded-full bg-current"></span>
+            Research
+        </p>
+
+        <div class="mt-6 grid gap-8 lg:grid-cols-[1.3fr_0.7fr] lg:items-end">
+            <h1 class="font-display text-5xl sm:text-6xl lg:text-7xl text-base-content">
+                Six areas,
+                <br />
+                <span class="text-gradient">one shared mission.</span>
+            </h1>
+
+            <p class="text-base sm:text-lg leading-relaxed text-base-content/70 max-w-md">
+                Our work spans foundational AI and applied research across
+                critical domains where intelligence meets impact.
+            </p>
+        </div>
+
+        <!-- Jump links -->
+        <nav class="mt-10 flex flex-wrap gap-2" aria-label="Research areas">
+            {
+                areas.map((a) => (
+                    <a href={`#${a.id}`} class="area-chip">
+                        <span class="text-[#5170FF] font-semibold tabular-nums">{a.index}</span>
+                        {a.title}
+                    </a>
+                ))
+            }
+        </nav>
+    </header>
+
+    <!-- ===================================================== -->
+    <!-- AREAS — alternating editorial rows -->
+    <!-- ===================================================== -->
+
+    <div class="mt-16 lg:mt-24 flex flex-col gap-8 lg:gap-12">
         {
-            researchAreas.map((Area: any) => (
-                <ResearchAreaCard
-                    Area={Area.frontmatter.title}
-                    ImageUrl={imagekey_to_src(Area.frontmatter.coverImage)}
-                    PageLink={Area.url}
-                >
-                    {Area.frontmatter.short}
-                </ResearchAreaCard>
+            areas.map((a, i) => (
+                <article id={a.id} class="area-row group scroll-mt-28">
+                    <a
+                        href={a.url}
+                        class={`grid items-center gap-6 lg:gap-12 lg:grid-cols-2 ${i % 2 === 1 ? "lg:[&>*:first-child]:order-2" : ""}`}
+                    >
+                        <!-- Image -->
+                        <div class="area-media">
+                            {a.image && (
+                                <Image
+                                    src={a.image}
+                                    alt={a.title}
+                                    class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.04]"
+                                />
+                            )}
+                            <span class="area-index-badge">{a.index}</span>
+                        </div>
+
+                        <!-- Text -->
+                        <div class="px-1 lg:px-4 py-2">
+                            <p class="eyebrow text-base-content/50">
+                                Research area {a.index}
+                            </p>
+
+                            <h2 class="mt-3 font-display text-3xl sm:text-4xl text-base-content transition-colors group-hover:text-[#004AAD] dark:group-hover:text-[#5170FF]">
+                                {a.title}
+                            </h2>
+
+                            <p class="mt-5 text-base leading-relaxed text-base-content/70 line-clamp-5">
+                                {a.short}
+                            </p>
+
+                            <span class="mt-7 inline-flex items-center gap-3 rounded-full bg-base-100/80 px-5 py-2.5 text-sm font-semibold text-base-content shadow-[0_10px_30px_-16px_rgba(70,90,180,0.5)] ring-1 ring-white/80 dark:ring-white/10 transition-all group-hover:gap-4">
+                                Explore area
+                                <span class="grid h-6 w-6 place-items-center rounded-full bg-gradient-to-r from-[#3f6bf5] to-[#7a84f0] text-white">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M13 5l7 7-7 7" />
+                                    </svg>
+                                </span>
+                            </span>
+                        </div>
+                    </a>
+                </article>
             ))
         }
-    </main>
+    </div>
 </BaseLayout>
+
+<style>
+    /* glass chip for the jump links */
+    .area-chip {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.6rem;
+        padding: 0.55rem 1rem;
+        border-radius: 999px;
+        font-size: 0.875rem;
+        font-weight: 500;
+        color: var(--color-base-content);
+        background:
+            linear-gradient(135deg, rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.2)),
+            color-mix(in srgb, var(--color-base-100) 35%, transparent);
+        border: 1px solid rgba(255, 255, 255, 0.8);
+        box-shadow:
+            inset 0 1px 0 rgba(255, 255, 255, 0.95),
+            0 8px 24px -16px rgba(70, 90, 180, 0.45);
+        backdrop-filter: blur(16px) saturate(1.4);
+        -webkit-backdrop-filter: blur(16px) saturate(1.4);
+        transition:
+            transform 0.25s ease,
+            box-shadow 0.25s ease,
+            background-color 0.25s ease;
+    }
+
+    .area-chip:hover {
+        transform: translateY(-2px);
+        background: var(--color-base-100);
+        box-shadow: 0 12px 28px -14px rgba(70, 90, 180, 0.55);
+    }
+
+    /* each area sits on a soft glass panel */
+    .area-row > a {
+        position: relative;
+        padding: 1rem;
+        border-radius: 2rem;
+        /* glass: translucent body with a soft top-left sheen */
+        background:
+            linear-gradient(135deg, rgba(255, 255, 255, 0.55) 0%, rgba(255, 255, 255, 0.12) 45%, rgba(255, 255, 255, 0.28) 100%),
+            color-mix(in srgb, var(--color-base-100) 35%, transparent);
+        border: 1px solid rgba(255, 255, 255, 0.8);
+        box-shadow:
+            inset 0 1px 0 rgba(255, 255, 255, 0.95),
+            inset 0 -1px 0 rgba(255, 255, 255, 0.35),
+            0 30px 60px -40px rgba(70, 90, 180, 0.5);
+        backdrop-filter: blur(22px) saturate(1.4);
+        -webkit-backdrop-filter: blur(22px) saturate(1.4);
+        transition:
+            transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1),
+            box-shadow 0.4s ease;
+    }
+
+    .area-row > a:hover {
+        transform: translateY(-4px);
+        box-shadow:
+            inset 0 1px 0 rgba(255, 255, 255, 0.95),
+            inset 0 -1px 0 rgba(255, 255, 255, 0.35),
+            0 40px 70px -40px rgba(70, 90, 180, 0.65);
+    }
+
+    .area-media {
+        position: relative;
+        aspect-ratio: 16 / 11;
+        overflow: hidden;
+        border-radius: 1.5rem;
+        background: color-mix(in srgb, var(--color-base-content) 6%, transparent);
+    }
+
+    .area-index-badge {
+        position: absolute;
+        top: 1rem;
+        left: 1rem;
+        padding: 0.35rem 0.8rem;
+        border-radius: 999px;
+        font-size: 0.8rem;
+        font-weight: 700;
+        letter-spacing: 0.05em;
+        color: #fff;
+        background: rgba(20, 26, 46, 0.35);
+        border: 1px solid rgba(255, 255, 255, 0.35);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+    }
+
+    :global(html[data-theme="marc-dark"]) .area-chip,
+    :global(html[data-theme="marc-dark"]) .area-row > a {
+        background:
+            linear-gradient(135deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.02)),
+            color-mix(in srgb, var(--color-base-100) 55%, transparent);
+        border-color: rgba(255, 255, 255, 0.1);
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
+    }
+
+    @media (min-width: 1024px) {
+        .area-row > a {
+            padding: 1.25rem;
+        }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        .area-chip,
+        .area-row > a {
+            transition: none;
+        }
+    }
+</style>
