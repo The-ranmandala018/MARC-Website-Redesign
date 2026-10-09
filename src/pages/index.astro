@@ -73,54 +73,75 @@ const stats = [
                         </radialGradient>
                     </defs>
 
-                    <!-- Left hand: wrist, palm, and five clearly defined fingers -->
-                    <g class="dotted-hand" transform="translate(0 0) scale(.78 1)">
-                        <path d="M-45 470 L160 420
-                            C235 398 296 368 354 338
-                            L431 296
-                            C448 287 464 291 467 303
-                            C470 311 463 318 454 324
-                            L405 353 L476 321
-                            C493 313 508 324 499 337
-                            C495 343 488 347 479 352
-                            L425 379 L493 353
-                            C511 347 523 360 511 373
-                            C507 378 500 382 491 386
-                            L440 408 L493 391
-                            C510 386 521 401 507 413
-                            C502 418 494 422 484 426
-                            L431 447 L463 440
-                            C480 437 489 451 476 462
-                            C439 492 394 512 344 529
-                            L154 585 L-45 610 Z"
-                            fill="url(#hand-dots)" stroke="url(#hand-edge)" stroke-width="1.8" stroke-linejoin="round" />
-                        <path d="M155 420 C235 397 300 365 354 338 M180 455 C280 421 345 389 405 353"
-                            fill="none" stroke="#343943" stroke-opacity=".23" stroke-width="1.4" stroke-dasharray="2 8" />
+                    <!-- Left human hand reaching in from the left -->
+                    <g class="dotted-hand hand-left">
+                        <path d="M-40 470
+                            L120 432
+                            C190 414 255 388 315 358
+                            L407 309
+                            C424 300 442 301 451 311
+                            C458 320 450 330 439 337
+                            L384 371
+                            L448 344
+                            C466 336 482 345 474 358
+                            C470 364 463 369 454 374
+                            L398 402
+                            L461 381
+                            C480 375 494 386 484 400
+                            C480 406 473 411 463 416
+                            L407 441
+                            L453 427
+                            C471 421 483 434 471 447
+                            C466 453 457 458 447 463
+                            L395 485
+                            L427 478
+                            C444 474 454 487 441 499
+                            C410 525 369 544 322 560
+                            L130 613 L-40 620 Z"
+                            fill="url(#hand-dots)" stroke="url(#hand-edge)" stroke-width="2" stroke-linejoin="round" />
+                        <!-- Thumb separated from the fingers for a recognisable hand shape -->
+                        <path d="M322 358 C346 343 369 327 391 310
+                            C405 299 422 300 429 311
+                            C436 322 426 333 414 342
+                            L368 376 C351 389 334 397 314 404"
+                            fill="url(#hand-dots)" stroke="#343943" stroke-opacity=".45" stroke-width="1.7" stroke-linejoin="round" />
+                        <path d="M135 466 C224 443 294 408 369 375"
+                            fill="none" stroke="#343943" stroke-opacity=".25" stroke-width="1.5" stroke-dasharray="2 8" />
                     </g>
 
-                    <!-- Right hand mirrored inward, with fingertips nearly touching -->
-                    <g class="dotted-hand" transform="translate(264 0) scale(.78 1)">
-                        <path d="M1245 470 L1040 420
-                            C965 398 904 368 846 338
-                            L769 296
-                            C752 287 736 291 733 303
-                            C730 311 737 318 746 324
-                            L795 353 L724 321
-                            C707 313 692 324 701 337
-                            C705 343 712 347 721 352
-                            L775 379 L707 353
-                            C689 347 677 360 689 373
-                            C693 378 700 382 709 386
-                            L760 408 L707 391
-                            C690 386 679 401 693 413
-                            C698 418 706 422 716 426
-                            L769 447 L737 440
-                            C720 437 711 451 724 462
-                            C761 492 806 512 856 529
-                            L1046 585 L1245 610 Z"
-                            fill="url(#hand-dots)" stroke="url(#hand-edge)" stroke-width="1.8" stroke-linejoin="round" />
-                        <path d="M1045 420 C965 397 900 365 846 338 M1020 455 C920 421 855 389 795 353"
-                            fill="none" stroke="#343943" stroke-opacity=".23" stroke-width="1.4" stroke-dasharray="2 8" />
+                    <!-- Right human hand mirrored toward the left hand -->
+                    <g class="dotted-hand hand-right">
+                        <path d="M1240 470
+                            L1080 432
+                            C1010 414 945 388 885 358
+                            L793 309
+                            C776 300 758 301 749 311
+                            C742 320 750 330 761 337
+                            L816 371
+                            L752 344
+                            C734 336 718 345 726 358
+                            C730 364 737 369 746 374
+                            L802 402
+                            L739 381
+                            C720 375 706 386 716 400
+                            C720 406 727 411 737 416
+                            L793 441
+                            L747 427
+                            C729 421 717 434 729 447
+                            C734 453 743 458 753 463
+                            L805 485
+                            L773 478
+                            C756 474 746 487 759 499
+                            C790 525 831 544 878 560
+                            L1070 613 L1240 620 Z"
+                            fill="url(#hand-dots)" stroke="url(#hand-edge)" stroke-width="2" stroke-linejoin="round" />
+                        <path d="M878 358 C854 343 831 327 809 310
+                            C795 299 778 300 771 311
+                            C764 322 774 333 786 342
+                            L832 376 C849 389 866 397 886 404"
+                            fill="url(#hand-dots)" stroke="#343943" stroke-opacity=".45" stroke-width="1.7" stroke-linejoin="round" />
+                        <path d="M1065 466 C976 443 906 408 831 375"
+                            fill="none" stroke="#343943" stroke-opacity=".25" stroke-width="1.5" stroke-dasharray="2 8" />
                     </g>
 
                     <!-- Small AI-inspired spark at the meeting point -->
