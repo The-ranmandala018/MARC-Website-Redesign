@@ -1,29 +1,51 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import Breadcrumb from "../../components/Breadcrumb.astro";
+import PageHeader from "../../components/PageHeader.astro";
 import PublicationsList from "../../components/react/PublicationList";
 import { getCollection } from "astro:content";
 
 const publications = await getCollection("publications");
+
+// Small summary shown under the header
+const journals = publications.filter((p) => p.data.type === "Journal").length;
+const conferences = publications.filter((p) => p.data.type === "Conference").length;
+const stats = [
+    { value: publications.length, label: publications.length === 1 ? "Publication" : "Publications" },
+    { value: journals, label: journals === 1 ? "Journal paper" : "Journal papers" },
+    { value: conferences, label: conferences === 1 ? "Conference paper" : "Conference papers" },
+];
 ---
 
-<BaseLayout title="Publications">
-    <div class="max-w-5xl mx-auto px-4 py-8">
-        <Breadcrumb>
-            <li><a href="/">Home</a></li>
-            <li>Publications</li>
-        </Breadcrumb>
+<BaseLayout
+    title="Publications"
+    description="MARC's latest contributions to journals and conferences."
+>
+    <Breadcrumb>
+        <li><a href="/">Home</a></li>
+        <li>Publications</li>
+    </Breadcrumb>
 
-        <div class="mb-8 text-center">
-            <h1 class="text-5xl font-bold mb-4 text-primary">Publications</h1>
-            <p class="text-lg text-base-content/70">
-                Our latest contributions to Journals and Conferences.
-            </p>
+    <PageHeader eyebrow="Publications" lead="Our latest contributions to journals and conferences.">
+        <Fragment slot="title">
+            Papers &amp;
+            <br />
+            <span class="text-gradient">publications.</span>
+        </Fragment>
+
+        <div slot="after" class="mt-10 grid grid-cols-3 gap-3 sm:max-w-xl sm:gap-4">
+            {
+                stats.map((s) => (
+                    <div class="glass-card !rounded-3xl px-4 py-4 sm:px-5">
+                        <p class="font-display text-3xl sm:text-4xl text-base-content tabular-nums">{s.value}</p>
+                        <p class="mt-1 text-xs sm:text-sm text-base-content/60">{s.label}</p>
+                    </div>
+                ))
+            }
         </div>
+    </PageHeader>
 
-        {
-            /* Hydrate the component with client:load so it's interactive immediately */
-        }
+    <div class="mt-14">
         <PublicationsList publications={publications} client:load />
     </div>
 </BaseLayout>
