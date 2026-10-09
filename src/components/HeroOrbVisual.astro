@@ -9,10 +9,19 @@
 ---
 
 <div class="orb-visual" aria-hidden="true">
-    <div class="orbit o1"></div>
-    <div class="orbit o2"></div>
-    <div class="orbit o3"></div>
+    <!-- Back half of the orbit rings (upper arcs, passing behind the orb) -->
+    <div class="orbits orbits-back">
+        <div class="orbit o1"></div>
+        <div class="orbit o2"></div>
+        <div class="orbit o3"></div>
+    </div>
     <div class="orb"></div>
+    <!-- Front half of the same rings (lower arcs, passing in front of the orb) -->
+    <div class="orbits orbits-front">
+        <div class="orbit o1"></div>
+        <div class="orbit o2"></div>
+        <div class="orbit o3"></div>
+    </div>
     <span class="sat s1"></span>
     <span class="sat s2"></span>
     <span class="sat s3"></span>
@@ -35,6 +44,56 @@
         min-height: 420px;
         display: grid;
         place-items: center;
+    }
+
+    /* Each ring is drawn twice. The back copy sits under the orb as
+       before. The front copy sits over the orb, masked to the orb's
+       circle AND its lower half, so the lower arcs cross in front of the
+       sphere while the upper arcs stay hidden behind it — the rings read
+       as wrapping around it. Masks live on non-rotating wrappers, so the
+       split stays horizontal while the rings spin. */
+    .orbits {
+        position: absolute;
+        display: grid;
+        place-items: center;
+        pointer-events: none;
+    }
+
+    .orbits-back {
+        inset: 0;
+        z-index: 0;
+    }
+
+    .orbits-front {
+        z-index: 2;
+        /* same box as the orb, centred the same way */
+        width: min(420px, 70%);
+        aspect-ratio: 1;
+        -webkit-mask-image:
+            radial-gradient(circle closest-side, #000 86%, transparent 100%),
+            linear-gradient(to bottom, transparent 50%, #000 50%);
+        -webkit-mask-composite: source-in;
+        mask-image:
+            radial-gradient(circle closest-side, #000 86%, transparent 100%),
+            linear-gradient(to bottom, transparent 50%, #000 50%);
+        mask-composite: intersect;
+    }
+
+    .orbits-front .orbit {
+        /* a touch stronger so the arc stays visible over the orb */
+        border-color: rgba(255, 255, 255, 0.8);
+    }
+
+    .orbits-front .orbit.o2 {
+        border-color: rgba(255, 255, 255, 0.65);
+    }
+
+    .orb-visual > .orb {
+        z-index: 1;
+    }
+
+    .orb-visual > .sat {
+        z-index: 3;
     }
 
     .orbit {
