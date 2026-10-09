@@ -1,9 +1,13 @@
 # MARC Hero Animation
 
-The homepage hero uses a procedural Three.js scene embedded in `src/pages/index.astro`.
-It includes stylized human and robotic hands, a pulsing orange energy ring, botanical accents,
-responsive sizing, and a reduced-motion preference. It does not require external 3D model files.
+The homepage hero background is a particle sphere: a slowly rotating cloud of dots with a sparse
+hollow core and ripples travelling across its outer shell. It lives in
+`src/components/HeroParticles.astro` and is placed in the hero of `src/pages/index.astro`.
 
-After pulling the branch, run `npm install` to install the new `three` dependency, then `npm run dev`.
-The procedural hands are stylized meshes rather than photorealistic downloaded models; realistic
-model assets would be needed to match the Pinterest reference closely.
+- Drawn on a plain 2D canvas, so it needs no extra libraries (the `three` dependency is no longer used by the homepage).
+- Follows the site theme: blue, light-blue and maroon dots in light mode (`marc`), and white and blue dots in dark mode (`marc-dark`). It updates live when the navbar theme toggle is used.
+- Reacts gently to the pointer (parallax).
+- Pauses when the hero is off screen or the tab is hidden, uses fewer dots on small screens, and shows a single still frame when the visitor prefers reduced motion.
+
+To tune the look, edit the constants at the top of the `<script>` in `HeroParticles.astro`:
+`PALETTES` (colours), `WEIGHTS` (colour mix), `COUNT` (number of dots), and the rotation speed (`t * 0.12`).

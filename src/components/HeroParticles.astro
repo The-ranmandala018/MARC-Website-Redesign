@@ -1,0 +1,268 @@
+---
+/**
+ * HeroParticles
+ * A slowly rotating cloud of dots shaped like a hollow sphere, with ripples
+ * travelling across its outer shell. Drawn on a 2D canvas (no extra libraries).
+ *
+ * Theme aware: colours follow the site's light ("marc") and dark ("marc-dark")
+ * themes and update live when the navbar toggle is used.
+ */
+---
+
+<div class="hero-particles" aria-hidden="true">
+    <canvas id="marc-particles"></canvas>
+</div>
+
+<style>
+    .hero-particles {
+        position: absolute;
+        inset: 0;
+        z-index: 10;
+        pointer-events: none;
+        overflow: hidden;
+    }
+
+    #marc-particles {
+        display: block;
+        width: 100%;
+        height: 100%;
+    }
+</style>
+
+<script>
+    const canvas = document.querySelector<HTMLCanvasElement>("#marc-particles");
+    const ctx = canvas?.getContext("2d");
+
+    if (canvas && ctx) {
+        const reducedMotion = window.matchMedia(
+            "(prefers-reduced-motion: reduce)",
+        ).matches;
+
+        // ---------------------------------------------------------
+        // Theme palettes (taken from src/styles/app.css)
+        // ---------------------------------------------------------
+        const PALETTES = {
+            light: ["#004AAD", "#5170FF", "#7C0E24"], // primary, accent, secondary
+            dark: ["#F8F8FF", "#8FA5FF", "#5170FF"],
+        };
+        const WEIGHTS = [0.62, 0.3, 0.08];
+
+        const isDark = () =>
+            document.documentElement.getAttribute("data-theme") === "marc-dark";
+        let palette = isDark() ? PALETTES.dark : PALETTES.light;
+
+        // ---------------------------------------------------------
+        // Build the particle cloud
+        // ---------------------------------------------------------
+        const small = window.innerWidth < 700;
+        const COUNT = small ? 1700 : 3400;
+
+        type Group = {
+            x: Float32Array;
+            y: Float32Array;
+            z: Float32Array;
+            shell: Uint8Array;
+            size: Float32Array;
+            phase: Float32Array;
+            count: number;
+        };
+
+        const counts = WEIGHTS.map((w) => Math.round(COUNT * w));
+        const groups: Group[] = counts.map((n) => ({
+            x: new Float32Array(n),
+            y: new Float32Array(n),
+            z: new Float32Array(n),
+            shell: new Uint8Array(n),
+            size: new Float32Array(n),
+            phase: new Float32Array(n),
+            count: n,
+        }));
+
+        for (const g of groups) {
+            for (let i = 0; i < g.count; i++) {
+                // Random direction on a sphere.
+                const u = Math.random() * 2 - 1;
+                const a = Math.random() * Math.PI * 2;
+                const s = Math.sqrt(1 - u * u);
+                const isShell = Math.random() < 0.34;
+
+                // Shell points sit near the surface (they carry the ripples);
+                // the rest fill a ball with a sparse hollow core.
+                const r = isShell
+                    ? 0.97 + Math.random() * 0.06
+                    : 0.32 + Math.cbrt(Math.random()) * 0.66;
+
+                g.x[i] = Math.cos(a) * s * r;
+                g.y[i] = u * r;
+                g.z[i] = Math.sin(a) * s * r;
+                g.shell[i] = isShell ? 1 : 0;
+                g.size[i] = 0.7 + Math.random() * 0.7;
+                g.phase[i] = Math.random() * Math.PI * 2;
+            }
+        }
+
+        // ---------------------------------------------------------
+        // Sizing
+        // ---------------------------------------------------------
+        let width = 1;
+        let height = 1;
+        let dpr = 1;
+
+        function resize() {
+            const rect = canvas!.getBoundingClientRect();
+            dpr = Math.min(window.devicePixelRatio || 1, 2);
+            width = Math.max(1, rect.width);
+            height = Math.max(1, rect.height);
+            canvas!.width = Math.round(width * dpr);
+            canvas!.height = Math.round(height * dpr);
+        }
+
+        // ---------------------------------------------------------
+        // Pointer parallax (smoothed)
+        // ---------------------------------------------------------
+        let targetX = 0;
+        let targetY = 0;
+        let mouseX = 0;
+        let mouseY = 0;
+
+        window.addEventListener(
+            "pointermove",
+            (e) => {
+                targetX = e.clientX / window.innerWidth - 0.5;
+                targetY = e.clientY / window.innerHeight - 0.5;
+            },
+            { passive: true },
+        );
+
+        // ---------------------------------------------------------
+        // Render
+        // ---------------------------------------------------------
+        const CAMERA = 4;
+
+        function draw(t: number) {
+            const c = ctx!;
+            c.setTransform(1, 0, 0, 1, 0, 0);
+            c.clearRect(0, 0, canvas!.width, canvas!.height);
+
+            mouseX += (targetX - mouseX) * 0.04;
+            mouseY += (targetY - mouseY) * 0.04;
+
+            const angleY = t * 0.12 + mouseX * 0.9;
+            const angleX = 0.35 + mouseY * 0.6;
+            const cosY = Math.cos(angleY);
+            const sinY = Math.sin(angleY);
+            const cosX = Math.cos(angleX);
+            const sinX = Math.sin(angleX);
+
+            const radius = Math.min(width, height) * 0.46 * dpr;
+            const cx = (width * dpr) / 2;
+            const cy = (height * dpr) / 2;
+
+            for (let gi = 0; gi < groups.length; gi++) {
+                const g = groups[gi];
+                c.fillStyle = palette[gi];
+
+                for (let i = 0; i < g.count; i++) {
+                    let px = g.x[i];
+                    let py = g.y[i];
+                    let pz = g.z[i];
+
+                    // Ripples travelling across the outer shell.
+                    if (g.shell[i]) {
+                        const wave =
+                            Math.sin(px * 3.1 + t * 0.9) *
+                                Math.sin(py * 2.3 - t * 0.7) *
+                                0.08 +
+                            Math.sin(pz * 2.7 + t * 0.6) * 0.04;
+                        const k = 1 + wave;
+                        px *= k;
+                        py *= k;
+                        pz *= k;
+                    }
+
+                    // Rotate around Y, then X.
+                    const x1 = px * cosY + pz * sinY;
+                    const z1 = -px * sinY + pz * cosY;
+                    const y2 = py * cosX - z1 * sinX;
+                    const z2 = py * sinX + z1 * cosX;
+
+                    const scale = CAMERA / (CAMERA - z2);
+                    const sx = cx + x1 * radius * scale;
+                    const sy = cy + y2 * radius * scale;
+
+                    // Nearer dots are bigger and brighter; the rim fades out.
+                    const depth = (z2 + 1.1) / 2.2;
+                    const dist = Math.sqrt(px * px + py * py + pz * pz);
+                    const rim = Math.min(Math.max((dist - 0.7) / 0.4, 0), 1);
+                    const twinkle = reducedMotion
+                        ? 1
+                        : 0.75 + 0.25 * Math.sin(t * 1.5 + g.phase[i]);
+
+                    const alpha =
+                        (0.16 + 0.84 * depth) * (1 - 0.55 * rim) * twinkle;
+                    const size = (0.7 + 1.2 * depth) * g.size[i] * dpr;
+
+                    c.globalAlpha = alpha;
+                    c.fillRect(sx - size / 2, sy - size / 2, size, size);
+                }
+            }
+
+            c.globalAlpha = 1;
+        }
+
+        // ---------------------------------------------------------
+        // Loop control (pause when hidden or off screen)
+        // ---------------------------------------------------------
+        let raf = 0;
+        let running = false;
+        let visible = true;
+        const startTime = performance.now();
+
+        function frame(now: number) {
+            draw((now - startTime) / 1000);
+            raf = requestAnimationFrame(frame);
+        }
+
+        function start() {
+            if (running || reducedMotion) return;
+            running = true;
+            raf = requestAnimationFrame(frame);
+        }
+
+        function stop() {
+            running = false;
+            cancelAnimationFrame(raf);
+        }
+
+        function sync() {
+            if (visible && !document.hidden) start();
+            else stop();
+        }
+
+        resize();
+        draw(0);
+
+        new ResizeObserver(() => {
+            resize();
+            if (reducedMotion || !running) draw(0);
+        }).observe(canvas);
+
+        new IntersectionObserver((entries) => {
+            visible = entries[0]?.isIntersecting ?? true;
+            sync();
+        }).observe(canvas);
+
+        document.addEventListener("visibilitychange", sync);
+
+        // Follow the navbar light/dark toggle.
+        new MutationObserver(() => {
+            palette = isDark() ? PALETTES.dark : PALETTES.light;
+            if (reducedMotion || !running) draw(0);
+        }).observe(document.documentElement, {
+            attributes: true,
+            attributeFilter: ["data-theme"],
+        });
+
+        sync();
+    }
+</script>
