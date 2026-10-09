@@ -37,6 +37,8 @@
     const canvas = document.querySelector<HTMLCanvasElement>("#marc-orb");
 
     if (canvas) {
+      try {
+        console.log("[HeroOrb] mounting…");
         const reducedMotion = window.matchMedia(
             "(prefers-reduced-motion: reduce)",
         ).matches;
@@ -356,6 +358,10 @@
         }
 
         renderFrame();
+        console.log("[HeroOrb] first frame rendered", {
+            width: canvas.clientWidth,
+            height: canvas.clientHeight,
+        });
 
         new IntersectionObserver((entries) => {
             visible = entries[0]?.isIntersecting ?? true;
@@ -365,5 +371,28 @@
         document.addEventListener("visibilitychange", sync);
 
         sync();
+      } catch (err) {
+        // Something in the 3D setup threw. Log it (check the browser
+        // console) and fall back to a plain glowing circle so the hero
+        // isn't left blank.
+        console.error("[HeroOrb] failed to mount:", err);
+        const ctx2d = canvas.getContext("2d");
+        if (ctx2d) {
+            const w = canvas.clientWidth || 400;
+            const h = canvas.clientHeight || 400;
+            canvas.width = w;
+            canvas.height = h;
+            const cx = w / 2;
+            const cy = h / 2;
+            const r = Math.min(w, h) * 0.18;
+            const grad = ctx2d.createRadialGradient(cx, cy, 0, cx, cy, r * 2.2);
+            grad.addColorStop(0, "rgba(0,207,245,0.9)");
+            grad.addColorStop(1, "rgba(0,207,245,0)");
+            ctx2d.fillStyle = grad;
+            ctx2d.beginPath();
+            ctx2d.arc(cx, cy, r * 2.2, 0, Math.PI * 2);
+            ctx2d.fill();
+        }
+      }
     }
 </script>
