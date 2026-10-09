@@ -13,6 +13,7 @@
     <span class="torb t2"></span>
     <span class="torb t3"></span>
     <span class="torb t4"></span>
+    <span class="torb t5"></span>
 </div>
 
 <style>
@@ -65,6 +66,22 @@
         bottom: -5%;
         opacity: 0.75;
         animation-delay: -6s;
+    }
+
+    .t5 {
+        width: 86px;
+        height: 86px;
+        right: -10%;
+        top: 28%;
+        background:
+            radial-gradient(circle at 30% 24%, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0) 42%),
+            radial-gradient(circle at 76% 78%, rgba(248, 160, 195, 0.9) 0%, rgba(248, 160, 195, 0) 55%),
+            linear-gradient(145deg, #9db9ff 0%, #6f7ff2 38%, #8a6ef0 62%, #eaa1c4 100%);
+        box-shadow:
+            0 20px 36px -16px rgba(80, 90, 220, 0.5),
+            inset -10px -12px 24px rgba(90, 80, 200, 0.22),
+            inset 8px 10px 20px rgba(255, 255, 255, 0.4);
+        animation-delay: -3.5s;
     }
 
     @keyframes torb-bob {
