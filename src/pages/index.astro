@@ -55,118 +55,12 @@ const stats = [
 
         <div class="absolute inset-0 overflow-hidden">
 
-            <!-- Dotted hands reaching toward one another -->
+            <!-- Cinematic 3D human + AI hands animation -->
             <div class="hero-hands-art" aria-hidden="true">
-                <svg viewBox="0 0 1200 620" preserveAspectRatio="xMidYMid meet" role="presentation">
-                    <defs>
-                        <pattern id="hand-dots" width="8" height="8" patternUnits="userSpaceOnUse">
-                            <circle cx="2" cy="2" r="1.25" fill="#343943" />
-                        </pattern>
-                        <linearGradient id="hand-edge" x1="0" y1="0" x2="1" y2="0">
-                            <stop offset="0" stop-color="#343943" stop-opacity=".2" />
-                            <stop offset=".55" stop-color="#343943" stop-opacity=".65" />
-                            <stop offset="1" stop-color="#343943" stop-opacity=".35" />
-                        </linearGradient>
-                        <radialGradient id="touch-glow">
-                            <stop offset="0" stop-color="#5170FF" stop-opacity=".35" />
-                            <stop offset="1" stop-color="#5170FF" stop-opacity="0" />
-                        </radialGradient>
-                    </defs>
-
-                    <!-- Left human hand reaching in from the left -->
-                    <g class="dotted-hand hand-left">
-                        <path d="M-40 470
-                            L120 432
-                            C190 414 255 388 315 358
-                            L407 309
-                            C424 300 442 301 451 311
-                            C458 320 450 330 439 337
-                            L384 371
-                            L448 344
-                            C466 336 482 345 474 358
-                            C470 364 463 369 454 374
-                            L398 402
-                            L461 381
-                            C480 375 494 386 484 400
-                            C480 406 473 411 463 416
-                            L407 441
-                            L453 427
-                            C471 421 483 434 471 447
-                            C466 453 457 458 447 463
-                            L395 485
-                            L427 478
-                            C444 474 454 487 441 499
-                            C410 525 369 544 322 560
-                            L130 613 L-40 620 Z"
-                            fill="url(#hand-dots)" stroke="url(#hand-edge)" stroke-width="2" stroke-linejoin="round" />
-                        <!-- Distinct thumb, finger creases, and palm lines -->
-                        <path d="M305 365 C333 348 359 327 388 307
-                            C401 298 417 299 425 309
-                            C433 319 425 329 413 338
-                            L368 372 C349 387 331 397 309 405
-                            C297 410 285 402 289 392
-                            C292 382 299 373 305 365 Z"
-                            fill="url(#hand-dots)" stroke="#343943" stroke-opacity=".48" stroke-width="1.8" stroke-linejoin="round" />
-                        <path d="M380 344 C396 334 410 326 425 319
-                            M397 379 C420 369 439 359 458 350
-                            M410 409 C433 401 451 392 470 383
-                            M413 443 C434 436 451 428 466 419
-                            M390 478 C407 471 423 464 438 454
-                            M160 466 C230 445 292 416 349 384"
-                            fill="none" stroke="#343943" stroke-opacity=".42" stroke-width="1.7" stroke-linecap="round" stroke-dasharray="2 7" />
-                    </g>
-
-                    <!-- Right human hand mirrored toward the left hand -->
-                    <g class="dotted-hand hand-right">
-                        <path d="M1240 470
-                            L1080 432
-                            C1010 414 945 388 885 358
-                            L793 309
-                            C776 300 758 301 749 311
-                            C742 320 750 330 761 337
-                            L816 371
-                            L752 344
-                            C734 336 718 345 726 358
-                            C730 364 737 369 746 374
-                            L802 402
-                            L739 381
-                            C720 375 706 386 716 400
-                            C720 406 727 411 737 416
-                            L793 441
-                            L747 427
-                            C729 421 717 434 729 447
-                            C734 453 743 458 753 463
-                            L805 485
-                            L773 478
-                            C756 474 746 487 759 499
-                            C790 525 831 544 878 560
-                            L1070 613 L1240 620 Z"
-                            fill="url(#hand-dots)" stroke="url(#hand-edge)" stroke-width="2" stroke-linejoin="round" />
-                        <path d="M895 365 C867 348 841 327 812 307
-                            C799 298 783 299 775 309
-                            C767 319 775 329 787 338
-                            L832 372 C851 387 869 397 891 405
-                            C903 410 915 402 911 392
-                            C908 382 901 373 895 365 Z"
-                            fill="url(#hand-dots)" stroke="#343943" stroke-opacity=".48" stroke-width="1.8" stroke-linejoin="round" />
-                        <path d="M820 344 C804 334 790 326 775 319
-                            M803 379 C780 369 761 359 742 350
-                            M790 409 C767 401 749 392 730 383
-                            M787 443 C766 436 749 428 734 419
-                            M810 478 C793 471 777 464 762 454
-                            M1040 466 C970 445 908 416 851 384"
-                            fill="none" stroke="#343943" stroke-opacity=".42" stroke-width="1.7" stroke-linecap="round" stroke-dasharray="2 7" />
-                    </g>
-
-                    <!-- Small AI-inspired spark at the meeting point -->
-                    <g class="hand-connection">
-                        <circle cx="600" cy="270" r="43" fill="url(#touch-glow)" />
-                        <circle class="connection-ring" cx="600" cy="270" r="13" fill="none" stroke="#5170FF" stroke-width="1.5" />
-                        <circle cx="600" cy="270" r="3.5" fill="#004AAD" />
-                        <path class="connection-rays" d="M600 247 V239 M600 293 V301 M577 270 H569 M623 270 H631 M584 254 L578 248 M616 286 L622 292 M616 254 L622 248 M584 286 L578 292"
-                            stroke="#5170FF" stroke-width="1.6" stroke-linecap="round" />
-                    </g>
-                </svg>
+                <canvas id="marc-hands-canvas"></canvas>
+                <div class="hands-animation-fallback">
+                    <div class="fallback-ring"></div>
+                </div>
             </div>
             <!--
                 IMPORTANT:
@@ -585,90 +479,280 @@ const stats = [
 
 
 <!-- ============================================================= -->
+<!-- ============================================================= -->
 <!-- HERO ANIMATION -->
 <!-- ============================================================= -->
 
 <style>
-    /* Dotted hands framing the centered MARC hero */
     .hero-hands-art {
         position: absolute;
         z-index: 10;
-        inset: 17% 0 3%;
+        inset: 9% 0 2%;
         width: 100%;
-        height: 76%;
+        height: 86%;
         pointer-events: none;
-        opacity: .48;
         overflow: hidden;
+        opacity: .96;
     }
 
-    .hero-hands-art svg {
+    #marc-hands-canvas {
         display: block;
         width: 100%;
         height: 100%;
     }
 
-    .dotted-hand {
-        transform-box: fill-box;
-        transform-origin: center;
-        animation: hands-reach 5s ease-in-out infinite alternate;
+    .hands-animation-fallback {
+        position: absolute;
+        width: min(25vw, 260px);
+        aspect-ratio: 1;
+        left: 50%;
+        top: 42%;
+        transform: translate(-50%, -50%);
+        border: 2px solid rgba(245, 133, 55, .65);
+        border-radius: 50%;
+        box-shadow: 0 0 28px rgba(245, 133, 55, .18), inset 0 0 28px rgba(245, 133, 55, .12);
+        animation: fallback-ring-pulse 4s ease-in-out infinite;
     }
 
-    .dotted-hand:nth-of-type(2) {
-        animation-delay: -.4s;
-    }
-
-    .connection-ring {
-        transform-box: fill-box;
-        transform-origin: center;
-        animation: connection-pulse 2s ease-in-out infinite;
-    }
-
-    .connection-rays {
-        animation: connection-glow 2s ease-in-out infinite;
-    }
-
-    @keyframes hands-reach {
-        from { translate: 0 0; }
-        to { translate: 0 -3px; }
-    }
-
-    @keyframes connection-pulse {
-        0%, 100% { opacity: .45; transform: scale(.85); }
-        50% { opacity: 1; transform: scale(1.2); }
-    }
-
-    @keyframes connection-glow {
-        0%, 100% { opacity: .45; }
-        50% { opacity: 1; }
+    @keyframes fallback-ring-pulse {
+        0%, 100% { transform: translate(-50%, -50%) scale(.88); opacity: .5; }
+        50% { transform: translate(-50%, -50%) scale(1.06); opacity: .9; }
     }
 
     @media (max-width: 900px) {
-        .hero-hands-art {
-            inset: 22% -8% 10%;
-            width: 116%;
-            height: 70%;
-            opacity: .32;
-        }
+        .hero-hands-art { inset: 17% -8% 7%; width: 116%; height: 75%; opacity: .72; }
     }
 
     @media (max-width: 640px) {
-        .hero-hands-art {
-            inset: 30% -20% 12%;
-            width: 140%;
-            height: 58%;
-            opacity: .2;
-        }
+        .hero-hands-art { inset: 25% -22% 10%; width: 144%; height: 64%; opacity: .5; }
     }
 
     @media (prefers-reduced-motion: reduce) {
-        .dotted-hand,
-        .connection-ring,
-        .connection-rays {
-            animation: none !important;
-        }
+        .hands-animation-fallback { animation: none; }
     }
 </style>
 
+<script>
+    import * as THREE from "three";
 
-<!-- Previous colourful particle animation script disabled.
-     The hero now uses the lightweight dotted-hands SVG animation. -->
+    const canvas = document.querySelector<HTMLCanvasElement>("#marc-hands-canvas");
+
+    if (canvas) {
+        const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(35, 1, 0.1, 100);
+        camera.position.set(0, 0.15, 10.8);
+
+        const renderer = new THREE.WebGLRenderer({
+            canvas,
+            alpha: true,
+            antialias: true,
+            powerPreference: "low-power",
+        });
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.75));
+        renderer.outputColorSpace = THREE.SRGBColorSpace;
+        renderer.toneMapping = THREE.ACESFilmicToneMapping;
+        renderer.toneMappingExposure = 1.15;
+
+        scene.add(new THREE.AmbientLight(0xffffff, 2.0));
+        const keyLight = new THREE.DirectionalLight(0xfff1df, 3.2);
+        keyLight.position.set(0, 4, 6);
+        scene.add(keyLight);
+        const blueLight = new THREE.PointLight(0x20bfff, 24, 9);
+        blueLight.position.set(1.3, 1.1, 2);
+        scene.add(blueLight);
+        const warmLight = new THREE.PointLight(0xff8438, 18, 7);
+        warmLight.position.set(0, -0.4, 2);
+        scene.add(warmLight);
+
+        const art = new THREE.Group();
+        scene.add(art);
+
+        const skin = new THREE.MeshStandardMaterial({
+            color: 0xc88c68, roughness: 0.48, metalness: 0.02,
+        });
+        const skinLight = new THREE.MeshStandardMaterial({
+            color: 0xe0ad88, roughness: 0.42, metalness: 0.02,
+        });
+        const metal = new THREE.MeshStandardMaterial({
+            color: 0x9eb9c8, metalness: 0.82, roughness: 0.23,
+        });
+        const darkMetal = new THREE.MeshStandardMaterial({
+            color: 0x243b4b, metalness: 0.75, roughness: 0.28,
+        });
+        const jointMaterial = new THREE.MeshStandardMaterial({
+            color: 0x25c9ff, emissive: 0x0879a8, emissiveIntensity: 1.2,
+            metalness: 0.45, roughness: 0.24,
+        });
+        const leafMaterial = new THREE.MeshStandardMaterial({
+            color: 0x4c9869, roughness: 0.65, side: THREE.DoubleSide,
+        });
+        const flowerMaterial = new THREE.MeshStandardMaterial({
+            color: 0x6f91ed, roughness: 0.55, side: THREE.DoubleSide,
+        });
+
+        const sphereGeometry = new THREE.SphereGeometry(1, 20, 14);
+        function ellipsoid(parent: THREE.Object3D, material: THREE.Material, pos: [number,number,number], scale: [number,number,number]) {
+            const mesh = new THREE.Mesh(sphereGeometry, material);
+            mesh.position.set(...pos);
+            mesh.scale.set(...scale);
+            parent.add(mesh);
+            return mesh;
+        }
+
+        function segment(parent: THREE.Object3D, material: THREE.Material, a: THREE.Vector3, b: THREE.Vector3, radiusA: number, radiusB = radiusA) {
+            const direction = new THREE.Vector3().subVectors(b, a);
+            const mesh = new THREE.Mesh(
+                new THREE.CylinderGeometry(radiusB, radiusA, direction.length(), 12, 1),
+                material,
+            );
+            mesh.position.copy(a).add(b).multiplyScalar(0.5);
+            mesh.quaternion.setFromUnitVectors(new THREE.Vector3(0, 1, 0), direction.normalize());
+            parent.add(mesh);
+            ellipsoid(parent, material, [a.x,a.y,a.z], [radiusA,radiusA,radiusA]);
+            ellipsoid(parent, material, [b.x,b.y,b.z], [radiusB,radiusB,radiusB]);
+            return mesh;
+        }
+
+        // Organic hand: a softly sculpted palm, forearm and five reaching fingers.
+        const human = new THREE.Group();
+        human.position.set(-2.7, -0.15, 0.05);
+        human.rotation.z = 0.08;
+        art.add(human);
+        ellipsoid(human, skin, [-0.95, 0, 0], [1.22, 0.57, 0.38]);
+        ellipsoid(human, skinLight, [-0.22, 0.02, 0.02], [0.68, 0.43, 0.34]);
+        const humanFingerTips: THREE.Vector3[] = [];
+        const fingerStarts = [
+            [-0.1, 0.28, 0.04], [0.0, 0.12, 0.10],
+            [0.02, -0.06, 0.12], [-0.06, -0.23, 0.10],
+        ];
+        const fingerEnds = [
+            [1.5, 0.53, 0.02], [1.72, 0.23, 0.08],
+            [1.75, -0.08, 0.08], [1.58, -0.37, 0.05],
+        ];
+        fingerStarts.forEach((start, i) => {
+            const a = new THREE.Vector3(...start);
+            const mid = new THREE.Vector3(start[0] + 0.68, start[1] + (fingerEnds[i][1] - start[1]) * 0.6, start[2]);
+            const tip = new THREE.Vector3(...fingerEnds[i]);
+            segment(human, skinLight, a, mid, 0.145 - i * 0.012, 0.12 - i * 0.01);
+            segment(human, skin, mid, tip, 0.12 - i * 0.01, 0.075 - i * 0.008);
+            humanFingerTips.push(tip);
+        });
+        segment(human, skinLight, new THREE.Vector3(-0.28,-0.08,0.12), new THREE.Vector3(0.56,-0.62,0.14), 0.19, 0.14);
+        segment(human, skin, new THREE.Vector3(0.56,-0.62,0.14), new THREE.Vector3(0.94,-0.51,0.12), 0.14, 0.09);
+
+        // Small botanical accents winding around the organic forearm.
+        for (let i = 0; i < 8; i++) {
+            const x = -1.8 + i * 0.34;
+            const y = Math.sin(i * 1.2) * 0.32;
+            const leaf = ellipsoid(human, leafMaterial, [x, y, 0.34], [0.23, 0.085, 0.035]);
+            leaf.rotation.z = (i % 2 ? -1 : 1) * (0.45 + (i % 3) * 0.18);
+            if (i === 2 || i === 5 || i === 7) {
+                const flower = new THREE.Group();
+                flower.position.set(x, y + 0.14, 0.4);
+                for (let p = 0; p < 5; p++) {
+                    const angle = p * Math.PI * 2 / 5;
+                    ellipsoid(flower, flowerMaterial, [Math.cos(angle)*0.075, Math.sin(angle)*0.075, 0], [0.07,0.045,0.025]);
+                }
+                ellipsoid(flower, new THREE.MeshStandardMaterial({color:0xffd16c, emissive:0x6a3b08}), [0,0,0.025], [0.035,0.035,0.025]);
+                human.add(flower);
+            }
+        }
+
+        // Robotic hand: articulated metallic palm, segmented fingers and cyan joints.
+        const robot = new THREE.Group();
+        robot.position.set(2.75, 0.15, 0.1);
+        robot.rotation.z = Math.PI - 0.08;
+        art.add(robot);
+        ellipsoid(robot, darkMetal, [-0.95,0,0], [1.18,0.57,0.38]);
+        ellipsoid(robot, metal, [-0.24,0,0.03], [0.68,0.44,0.34]);
+        const robotStarts = [
+            [-0.1,0.28,0.06], [0.0,0.12,0.1],
+            [0.02,-0.06,0.12], [-0.06,-0.23,0.1],
+        ];
+        const robotEnds = [
+            [1.5,0.53,0.04], [1.72,0.23,0.08],
+            [1.75,-0.08,0.08], [1.58,-0.37,0.05],
+        ];
+        robotStarts.forEach((start, i) => {
+            const a = new THREE.Vector3(...start);
+            const mid = new THREE.Vector3(start[0] + 0.68, start[1] + (robotEnds[i][1] - start[1]) * 0.6, start[2]);
+            const tip = new THREE.Vector3(...robotEnds[i]);
+            segment(robot, metal, a, mid, 0.14 - i * 0.01, 0.115 - i * 0.009);
+            segment(robot, darkMetal, mid, tip, 0.115 - i * 0.009, 0.07 - i * 0.007);
+            ellipsoid(robot, jointMaterial, [mid.x,mid.y,mid.z+0.025], [0.105,0.105,0.09]);
+        });
+        segment(robot, metal, new THREE.Vector3(-0.28,-0.08,0.12), new THREE.Vector3(0.56,-0.62,0.14), 0.18, 0.13);
+        segment(robot, darkMetal, new THREE.Vector3(0.56,-0.62,0.14), new THREE.Vector3(0.94,-0.51,0.12), 0.13, 0.085);
+
+        // Orange energy ring, layered for a soft cinematic glow.
+        const ringGroup = new THREE.Group();
+        ringGroup.position.set(0, 0.02, 0.0);
+        ringGroup.rotation.x = 0.22;
+        art.add(ringGroup);
+        const ring = new THREE.Mesh(
+            new THREE.TorusGeometry(1.12, 0.025, 12, 100),
+            new THREE.MeshStandardMaterial({color:0xff9a47, emissive:0xff641c, emissiveIntensity:2.1, metalness:0.25, roughness:0.25}),
+        );
+        ringGroup.add(ring);
+        const ringInner = new THREE.Mesh(
+            new THREE.TorusGeometry(1.02, 0.008, 8, 100),
+            new THREE.MeshBasicMaterial({color:0xffbd79, transparent:true, opacity:0.75}),
+        );
+        ringGroup.add(ringInner);
+        const glow = new THREE.Mesh(
+            new THREE.TorusGeometry(1.16, 0.085, 8, 100),
+            new THREE.MeshBasicMaterial({color:0xff762d, transparent:true, opacity:0.11}),
+        );
+        ringGroup.add(glow);
+
+        // Floating botanical leaves around the human side.
+        const leaves: THREE.Mesh[] = [];
+        for (let i = 0; i < 11; i++) {
+            const leaf = ellipsoid(art, leafMaterial,
+                [-3.35 + (i % 4) * 0.27, -0.9 + i * 0.18, -0.2 + (i % 3) * 0.12],
+                [0.18,0.065,0.035]);
+            leaf.rotation.z = (i % 2 ? -1 : 1) * 0.65;
+            leaves.push(leaf);
+        }
+
+        const fallback = document.querySelector<HTMLElement>(".hands-animation-fallback");
+        if (fallback) fallback.style.display = "none";
+
+        function resize() {
+            const rect = canvas!.getBoundingClientRect();
+            const width = Math.max(1, rect.width);
+            const height = Math.max(1, rect.height);
+            renderer.setSize(width, height, false);
+            camera.aspect = width / height;
+            camera.position.z = width < 620 ? 13.8 : width < 950 ? 12.2 : 10.8;
+            camera.updateProjectionMatrix();
+        }
+        resize();
+        const resizeObserver = new ResizeObserver(resize);
+        resizeObserver.observe(canvas);
+
+        const clock = new THREE.Clock();
+        function animate() {
+            const t = clock.getElapsedTime();
+            if (!reducedMotion) {
+                human.position.x = -2.7 + Math.sin(t * 0.55) * 0.1;
+                robot.position.x = 2.75 - Math.sin(t * 0.55) * 0.1;
+                human.rotation.z = 0.08 + Math.sin(t * 0.7) * 0.025;
+                robot.rotation.z = Math.PI - 0.08 - Math.sin(t * 0.7) * 0.025;
+                ringGroup.rotation.z = Math.sin(t * 0.3) * 0.12;
+                const pulse = 1 + Math.sin(t * 1.6) * 0.035;
+                ringGroup.scale.setScalar(pulse);
+                blueLight.intensity = 20 + Math.sin(t * 1.8) * 5;
+                warmLight.intensity = 14 + Math.sin(t * 1.6) * 5;
+                leaves.forEach((leaf, i) => {
+                    leaf.position.y += Math.sin(t * 0.8 + i) * 0.0009;
+                    leaf.rotation.z += Math.cos(t * 0.5 + i) * 0.0008;
+                });
+            }
+            renderer.render(scene, camera);
+            if (!reducedMotion) requestAnimationFrame(animate);
+        }
+        animate();
+    }
+</script>
