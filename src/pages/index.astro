@@ -55,16 +55,13 @@ const stats = [
 
         <div class="absolute inset-0 overflow-hidden">
 
-            <!-- Particle canvas -->
+            <!-- Previous colourful particle-vortex animation disabled.
+                 New monochrome dotted-wave animation is rendered below. -->
             <canvas
-                id="particleCanvas"
+                id="dottedWaveCanvas"
                 class="absolute inset-0 w-full h-full z-[10] pointer-events-none"
                 aria-hidden="true"
             ></canvas>
-
-            <!-- Particle vortex inspired by the supplied reference -->
-            <div class="particle-vortex-glow" aria-hidden="true"></div>
-            <div class="particle-vortex-core" aria-hidden="true"></div>
             <!--
                 IMPORTANT:
                 No dark overlay here.
@@ -486,205 +483,112 @@ const stats = [
 <!-- ============================================================= -->
 
 <style>
-
-    /* =========================================================
-       HERO — CLEAN LIGHT BACKGROUND
-       ========================================================= */
-
-    /* =========================================================
-       PREMIUM LIQUID AI LIGHT
-       ========================================================= */
-
-    /* =========================================================
-       3D-LIKE PARTICLE FLOW — LIGHT MARC THEME
-       ========================================================= */
-
-    .particle-vortex-glow {
-        position:absolute;
-        width:52vw;
-        height:44vw;
-        min-width:520px;
-        min-height:360px;
-        left:67%;
-        top:53%;
-        transform:translate(-50%,-50%);
-        border-radius:50%;
-        background:
-            radial-gradient(
-                ellipse,
-                rgba(124,14,36,.20) 0%,
-                rgba(81,112,255,.07) 32%,
-                rgba(0,74,173,.07) 54%,
-                transparent 74%
-            );
-        filter:blur(24px);
-        pointer-events:none;
-    }
-
-    .particle-vortex-core {
-        position:absolute;
-        width:270px;
-        height:190px;
-        left:67%;
-        top:54%;
-        transform:translate(-50%,-50%);
-        border-radius:50%;
-        background:
-            radial-gradient(
-                ellipse,
-                rgba(255,255,255,1) 0%,
-                rgba(81,112,255,.34) 15%,
-                rgba(0,74,173,.10) 38%,
-                transparent 73%
-            );
-        filter:blur(22px);
-        opacity:.72;
-        pointer-events:none;
-        animation:vortexCore 8s ease-in-out infinite;
-    }
-
-    @keyframes vortexCore {
-        0%,100% {
-            transform:translate(-50%,-50%) scale(1);
-            opacity:.55;
-        }
-        50% {
-            transform:translate(-50%,-50%) scale(1.18);
-            opacity:.82;
-        }
-    }
-
-    /* =========================================================
-       MOBILE
-       ========================================================= */
-
-    @media (max-width: 1100px) {
-        .liquid-ai-visual {
-            opacity: 0.92;
-        }
-
-        .liquid-ai-label {
-            right: 5%;
-            bottom: 6%;
-        }
-    }
-
-    @media (max-width: 900px) {
-        .liquid-ai-visual {
-            opacity: 0.72;
-        }
-
-        .liquid-ai-label {
-            display: none;
-        }
+    /* Minimal monochrome dotted waves for the light hero */
+    #dottedWaveCanvas {
+        opacity: 0.78;
+        mix-blend-mode: multiply;
     }
 
     @media (max-width: 640px) {
-        .liquid-ai-visual {
-            opacity: 0.52;
+        #dottedWaveCanvas {
+            opacity: 0.42;
         }
     }
-
-
-    /* =========================================================
-       REDUCE MOTION
-       ========================================================= */
 
     @media (prefers-reduced-motion: reduce) {
-
-        .liquid-ai-visual,
-        .liquid-glow,
-        .liquid-core,
-        .liquid-band,
-        .liquid-wave,
-        .liquid-particle {
-
-            animation: none !important;
+        #dottedWaveCanvas {
+            opacity: 0.55;
         }
-
     }
-
 </style>
 
 
 <!-- ============================================================= -->
 <!-- ============================================================= -->
-<!-- PARTICLE SPHERE SCRIPT -->
-<!-- ============================================================= -->
-
+<!-- Previous colourful particle animation script disabled.
+     Replaced with a subtle monochrome dotted-wave animation. -->
 <script>
-const canvas=document.getElementById("particleCanvas") as HTMLCanvasElement|null;
-if(canvas){
- const ctx=canvas.getContext("2d");
- if(ctx){
-  let w=0,h=0,dpr=1,raf=0,time=0;
-  type Particle={r:number;a:number;speed:number;size:number;alpha:number;color:number;phase:number};
-  let particles:Particle[]=[];
-  const resize=()=>{
-   dpr=Math.min(window.devicePixelRatio||1,2);
-   w=window.innerWidth; h=window.innerHeight;
-   canvas.width=w*dpr; canvas.height=h*dpr;
-   canvas.style.width=w+"px"; canvas.style.height=h+"px";
-   ctx.setTransform(dpr,0,0,dpr,0,0);
-   const max=Math.min(w,h)*.72;
-   const count=w<768?1500:4200;
-   particles=Array.from({length:count},()=>({
-    r:45+Math.pow(Math.random(),.62)*max,
-    a:Math.random()*Math.PI*2,
-    speed:.0015+Math.random()*.004,
-    size:Math.random()<.045?1.8+Math.random()*3:0.35+Math.random()*1.25,
-    alpha:.25+Math.random()*.7,
-    color:Math.random(),
-    phase:Math.random()*Math.PI*2
-   }));
-  };
-  const draw=()=>{
-   time+=1;
-   ctx.clearRect(0,0,w,h);
-   const cx=w*.69,cy=h*.53,max=Math.min(w,h)*.72;
-   particles.forEach((p,i)=>{
-    const old=p.r;
-    p.a+=p.speed;
-    p.r-=.12+(1-p.r/max)*.08;
-    if(p.r<20){p.r=max*(.62+Math.random()*.42);p.a=Math.random()*Math.PI*2;}
-    const q=p.r/max;
-    const spiral=Math.sin(p.a*2.6+p.phase+time*.003)*(8+q*45);
-    const angle=p.a+.9/(p.r/120+1);
-    const x=cx+Math.cos(angle)*p.r+spiral;
-    const y=cy+Math.sin(angle)*p.r*.48+Math.sin(p.a*4+p.phase)*12*q;
-    const rgb=p.color<.33?"0,74,173":p.color<.66?"81,112,255":"124,14,36";
-    const alpha=Math.min(1,p.alpha+(q<.16?.3:0));
-    if(old>100&&p.size>.8){
-      ctx.beginPath();
-      ctx.moveTo(x,y);
-      ctx.lineTo(
-       cx+Math.cos(angle-.05)*(p.r+16)+spiral,
-       cy+Math.sin(angle-.05)*(p.r+16)*.48
-      );
-      ctx.strokeStyle="rgba("+rgb+","+alpha*.14+")";
-      ctx.lineWidth=Math.max(.35,p.size*.35);
-      ctx.stroke();
+const canvas = document.getElementById("dottedWaveCanvas") as HTMLCanvasElement | null;
+
+if (canvas) {
+    const ctx = canvas.getContext("2d");
+    if (ctx) {
+        let width = 0;
+        let height = 0;
+        let dpr = 1;
+        let frame = 0;
+        let animationId = 0;
+        let reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+        const resize = () => {
+            dpr = Math.min(window.devicePixelRatio || 1, 2);
+            width = window.innerWidth;
+            height = canvas.parentElement?.clientHeight || window.innerHeight;
+            canvas.width = width * dpr;
+            canvas.height = height * dpr;
+            canvas.style.width = width + "px";
+            canvas.style.height = height + "px";
+            ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+            draw();
+        };
+
+        const draw = () => {
+            frame += reducedMotion ? 0 : 0.012;
+            ctx.clearRect(0, 0, width, height);
+
+            const spacing = width < 640 ? 9 : 8;
+            const centerY = height * 0.57;
+            const leftReach = width * 0.34;
+            const rightStart = width * 0.55;
+            const rightReach = width * 0.45;
+
+            for (let x = 0; x <= width; x += spacing) {
+                const leftSide = x < leftReach;
+                const rightSide = x > rightStart;
+                if (!leftSide && !rightSide) continue;
+
+                const sideProgress = leftSide
+                    ? x / leftReach
+                    : (x - rightStart) / rightReach;
+
+                for (let y = spacing; y < height; y += spacing) {
+                    const waveA = Math.sin(sideProgress * Math.PI * 1.35 + (leftSide ? 0.25 : 1.4) + frame) * height * 0.19;
+                    const waveB = Math.sin(sideProgress * Math.PI * 2.0 + (leftSide ? 1.7 : 0.2) - frame * 0.7) * height * 0.10;
+                    const waveC = Math.cos(sideProgress * Math.PI * 2.7 + frame * 0.5) * height * 0.035;
+                    const waveY = centerY + waveA + waveB + waveC;
+                    const distance = Math.abs(y - waveY);
+                    const bandWidth = height * (0.17 + 0.06 * Math.sin(sideProgress * Math.PI));
+
+                    // Keep the centre open for the hero heading and CTA.
+                    const centerGap = width * 0.14;
+                    if (x > width * 0.36 && x < width * 0.60) continue;
+
+                    const envelope = Math.max(0, 1 - distance / bandWidth);
+                    const secondaryArc = Math.abs(y - (waveY + height * 0.19));
+                    const secondaryEnvelope = Math.max(0, 1 - secondaryArc / (bandWidth * 0.72));
+                    const density = Math.max(envelope, secondaryEnvelope * 0.62);
+
+                    if (density <= 0.08) continue;
+                    const variation = (Math.sin(x * 0.17 + y * 0.11) + 1) / 2;
+                    const alpha = Math.min(0.46, density * (0.16 + variation * 0.28));
+                    const radius = 0.45 + variation * 0.7 + density * 0.25;
+
+                    ctx.beginPath();
+                    ctx.arc(x + Math.sin(frame + y * 0.01) * 0.8, y, radius, 0, Math.PI * 2);
+                    ctx.fillStyle = "rgba(25, 31, 42, " + alpha + ")";
+                    ctx.fill();
+                }
+            }
+
+            if (!reducedMotion) animationId = requestAnimationFrame(draw);
+        };
+
+        resize();
+        window.addEventListener("resize", resize);
+        document.addEventListener("astro:before-swap", () => {
+            cancelAnimationFrame(animationId);
+            window.removeEventListener("resize", resize);
+        }, { once: true });
     }
-    const glow=ctx.createRadialGradient(x,y,0,x,y,p.size*6);
-    glow.addColorStop(0,"rgba(255,255,255,"+alpha+")");
-    glow.addColorStop(.18,"rgba("+rgb+","+alpha*.9+")");
-    glow.addColorStop(1,"rgba("+rgb+",0)");
-    ctx.fillStyle=glow;
-    ctx.beginPath();ctx.arc(x,y,p.size*6,0,Math.PI*2);ctx.fill();
-    ctx.fillStyle="rgba(255,255,255,"+Math.min(1,alpha+.1)+")";
-    ctx.beginPath();ctx.arc(x,y,Math.max(.45,p.size),0,Math.PI*2);ctx.fill();
-   });
-   const core=ctx.createRadialGradient(cx,cy,0,cx,cy,180);
-   core.addColorStop(0,"rgba(255,255,255,.95)");
-   core.addColorStop(.08,"rgba(124,14,36,.28)");
-   core.addColorStop(.28,"rgba(0,74,173,.10)");
-   core.addColorStop(1,"rgba(255,255,255,0)");
-   ctx.fillStyle=core;ctx.beginPath();ctx.arc(cx,cy,180,0,Math.PI*2);ctx.fill();
-   raf=requestAnimationFrame(draw);
-  };
-  resize();draw();
-  window.addEventListener("resize",resize);
-  document.addEventListener("astro:before-swap",()=>{cancelAnimationFrame(raf);window.removeEventListener("resize",resize)},{once:true});
- }
 }
 </script>
