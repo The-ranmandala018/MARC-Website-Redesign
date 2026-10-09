@@ -104,17 +104,31 @@
                 1,
                 BIN_DENSITY[k] * (0.6 + Math.random() * 0.9),
             );
-            sizeMul[i] = 0.8 + Math.random() * 0.5;
+            // Mostly small dots, with a scattered few much bigger — gives the
+            // "some particles big, some small" look instead of a uniform field.
+            const sizeRoll = Math.random();
+            sizeMul[i] =
+                sizeRoll < 0.72
+                    ? 0.55 + sizeRoll * 0.9 // small: ~0.55–1.2
+                    : sizeRoll < 0.94
+                      ? 1.3 + Math.random() * 1.1 // medium: ~1.3–2.4
+                      : 2.6 + Math.random() * 2.2; // few large glowing ones: ~2.6–4.8
             phase[i] = Math.random() * Math.PI * 2;
             pick[i] = Math.random();
             color[i] = pickColor();
         }
 
-        // Draw order grouped by colour, so each frame sets fillStyle only
-        // once per colour instead of once per dot.
-        const order = Array.from({ length: COUNT }, (_, i) => i).sort((a, b) =>
-            color[a] < color[b] ? -1 : color[a] > color[b] ? 1 : 0,
-        );
+        // The bigger dots get a soft glow; the rest stay crisp (cheaper to
+        // draw, and it keeps the glow from washing out the fine texture).
+        const glow = new Uint8Array(COUNT);
+        for (let i = 0; i < COUNT; i++) glow[i] = sizeMul[i] > 1.25 ? 1 : 0;
+
+        // Draw order grouped by colour, then by glow, so each frame only
+        // changes fillStyle/shadow a handful of times instead of per dot.
+        const order = Array.from({ length: COUNT }, (_, i) => i).sort((a, b) => {
+            if (color[a] !== color[b]) return color[a] < color[b] ? -1 : 1;
+            return glow[a] - glow[b];
+        });
 
         // Harmonics that make the ripple line jagged rather than a clean circle.
         const HARM = [3, 5, 8, 13, 21, 34];
@@ -186,6 +200,7 @@
                 : 0;
 
             let currentColor = "";
+            let currentGlow = -1;
 
             for (let oi = 0; oi < COUNT; oi++) {
                 const i = order[oi];
@@ -243,6 +258,16 @@
                 if (color[i] !== currentColor) {
                     currentColor = color[i];
                     c.fillStyle = currentColor;
+                    currentGlow = -1; // force the glow state to re-apply below
+                }
+                if (glow[i] !== currentGlow) {
+                    currentGlow = glow[i];
+                    if (currentGlow) {
+                        c.shadowColor = currentColor;
+                        c.shadowBlur = 9 * dpr;
+                    } else {
+                        c.shadowBlur = 0;
+                    }
                 }
                 c.globalAlpha = b;
                 c.beginPath();
@@ -250,6 +275,7 @@
                 c.fill();
             }
 
+            c.shadowBlur = 0;
             c.globalAlpha = 1;
         }
 
