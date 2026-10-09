@@ -5,8 +5,9 @@
  * middle, fading at the edge) with a thin, jagged ripple line that
  * contracts from the rim toward the centre, dissolves, and starts again.
  *
- * Drawn on a plain 2D canvas (no extra libraries). Works over the site's
- * light or dark hero background.
+ * Drawn on a plain 2D canvas (no extra libraries). Framed around the hero
+ * content (inset, lower opacity) rather than filling the whole section, and
+ * eases back further on small screens so it doesn't crowd the text.
  */
 ---
 
@@ -17,16 +18,37 @@
 <style>
     .hero-particles {
         position: absolute;
-        inset: 0;
         z-index: 10;
+        inset: 12% 0 8%;
+        width: 100%;
+        height: 80%;
         pointer-events: none;
         overflow: hidden;
+        opacity: 0.64;
     }
 
     #marc-particles {
         display: block;
         width: 100%;
         height: 100%;
+    }
+
+    @media (max-width: 900px) {
+        .hero-particles {
+            inset: 22% -8% 10%;
+            width: 116%;
+            height: 70%;
+            opacity: 0.35;
+        }
+    }
+
+    @media (max-width: 640px) {
+        .hero-particles {
+            inset: 30% -20% 12%;
+            width: 140%;
+            height: 58%;
+            opacity: 0.22;
+        }
     }
 </style>
 
