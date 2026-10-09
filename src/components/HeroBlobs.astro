@@ -1,0 +1,106 @@
+---
+/**
+ * HeroBlobs
+ * Soft, heavily blurred gradient spheres that drift gently behind the hero
+ * content — like the balloon-site reference. Pure CSS (no canvas/WebGL), so
+ * it always renders and costs almost nothing.
+ *
+ * Colours are the MARC brand palette: deep blue, electric cyan, accent
+ * blue and a touch of signal red / maroon as the warm accent.
+ */
+
+type Blob = {
+    top: string;
+    left: string;
+    size: string;
+    // highlight, mid, base, deep — four stops shading the sphere, like a
+    // glossy ball lit from the top-left.
+    shades: [string, string, string, string];
+    glow: string; // soft colour-matched halo around the edge
+    blurPx: number;
+    duration: string;
+    delay: string;
+    drift: string;
+    opacity: number;
+};
+
+// Kept to the outer margins (top/side/bottom corners) so the headline,
+// description and buttons in the centre stay fully readable.
+const blobs: Blob[] = [
+    { top: "2%", left: "0%", size: "260px", shades: ["#c7d2ff", "#5170FF", "#2a3fc9", "#1b2a9e"], glow: "#5170FF55", blurPx: 6, duration: "17s", delay: "0s", drift: "22px", opacity: 0.9 },
+    { top: "-4%", left: "64%", size: "380px", shades: ["#9fb8ff", "#073BCE", "#042575", "#021850"], glow: "#073BCE4d", blurPx: 8, duration: "21s", delay: "-4s", drift: "28px", opacity: 0.88 },
+    { top: "30%", left: "86%", size: "220px", shades: ["#e3fbff", "#00CFF5", "#00a0c2", "#016f87"], glow: "#00CFF566", blurPx: 5, duration: "15s", delay: "-8s", drift: "18px", opacity: 0.9 },
+    { top: "56%", left: "0%", size: "300px", shades: ["#d7f8ff", "#38c6e6", "#0b8aa8", "#065f73"], glow: "#00CFF54d", blurPx: 7, duration: "19s", delay: "-2s", drift: "24px", opacity: 0.86 },
+    { top: "74%", left: "80%", size: "230px", shades: ["#f3c6cf", "#a21d33", "#7C0E24", "#4d0815"], glow: "#7C0E244d", blurPx: 6, duration: "20s", delay: "-11s", drift: "20px", opacity: 0.8 },
+    { top: "70%", left: "16%", size: "150px", shades: ["#ffd3d6", "#F51D2A", "#b5101c", "#7c0e24"], glow: "#F51D2A4d", blurPx: 5, duration: "14s", delay: "-6s", drift: "16px", opacity: 0.75 },
+    { top: "6%", left: "34%", size: "110px", shades: ["#d4ddff", "#5170FF", "#2a3fc9", "#1b2a9e"], glow: "#5170FF55", blurPx: 4, duration: "12s", delay: "-3s", drift: "14px", opacity: 0.7 },
+    { top: "4%", left: "90%", size: "130px", shades: ["#e3fbff", "#00CFF5", "#00a0c2", "#016f87"], glow: "#00CFF555", blurPx: 4, duration: "13s", delay: "-7s", drift: "14px", opacity: 0.75 },
+];
+---
+
+<div class="hero-blobs" aria-hidden="true">
+    {
+        blobs.map((b) => (
+            <span
+                class="blob"
+                style={`
+                    top: ${b.top};
+                    left: ${b.left};
+                    width: ${b.size};
+                    height: ${b.size};
+                    opacity: ${b.opacity};
+                    filter: blur(${b.blurPx}px);
+                    box-shadow: 0 0 ${b.blurPx * 11}px ${Math.round(b.blurPx * 1.6)}px ${b.glow};
+                    background: radial-gradient(circle at 32% 28%, ${b.shades[0]} 0%, ${b.shades[1]} 48%, ${b.shades[2]} 80%, ${b.shades[3]} 100%);
+                    animation-duration: ${b.duration};
+                    animation-delay: ${b.delay};
+                    --drift: ${b.drift};
+                `}
+            />
+        ))
+    }
+</div>
+
+<style>
+    .hero-blobs {
+        position: absolute;
+        inset: 0;
+        z-index: 10;
+        pointer-events: none;
+        overflow: hidden;
+    }
+
+    .blob {
+        position: absolute;
+        border-radius: 50%;
+        will-change: transform;
+        animation-name: blob-float;
+        animation-timing-function: ease-in-out;
+        animation-iteration-count: infinite;
+    }
+
+    @keyframes blob-float {
+        0% {
+            transform: translate3d(0, 0, 0) scale(1);
+        }
+        50% {
+            transform: translate3d(calc(var(--drift) * 0.6), calc(var(--drift) * -1), 0)
+                scale(1.06);
+        }
+        100% {
+            transform: translate3d(0, 0, 0) scale(1);
+        }
+    }
+
+    @media (max-width: 640px) {
+        .hero-blobs {
+            opacity: 0.75;
+        }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        .blob {
+            animation: none;
+        }
+    }
+</style>
