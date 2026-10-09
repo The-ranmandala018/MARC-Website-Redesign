@@ -18,9 +18,11 @@
     <div class="orb"></div>
     <!-- Front half of the same rings (lower arcs, passing in front of the orb) -->
     <div class="orbits orbits-front">
-        <div class="orbit o1"></div>
-        <div class="orbit o2"></div>
-        <div class="orbit o3"></div>
+        <div class="orbits-front-half">
+            <div class="orbit o1"></div>
+            <div class="orbit o2"></div>
+            <div class="orbit o3"></div>
+        </div>
     </div>
     <span class="sat s1"></span>
     <span class="sat s2"></span>
@@ -69,22 +71,28 @@
         /* same box as the orb, centred the same way */
         width: min(420px, 70%);
         aspect-ratio: 1;
-        -webkit-mask-image:
-            radial-gradient(circle closest-side, #000 86%, transparent 100%),
-            linear-gradient(to bottom, transparent 50%, #000 50%);
-        -webkit-mask-composite: source-in;
-        mask-image:
-            radial-gradient(circle closest-side, #000 86%, transparent 100%),
-            linear-gradient(to bottom, transparent 50%, #000 50%);
-        mask-composite: intersect;
+        /* clip to the orb's circle (soft at the rim) */
+        -webkit-mask-image: radial-gradient(circle closest-side, #000 86%, transparent 100%);
+        mask-image: radial-gradient(circle closest-side, #000 86%, transparent 100%);
     }
 
-    .orbits-front .orbit {
+    /* nested wrapper keeps only the lower half — two single masks instead
+       of mask-composite, so it works in every browser */
+    .orbits-front-half {
+        position: absolute;
+        inset: 0;
+        display: grid;
+        place-items: center;
+        -webkit-mask-image: linear-gradient(to bottom, transparent 42%, #000 58%);
+        mask-image: linear-gradient(to bottom, transparent 42%, #000 58%);
+    }
+
+    .orbits-front-half .orbit {
         /* a touch stronger so the arc stays visible over the orb */
         border-color: rgba(255, 255, 255, 0.8);
     }
 
-    .orbits-front .orbit.o2 {
+    .orbits-front-half .orbit.o2 {
         border-color: rgba(255, 255, 255, 0.65);
     }
 
