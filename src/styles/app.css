@@ -19,9 +19,9 @@
     default: true;
     color-scheme: light;
 
-    --color-base-100: #F8F5EF;
-    --color-base-200: #F2EDE3;
-    --color-base-300: #E5DED2;
+    --color-base-100: #FAF8F3;
+    --color-base-200: #F5F1E8;
+    --color-base-300: #E8E3D9;
     --color-base-content: #0B0405;
 
     --color-primary: #004AAD;
@@ -102,7 +102,7 @@ html {
 
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
-    background: #F8F5EF;
+    background: #FAF8F3;
     color: #0B0405;
 }
 
