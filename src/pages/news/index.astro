@@ -150,10 +150,10 @@ const sourceColor: Record<string, string> = {
                                 <div class="grid h-16 w-16 shrink-0 place-items-center rounded-2xl bg-white/60 text-center ring-1 ring-white/80 dark:bg-white/5 dark:ring-white/10">
                                     <div>
                                         <p class="font-display text-2xl leading-none text-[#004AAD] dark:text-[#5170FF] tabular-nums">
-                                            {d.getDate()}
+                                            {d.getUTCDate()}
                                         </p>
                                         <p class="mt-1 text-[0.65rem] font-semibold uppercase tracking-wider text-base-content/50">
-                                            {d.toLocaleString("en-GB", { month: "short" })} {d.getFullYear()}
+                                            {d.toLocaleString("en-GB", { month: "short", timeZone: "UTC" })} {d.getUTCFullYear()}
                                         </p>
                                     </div>
                                 </div>

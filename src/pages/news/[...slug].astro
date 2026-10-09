@@ -39,7 +39,7 @@ const moreNews = (await getCollection("news"))
     <article>
         <!-- Header -->
         <header class="mx-auto max-w-4xl text-center">
-            <p class="eyebrow !opacity-100 text-[#004AAD] dark:text-[#5170FF]">
+            <p class="eyebrow !opacity-100 !text-[#004AAD] dark:!text-[#5170FF]">
                 {formatDate(item.data.date, { weekday: "long", day: "numeric", month: "long", year: "numeric" })}
             </p>
             <h1 class="mt-5 font-display text-4xl sm:text-5xl lg:text-6xl text-base-content">

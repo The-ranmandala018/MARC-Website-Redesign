@@ -30,7 +30,7 @@ export default function PublicationsList({ publications }: Props) {
     const years = useMemo(() => {
         const uniqueYears = new Set(
             publications.map((p) =>
-                new Date(p.data.publication_date).getFullYear().toString()
+                new Date(p.data.publication_date).getUTCFullYear().toString()
             )
         );
         return ["All", ...Array.from(uniqueYears).sort((a, b) => Number(b) - Number(a))];
@@ -50,7 +50,7 @@ export default function PublicationsList({ publications }: Props) {
     // --- FILTERING LOGIC ---
     const filteredPubs = useMemo(() => {
         return publications.filter((pub) => {
-            const pubYear = new Date(pub.data.publication_date).getFullYear().toString();
+            const pubYear = new Date(pub.data.publication_date).getUTCFullYear().toString();
             const matchesSearch =
                 pub.data.paper_title.toLowerCase().includes(search.toLowerCase()) ||
                 pub.data.venue.toLowerCase().includes(search.toLowerCase());
@@ -74,7 +74,7 @@ export default function PublicationsList({ publications }: Props) {
 
         // Group
         return sorted.reduce((acc, pub) => {
-            const year = new Date(pub.data.publication_date).getFullYear();
+            const year = new Date(pub.data.publication_date).getUTCFullYear();
             if (!acc[year]) acc[year] = [];
             acc[year].push(pub);
             return acc;
@@ -96,7 +96,7 @@ export default function PublicationsList({ publications }: Props) {
     };
 
     const formatDate = (d: string) =>
-        new Date(d).toLocaleDateString("en-GB", { month: "short", year: "numeric" });
+        new Date(d).toLocaleDateString("en-GB", { month: "short", year: "numeric", timeZone: "UTC" });
 
     return (
         <div class="space-y-10">
@@ -124,7 +124,7 @@ export default function PublicationsList({ publications }: Props) {
                             <button
                                 type="button"
                                 class="glass-chip !py-2"
-                                aria-pressed={selectedType === t}
+                                aria-pressed={String(selectedType === t)}
                                 onClick={() => setSelectedType(t)}
                             >
                                 {t}

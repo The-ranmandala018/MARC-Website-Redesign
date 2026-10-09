@@ -18,8 +18,9 @@ export function excerpt(markdown: string | undefined, max = 180): string {
 
 /** "5 Feb 2025" style date. */
 export function formatDate(d: Date | string, opts?: Intl.DateTimeFormatOptions): string {
-    return new Date(d).toLocaleDateString(
-        "en-GB",
-        opts ?? { day: "numeric", month: "short", year: "numeric" },
-    );
+    // UTC so a "YYYY-MM-DD" date never shifts a day/month in other timezones
+    return new Date(d).toLocaleDateString("en-GB", {
+        timeZone: "UTC",
+        ...(opts ?? { day: "numeric", month: "short", year: "numeric" }),
+    });
 }

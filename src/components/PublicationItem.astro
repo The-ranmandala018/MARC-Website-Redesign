@@ -21,6 +21,7 @@ const { title, venue, type, doi, date, authors, project } = Astro.props;
 const prettyDate = new Date(date).toLocaleDateString("en-GB", {
     month: "short",
     year: "numeric",
+    timeZone: "UTC",
 });
 ---
 
