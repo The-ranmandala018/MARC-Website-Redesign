@@ -2,6 +2,7 @@
 import "../styles/app.css";
 import Navbar from "../components/Navbar.astro";
 import Footer from "../components/Footer.astro";
+import PageBackground from "../components/PageBackground.astro";
 
 interface Props {
     title?: string;
@@ -23,6 +24,10 @@ const fullTitle =
         : `${title} — MARC`;
 
 const canonical = Astro.url.href;
+
+// The homepage hero has its own background; every other page gets the
+// same blobs as a fixed, site-wide backdrop.
+const isHome = Astro.url.pathname.replace(/\/$/, "") === "";
 ---
 
 <!doctype html>
@@ -120,8 +125,10 @@ const canonical = Astro.url.href;
     </head>
 
     <body
-        class="flex flex-col min-h-screen bg-base-100 text-base-content"
+        class="isolate flex flex-col min-h-screen bg-base-100 text-base-content"
     >
+        {!isHome && <PageBackground />}
+
         <Navbar />
 
         <main class="flex-grow">

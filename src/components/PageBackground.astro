@@ -1,0 +1,29 @@
+---
+/**
+ * PageBackground
+ * The homepage hero's soft gradient-blob background (HeroBlobs), fixed
+ * behind the content of every other page so the whole site shares the
+ * same theme. Content scrolls over it. Rendered from BaseLayout on all
+ * pages except the homepage, whose hero already has its own copy.
+ */
+import HeroBlobs from "./HeroBlobs.astro";
+---
+
+<div class="page-bg" aria-hidden="true">
+    <HeroBlobs />
+</div>
+
+<style>
+    .page-bg {
+        position: fixed;
+        inset: 0;
+        z-index: -1;
+        overflow: hidden;
+        pointer-events: none;
+    }
+
+    /* keep it subtle behind dark-theme content */
+    :global(html[data-theme="marc-dark"]) .page-bg {
+        opacity: 0.3;
+    }
+</style>
