@@ -1,11 +1,12 @@
 ---
 /**
  * HeroParticles
- * A slowly rotating cloud of dots shaped like a hollow sphere, with ripples
- * travelling across its outer shell. Drawn on a 2D canvas (no extra libraries).
+ * White dots on black: a round cloud of fine dots (sparse in the middle,
+ * fading at the edge) with a thin, jagged ripple line that contracts from the
+ * rim toward the centre, dissolves, and starts again.
  *
- * Theme aware: colours follow the site's light ("marc") and dark ("marc-dark")
- * themes and update live when the navbar toggle is used.
+ * Drawn on a plain 2D canvas (no extra libraries). The parent section should
+ * have a black background.
  */
 ---
 
@@ -39,67 +40,61 @@
         ).matches;
 
         // ---------------------------------------------------------
-        // Theme palettes (taken from src/styles/app.css)
+        // Tuning
         // ---------------------------------------------------------
-        const PALETTES = {
-            light: ["#004AAD", "#5170FF", "#7C0E24"], // primary, accent, secondary
-            dark: ["#F8F8FF", "#8FA5FF", "#5170FF"],
-        };
-        const WEIGHTS = [0.62, 0.3, 0.08];
+        const LOOP_SECONDS = 3; // one ripple cycle (the reference GIF is 1.5s)
+        const ACTIVE = 0.75; // share of the cycle where the ripple is visible
+        const COUNT = window.innerWidth < 700 ? 2400 : 4200;
 
-        const isDark = () =>
-            document.documentElement.getAttribute("data-theme") === "marc-dark";
-        let palette = isDark() ? PALETTES.dark : PALETTES.light;
+        // Radial profile measured from the reference, in bins of 40px out of a
+        // 243px radius: how many dots fall in each ring, and how bright they are.
+        const BIN_FRACTION = [0.003, 0.037, 0.047, 0.066, 0.086, 0.047];
+        const BIN_BRIGHT = [45, 76, 119, 136, 110, 70].map((v) => v / 255);
+        const BIN_WHITE = [0.04, 0.06, 0.14, 0.15, 0.14, 0.05]; // chance of a bright dot
+        const BIN_WIDTH = 40 / 243;
 
         // ---------------------------------------------------------
-        // Build the particle cloud
+        // Build the dots
         // ---------------------------------------------------------
-        const small = window.innerWidth < 700;
-        const COUNT = small ? 1700 : 3400;
+        const weights = BIN_FRACTION.map((f, k) => f * (2 * k + 1)); // x ring area
+        const total = weights.reduce((a, b) => a + b, 0);
 
-        type Group = {
-            x: Float32Array;
-            y: Float32Array;
-            z: Float32Array;
-            shell: Uint8Array;
-            size: Float32Array;
-            phase: Float32Array;
-            count: number;
-        };
+        const rho = new Float32Array(COUNT); // distance from centre (0..1)
+        const theta = new Float32Array(COUNT); // angle
+        const bright = new Float32Array(COUNT); // base brightness (0..1)
+        const sizeMul = new Float32Array(COUNT);
+        const phase = new Float32Array(COUNT);
+        const pick = new Float32Array(COUNT); // decides who joins the ripple line
 
-        const counts = WEIGHTS.map((w) => Math.round(COUNT * w));
-        const groups: Group[] = counts.map((n) => ({
-            x: new Float32Array(n),
-            y: new Float32Array(n),
-            z: new Float32Array(n),
-            shell: new Uint8Array(n),
-            size: new Float32Array(n),
-            phase: new Float32Array(n),
-            count: n,
-        }));
-
-        for (const g of groups) {
-            for (let i = 0; i < g.count; i++) {
-                // Random direction on a sphere.
-                const u = Math.random() * 2 - 1;
-                const a = Math.random() * Math.PI * 2;
-                const s = Math.sqrt(1 - u * u);
-                const isShell = Math.random() < 0.34;
-
-                // Shell points sit near the surface (they carry the ripples);
-                // the rest fill a ball with a sparse hollow core.
-                const r = isShell
-                    ? 0.97 + Math.random() * 0.06
-                    : 0.32 + Math.cbrt(Math.random()) * 0.66;
-
-                g.x[i] = Math.cos(a) * s * r;
-                g.y[i] = u * r;
-                g.z[i] = Math.sin(a) * s * r;
-                g.shell[i] = isShell ? 1 : 0;
-                g.size[i] = 0.7 + Math.random() * 0.7;
-                g.phase[i] = Math.random() * Math.PI * 2;
+        for (let i = 0; i < COUNT; i++) {
+            let r = Math.random() * total;
+            let k = 0;
+            while (k < weights.length - 1 && r > weights[k]) {
+                r -= weights[k];
+                k++;
             }
+            rho[i] = (k + Math.random()) * BIN_WIDTH;
+            theta[i] = Math.random() * Math.PI * 2;
+
+            bright[i] =
+                Math.random() < BIN_WHITE[k]
+                    ? 0.8 + Math.random() * 0.2
+                    : Math.min(1, BIN_BRIGHT[k] * (0.55 + Math.random() * 0.95));
+            sizeMul[i] = 0.8 + Math.random() * 0.5;
+            phase[i] = Math.random() * Math.PI * 2;
+            pick[i] = Math.random();
         }
+
+        // Harmonics that make the ripple line jagged rather than a clean circle.
+        const HARM = [3, 5, 8, 13, 21, 34];
+        const AMP = [0.07, 0.05, 0.035, 0.022, 0.012, 0.007];
+        const harmPhase = HARM.map(() => Math.random() * Math.PI * 2);
+        const harmDrift = HARM.map(() => (Math.random() - 0.5) * 0.9);
+
+        const smooth = (a: number, b: number, x: number) => {
+            const t = Math.min(Math.max((x - a) / (b - a), 0), 1);
+            return t * t * (3 - 2 * t);
+        };
 
         // ---------------------------------------------------------
         // Sizing
@@ -117,14 +112,11 @@
             canvas!.height = Math.round(height * dpr);
         }
 
-        // ---------------------------------------------------------
-        // Pointer parallax (smoothed)
-        // ---------------------------------------------------------
+        // Gentle pointer parallax (smoothed).
         let targetX = 0;
         let targetY = 0;
-        let mouseX = 0;
-        let mouseY = 0;
-
+        let offX = 0;
+        let offY = 0;
         window.addEventListener(
             "pointermove",
             (e) => {
@@ -135,76 +127,87 @@
         );
 
         // ---------------------------------------------------------
-        // Render
+        // Render one frame at time t (seconds)
         // ---------------------------------------------------------
-        const CAMERA = 4;
-
         function draw(t: number) {
             const c = ctx!;
             c.setTransform(1, 0, 0, 1, 0, 0);
             c.clearRect(0, 0, canvas!.width, canvas!.height);
 
-            mouseX += (targetX - mouseX) * 0.04;
-            mouseY += (targetY - mouseY) * 0.04;
+            offX += (targetX - offX) * 0.04;
+            offY += (targetY - offY) * 0.04;
 
-            const angleY = t * 0.12 + mouseX * 0.9;
-            const angleX = 0.35 + mouseY * 0.6;
-            const cosY = Math.cos(angleY);
-            const sinY = Math.sin(angleY);
-            const cosX = Math.cos(angleX);
-            const sinX = Math.sin(angleX);
+            const radiusCss = Math.min(width, height) * 0.48;
+            const radius = radiusCss * dpr;
+            const cx = (width / 2 - offX * 16) * dpr;
+            const cy = (height / 2 - offY * 16) * dpr;
+            const dotSize =
+                Math.min(Math.max(radiusCss * 0.005, 1.2), 2.2) * dpr;
 
-            const radius = Math.min(width, height) * 0.46 * dpr;
-            const cx = (width * dpr) / 2;
-            const cy = (height * dpr) / 2;
+            // Where are we in the ripple cycle?
+            const p = (t % LOOP_SECONDS) / LOOP_SECONDS;
+            const qRaw = (p + 0.15) % 1; // p = 0 matches the reference's first frame
+            const active = qRaw < ACTIVE;
+            const q = qRaw / ACTIVE;
+            const waveR = 0.97 - 0.72 * q; // contracts from rim to centre
+            const env = active
+                ? smooth(0, 0.1, q) * (1 - smooth(0.82, 1, q))
+                : 0;
 
-            for (let gi = 0; gi < groups.length; gi++) {
-                const g = groups[gi];
-                c.fillStyle = palette[gi];
+            c.fillStyle = "#ffffff";
 
-                for (let i = 0; i < g.count; i++) {
-                    let px = g.x[i];
-                    let py = g.y[i];
-                    let pz = g.z[i];
+            for (let i = 0; i < COUNT; i++) {
+                // Tiny shimmer so the field never looks frozen.
+                const wob = reducedMotion ? 0 : 0.0035;
+                let x =
+                    rho[i] * Math.cos(theta[i]) +
+                    Math.cos(t * 0.8 + phase[i]) * wob;
+                let y =
+                    rho[i] * Math.sin(theta[i]) +
+                    Math.sin(t * 0.7 + phase[i] * 1.3) * wob;
+                let b = bright[i];
 
-                    // Ripples travelling across the outer shell.
-                    if (g.shell[i]) {
-                        const wave =
-                            Math.sin(px * 3.1 + t * 0.9) *
-                                Math.sin(py * 2.3 - t * 0.7) *
-                                0.08 +
-                            Math.sin(pz * 2.7 + t * 0.6) * 0.04;
-                        const k = 1 + wave;
-                        px *= k;
-                        py *= k;
-                        pz *= k;
+                if (env > 0.001) {
+                    const r = Math.hypot(x, y);
+                    const a = Math.atan2(y, x);
+
+                    // Jagged ripple radius at this angle.
+                    let jag = 0;
+                    for (let h = 0; h < HARM.length; h++) {
+                        jag +=
+                            AMP[h] *
+                            Math.sin(HARM[h] * a + harmPhase[h] + harmDrift[h] * t);
                     }
+                    const wr = waveR * (1 + jag);
 
-                    // Rotate around Y, then X.
-                    const x1 = px * cosY + pz * sinY;
-                    const z1 = -px * sinY + pz * cosY;
-                    const y2 = py * cosX - z1 * sinX;
-                    const z2 = py * sinX + z1 * cosX;
+                    // Pull nearby dots onto the line; only some arcs are strong,
+                    // so the line looks broken and hand-drawn like the reference.
+                    const d = r - wr;
+                    const near = Math.exp(-((d / 0.06) * (d / 0.06)));
+                    const arc =
+                        0.5 + 0.5 * Math.sin(3 * a + 1.7 + t * 0.5);
+                    const local = env * Math.pow(arc, 0.7);
+                    const join = Math.min(
+                        Math.max((local * 1.4 - pick[i]) * 3, 0),
+                        1,
+                    );
+                    const pull = near * join;
 
-                    const scale = CAMERA / (CAMERA - z2);
-                    const sx = cx + x1 * radius * scale;
-                    const sy = cy + y2 * radius * scale;
-
-                    // Nearer dots are bigger and brighter; the rim fades out.
-                    const depth = (z2 + 1.1) / 2.2;
-                    const dist = Math.sqrt(px * px + py * py + pz * pz);
-                    const rim = Math.min(Math.max((dist - 0.7) / 0.4, 0), 1);
-                    const twinkle = reducedMotion
-                        ? 1
-                        : 0.75 + 0.25 * Math.sin(t * 1.5 + g.phase[i]);
-
-                    const alpha =
-                        (0.16 + 0.84 * depth) * (1 - 0.55 * rim) * twinkle;
-                    const size = (0.7 + 1.2 * depth) * g.size[i] * dpr;
-
-                    c.globalAlpha = alpha;
-                    c.fillRect(sx - size / 2, sy - size / 2, size, size);
+                    if (pull > 0) {
+                        const r2 = r - d * 0.88 * pull;
+                        const k = r2 / (r || 1);
+                        x *= k;
+                        y *= k;
+                        b = Math.min(1, b + 0.4 * pull);
+                    }
                 }
+
+                const sx = Math.round(cx + x * radius);
+                const sy = Math.round(cy + y * radius);
+                const s = Math.max(1, Math.round(dotSize * sizeMul[i]));
+
+                c.globalAlpha = b;
+                c.fillRect(sx, sy, s, s);
             }
 
             c.globalAlpha = 1;
@@ -253,15 +256,6 @@
         }).observe(canvas);
 
         document.addEventListener("visibilitychange", sync);
-
-        // Follow the navbar light/dark toggle.
-        new MutationObserver(() => {
-            palette = isDark() ? PALETTES.dark : PALETTES.light;
-            if (reducedMotion || !running) draw(0);
-        }).observe(document.documentElement, {
-            attributes: true,
-            attributeFilter: ["data-theme"],
-        });
 
         sync();
     }

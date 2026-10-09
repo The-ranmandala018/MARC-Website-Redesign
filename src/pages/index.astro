@@ -47,7 +47,7 @@ const stats = [
     <!-- ========================================================= -->
 
     <section
-        class="relative min-h-screen overflow-hidden bg-[#FAF8F3] text-slate-900 dark:bg-slate-950 dark:text-white"
+        class="relative min-h-screen overflow-hidden bg-black text-white"
     >
 
         <!-- ===================================================== -->
@@ -56,11 +56,11 @@ const stats = [
 
         <div class="absolute inset-0 overflow-hidden">
 
-            <!-- Particle sphere animation (follows the light/dark theme) -->
+            <!-- White particle sphere on black (like the reference) -->
             <HeroParticles />
 
-            <!-- Light grid -->
-            <div class="hero-grid absolute inset-0"></div>
+            <!-- Vignette so the dots fade softly into the edges -->
+            <div class="hero-vignette absolute inset-0"></div>
 
         </div>
 
@@ -87,7 +87,7 @@ const stats = [
                              ================================================= -->
 
                         <h1
-                            class="font-display font-semibold text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-[0.98] tracking-tight max-w-4xl text-[#0F172A] dark:text-white"
+                            class="font-display font-semibold text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-[0.98] tracking-tight max-w-4xl text-white"
                         >
 
                             Multidisciplinary
@@ -100,7 +100,7 @@ const stats = [
 
                             <br />
 
-                            <span class="text-slate-700 dark:text-slate-100">
+                            <span class="text-slate-100">
                                 for a human future.
                             </span>
 
@@ -112,7 +112,7 @@ const stats = [
                              ================================================= -->
 
                         <p
-                            class="mt-6 max-w-2xl text-base sm:text-lg text-slate-600 leading-relaxed"
+                            class="mt-6 max-w-2xl text-base sm:text-lg text-slate-300 leading-relaxed"
                         >
                             MARC brings together engineers, scientists and
                             researchers to develop intelligent systems that
@@ -160,7 +160,7 @@ const stats = [
 
                             <a
                                 href="/contact"
-                                class="inline-flex items-center gap-3 rounded-full border border-white/70 bg-white/55 px-7 py-3.5 text-sm font-medium text-slate-700 backdrop-blur-md transition-all duration-300 hover:bg-white/80 hover:border-sky-300/60 shadow-sm"
+                                class="inline-flex items-center gap-3 rounded-full border border-white/25 bg-white/10 px-7 py-3.5 text-sm font-medium text-white backdrop-blur-md transition-all duration-300 hover:bg-white/20 hover:border-white/50 shadow-sm"
                             >
                                 Contact Us
                             </a>
@@ -177,7 +177,7 @@ const stats = [
                      ================================================= -->
 
                 <div
-                    class="relative z-20 border-t border-white/50 px-7 py-5 sm:px-12 lg:px-20 flex flex-col sm:flex-row justify-between gap-4 text-xs sm:text-sm text-slate-500"
+                    class="relative z-20 border-t border-white/15 px-7 py-5 sm:px-12 lg:px-20 flex flex-col sm:flex-row justify-between gap-4 text-xs sm:text-sm text-slate-400"
                 >
 
                     <span>
@@ -466,3 +466,17 @@ const stats = [
     </div>
 
 </BaseLayout>
+
+<style>
+    /* Soft radial vignette over the particle field in the hero */
+    .hero-vignette {
+        pointer-events: none;
+        background: radial-gradient(
+            circle at 50% 45%,
+            transparent 0%,
+            transparent 52%,
+            rgba(0, 0, 0, 0.55) 82%,
+            #000 100%
+        );
+    }
+</style>
