@@ -42,6 +42,7 @@
         // ---------------------------------------------------------
         // Tuning
         // ---------------------------------------------------------
+        const TAU = Math.PI * 2;
         const LOOP_SECONDS = 1.6; // one ripple cycle — faster than before
         const ACTIVE = 0.75; // share of the cycle where the ripple is visible
         const COUNT = window.innerWidth < 700 ? 2400 : 4200;
@@ -235,16 +236,18 @@
                     }
                 }
 
-                const sx = Math.round(cx + x * radius);
-                const sy = Math.round(cy + y * radius);
-                const s = Math.max(1, Math.round(dotSize * sizeMul[i]));
+                const sx = cx + x * radius;
+                const sy = cy + y * radius;
+                const s = Math.max(0.6, dotSize * sizeMul[i]) / 2;
 
                 if (color[i] !== currentColor) {
                     currentColor = color[i];
                     c.fillStyle = currentColor;
                 }
                 c.globalAlpha = b;
-                c.fillRect(sx, sy, s, s);
+                c.beginPath();
+                c.arc(sx, sy, s, 0, TAU);
+                c.fill();
             }
 
             c.globalAlpha = 1;
