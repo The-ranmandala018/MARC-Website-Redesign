@@ -1,35 +1,102 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import ResearchAreaCard from "../components/ResearchAreaCard.astro";
-import Section from "../components/ui/Section.astro";
 import HeroBlobs from "../components/HeroBlobs.astro";
 import HeroOrbVisual from "../components/HeroOrbVisual.astro";
 import HeroTextOrbs from "../components/HeroTextOrbs.astro";
 import HeroMiniOrbs from "../components/HeroMiniOrbs.astro";
+import PageBackground from "../components/PageBackground.astro";
+import ArrowPill from "../components/ArrowPill.astro";
+import default_avatar from "../assets/avatar_default.svg";
 import { getCollection } from "astro:content";
 import { Image } from "astro:assets";
+import { formatDate } from "../utils/text";
 
 const researchAreas = Object.values(
     import.meta.glob("./Research/*.md", { eager: true }),
 );
 
-const researchImages = import.meta.glob<{ default: ImageMetadata }>(
-    "/src/assets/*.{jpeg,jpg,png,gif}",
-    { eager: true },
-);
-
-const getResearchImage = (filename: string) =>
-    researchImages[`/src/assets/${filename}`]?.default;
-
-const allNews = await getCollection("news");
-
-const latestNews = allNews
-    .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
-    .slice(0, 4);
-
 const allProjects = await getCollection("projects");
 const allPubs = await getCollection("publications");
 const allPeople = await getCollection("people");
+
+// --- News: stories (markdown) + social posts, newest first ---
+const stories = (await getCollection("news")).sort(
+    (a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
+);
+const social = (await getCollection("social_news")).sort(
+    (a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime(),
+);
+
+// About sidebar: latest social updates
+const updates = social.slice(0, 3);
+
+// News section: one featured story, then up to three smaller items
+// (remaining stories first, topped up with social posts).
+const [featuredStory, ...otherStories] = stories;
+const newsList = [
+    ...otherStories.map((s) => ({
+        kind: "story" as const,
+        href: `/news/${s.id}`,
+        title: s.data.title,
+        date: s.data.date,
+        short: s.data.short,
+        cover: s.data.cover,
+        source: "Story",
+    })),
+    ...social.map((s) => ({
+        kind: "social" as const,
+        href: s.data.url,
+        title: s.data.title.trim(),
+        date: new Date(s.data.date),
+        short: "",
+        cover: undefined,
+        source: s.data.source,
+    })),
+].slice(0, 3);
+
+// --- People: four featured, leadership first, photos preferred ---
+const roleOrder = ["Director", "Deputy Director", "Research Assistant", "Volunteer"];
+const rank = (post: string) => {
+    const i = roleOrder.indexOf(post);
+    return i === -1 ? roleOrder.length : i;
+};
+const featuredPeople = [...allPeople]
+    .sort(
+        (a, b) =>
+            rank(a.data.post) - rank(b.data.post) ||
+            Number(Boolean(b.data.photo)) - Number(Boolean(a.data.photo)) ||
+            a.data.name.localeCompare(b.data.name),
+    )
+    .slice(0, 4);
+
+// --- Projects: team + publication counts for the cards ---
+const peopleByEmail = new Map(allPeople.map((p) => [p.data.email.trim(), p]));
+const projectCards = allProjects.map((p) => {
+    const team = [...p.data.supervisors, ...p.data.projectMembers];
+    return {
+        id: p.id,
+        title: p.data.project,
+        area: p.data.researchArea,
+        pillars: p.data.researchPillars ?? [],
+        cover: p.data.coverImage,
+        teamCount: team.length,
+        faces: team
+            .map((k) => peopleByEmail.get(k.trim()))
+            .filter((x): x is NonNullable<typeof x> => Boolean(x))
+            .slice(0, 3),
+        pubCount: allPubs.filter((pub) => pub.data.project === p.data.project).length,
+    };
+});
+
+// --- Publications: latest two ---
+const latestPubs = [...allPubs]
+    .sort(
+        (a, b) =>
+            new Date(b.data.publication_date).getTime() -
+            new Date(a.data.publication_date).getTime(),
+    )
+    .slice(0, 2);
+const journalCount = allPubs.filter((p) => p.data.type === "Journal").length;
 
 const stats = [
     { label: "Research areas", value: researchAreas.length },
@@ -44,6 +111,9 @@ const stats = [
     description="MARC advances multidisciplinary AI research at the Faculty of Engineering, University of Peradeniya — across computer vision, generative AI, biomedical, smart grid, MSI and socioeconomic systems."
     fullWidth={true}
 >
+
+    <!-- Site-wide blob backdrop: the sections below the hero scroll over it -->
+    <PageBackground />
 
     <!-- ========================================================= -->
     <!-- HERO -->
@@ -212,270 +282,705 @@ const stats = [
 
 
     <!-- ========================================================= -->
-    <!-- ABOUT MARC -->
+    <!-- 1. ABOUT + LATEST UPDATES -->
     <!-- ========================================================= -->
 
-    <section id="about" class="py-20 lg:py-28 bg-white dark:bg-slate-950">
+    <section id="about" class="home-section scroll-mt-24">
         <div class="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div class="grid lg:grid-cols-[0.8fr_1.2fr] gap-10 lg:gap-20 items-start">
+            <div class="grid items-center gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:gap-16">
+
+                <!-- About text -->
                 <div>
-                    <p class="eyebrow text-[#004AAD] dark:text-[#5170FF] mb-4">About MARC</p>
-                    <h2 class="font-display text-4xl md:text-5xl leading-tight text-slate-900 dark:text-white">
-                        AI research across disciplines.
+                    <p class="home-eyebrow eyebrow">
+                        <span class="home-eyebrow-rule"></span>
+                        About MARC
+                    </p>
+
+                    <h2 class="mt-5 font-display text-4xl sm:text-5xl lg:text-6xl text-base-content">
+                        AI research
+                        <br />
+                        <span class="text-gradient">across disciplines.</span>
                     </h2>
+
+                    <div class="mt-7 max-w-xl space-y-4 text-base sm:text-lg leading-relaxed text-base-content/70">
+                        <p>
+                            The Multidisciplinary AI Research Centre (MARC) brings together researchers
+                            from different disciplines to develop intelligent systems for meaningful
+                            real-world impact.
+                        </p>
+                        <p>
+                            Based at the University of Peradeniya, MARC connects foundational AI
+                            research with practical challenges in engineering, science, health,
+                            energy and society.
+                        </p>
+                    </div>
+
+                    <ArrowPill label="Explore our research" href="/Research" class="mt-8" />
                 </div>
-                <div class="space-y-5 text-base sm:text-lg leading-relaxed text-slate-600 dark:text-slate-300">
-                    <p>
-                        The Multidisciplinary AI Research Centre (MARC) brings together researchers
-                        from different disciplines to develop intelligent systems for meaningful
-                        real-world impact.
-                    </p>
-                    <p>
-                        Based at the University of Peradeniya, MARC connects foundational AI
-                        research with practical challenges in engineering, science, health,
-                        energy and society.
-                    </p>
-                    <a href="/Research" class="inline-flex items-center gap-2 text-sm font-semibold text-[#004AAD] dark:text-[#5170FF] hover:gap-3 transition-all">
-                        Explore our research
-                        <span aria-hidden="true">→</span>
-                    </a>
-                </div>
+
+                <!-- Latest updates card -->
+                {
+                    updates.length > 0 && (
+                        <aside class="glass-card !rounded-[2rem] p-6 sm:p-8" aria-labelledby="updates-title">
+                            <div class="flex items-center justify-between gap-4">
+                                <h3 id="updates-title" class="font-display text-2xl sm:text-3xl text-base-content">
+                                    Latest updates
+                                </h3>
+                                <a href="/news" class="text-sm font-semibold text-[#004AAD] hover:underline dark:text-[#5170FF]">
+                                    All news
+                                </a>
+                            </div>
+
+                            <ul class="mt-4 divide-y divide-base-content/10">
+                                {updates.map((u) => (
+                                    <li>
+                                        <a
+                                            href={u.data.url}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            class="group/update block py-5"
+                                        >
+                                            <p class="flex items-center gap-2 text-xs font-medium text-[#004AAD] dark:text-[#9fb0ff]">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                                                    <rect x="3" y="5" width="18" height="16" rx="3" />
+                                                    <path stroke-linecap="round" d="M3 10h18M8 3v4M16 3v4" />
+                                                </svg>
+                                                <span class="tabular-nums">{formatDate(u.data.date)}</span>
+                                            </p>
+                                            <p class="mt-2 font-semibold leading-snug text-base-content transition-colors group-hover/update:text-[#004AAD] dark:group-hover/update:text-[#5170FF]">
+                                                {u.data.title.trim()}
+                                            </p>
+                                            <p class="mt-2 inline-flex items-center gap-1.5 text-xs text-base-content/55">
+                                                <span class="h-1.5 w-1.5 rounded-full bg-[#7C0E24]/70"></span>
+                                                {u.data.source}
+                                                <span aria-hidden="true" class="transition-transform group-hover/update:translate-x-0.5">↗</span>
+                                            </p>
+                                        </a>
+                                    </li>
+                                ))}
+                            </ul>
+                        </aside>
+                    )
+                }
             </div>
         </div>
     </section>
 
+
     <!-- ========================================================= -->
-    <!-- STATS -->
+    <!-- 2. TWO PATHWAYS — research / collaborate -->
     <!-- ========================================================= -->
 
-    <section
-        class="border-y border-slate-200 bg-slate-50/70 dark:border-slate-800 dark:bg-slate-900/50"
-    >
+    <section class="home-section !pt-0" aria-label="Get started">
+        <div class="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div class="glass-card !rounded-[2rem] grid overflow-hidden !p-0 md:grid-cols-2">
 
-        <div
-            class="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12 lg:py-16"
-        >
+                <a href="/Research" class="pathway pathway-blue group">
+                    <p class="eyebrow">Research &amp; projects</p>
+                    <h3 class="mt-3 font-display text-3xl sm:text-4xl text-base-content">
+                        Explore our research
+                    </h3>
+                    <p class="mt-4 max-w-md leading-relaxed text-base-content/70">
+                        {researchAreas.length} research areas and {allProjects.length} projects,
+                        spanning foundational AI and applied research across critical domains.
+                    </p>
+                    <ArrowPill label="Explore research" class="mt-7" />
+                </a>
 
-            <div
-                class="grid grid-cols-2 md:grid-cols-4 gap-8 divide-y md:divide-y-0 md:divide-x divide-slate-200 dark:divide-slate-800"
-            >
+                <a href="/contact" class="pathway pathway-rose group">
+                    <p class="eyebrow">Get involved</p>
+                    <h3 class="mt-3 font-display text-3xl sm:text-4xl text-base-content">
+                        Collaborate with MARC
+                    </h3>
+                    <p class="mt-4 max-w-md leading-relaxed text-base-content/70">
+                        Collaborate, research, or join the team.
+                    </p>
+                    <ArrowPill label="Contact us" class="mt-7" />
+                </a>
 
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ========================================================= -->
+    <!-- 3. PROJECTS — card carousel -->
+    <!-- ========================================================= -->
+
+    <section class="home-section" aria-labelledby="projects-title">
+        <div class="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+
+            <div class="flex flex-wrap items-end justify-between gap-6">
+                <div>
+                    <p class="home-eyebrow eyebrow">
+                        <span class="home-eyebrow-rule"></span>
+                        Our projects
+                    </p>
+                    <h2 id="projects-title" class="mt-5 font-display text-4xl sm:text-5xl text-base-content">
+                        Research projects
+                    </h2>
+                </div>
+
+                <div class="flex items-center gap-2" data-carousel-controls="projects">
+                    <button type="button" class="carousel-btn" data-dir="-1" aria-label="Previous projects">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" /></svg>
+                    </button>
+                    <button type="button" class="carousel-btn" data-dir="1" aria-label="Next projects">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" /></svg>
+                    </button>
+                </div>
+            </div>
+
+            <ul class="carousel-track mt-10" data-carousel="projects">
                 {
-                    stats.map((s) => (
-                        <div class="px-6 py-4 md:py-0 first:pt-0">
+                    projectCards.map((p) => (
+                        <li class="carousel-item">
+                            <a href={`/projects/${p.id}`} class="group glass-card glass-hover flex h-full flex-col !rounded-[1.75rem] p-3">
+                                <div class="relative aspect-[16/11] overflow-hidden rounded-[1.25rem] bg-base-content/5">
+                                    <Image
+                                        src={p.cover}
+                                        alt=""
+                                        width={640}
+                                        class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.05]"
+                                    />
+                                    <span class="absolute left-3 top-3 max-w-[80%] truncate rounded-full border border-white/40 bg-[#141a2e]/40 px-3 py-1 text-xs font-semibold text-white backdrop-blur-md">
+                                        {p.area}
+                                    </span>
+                                </div>
 
-                            <div class="font-display text-5xl md:text-6xl text-slate-900 dark:text-white">
-                                {s.value}
+                                <div class="flex flex-grow flex-col px-2 pb-1 pt-5">
+                                    {p.pillars.length > 0 && (
+                                        <p class="truncate text-xs font-medium text-[#3f55c9] dark:text-[#9fb0ff]">
+                                            {p.pillars.join(" · ")}
+                                        </p>
+                                    )}
+                                    <h3 class="mb-6 mt-2 text-xl font-semibold leading-snug text-base-content transition-colors group-hover:text-[#004AAD] dark:group-hover:text-[#5170FF]">
+                                        {p.title}
+                                    </h3>
+
+                                    <div class="mt-auto flex items-center justify-between gap-3 border-t border-base-content/10 pt-4">
+                                        <div class="flex items-center gap-2.5">
+                                            <div class="flex -space-x-2">
+                                                {p.faces.map((f) => (
+                                                    <Image
+                                                        src={f.data.photo ?? default_avatar}
+                                                        alt=""
+                                                        width={64}
+                                                        height={64}
+                                                        class="h-8 w-8 rounded-full object-cover ring-2 ring-white dark:ring-slate-900"
+                                                    />
+                                                ))}
+                                            </div>
+                                            <span class="text-xs text-base-content/60">
+                                                {p.teamCount} {p.teamCount === 1 ? "person" : "people"}
+                                            </span>
+                                        </div>
+                                        <span class="text-xs text-base-content/60">
+                                            {p.pubCount} {p.pubCount === 1 ? "paper" : "papers"}
+                                        </span>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                    ))
+                }
+            </ul>
+        </div>
+    </section>
+
+
+    <!-- ========================================================= -->
+    <!-- 4. PEOPLE — text + photo grid -->
+    <!-- ========================================================= -->
+
+    <section class="home-section" aria-labelledby="people-title">
+        <div class="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div class="grid items-center gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16">
+
+                <div>
+                    <p class="home-eyebrow eyebrow">
+                        <span class="home-eyebrow-rule"></span>
+                        Our people
+                    </p>
+                    <h2 id="people-title" class="mt-5 font-display text-4xl sm:text-5xl lg:text-6xl text-base-content">
+                        Meet the team
+                        <br />
+                        <span class="text-gradient">behind MARC.</span>
+                    </h2>
+                    <p class="mt-7 max-w-md text-base sm:text-lg leading-relaxed text-base-content/70">
+                        Meet the researchers and team behind the Multidisciplinary AI Research Centre.
+                    </p>
+                    <ArrowPill label="Meet our people" href="/people" class="mt-8" />
+                </div>
+
+                <ul class="grid grid-cols-2 gap-4 sm:gap-6">
+                    {
+                        featuredPeople.map((person, i) => (
+                            <li class={i % 2 === 1 ? "sm:translate-y-10" : ""}>
+                                <a href={`/people/${person.id}/`} class="group glass-card glass-hover block !rounded-[1.75rem] p-2.5">
+                                    <div class="relative aspect-[4/5] overflow-hidden rounded-[1.35rem] bg-base-content/5">
+                                        <Image
+                                            src={person.data.photo ?? default_avatar}
+                                            alt={person.data.name}
+                                            width={480}
+                                            class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.05]"
+                                        />
+                                        <div class="person-tag">
+                                            <p class="truncate text-sm font-semibold text-base-content">
+                                                {person.data.name}
+                                            </p>
+                                            <p class="truncate text-xs text-base-content/60">
+                                                {person.data.post}
+                                            </p>
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
+                        ))
+                    }
+                </ul>
+
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ========================================================= -->
+    <!-- 5. PUBLICATIONS — tinted band -->
+    <!-- ========================================================= -->
+
+    {
+        latestPubs.length > 0 && (
+            <section class="home-section" aria-labelledby="pubs-title">
+                <div class="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+                    <div class="pubs-band">
+                        <div class="relative grid gap-10 lg:grid-cols-[0.75fr_1.25fr] lg:gap-14">
+
+                            <div class="flex flex-col">
+                                <p class="home-eyebrow eyebrow">
+                                    <span class="home-eyebrow-rule"></span>
+                                    Publications
+                                </p>
+                                <h2 id="pubs-title" class="mt-5 font-display text-4xl sm:text-5xl text-base-content">
+                                    Recent
+                                    <br />
+                                    <span class="text-gradient">publications.</span>
+                                </h2>
+
+                                <dl class="mt-8 grid grid-cols-2 gap-3 max-w-sm">
+                                    <div class="rounded-2xl bg-white/55 p-4 ring-1 ring-white/80 dark:bg-white/5 dark:ring-white/10">
+                                        <dt class="text-xs text-base-content/60">Publications</dt>
+                                        <dd class="mt-1 font-display text-3xl text-base-content tabular-nums">{allPubs.length}</dd>
+                                    </div>
+                                    <div class="rounded-2xl bg-white/55 p-4 ring-1 ring-white/80 dark:bg-white/5 dark:ring-white/10">
+                                        <dt class="text-xs text-base-content/60">Journal articles</dt>
+                                        <dd class="mt-1 font-display text-3xl text-base-content tabular-nums">{journalCount}</dd>
+                                    </div>
+                                </dl>
+
+                                <ArrowPill label="All publications" href="/publications" class="mt-8 self-start" />
                             </div>
 
-                            <div class="mt-2 text-sm text-slate-500 dark:text-slate-400">
-                                {s.label}
+                            <div class="grid gap-5 md:grid-cols-2">
+                                {latestPubs.map((pub) => (
+                                    <article class="glass-card glass-hover flex flex-col !rounded-[1.75rem] p-6">
+                                        <div class="flex items-center justify-between gap-3">
+                                            <span class="quote-mark" aria-hidden="true">“</span>
+                                            <span
+                                                class={`rounded-full px-2.5 py-1 text-xs font-semibold uppercase tracking-wider ${
+                                                    pub.data.type === "Journal"
+                                                        ? "bg-[#004AAD]/10 text-[#004AAD] dark:bg-[#5170FF]/15 dark:text-[#9fb0ff]"
+                                                        : "bg-[#7C0E24]/10 text-[#7C0E24] dark:bg-[#f3dfe4]/10 dark:text-[#f3dfe4]"
+                                                }`}
+                                            >
+                                                {pub.data.type}
+                                            </span>
+                                        </div>
+
+                                        <h3 class="mt-5 text-lg font-semibold leading-snug text-base-content">
+                                            <a href={pub.data.doi} target="_blank" rel="noopener noreferrer" class="transition-colors hover:text-[#004AAD] dark:hover:text-[#5170FF]">
+                                                {pub.data.paper_title}
+                                            </a>
+                                        </h3>
+                                        <p class="mt-2 text-sm italic text-base-content/70">{pub.data.venue.trim()}</p>
+
+                                        <div class="mt-auto pt-6">
+                                            <p class="line-clamp-2 text-xs leading-relaxed text-base-content/55">
+                                                {pub.data.authors.join(", ")}
+                                            </p>
+                                            <p class="mt-3 flex items-center justify-between text-xs text-base-content/55">
+                                                <span class="tabular-nums">
+                                                    {formatDate(pub.data.publication_date, { month: "short", year: "numeric" })}
+                                                </span>
+                                                <a href={pub.data.doi} target="_blank" rel="noopener noreferrer" class="font-semibold text-[#004AAD] hover:underline dark:text-[#5170FF]">
+                                                    Read paper ↗
+                                                </a>
+                                            </p>
+                                        </div>
+                                    </article>
+                                ))}
                             </div>
 
                         </div>
-                    ))
-                }
+                    </div>
+                </div>
+            </section>
+        )
+    }
 
+
+    <!-- ========================================================= -->
+    <!-- 6. LATEST NEWS — featured + list -->
+    <!-- ========================================================= -->
+
+    <section class="home-section" aria-labelledby="news-title">
+        <div class="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+
+            <div class="flex flex-wrap items-end justify-between gap-6">
+                <div>
+                    <p class="home-eyebrow eyebrow">
+                        <span class="home-eyebrow-rule"></span>
+                        Latest news
+                    </p>
+                    <h2 id="news-title" class="mt-5 font-display text-4xl sm:text-5xl text-base-content">
+                        Latest from MARC
+                    </h2>
+                </div>
+                <ArrowPill label="All news" href="/news" />
             </div>
 
-        </div>
+            <div class="mt-10 grid gap-6 lg:grid-cols-[1.15fr_0.85fr] lg:gap-8">
 
+                {
+                    featuredStory && (
+                        <a href={`/news/${featuredStory.id}`} class="group glass-card glass-hover flex flex-col !rounded-[2rem] p-3">
+                            <div class="aspect-[16/10] overflow-hidden rounded-[1.5rem] bg-base-content/5">
+                                {featuredStory.data.cover && (
+                                    <Image
+                                        src={featuredStory.data.cover}
+                                        alt={featuredStory.data.title}
+                                        width={900}
+                                        class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.04]"
+                                    />
+                                )}
+                            </div>
+                            <div class="px-3 pb-4 pt-5 sm:px-4">
+                                <p class="text-sm text-base-content/55 tabular-nums">{formatDate(featuredStory.data.date)}</p>
+                                <h3 class="mt-2 font-display text-2xl sm:text-3xl text-base-content transition-colors group-hover:text-[#004AAD] dark:group-hover:text-[#5170FF]">
+                                    {featuredStory.data.title}
+                                </h3>
+                                <p class="mt-3 line-clamp-3 leading-relaxed text-base-content/70">
+                                    {featuredStory.data.short}
+                                </p>
+                            </div>
+                        </a>
+                    )
+                }
+
+                <ul class="flex flex-col gap-4">
+                    {
+                        newsList.map((n) => (
+                            <li class="flex-1">
+                                <a
+                                    href={n.href}
+                                    {...(n.kind === "social" ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+                                    class="group glass-card glass-hover flex h-full items-center gap-4 !rounded-3xl p-3"
+                                >
+                                    <div class="h-24 w-28 shrink-0 overflow-hidden rounded-2xl bg-white/55 ring-1 ring-white/80 dark:bg-white/5 dark:ring-white/10">
+                                        {n.cover ? (
+                                            <Image
+                                                src={n.cover}
+                                                alt=""
+                                                width={240}
+                                                class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.05]"
+                                            />
+                                        ) : (
+                                            <div class="grid h-full w-full place-items-center text-center">
+                                                <div>
+                                                    <p class="font-display text-3xl leading-none text-[#004AAD] dark:text-[#5170FF] tabular-nums">
+                                                        {n.date.getUTCDate()}
+                                                    </p>
+                                                    <p class="mt-1 text-[0.65rem] font-semibold uppercase tracking-wider text-base-content/50">
+                                                        {formatDate(n.date, { month: "short", year: "numeric" })}
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        )}
+                                    </div>
+                                    <div class="min-w-0 pr-2">
+                                        <p class="text-xs text-base-content/55">
+                                            <span class="tabular-nums">{formatDate(n.date)}</span>
+                                            <span> · {n.source}</span>
+                                        </p>
+                                        <h3 class="mt-1.5 line-clamp-2 font-semibold leading-snug text-base-content transition-colors group-hover:text-[#004AAD] dark:group-hover:text-[#5170FF]">
+                                            {n.title}
+                                        </h3>
+                                        {n.short && (
+                                            <p class="mt-1.5 line-clamp-2 text-sm text-base-content/60">{n.short}</p>
+                                        )}
+                                    </div>
+                                </a>
+                            </li>
+                        ))
+                    }
+                </ul>
+
+            </div>
+        </div>
     </section>
 
 
     <!-- ========================================================= -->
-    <!-- RESEARCH PILLARS -->
+    <!-- 7. AT A GLANCE — stats strip -->
     <!-- ========================================================= -->
 
-    <div
-        class="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8"
-    >
-
-        <Section
-            eyebrow="Research"
-            title="Six pillars, one shared mission"
-            description="Our work spans foundational AI and applied research across critical domains where intelligence meets impact."
-            cta={{ href: "/Research", label: "All research areas" }}
-        >
-
-            <div
-                class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8"
-            >
-
+    <section class="home-section !pt-0" aria-label="MARC at a glance">
+        <div class="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <dl class="glass-card !rounded-[2rem] grid grid-cols-2 md:grid-cols-4">
                 {
-                    researchAreas.map((Area: any) => (
-                        <ResearchAreaCard
-                            Area={Area.frontmatter.title}
-                            ImageUrl={getResearchImage(
-                                Area.frontmatter.coverImage,
-                            )}
-                            PageLink={Area.url}
-                        >
-                            {Area.frontmatter.short}
-                        </ResearchAreaCard>
+                    stats.map((s, i) => (
+                        <div class={`flex flex-col-reverse px-6 py-7 sm:px-8 sm:py-9 ${i > 0 ? "md:border-l" : ""} ${i % 2 === 1 ? "border-l md:border-l" : ""} ${i > 1 ? "border-t md:border-t-0" : ""} border-base-content/10`}>
+                            <dt class="mt-2 text-sm text-base-content/60">{s.label}</dt>
+                            <dd class="font-display text-4xl sm:text-5xl tabular-nums text-gradient w-fit">{s.value}</dd>
+                        </div>
                     ))
                 }
-
-            </div>
-
-        </Section>
-
-
-        <!-- ========================================================= -->
-        <!-- LATEST NEWS -->
-        <!-- ========================================================= -->
-
-        <Section
-            eyebrow="Latest updates"
-            title="Latest News"
-            description="Discover the latest research, achievements, events and updates from MARC."
-            cta={{ href: "/news", label: "All news" }}
-        >
-
-            <div
-                class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
-            >
-
-                {
-                    latestNews.map((newsItem) => (
-                        <a
-                            href={`/news/${newsItem.id}`}
-                            class="group surface-hover flex flex-col rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 overflow-hidden h-full"
-                        >
-
-                            <div
-                                class="aspect-[4/3] overflow-hidden bg-slate-100 dark:bg-slate-800"
-                            >
-
-                                {newsItem.data.cover && (
-                                    <Image
-                                        src={newsItem.data.cover}
-                                        alt={newsItem.data.title}
-                                        class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-                                    />
-                                )}
-
-                            </div>
-
-
-                            <div
-                                class="p-5 flex flex-col flex-grow"
-                            >
-
-                                <p
-                                    class="text-xs text-slate-400 dark:text-slate-500 mb-2"
-                                >
-                                    {newsItem.data.date.toLocaleDateString(
-                                        "en-US",
-                                        {
-                                            year: "numeric",
-                                            month: "short",
-                                            day: "numeric",
-                                        },
-                                    )}
-                                </p>
-
-                                <h3
-                                    class="font-medium text-base leading-snug text-slate-900 dark:text-white group-hover:text-primary transition-colors mb-2"
-                                >
-                                    {newsItem.data.title}
-                                </h3>
-
-                                <p
-                                    class="text-sm text-slate-500 dark:text-slate-400 line-clamp-2 mt-auto"
-                                >
-                                    {newsItem.data.short}
-                                </p>
-
-                            </div>
-
-                        </a>
-                    ))
-                }
-
-            </div>
-
-        </Section>
-
-
-        <!-- ========================================================= -->
-        <!-- CTA -->
-        <!-- ========================================================= -->
-
-        <section class="pb-24 lg:pb-32">
-
-            <div
-                class="relative overflow-hidden rounded-3xl bg-[#0B0405] text-white p-10 md:p-16 dark:bg-slate-900"
-            >
-
-                <!-- subtle blue glow -->
-
-                <div
-                    class="cta-glow-blue absolute -top-20 -right-10 w-96 h-96"
-                ></div>
-
-                <!-- subtle purple glow -->
-
-                <div
-                    class="cta-glow-purple absolute -bottom-20 -left-10 w-96 h-96"
-                ></div>
-
-
-                <div
-                    class="relative grid md:grid-cols-3 gap-8 items-end"
-                >
-
-                    <div class="md:col-span-2">
-
-                        <p
-                            class="eyebrow text-[#5170FF] opacity-90 mb-4"
-                        >
-                            Get involved
-                        </p>
-
-                        <h2
-                            class="font-display text-4xl md:text-5xl leading-tight"
-                        >
-                            Collaborate, research, or join the team.
-                        </h2>
-
-                    </div>
-
-
-                    <div class="flex md:justify-end">
-
-                        <a
-                            href="/people"
-                            class="inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-white text-slate-950 text-sm font-medium hover:scale-105 transition"
-                        >
-
-                            Meet our people
-
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                class="w-4 h-4"
-                                fill="none"
-                                viewBox="0 0 24 24"
-                                stroke="currentColor"
-                                stroke-width="2"
-                            >
-                                <path
-                                    stroke-linecap="round"
-                                    stroke-linejoin="round"
-                                    d="M5 12h14M13 5l7 7-7 7"
-                                ></path>
-                            </svg>
-
-                        </a>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </section>
-
-    </div>
+            </dl>
+        </div>
+    </section>
 
 </BaseLayout>
+
+<style>
+    .home-section {
+        padding-block: 4.5rem;
+    }
+    @media (min-width: 1024px) {
+        .home-section {
+            padding-block: 6rem;
+        }
+    }
+
+    .home-eyebrow {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        opacity: 1;
+        color: #004aad;
+    }
+    :global(html[data-theme="marc-dark"]) .home-eyebrow {
+        color: #5170ff;
+    }
+    .home-eyebrow-rule {
+        display: inline-block;
+        width: 2rem;
+        height: 2px;
+        border-radius: 999px;
+        background: currentColor;
+    }
+
+    /* ---- Two pathways ---- */
+    .pathway {
+        position: relative;
+        display: block;
+        padding: 2.25rem;
+        transition: background-color 0.3s ease;
+    }
+    @media (min-width: 1024px) {
+        .pathway {
+            padding: 3rem 3.25rem;
+        }
+    }
+    .pathway-blue {
+        background:
+            radial-gradient(120% 120% at 0% 0%, rgba(81, 112, 255, 0.16), transparent 60%);
+    }
+    .pathway-rose {
+        background:
+            radial-gradient(120% 120% at 100% 0%, rgba(214, 120, 150, 0.14), transparent 60%);
+        border-top: 1px solid rgba(255, 255, 255, 0.7);
+    }
+    @media (min-width: 768px) {
+        .pathway-rose {
+            border-top: 0;
+            border-left: 1px solid rgba(255, 255, 255, 0.7);
+        }
+    }
+    .pathway:hover {
+        background-color: rgba(255, 255, 255, 0.35);
+    }
+    :global(html[data-theme="marc-dark"]) .pathway-rose {
+        border-color: rgba(255, 255, 255, 0.1);
+    }
+    :global(html[data-theme="marc-dark"]) .pathway:hover {
+        background-color: rgba(255, 255, 255, 0.04);
+    }
+
+    /* ---- Carousel ---- */
+    .carousel-track {
+        display: flex;
+        gap: 1.5rem;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        scroll-padding-inline: 0;
+        padding: 0.5rem 0.25rem 1.5rem;
+        margin-inline: -0.25rem;
+        margin-bottom: -1.5rem;
+        scrollbar-width: none;
+    }
+    .carousel-track::-webkit-scrollbar {
+        display: none;
+    }
+    .carousel-item {
+        flex: 0 0 85%;
+        scroll-snap-align: start;
+    }
+    @media (min-width: 640px) {
+        .carousel-item {
+            flex-basis: calc((100% - 1.5rem) / 2);
+        }
+    }
+    @media (min-width: 1024px) {
+        .carousel-item {
+            flex-basis: calc((100% - 3rem) / 3);
+        }
+    }
+
+    .carousel-btn {
+        display: grid;
+        place-items: center;
+        width: 2.75rem;
+        height: 2.75rem;
+        border-radius: 999px;
+        color: var(--color-base-content);
+        background: rgba(255, 255, 255, 0.6);
+        border: 1px solid rgba(255, 255, 255, 0.85);
+        box-shadow: 0 10px 30px -16px rgba(70, 90, 180, 0.5);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        transition: background-color 0.2s ease, opacity 0.2s ease, color 0.2s ease;
+    }
+    .carousel-btn:hover:not(:disabled) {
+        background: #fff;
+        color: #004aad;
+    }
+    .carousel-btn:disabled {
+        opacity: 0.4;
+        cursor: default;
+    }
+    .carousel-btn:focus-visible {
+        outline: 2px solid #5170ff;
+        outline-offset: 2px;
+    }
+    :global(html[data-theme="marc-dark"]) .carousel-btn {
+        background: rgba(255, 255, 255, 0.06);
+        border-color: rgba(255, 255, 255, 0.12);
+    }
+
+    /* ---- People name tag ---- */
+    .person-tag {
+        position: absolute;
+        left: 0.6rem;
+        right: 0.6rem;
+        bottom: 0.6rem;
+        padding: 0.6rem 0.85rem;
+        border-radius: 1rem;
+        background: rgba(255, 255, 255, 0.72);
+        border: 1px solid rgba(255, 255, 255, 0.85);
+        backdrop-filter: blur(14px);
+        -webkit-backdrop-filter: blur(14px);
+        box-shadow: 0 10px 30px -18px rgba(40, 50, 100, 0.6);
+    }
+    :global(html[data-theme="marc-dark"]) .person-tag {
+        background: rgba(15, 20, 35, 0.65);
+        border-color: rgba(255, 255, 255, 0.12);
+    }
+
+    /* ---- Publications band ---- */
+    .pubs-band {
+        position: relative;
+        overflow: hidden;
+        border-radius: 2.25rem;
+        padding: 2.25rem 1.5rem;
+        background:
+            radial-gradient(60% 80% at 0% 0%, rgba(81, 112, 255, 0.22), transparent 65%),
+            radial-gradient(50% 70% at 100% 100%, rgba(214, 120, 150, 0.18), transparent 65%),
+            linear-gradient(135deg, rgba(236, 240, 255, 0.75), rgba(255, 255, 255, 0.45));
+        border: 1px solid rgba(255, 255, 255, 0.85);
+        box-shadow:
+            inset 0 1px 0 rgba(255, 255, 255, 0.9),
+            0 30px 80px -40px rgba(60, 80, 170, 0.45);
+        backdrop-filter: blur(18px);
+        -webkit-backdrop-filter: blur(18px);
+    }
+    @media (min-width: 1024px) {
+        .pubs-band {
+            padding: 3.5rem;
+        }
+    }
+    :global(html[data-theme="marc-dark"]) .pubs-band {
+        background:
+            radial-gradient(60% 80% at 0% 0%, rgba(81, 112, 255, 0.18), transparent 65%),
+            radial-gradient(50% 70% at 100% 100%, rgba(214, 120, 150, 0.12), transparent 65%),
+            rgba(15, 20, 35, 0.6);
+        border-color: rgba(255, 255, 255, 0.1);
+    }
+
+    .quote-mark {
+        display: grid;
+        place-items: center;
+        width: 2.5rem;
+        height: 2.5rem;
+        border-radius: 999px;
+        font-family: "Instrument Serif", Georgia, serif;
+        font-size: 2.6rem;
+        line-height: 1;
+        padding-top: 1.1rem;
+        color: #fff;
+        background: linear-gradient(135deg, #3f6bf5, #7a84f0 60%, #c86a86);
+        box-shadow: 0 10px 24px -12px rgba(63, 107, 245, 0.7);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        .carousel-track {
+            scroll-behavior: auto;
+        }
+    }
+</style>
+
+<script>
+    // Prev/next buttons for the projects carousel (native scroll-snap does the rest)
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    document.querySelectorAll<HTMLElement>("[data-carousel]").forEach((track) => {
+        const name = track.dataset.carousel;
+        const controls = document.querySelector<HTMLElement>(`[data-carousel-controls="${name}"]`);
+        if (!controls) return;
+        const buttons = controls.querySelectorAll<HTMLButtonElement>("button[data-dir]");
+
+        const update = () => {
+            const max = track.scrollWidth - track.clientWidth - 2;
+            const scrollable = max > 0;
+            controls.hidden = !scrollable;
+            buttons.forEach((btn) => {
+                const dir = Number(btn.dataset.dir);
+                btn.disabled = dir < 0 ? track.scrollLeft <= 2 : track.scrollLeft >= max;
+            });
+        };
+
+        buttons.forEach((btn) =>
+            btn.addEventListener("click", () => {
+                const item = track.querySelector<HTMLElement>(".carousel-item");
+                const step = item ? item.offsetWidth + 24 : track.clientWidth * 0.8;
+                track.scrollBy({
+                    left: Number(btn.dataset.dir) * step,
+                    behavior: reduceMotion ? "auto" : "smooth",
+                });
+            }),
+        );
+
+        track.addEventListener("scroll", update, { passive: true });
+        window.addEventListener("resize", update);
+        update();
+    });
+</script>
