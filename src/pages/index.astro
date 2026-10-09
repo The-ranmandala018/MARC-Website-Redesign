@@ -74,7 +74,7 @@ const stats = [
                     </defs>
 
                     <!-- Left hand: wrist, palm, and five clearly defined fingers -->
-                    <g class="dotted-hand">
+                    <g class="dotted-hand" transform="translate(0 0) scale(.78 1)">
                         <path d="M-45 470 L160 420
                             C235 398 296 368 354 338
                             L431 296
@@ -99,7 +99,7 @@ const stats = [
                     </g>
 
                     <!-- Right hand mirrored inward, with fingertips nearly touching -->
-                    <g class="dotted-hand">
+                    <g class="dotted-hand" transform="translate(264 0) scale(.78 1)">
                         <path d="M1245 470 L1040 420
                             C965 398 904 368 846 338
                             L769 296
@@ -558,11 +558,11 @@ const stats = [
     .hero-hands-art {
         position: absolute;
         z-index: 10;
-        inset: 12% 0 8%;
+        inset: 17% 0 3%;
         width: 100%;
-        height: 80%;
+        height: 76%;
         pointer-events: none;
-        opacity: .58;
+        opacity: .48;
         overflow: hidden;
     }
 
