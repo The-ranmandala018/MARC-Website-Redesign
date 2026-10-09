@@ -1,0 +1,91 @@
+---
+/**
+ * HeroTextOrbs
+ * A few small decorative satellite spheres scattered near the hero
+ * headline/text column, matching the glassy-sphere style of
+ * HeroOrbVisual so the left and right sides of the hero feel balanced.
+ * Pure CSS, no JS. Scoped to the hero only.
+ */
+---
+
+<div class="text-orbs" aria-hidden="true">
+    <span class="torb t1"></span>
+    <span class="torb t2"></span>
+    <span class="torb t3"></span>
+    <span class="torb t4"></span>
+</div>
+
+<style>
+    .text-orbs {
+        position: absolute;
+        inset: 0;
+        z-index: 0;
+        pointer-events: none;
+    }
+
+    .torb {
+        position: absolute;
+        border-radius: 50%;
+        background: radial-gradient(circle at 32% 28%, #fff, #7f93f6 70%, #6a6ef0);
+        box-shadow: 0 8px 18px -8px rgba(70, 90, 220, 0.9);
+        animation: torb-bob 8s ease-in-out infinite;
+    }
+
+    .t1 {
+        width: 22px;
+        height: 22px;
+        left: -8%;
+        top: 4%;
+        animation-delay: -1s;
+    }
+
+    .t2 {
+        width: 12px;
+        height: 12px;
+        left: 6%;
+        top: -6%;
+        opacity: 0.8;
+        animation-delay: -4s;
+    }
+
+    .t3 {
+        width: 38px;
+        height: 38px;
+        left: -4%;
+        bottom: 10%;
+        background: radial-gradient(circle at 30% 26%, #fff 0%, #e4d9ff 38%, #b8a6f2 72%, #f3b6cd 100%);
+        box-shadow: inset -6px -8px 16px rgba(120, 110, 200, 0.22);
+        animation-delay: -2.5s;
+    }
+
+    .t4 {
+        width: 9px;
+        height: 9px;
+        left: 36%;
+        bottom: -5%;
+        opacity: 0.75;
+        animation-delay: -6s;
+    }
+
+    @keyframes torb-bob {
+        0%,
+        100% {
+            transform: translateY(0);
+        }
+        50% {
+            transform: translateY(-10px);
+        }
+    }
+
+    @media (max-width: 1040px) {
+        .text-orbs {
+            display: none;
+        }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        .torb {
+            animation: none;
+        }
+    }
+</style>
