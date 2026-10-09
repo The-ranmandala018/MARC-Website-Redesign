@@ -534,6 +534,7 @@ const stats = [
 
 <script>
     import * as THREE from "three";
+    import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
 
     const canvas = document.querySelector<HTMLCanvasElement>("#marc-hands-canvas");
 
@@ -715,6 +716,59 @@ const stats = [
             leaf.rotation.z = (i % 2 ? -1 : 1) * 0.65;
             leaves.push(leaf);
         }
+
+
+        // Load a real rigged, textured human hand model (CC0) and reuse its mesh
+        // for the metallic AI hand. Keep the procedural version as a fallback.
+        const handLoader = new GLTFLoader();
+        const realHands = new THREE.Group();
+        realHands.visible = false;
+        art.add(realHands);
+
+        handLoader.load(
+            "https://www.innerscene.com/api/library/posable-anatomical-right-hand-f6098b4f/download",
+            (gltf) => {
+                const sourceHand = gltf.scene;
+                sourceHand.scale.setScalar(7.2);
+                sourceHand.rotation.set(0, Math.PI, -Math.PI / 2);
+                sourceHand.position.set(-1.15, 0.05, 0.25);
+                sourceHand.traverse((object) => {
+                    if (object instanceof THREE.Mesh) {
+                        object.castShadow = false;
+                        object.receiveShadow = false;
+                    }
+                });
+
+                const roboticHand = sourceHand.clone(true);
+                roboticHand.scale.setScalar(7.2);
+                roboticHand.position.set(1.15, 0.05, 0.15);
+                roboticHand.rotation.set(0, 0, Math.PI / 2);
+                roboticHand.traverse((object) => {
+                    if (object instanceof THREE.Mesh) {
+                        const original = object.material;
+                        const metalFinish = new THREE.MeshStandardMaterial({
+                            color: 0xb9cbd5,
+                            metalness: 0.92,
+                            roughness: 0.2,
+                            emissive: 0x062638,
+                            emissiveIntensity: 0.22,
+                        });
+                        object.material = Array.isArray(original)
+                            ? original.map(() => metalFinish)
+                            : metalFinish;
+                    }
+                });
+
+                realHands.add(sourceHand, roboticHand);
+                human.visible = false;
+                robot.visible = false;
+                realHands.visible = true;
+            },
+            undefined,
+            (error) => {
+                console.warn("Real hand model could not load; using local 3D fallback.", error);
+            },
+        );
 
         const fallback = document.querySelector<HTMLElement>(".hands-animation-fallback");
         if (fallback) fallback.style.display = "none";
