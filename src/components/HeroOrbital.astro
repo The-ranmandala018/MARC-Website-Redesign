@@ -1,0 +1,393 @@
+---
+---
+
+<div class="marc-background" aria-hidden="true">
+  <canvas id="marc-canvas"></canvas>
+  <div class="ambient ambient-blue"></div>
+  <div class="ambient ambient-purple"></div>
+  <div class="ambient ambient-pink"></div>
+  <div class="dot-pattern"></div>
+</div>
+
+<style>
+  .marc-background {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    z-index: 0;
+    pointer-events: none;
+    background:
+      radial-gradient(ellipse at 48% 35%,
+        rgba(255, 255, 255, 0.98) 0%,
+        rgba(247, 250, 255, 0.95) 48%,
+        rgba(224, 232, 255, 0.8) 100%);
+  }
+
+  #marc-canvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+
+  .ambient {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(55px);
+    opacity: 0.6;
+  }
+
+  .ambient-blue {
+    width: 340px;
+    height: 340px;
+    background: #80b8ff;
+    top: 18%;
+    right: 12%;
+  }
+
+  .ambient-purple {
+    width: 280px;
+    height: 280px;
+    background: #c6a8ff;
+    top: 55%;
+    right: 28%;
+  }
+
+  .ambient-pink {
+    width: 260px;
+    height: 260px;
+    background: #ffb8dc;
+    bottom: 8%;
+    right: -3%;
+  }
+
+  .dot-pattern {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 240px;
+    height: 220px;
+    opacity: 0.35;
+    background-image: radial-gradient(
+      #9bbaff 1.5px,
+      transparent 1.5px
+    );
+    background-size: 17px 17px;
+    mask-image: linear-gradient(
+      45deg,
+      black,
+      transparent 85%
+    );
+  }
+</style>
+
+<script>
+  import * as THREE from 'three';
+
+  const canvas = document.querySelector(
+    '#marc-canvas'
+  ) as HTMLCanvasElement;
+
+  const host = canvas.parentElement!;
+
+  const scene = new THREE.Scene();
+
+  const camera = new THREE.PerspectiveCamera(
+    45,
+    host.clientWidth / host.clientHeight,
+    0.1,
+    100
+  );
+
+  camera.position.z = 12;
+
+  const renderer = new THREE.WebGLRenderer({
+    canvas,
+    alpha: true,
+    antialias: true
+  });
+
+  renderer.setPixelRatio(
+    Math.min(window.devicePixelRatio, 2)
+  );
+
+  renderer.setSize(
+    host.clientWidth,
+    host.clientHeight
+  );
+
+  renderer.outputColorSpace = THREE.SRGBColorSpace;
+
+  const sphereGeometry = new THREE.SphereGeometry(
+    1,
+    64,
+    64
+  );
+
+  const spheres: {
+    mesh: THREE.Mesh;
+    speed: number;
+    phase: number;
+    baseY: number;
+  }[] = [];
+
+  function createSphere(
+    x: number,
+    y: number,
+    size: number,
+    speed: number,
+    colorA: string,
+    colorB: string
+  ) {
+    const material = new THREE.ShaderMaterial({
+      transparent: true,
+      depthWrite: false,
+      uniforms: {
+        colorA: {
+          value: new THREE.Color(colorA)
+        },
+        colorB: {
+          value: new THREE.Color(colorB)
+        },
+        time: { value: 0 }
+      },
+      vertexShader: `
+        varying vec3 vNormal;
+        varying vec3 vPosition;
+
+        void main() {
+          vNormal = normalize(normal);
+          vPosition = position;
+
+          gl_Position =
+            projectionMatrix *
+            modelViewMatrix *
+            vec4(position, 1.0);
+        }
+      `,
+      fragmentShader: `
+        uniform vec3 colorA;
+        uniform vec3 colorB;
+        uniform float time;
+
+        varying vec3 vNormal;
+        varying vec3 vPosition;
+
+        void main() {
+          float gradient = smoothstep(
+            -0.9,
+            0.9,
+            vNormal.y * 0.7 +
+            vNormal.x * 0.5
+          );
+
+          vec3 color = mix(
+            colorA,
+            colorB,
+            gradient
+          );
+
+          float light = max(
+            dot(
+              normalize(vNormal),
+              normalize(vec3(-0.5, 0.7, 1.0))
+            ),
+            0.0
+          );
+
+          color *= 0.72 + light * 0.45;
+
+          float fresnel = pow(
+            1.0 - abs(vNormal.z),
+            3.0
+          );
+
+          color += vec3(0.35, 0.55, 1.0)
+            * fresnel * 0.35;
+
+          gl_FragColor = vec4(
+            color,
+            0.9
+          );
+        }
+      `
+    });
+
+    const mesh = new THREE.Mesh(
+      sphereGeometry,
+      material
+    );
+
+    mesh.position.set(x, y, 0);
+    mesh.scale.setScalar(size);
+
+    scene.add(mesh);
+
+    spheres.push({
+      mesh,
+      speed,
+      phase: Math.random() * Math.PI * 2,
+      baseY: y
+    });
+
+    return mesh;
+  }
+
+  // Main glassy blue-purple-pink sphere
+  createSphere(
+    2.2, -0.2, 1.65, 0.16,
+    '#2678ff', '#f3a4e7'
+  );
+
+  // Floating decorative spheres
+  createSphere(
+    -5.6, 2.0, 1.05, 0.12,
+    '#6bbaff', '#b3a0ff'
+  );
+
+  createSphere(
+    5.3, 3.2, 1.4, 0.10,
+    '#b4a1ff', '#79b8ff'
+  );
+
+  createSphere(
+    5.8, -2.8, 0.9, 0.14,
+    '#ffb3ce', '#8db7ff'
+  );
+
+  createSphere(
+    -5.0, -2.6, 1.15, 0.11,
+    '#83baff', '#e3a9f5'
+  );
+
+  createSphere(
+    0.0, 2.4, 0.48, 0.20,
+    '#d4d8ff', '#94baff'
+  );
+
+  createSphere(
+    3.8, 1.2, 0.23, 0.22,
+    '#8dd9ff', '#b59bff'
+  );
+
+  // Orbital rings around the main sphere
+  const orbitGroup = new THREE.Group();
+  orbitGroup.position.set(2.2, -0.2, 0);
+
+  function createOrbit(
+    radiusX: number,
+    radiusY: number,
+    rotation: number
+  ) {
+    const points: THREE.Vector3[] = [];
+
+    for (let i = 0; i <= 240; i++) {
+      const angle = (i / 240) * Math.PI * 2;
+
+      points.push(
+        new THREE.Vector3(
+          Math.cos(angle) * radiusX,
+          Math.sin(angle) * radiusY,
+          0
+        )
+      );
+    }
+
+    const geometry =
+      new THREE.BufferGeometry().setFromPoints(points);
+
+    const material = new THREE.LineBasicMaterial({
+      color: '#829dff',
+      transparent: true,
+      opacity: 0.48
+    });
+
+    const orbit = new THREE.Line(
+      geometry,
+      material
+    );
+
+    orbit.rotation.z = rotation;
+    orbit.rotation.x = -0.15;
+
+    orbitGroup.add(orbit);
+  }
+
+  createOrbit(2.5, 0.85, -0.45);
+  createOrbit(2.9, 1.15, 0.35);
+  createOrbit(3.3, 1.45, -0.1);
+
+  scene.add(orbitGroup);
+
+  // Small orbiting particles
+  const particles: THREE.Mesh[] = [];
+
+  for (let i = 0; i < 18; i++) {
+    const particle = new THREE.Mesh(
+      new THREE.SphereGeometry(0.025, 12, 12),
+      new THREE.MeshBasicMaterial({
+        color: '#729aff',
+        transparent: true,
+        opacity: 0.8
+      })
+    );
+
+    scene.add(particle);
+    particles.push(particle);
+  }
+
+  const clock = new THREE.Clock();
+
+  function animate() {
+    requestAnimationFrame(animate);
+
+    const time = clock.getElapsedTime();
+
+    spheres.forEach((sphere) => {
+      sphere.mesh.position.y =
+        sphere.baseY +
+        Math.sin(time * sphere.speed + sphere.phase)
+          * 0.12;
+
+      sphere.mesh.rotation.y = time * 0.08;
+
+      const material =
+        sphere.mesh.material as THREE.ShaderMaterial;
+
+      material.uniforms.time.value = time;
+    });
+
+    orbitGroup.rotation.z = Math.sin(time * 0.12) * 0.04;
+
+    particles.forEach((particle, index) => {
+      const angle =
+        time * 0.18 + (index / particles.length) *
+        Math.PI * 2;
+
+      const radius = 2.7 + (index % 4) * 0.15;
+
+      particle.position.set(
+        2.2 + Math.cos(angle) * radius,
+        -0.2 + Math.sin(angle) * radius * 0.48,
+        0.15
+      );
+    });
+
+    renderer.render(scene, camera);
+  }
+
+  animate();
+
+  const resizeObserver = new ResizeObserver(() => {
+    const width = host.clientWidth;
+    const height = host.clientHeight;
+
+    camera.aspect = width / height;
+    camera.updateProjectionMatrix();
+
+    renderer.setSize(width, height);
+  });
+
+  resizeObserver.observe(host);
+</script>
