@@ -64,7 +64,7 @@ const isActive = (href: string) => {
                  ===================================================== -->
 
             <nav
-                class="relative z-20 hidden lg:flex items-center gap-1.5 shrink-0"
+                class="relative z-20 hidden lg:flex items-center gap-2 shrink-0"
             >
                 {
                     links.map((link) => (
@@ -73,29 +73,32 @@ const isActive = (href: string) => {
                             class={`
                                 relative
                                 isolate
-                                px-3.5
-                                py-2
+                                px-4
+                                py-2.5
+                                min-h-11
                                 rounded-full
-                                text-[12px]
-                                font-medium
+                                text-sm
+                                font-semibold
                                 transition-all
                                 duration-300
                                 overflow-hidden
                                 border
-                                border-white/70
-                                bg-gradient-to-b from-white/75 via-blue-100/55 to-rose-100/45
+                                border-[#D8DFEC]
+                                bg-gradient-to-b from-white/95 via-[#EDF2FA]/95 to-[#F7EDEF]/90
+                                dark:border-white/15
+                                dark:from-[#25232B]/95 dark:via-[#1B2940]/95 dark:to-[#35232B]/95
                                 backdrop-blur-xl
-                                shadow-[inset_0_1px_2px_rgba(255,255,255,0.98),inset_0_-2px_8px_rgba(99,102,241,0.08),0_4px_14px_rgba(0,74,173,0.08)]
+                                shadow-[inset_0_1px_2px_rgba(255,255,255,0.95),inset_0_-2px_8px_rgba(99,102,241,0.10),0_5px_16px_rgba(0,74,173,0.12)]
                                 hover:-translate-y-0.5
                                 hover:shadow-[inset_0_1px_2px_rgba(255,255,255,1),inset_0_-2px_12px_rgba(99,102,241,0.12),0_8px_22px_rgba(59,130,246,0.14)]
                                 ${
                                      isActive(link.href)
-                                        ? "!text-slate-950 ring-1 ring-[#5170FF]/45"
-                                        : "!text-slate-700"
+                                        ? "!text-[#172A46] dark:!text-[#FFFFFF] ring-1 ring-[#5170FF]/55"
+                                        : "!text-[#34445D] dark:!text-[#F2F4FA]"
                                 }
                             `}
                         >
-                            <span class="pointer-events-none absolute inset-0 rounded-full bg-gradient-to-r from-white/60 via-transparent to-white/45 opacity-80"></span>
+                            <span class="pointer-events-none absolute inset-0 rounded-full bg-gradient-to-r from-white/75 via-transparent to-white/55 opacity-90 dark:from-white/10 dark:to-white/5"></span>
                             <span class="relative z-10">{link.label}</span>
 
                             {
@@ -125,7 +128,7 @@ const isActive = (href: string) => {
                     ></span>
 
                     <span
-                        class="text-xs font-medium text-base-content/70"
+                        class="text-sm font-semibold text-[#34445D] dark:text-[#F2F4FA]"
                     >
                         AI Research
                     </span>
