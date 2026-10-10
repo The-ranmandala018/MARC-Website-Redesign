@@ -1,9 +1,9 @@
 ---
 /**
  * HeroMiniOrbs
- * Smaller copies of the main hero orb (same blue → violet → pink body,
- * dotted shading and specular highlight), placed around the hero at
- * different sizes. Pure CSS, no JS. Scoped to the hero only.
+ * Smaller copies of the main hero orb, distributed as quiet accents around
+ * the hero so they frame the content instead of competing with the main orb.
+ * Pure CSS, no JS. Scoped to the hero only.
  */
 ---
 
@@ -31,13 +31,12 @@
             radial-gradient(circle at 20% 80%, rgba(140, 180, 255, 0.8) 0%, rgba(140, 180, 255, 0) 50%),
             linear-gradient(145deg, #9fc0ff 0%, #6a8af5 40%, #7a84f0 68%, #e69aa8 100%);
         box-shadow:
-            0 30px 60px -28px rgba(80, 90, 220, 0.55),
-            inset -12px -16px 32px rgba(90, 80, 200, 0.25),
-            inset 10px 12px 28px rgba(255, 255, 255, 0.45);
+            0 24px 48px -28px rgba(80, 90, 220, 0.45),
+            inset -10px -13px 26px rgba(90, 80, 200, 0.22),
+            inset 8px 10px 22px rgba(255, 255, 255, 0.4);
         animation: mini-bob 10s ease-in-out infinite;
     }
 
-    /* dotted shading */
     .mini::after {
         content: "";
         position: absolute;
@@ -48,10 +47,9 @@
         mix-blend-mode: overlay;
         -webkit-mask-image: radial-gradient(circle at 72% 60%, #000 0%, transparent 72%);
         mask-image: radial-gradient(circle at 72% 60%, #000 0%, transparent 72%);
-        opacity: 0.7;
+        opacity: 0.65;
     }
 
-    /* specular highlight */
     .mini::before {
         content: "";
         position: absolute;
@@ -64,61 +62,52 @@
         filter: blur(4px);
     }
 
-    /* top-left — largest */
+    /* Upper-left accent: smaller so it doesn't outweigh the main orb. */
     .m1 {
-        width: 140px;
-        height: 140px;
-        left: calc(7% - 70px);
-        top: calc(14% - 70px);
+        width: 112px;
+        height: 112px;
+        left: calc(7% - 56px);
+        top: calc(17% - 56px);
         animation-delay: -2s;
     }
 
-    /* bottom, centre-left */
+    /* Low, inner accent: shifted away from the centre of the headline. */
     .m2 {
-        width: 72px;
-        height: 72px;
-        left: calc(40% - 36px);
-        top: calc(90% - 36px);
+        width: 58px;
+        height: 58px;
+        left: calc(39% - 29px);
+        top: calc(92% - 29px);
         animation-delay: -5s;
     }
 
-    /* bottom-left */
+    /* Lower-left accent: reduced to keep the left edge quieter. */
     .m3 {
-        width: 96px;
-        height: 96px;
-        left: calc(5% - 48px);
-        top: calc(78% - 48px);
+        width: 78px;
+        height: 78px;
+        left: calc(5% - 39px);
+        top: calc(80% - 39px);
         animation-delay: -7s;
     }
 
-    /* bottom-right corner — smallest */
+    /* Small lower-right counterweight. */
     .m4 {
-        width: 58px;
-        height: 58px;
-        left: calc(96% - 29px);
-        top: calc(95% - 29px);
+        width: 46px;
+        height: 46px;
+        left: calc(94% - 23px);
+        top: calc(91% - 23px);
         animation-delay: -3.5s;
     }
 
     @keyframes mini-bob {
-        0%,
-        100% {
-            transform: translateY(0);
-        }
-        50% {
-            transform: translateY(-12px);
-        }
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-9px); }
     }
 
     @media (max-width: 1023px) {
-        .mini-orbs {
-            display: none;
-        }
+        .mini-orbs { display: none; }
     }
 
     @media (prefers-reduced-motion: reduce) {
-        .mini {
-            animation: none;
-        }
+        .mini { animation: none; }
     }
 </style>
