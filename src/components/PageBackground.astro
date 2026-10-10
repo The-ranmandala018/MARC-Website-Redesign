@@ -1,15 +1,20 @@
 ---
 /**
  * PageBackground
- * The homepage hero's soft gradient-blob background (HeroBlobs), fixed
- * behind the content of every other page so the whole site shares the
- * same theme. Content scrolls over it. Rendered from BaseLayout on all
- * pages except the homepage, whose hero already has its own copy.
+ * Reuses the homepage HeroBlobs component. The default instance remains
+ * unchanged for the homepage; innerPage enables the fixed shared backdrop
+ * for every inner page without duplicating blob markup or styles.
  */
 import HeroBlobs from "./HeroBlobs.astro";
+
+interface Props {
+    innerPage?: boolean;
+}
+
+const { innerPage = false } = Astro.props;
 ---
 
-<div class="page-bg" aria-hidden="true">
+<div class:list={["page-bg", { "page-bg-inner": innerPage }]} aria-hidden="true">
     <HeroBlobs />
 </div>
 
@@ -22,8 +27,25 @@ import HeroBlobs from "./HeroBlobs.astro";
         pointer-events: none;
     }
 
-    /* keep it subtle behind dark-theme content */
+    /* Preserve the existing homepage instance; apply the shared warm base only to inner pages. */
+    .page-bg-inner {
+        background-color: #FAF8F3;
+    }
+
+    /* Keep the background subtle behind dark-theme content. */
     :global(html[data-theme="marc-dark"]) .page-bg {
+        opacity: 0.3;
+    }
+
+    /* Keep the same composition on mobile while reducing its visual weight. */
+    @media (max-width: 640px) {
+        .page-bg-inner {
+            opacity: 0.85;
+        }
+    }
+
+    /* Dark mode takes precedence over the mobile opacity adjustment. */
+    :global(html[data-theme="marc-dark"]) .page-bg-inner {
         opacity: 0.3;
     }
 </style>
