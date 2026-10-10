@@ -1,0 +1,176 @@
+---
+/**
+ * PageBackgroundImproved
+ * A refined background for non-hero pages. Instead of the HeroBlobs,
+ * this uses a subtle gradient + soft glow + abstract floating elements.
+ *
+ * Design: light cream/white base with soft blue glow, subtle geometric hints
+ */
+---
+
+<div class="page-bg-improved" aria-hidden="true">
+    <!-- Soft gradient base -->
+    <div class="bg-base"></div>
+
+    <!-- Central glow (subtle MARC brand color) -->
+    <div class="glow-center"></div>
+
+    <!-- Floating abstract elements -->
+    <div class="element e1"></div>
+    <div class="element e2"></div>
+    <div class="element e3"></div>
+
+    <!-- Subtle grain overlay -->
+    <div class="grain"></div>
+</div>
+
+<style>
+    .page-bg-improved {
+        position: fixed;
+        inset: 0;
+        z-index: -1;
+        overflow: hidden;
+        pointer-events: none;
+    }
+
+    .bg-base {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+            135deg,
+            #faf8f3 0%,
+            #f5f3f0 40%,
+            #f0f0f8 100%
+        );
+    }
+
+    /* Soft central glow */
+    .glow-center {
+        position: absolute;
+        width: 1200px;
+        height: 1200px;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: radial-gradient(
+            circle,
+            rgba(95, 123, 242, 0.08) 0%,
+            rgba(95, 123, 242, 0.04) 30%,
+            transparent 70%
+        );
+        border-radius: 50%;
+        pointer-events: none;
+    }
+
+    /* Floating abstract elements */
+    .element {
+        position: absolute;
+        border-radius: 50%;
+        will-change: transform;
+    }
+
+    .e1 {
+        width: 280px;
+        height: 280px;
+        top: 8%;
+        right: 5%;
+        background: radial-gradient(
+            circle at 30% 30%,
+            rgba(212, 230, 255, 0.4),
+            rgba(172, 194, 255, 0.15),
+            transparent 70%
+        );
+        filter: blur(40px);
+        animation: float-slow 15s ease-in-out infinite;
+    }
+
+    .e2 {
+        width: 350px;
+        height: 350px;
+        bottom: 10%;
+        left: 8%;
+        background: radial-gradient(
+            circle at 40% 35%,
+            rgba(217, 169, 211, 0.25),
+            rgba(191, 169, 241, 0.1),
+            transparent 70%
+        );
+        filter: blur(45px);
+        animation: float-slow 18s ease-in-out infinite reverse;
+    }
+
+    .e3 {
+        width: 220px;
+        height: 220px;
+        top: 60%;
+        left: 75%;
+        background: radial-gradient(
+            circle at 35% 32%,
+            rgba(143, 168, 248, 0.3),
+            rgba(127, 142, 238, 0.1),
+            transparent 70%
+        );
+        filter: blur(35px);
+        animation: float-slow 20s ease-in-out infinite;
+    }
+
+    /* Subtle grain */
+    .grain {
+        position: absolute;
+        inset: 0;
+        opacity: 0.08;
+        mix-blend-mode: overlay;
+        background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/></filter><rect width='160' height='160' filter='url(%23n)' opacity='0.5'/></svg>");
+    }
+
+    @keyframes float-slow {
+        0%,
+        100% {
+            transform: translate3d(0, 0, 0);
+        }
+        50% {
+            transform: translate3d(24px, 18px, 0);
+        }
+    }
+
+    /* Darker mode adjustment */
+    :global(html[data-theme="marc-dark"]) .page-bg-improved {
+        opacity: 0.5;
+    }
+
+    :global(html[data-theme="marc-dark"]) .bg-base {
+        background: linear-gradient(
+            135deg,
+            #1a1a24 0%,
+            #0f1419 40%,
+            #1a1a2e 100%
+        );
+    }
+
+    @media (max-width: 640px) {
+        .element {
+            filter: blur(50px) !important;
+        }
+
+        .e1 {
+            width: 200px;
+            height: 200px;
+        }
+
+        .e2 {
+            width: 250px;
+            height: 250px;
+        }
+
+        .e3 {
+            width: 150px;
+            height: 150px;
+        }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        .element {
+            animation: none;
+        }
+    }
+</style>
