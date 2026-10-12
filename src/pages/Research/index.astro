@@ -294,9 +294,29 @@ const otherProjects = projects.filter((p) => !areaTitles.has(norm(p.data.researc
     }
 
         .research-area-card:hover {
-        transform: translateY(-3px);
+        transform: translateY(-8px) scale(1.012);
         border-color: rgba(255, 255, 255, 0.5);
-        box-shadow: 0 25px 55px -30px rgba(15, 23, 42, 0.55);
+        box-shadow: 0 30px 60px -28px rgba(15, 23, 42, 0.58);
+    }
+
+    /* Gentle floating motion keeps the cards lively without distracting from content. */
+    @keyframes research-card-float {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-7px); }
+    }
+
+    .research-card-track:not(:hover):not(:focus-within) .research-area-card {
+        animation:
+            research-card-enter 650ms cubic-bezier(0.2, 0.75, 0.25, 1) both,
+            research-card-float 5s ease-in-out infinite;
+        animation-delay:
+            calc(var(--card-index, 0) * 70ms),
+            calc(var(--card-index, 0) * -420ms);
+    }
+
+    .research-card-track:hover .research-area-card,
+    .research-card-track:focus-within .research-area-card {
+        animation-play-state: paused;
     }
 
     .research-card-link {
