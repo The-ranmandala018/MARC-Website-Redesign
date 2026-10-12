@@ -278,20 +278,26 @@ const isActive = (href: string) => {
         }
     }
 
+    @property --marc-beam-angle {
+        syntax: "<angle>";
+        inherits: false;
+        initial-value: 0deg;
+    }
+
     .marc-nav-tab-active::after {
         content: "";
         position: absolute;
-        inset: -1px;
+        inset: -1.5px;
         border-radius: inherit;
         padding: 1.5px;
         background: conic-gradient(
-            from 0deg,
-            transparent 0deg 320deg,
-            #004AAD 330deg,
-            #5170FF 340deg,
-            #9BACF4 348deg,
-            #D9A9D3 355deg,
-            #7C0E24 359deg,
+            from var(--marc-beam-angle),
+            transparent 0deg 315deg,
+            #004AAD 327deg,
+            #5170FF 338deg,
+            #9BACF4 347deg,
+            #D9A9D3 354deg,
+            #7C0E24 358deg,
             transparent 360deg
         );
         -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
@@ -301,12 +307,11 @@ const isActive = (href: string) => {
         pointer-events: none;
         opacity: 1;
         z-index: 1;
-        animation: marc-border-beam 2.4s linear infinite;
+        animation: marc-beam-orbit 2.2s linear infinite;
     }
 
-    @keyframes marc-border-beam {
-        from { transform: rotate(0deg); }
-        to { transform: rotate(360deg); }
+    @keyframes marc-beam-orbit {
+        to { --marc-beam-angle: 360deg; }
     }
 
     :global(html[data-theme="marc-dark"]) .marc-nav-rail {
