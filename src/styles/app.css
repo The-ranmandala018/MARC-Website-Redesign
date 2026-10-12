@@ -533,3 +533,42 @@ html[data-theme="marc-dark"] .marc-search-wrap input[type="search"] {
     background: rgba(20, 31, 57, 0.78);
 }
 
+/* Enforce the MARC search treatment after page-level styles. */
+body label.research-search,
+body label.marc-search-wrap {
+    box-sizing: border-box;
+    border: 1.5px solid transparent !important;
+    background:
+        linear-gradient(rgba(255, 255, 255, 0.96), rgba(247, 249, 255, 0.92)) padding-box,
+        linear-gradient(100deg, #004AAD 0%, #5170FF 38%, #9BACF4 65%, #7C0E24 100%) border-box !important;
+    box-shadow: 0 5px 18px rgba(0, 74, 173, 0.14), inset 0 1px 0 rgba(255, 255, 255, 0.95) !important;
+    transition: box-shadow 220ms ease, transform 220ms ease !important;
+}
+
+body label.research-search:focus-within,
+body label.marc-search-wrap:focus-within {
+    box-shadow: 0 8px 24px rgba(0, 74, 173, 0.24), 0 0 18px rgba(81, 112, 255, 0.24) !important;
+    transform: translateY(-1px);
+}
+
+body label.research-search input[type="search"],
+body label.marc-search-wrap input[type="search"] {
+    border: 0 !important;
+    outline: none !important;
+    box-shadow: none !important;
+    background: transparent !important;
+}
+
+html[data-theme="marc-dark"] body label.research-search,
+html[data-theme="marc-dark"] body label.marc-search-wrap {
+    background:
+        linear-gradient(rgba(20, 31, 57, 0.96), rgba(26, 28, 48, 0.94)) padding-box,
+        linear-gradient(100deg, #5170FF 0%, #9BACF4 45%, #7C0E24 100%) border-box !important;
+    box-shadow: 0 5px 18px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.08) !important;
+}
+
+html[data-theme="marc-dark"] body label.research-search:focus-within,
+html[data-theme="marc-dark"] body label.marc-search-wrap:focus-within {
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4), 0 0 18px rgba(81, 112, 255, 0.28) !important;
+}
+
