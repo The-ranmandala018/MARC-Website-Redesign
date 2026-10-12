@@ -72,7 +72,9 @@ const isActive = (href: string) => {
                             href={link.href}
                             class={`
                                 relative
-                                isolate
+                                inline-flex
+                                items-center
+                                justify-center
                                 px-4
                                 py-2.5
                                 min-h-11
@@ -81,29 +83,16 @@ const isActive = (href: string) => {
                                 font-semibold
                                 transition-all
                                 duration-300
-                                overflow-hidden
-                                border
-                                border-[#D8DFEC]
-                                bg-gradient-to-b from-white/95 via-[#EDF2FA]/95 to-[#F7EDEF]/90
-                                dark:border-white/15
-                                dark:from-[#25232B]/95 dark:via-[#1B2940]/95 dark:to-[#35232B]/95
-                                backdrop-blur-xl
-                                shadow-[inset_0_1px_2px_rgba(255,255,255,0.95),inset_0_-2px_8px_rgba(99,102,241,0.10),0_5px_16px_rgba(0,74,173,0.12)]
-                                hover:-translate-y-0.5
-                                hover:shadow-[inset_0_1px_2px_rgba(255,255,255,1),inset_0_-2px_12px_rgba(99,102,241,0.12),0_8px_22px_rgba(59,130,246,0.14)]
-                                ${
-                                     isActive(link.href)
-                                        ? "!text-[#172A46] dark:!text-[#FFFFFF] ring-1 ring-[#5170FF]/55"
-                                        : "!text-[#34445D] dark:!text-[#F2F4FA]"
-                                }
+                                ${isActive(link.href)
+                                    ? "text-[#004AAD] dark:text-[#9CB5FF] drop-shadow-[0_0_10px_rgba(81,112,255,0.22)]"
+                                    : "text-[#34445D] dark:text-[#F2F4FA] hover:text-[#004AAD] dark:hover:text-[#9CB5FF]"}
                             `}
                         >
-                            <span class="pointer-events-none absolute inset-0 rounded-full bg-gradient-to-r from-white/75 via-transparent to-white/55 opacity-90 dark:from-white/10 dark:to-white/5"></span>
                             <span class="relative z-10">{link.label}</span>
 
                             {
                                 isActive(link.href) && (
-                                    <span class="absolute inset-x-4 bottom-1 h-0.5 rounded-full bg-gradient-to-r from-[#004AAD] via-[#5170FF] to-[#7C0E24] opacity-80"></span>
+                                    <span class="absolute inset-x-4 bottom-0.5 h-0.5 rounded-full bg-gradient-to-r from-[#004AAD] via-[#5170FF] to-[#7C0E24]"></span>
                                 )
                             }
                         </a>
