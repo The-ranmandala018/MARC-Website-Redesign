@@ -96,7 +96,7 @@ const otherProjects = projects.filter((p) => !areaTitles.has(norm(p.data.researc
 
         <div class="research-card-track" id="research-card-track">
             {areas.map((a) => (
-                <article id={a.id} data-search-text={`${a.title} ${a.short} ${a.projects.map((p) => p.data.project).join(" ")}`} class="research-area-card group scroll-mt-28">
+                <article id={a.id} data-search-text={`${a.title} ${a.short} ${a.projects.map((p) => JSON.stringify(p.data)).join(" ")}`} class="research-area-card group scroll-mt-28">
                     <a href={a.url} class="research-card-link" aria-label={`Explore ${a.title}`}>
                         {a.image && (
                             <Image
@@ -134,6 +134,7 @@ const otherProjects = projects.filter((p) => !areaTitles.has(norm(p.data.researc
         const clearButton = document.querySelector<HTMLButtonElement>("#research-search-clear");
         const searchStatus = document.querySelector<HTMLElement>("#research-search-status");
         const researchCards = Array.from(document.querySelectorAll<HTMLElement>(".research-area-card"));
+        const standaloneProjectCards = Array.from(document.querySelectorAll<HTMLElement>("[data-project-search-card]"));
 
         const applyResearchSearch = () => {
             const query = (searchInput?.value ?? "").trim().toLocaleLowerCase();
@@ -145,10 +146,17 @@ const otherProjects = projects.filter((p) => !areaTitles.has(norm(p.data.researc
                 if (matches) visibleCount += 1;
             });
             if (clearButton) clearButton.hidden = !query;
+            let visibleProjectCount = 0;
+            standaloneProjectCards.forEach((card) => {
+                const searchableText = (card.dataset.searchText ?? card.innerText).toLocaleLowerCase();
+                const matches = !query || searchableText.includes(query);
+                card.hidden = !matches;
+                if (matches) visibleProjectCount += 1;
+            });
             if (searchStatus) {
                 searchStatus.textContent = query
-                    ? `Showing ${visibleCount} of ${researchCards.length} research areas`
-                    : `Showing all ${researchCards.length} research areas`;
+                    ? `Matching ${visibleCount} research areas and ${visibleProjectCount} other projects`
+                    : `Showing all ${researchCards.length} research areas and ${standaloneProjectCards.length} other projects`;
             }
             if (track) track.scrollTo({ left: 0, behavior: "smooth" });
         };
@@ -178,7 +186,7 @@ const otherProjects = projects.filter((p) => !areaTitles.has(norm(p.data.researc
                 <h2 class="mb-6 font-display text-3xl sm:text-4xl text-base-content">Other projects</h2>
                 <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
                     {otherProjects.map((p) => (
-                        <a href={`/projects/${p.id}`} class="group glass-card glass-hover flex items-center gap-4 p-3">
+                        <a href={`/projects/${p.id}`} data-project-search-card data-search-text={JSON.stringify(p.data)} class="group glass-card glass-hover flex items-center gap-4 p-3">
                             <div class="h-16 w-20 shrink-0 overflow-hidden rounded-xl bg-base-content/5">
                                 {p.data.coverImage && (
                                     <Image src={p.data.coverImage} alt="" width={160} class="h-full w-full object-cover" />
