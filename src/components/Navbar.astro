@@ -280,18 +280,19 @@ const isActive = (href: string) => {
     .marc-nav-tab-active::after {
         content: "";
         position: absolute;
-        inset: -2px;
+        inset: -3px;
         border-radius: inherit;
-        padding: 2px;
+        padding: 3px;
         background: conic-gradient(
             from 0deg,
             transparent 0deg,
-            transparent 35deg,
-            #004AAD 75deg,
-            #5170FF 135deg,
-            #D9A9D3 190deg,
-            #7C0E24 235deg,
-            transparent 285deg,
+            transparent 22deg,
+            #004AAD 55deg,
+            #5170FF 115deg,
+            #9BACF4 165deg,
+            #D9A9D3 215deg,
+            #7C0E24 260deg,
+            transparent 300deg,
             transparent 360deg
         );
         -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
@@ -300,13 +301,13 @@ const isActive = (href: string) => {
         pointer-events: none;
         opacity: 1;
         z-index: 1;
-        animation: marc-border-rotate 2.8s linear infinite;
+        will-change: transform;
+        animation: marc-border-rotate 2.2s linear infinite;
     }
 
     @keyframes marc-border-rotate {
-        to {
-            transform: rotate(360deg);
-        }
+        from { transform: rotate(0deg); }
+        to { transform: rotate(360deg); }
     }
 
     :global(html[data-theme="marc-dark"]) .marc-nav-rail {
