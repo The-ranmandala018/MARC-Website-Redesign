@@ -194,7 +194,7 @@ export default function PublicationsList({ publications }: Props) {
 
                             <div class="space-y-4">
                                 {groupedPubs[Number(year)].map((pub) => (
-                                    <article class="glass-card glass-hover !rounded-3xl p-5 sm:p-6">
+                                    <article class="glass-card pub-item glass-hover !rounded-3xl p-5 sm:p-6">
                                         <div class="flex flex-col gap-4 md:flex-row md:items-start md:justify-between">
                                             <div class="min-w-0 flex-1">
                                                 <div class="flex flex-wrap items-center gap-2 text-xs">

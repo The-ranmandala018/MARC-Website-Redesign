@@ -264,6 +264,13 @@ html[data-theme="marc-dark"] .glass {
             0 40px 70px -40px rgba(70, 90, 180, 0.65);
     }
 
+    /* Publication list: many cards on one page, so skip the costly blur on each one */
+    .pub-item,
+    .pub-item .glass-chip {
+        backdrop-filter: none;
+        -webkit-backdrop-filter: none;
+    }
+
     /* Small pill: chips, tags, filters */
     .glass-chip {
         display: inline-flex;

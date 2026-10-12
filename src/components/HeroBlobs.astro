@@ -226,4 +226,25 @@
             animation: none;
         }
     }
+
+    /* Pause the blob drift while the user scrolls; it resumes where it stopped */
+    .is-scrolling .blob {
+        animation-play-state: paused;
+    }
 </style>
+
+<script>
+    // Mark the page while scrolling so the CSS above can pause the blobs.
+    const root = document.documentElement;
+    let scrollTimer: number | undefined;
+
+    window.addEventListener(
+        "scroll",
+        () => {
+            root.classList.add("is-scrolling");
+            window.clearTimeout(scrollTimer);
+            scrollTimer = window.setTimeout(() => root.classList.remove("is-scrolling"), 150);
+        },
+        { passive: true }
+    );
+</script>
