@@ -357,65 +357,6 @@ html[data-theme="marc-dark"] .glass {
     transform: translateY(-1px);
 }
 
-/* MARC animated outline + soft glow for site-wide buttons.
-   This draws on top of the existing surface without changing its
-   background, dimensions, or border radius. */
-:is(button, .btn, [role="button"], a[class~="button"]):not(.marc-nav-tab):not(.marc-nav-rail) {
-    position: relative;
-    isolation: isolate;
-}
-
-:is(button, .btn, [role="button"], a[class~="button"]):not(.marc-nav-tab):not(.marc-nav-rail)::after {
-    content: "";
-    position: absolute;
-    inset: -1.5px;
-    z-index: 2;
-    padding: 1.5px;
-    border-radius: inherit;
-    background: linear-gradient(
-        100deg,
-        transparent 0%,
-        transparent 22%,
-        #004AAD 34%,
-        #5170FF 45%,
-        #9BACF4 54%,
-        #7C0E24 63%,
-        transparent 72%,
-        transparent 100%
-    );
-    background-size: 220% 100%;
-    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-    -webkit-mask-composite: xor;
-    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-    mask-composite: exclude;
-    pointer-events: none;
-    opacity: 0.7;
-    animation: marc-button-outline-flow 5s linear infinite;
-}
-
-:is(button, .btn, [role="button"], a[class~="button"]):not(.marc-nav-tab):not(.marc-nav-rail) {
-    box-shadow:
-        0 0 0 1px rgba(81, 112, 255, 0.08),
-        0 0 10px rgba(0, 74, 173, 0.10);
-    transition: box-shadow 0.25s ease, transform 0.25s ease;
-}
-
-:is(button, .btn, [role="button"], a[class~="button"]):not(.marc-nav-tab):not(.marc-nav-rail):hover {
-    box-shadow:
-        0 0 0 1px rgba(81, 112, 255, 0.14),
-        0 0 12px rgba(0, 74, 173, 0.18),
-        0 0 18px rgba(81, 112, 255, 0.12);
-}
-
-html[data-theme="marc-dark"] :is(button, .btn, [role="button"], a[class~="button"]):not(.marc-nav-tab):not(.marc-nav-rail)::after {
-    opacity: 0.8;
-}
-
-@keyframes marc-button-outline-flow {
-    from { background-position: 100% 0; }
-    to { background-position: -120% 0; }
-}
-
 /* =========================================================
    SECTION DIVIDER
    ========================================================= */
