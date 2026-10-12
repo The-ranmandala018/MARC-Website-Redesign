@@ -1,45 +1,1552 @@
 [
   {
-    "paper_title":"Hyperspectral unmixing with spatial context and endmember ensemble learning with attention mechanism",
-    "venue":"ISPRS Open Journal of Photogrammetry and Remote Sensing",
-    "type":"Journal",
-    "doi":"https:\/\/doi.org\/10.1016\/j.ophoto.2025.100086",
-    "publication_date":"2024-12-05",
-    "authors":[
-      "R.M.K.L. Ratnayake",
-      "D.M.U.P. Sumanasekara",
-      "H.M.K.D. Wickramathilaka",
-      "G.M.R.I. Godaliyadda",
-      "H.M.V.R. Herath",
-      "M.P.B. Ekanayake"
+    "paper_title": "Correlation Analysis of Age Structure Metrics and Cause-Specific Mortality: A Global and WHO Regional Comparison using the Top 5 Causes of Death in 2021",
+    "venue": "1st International Conference on Applied Sciences 2025",
+    "type": "Conference",
+    "doi": "https://scholar.google.com/scholar?q=Correlation%20Analysis%20of%20Age%20Structure%20Metrics%20and%20Cause-Specific%20Mortality%3A%20A%20Global%20and%20WHO%20Regional%20Comparison%20using%20the%20Top%205%20Causes%20of%20Death%20in%202021",
+    "publication_date": "2025-01-01",
+    "authors": [
+      "L Edirisinghe",
+      "B Wijenayake",
+      "A Ratnayake",
+      "T Fonseka",
+      "R Godalliyadda",
+      "S Dharmaratne",
+      "P Ekanayake",
+      "V Herath"
     ],
-    "people":[
-      "roshang@eng.pdn.ac.lk",
-      "dmu.praveen@gmail.com"
-    ],
-    "project":"Hyperspectral Unmixing",
-    "id":1
+    "people": [],
+    "project": "Demographics",
+    "id": "0cec42f354d7"
   },
   {
-    "paper_title":"Comparison of Appliance Signature Classification Methods for Non-Intrusive Load Monitoring",
-    "venue":" 2024 4th International Conference on Electrical Engineering (EECon)",
-    "type":"Conference",
-    "doi":"https:\/\/doi.org\/10.1109\/EECon64470.2024.10841878",
-    "publication_date":"2025-12-18",
-    "authors":[
+    "paper_title": "PoPStat-COVID19: Leveraging Population Pyramids to Quantify Demographic Vulnerability to COVID-19",
+    "venue": "International Conference on Advances in ICT for Emerging Regions 2025",
+    "type": "Conference",
+    "doi": "https://doi.org/10.48550/arXiv.2509.14213",
+    "publication_date": "2025-01-01",
+    "authors": [
+      "Buddhi Wijenayake",
+      "Athulya Ratnayake",
+      "Lelumi Edirisinghe",
+      "Uditha Wijeratne",
+      "Tharaka Fonseka",
+      "Roshan Godaliyadda",
+      "Samath Dharmaratne",
+      "Parakrama Ekanayake",
+      "Vijitha Herath",
+      "Insoha Alwis",
+      "Supun Manathunga"
+    ],
+    "people": [],
+    "project": "Demographics",
+    "id": "431fcf6c8205"
+  },
+  {
+    "paper_title": "Devising PoPStat: A Metric Bridging Population Pyramids with Global Disease Mortality",
+    "venue": "",
+    "type": "Journal",
+    "doi": "https://doi.org/10.48550/arXiv.2501.11514",
+    "publication_date": "2025-01-01",
+    "authors": [
+      "Tharaka Fonseka",
+      "Buddhi Wijenayake",
+      "Athulya Ratnayake",
+      "Inosha Alwis",
+      "Supun Manathunga",
+      "Roshan Godaliyadda",
+      "Samath Dharmarathne",
+      "Vijitha Herath",
+      "Parakrama Ekanayake",
+      "Isuru Pamuditha"
+    ],
+    "people": [],
+    "project": "Demographics",
+    "id": "17e081a2c456"
+  },
+  {
+    "paper_title": "PoPStat Versus Conventional Population Metrics: A Multi-Indicator Statistical Benchmark of Demographic Structure and Disease-Specific Mortality",
+    "venue": "8th IEEE International Conference on Advancements in Computing 2026",
+    "type": "Conference",
+    "doi": "https://scholar.google.com/scholar?q=PoPStat%20Versus%20Conventional%20Population%20Metrics%3A%20A%20Multi-Indicator%20Statistical%20Benchmark%20of%20Demographic%20Structure%20and%20Disease-Specific%20Mortality",
+    "publication_date": "2026-01-01",
+    "authors": [
+      "S.P. Malliyawadu",
+      "H.H.M.A.H.B. Thilakarathna",
+      "R.M.A.M.B. Ratanayake",
+      "G.M.R.I. Godaliyadda",
+      "M.P.B. Ekanayake",
+      "S.D. Dharmarathne"
+    ],
+    "people": [],
+    "project": "Demographics",
+    "id": "e28ce8797533"
+  },
+  {
+    "paper_title": "Unsupervised learning reveals global demographic configurations and national trajectories from population pyramids",
+    "venue": "Humanities and Social Sciences Communications",
+    "type": "Journal",
+    "doi": "https://scholar.google.com/scholar?q=Unsupervised%20learning%20reveals%20global%20demographic%20configurations%20and%20national%20trajectories%20from%20population%20pyramids",
+    "publication_date": "2026-01-01",
+    "authors": [
+      "Athulya Ratnayake",
+      "Lelumi Edirisnghe",
+      "Thisumi Wijesinghe",
+      "Roshan Godaliyadda",
+      "Parakrama Ekanayake",
+      "Vijitha Herath",
+      "Samath Dharmaratne"
+    ],
+    "people": [],
+    "project": "Demographics",
+    "id": "2de9c9ef7c7c"
+  },
+  {
+    "paper_title": "Family income does not necessarily lead to a holistic e-learning experience during COVID-19: a study in Sri Lanka",
+    "venue": "Nature Humanities and Social Sciences Communications",
+    "type": "Journal",
+    "doi": "https://doi.org/10.1057/s41599-024-04099-7",
+    "publication_date": "2024-01-01",
+    "authors": [
+      "Neranjan Senarath",
+      "Wathsala Dedunupitiya",
+      "Gayanthi Ilangarathna",
+      "Isuru Thilakasiri",
+      "Bhagya Samarakoon",
+      "Lakshitha Ramanayake",
+      "Roshan Godaliyadda",
+      "Parakrama Ekanayake",
+      "Vijitha Herath",
+      "Mallika Pinnawala",
+      "Sakunthala Yatigammana",
+      "Janaka Ekanayake",
+      "Samath Dharmarathne",
+      "Ganga Tilakaratne"
+    ],
+    "people": [],
+    "project": "Demographics",
+    "id": "a86cbd297e56"
+  },
+  {
+    "paper_title": "The Influence of Social Interactions in Mitigating Psychological Distress During the COVID-19 Pandemic: A Study in Sri Lanka",
+    "venue": "Frontiers in Psychology",
+    "type": "Journal",
+    "doi": "https://doi.org/10.3389/fpsyg.2024.1491805",
+    "publication_date": "2025-01-01",
+    "authors": [
+      "Isuru Thilakasiri",
+      "Tharaka Fonseka",
+      "Isuri Mapa",
+      "Roshan Godaliyadda",
+      "Vijitha Herath",
+      "Ramila Thowfeek",
+      "Anuruddhika Rathnayake",
+      "Parakrama Ekanayake",
+      "Janaka Ekanayake"
+    ],
+    "people": [],
+    "project": "Demographics",
+    "id": "b8cf07941a54"
+  },
+  {
+    "paper_title": "Structural Divides Shape the Nonlinear Nature of Human Mobility in COVID-19",
+    "venue": "Nature Humanities and Social Sciences Communications",
+    "type": "Journal",
+    "doi": "https://doi.org/10.21203/rs.3.rs-8482833/v1",
+    "publication_date": "2026-01-01",
+    "authors": [
+      "Madhumini Kulathunge",
+      "Lelumi Edirisinghe",
+      "Isuri Mapa",
+      "Roshan Godaliyadda",
+      "Parakrama Ekanayake",
+      "Niranjan Karnik",
+      "Samath Dharmaratne",
+      "Vijitha Herath",
+      "Janaka Ekanayake"
+    ],
+    "people": [],
+    "project": "Demographics",
+    "id": "7ca6371f2f19"
+  },
+  {
+    "paper_title": "A subspace signature based approach for residential appliances identification using less informative and low resolution smart meter data",
+    "venue": "2014 9th International Conference on Industrial and Information Systems (ICIIS)",
+    "type": "Conference",
+    "doi": "https://doi.org/10.1109/ICIINFS.2014.7036616",
+    "publication_date": "2014-01-01",
+    "authors": [
+      "H. G. C. P. Dinesh",
+      "D. B. W. Nettasinghe",
+      "G. M. R. I. Godaliyadda",
+      "M. P. B. Ekanayake",
+      "J. V. Wijayakulasooriya",
+      "J. B. Ekanayake"
+    ],
+    "people": [],
+    "project": "NILM",
+    "id": "162c15ea6cb6"
+  },
+  {
+    "paper_title": "Individual power profile estimation of residential appliances using low frequency smart meter data",
+    "venue": "2015 IEEE 10th International Conference on Industrial and Information Systems (ICIIS)",
+    "type": "Conference",
+    "doi": "https://doi.org/10.1109/ICIINFS.2015.7436254",
+    "publication_date": "2015-01-01",
+    "authors": [
+      "H. G. C. P. Dinesh",
+      "P. H. Perera",
+      "G. M. R. I. Godaliyadda",
+      "M. P. B. Ekanayake",
+      "J. B. Ekanayake"
+    ],
+    "people": [],
+    "project": "NILM",
+    "id": "4585fa5318dc"
+  },
+  {
+    "paper_title": "Residential appliance monitoring based on low frequency smart meter measurements",
+    "venue": "2015 IEEE 10th International Conference on Industrial and Information Systems (ICIIS)",
+    "type": "Conference",
+    "doi": "https://doi.org/10.1109/ICIINFS.2015.7436302",
+    "publication_date": "2015-01-01",
+    "authors": [
+      "H. G. C. P. Dinesh",
+      "P. H. Perera",
+      "G. M. R. I. Godaliyadda",
+      "M. P. B. Ekanayake",
+      "J. B. Ekanayake"
+    ],
+    "people": [],
+    "project": "NILM",
+    "id": "6a293a34adbf"
+  },
+  {
+    "paper_title": "Residential Appliance Identification Based on Spectral Information of Low Frequency Smart Meter Measurements",
+    "venue": "IEEE Transactions on Smart Grid",
+    "type": "Journal",
+    "doi": "https://doi.org/10.1109/TSG.2015.2488738",
+    "publication_date": "2015-01-01",
+    "authors": [
+      "C. Dinesh",
+      "B. W. Nettasinghe",
+      "R. I. Godaliyadda",
+      "M. P. B. Ekanayake",
+      "J. V. Wijayakulasooriya",
+      "J. B. Ekanayake"
+    ],
+    "people": [],
+    "project": "NILM",
+    "id": "3cae2c8598be"
+  },
+  {
+    "paper_title": "Non-intrusive load monitoring based on low frequency active power measurements",
+    "venue": "AIMS Energy",
+    "type": "Journal",
+    "doi": "https://doi.org/10.3934/energy.2016.3.414",
+    "publication_date": "2016-01-01",
+    "authors": [
+      "C. Dinesh",
+      "P. H. Perera",
+      "G. M. R. I. Godaliyadda",
+      "M. P. B. Ekanayake",
+      "J. B. Ekanayake"
+    ],
+    "people": [],
+    "project": "NILM",
+    "id": "eabec472b567"
+  },
+  {
+    "paper_title": "Robust Non-Intrusive Load Monitoring (NILM) with unknown loads",
+    "venue": "2016 IEEE International Conference on Information and Automation for Sustainability (ICIAfS)",
+    "type": "Conference",
+    "doi": "https://doi.org/10.1109/ICIAFS.2016.7946535",
+    "publication_date": "2016-01-01",
+    "authors": [
+      "S. Welikala",
+      "C. Dinesh",
+      "R. I. Godaliyadda",
+      "M. P. B. Ekanayake",
+      "J. B. Ekanayake"
+    ],
+    "people": [],
+    "project": "NILM",
+    "id": "668385b79d56"
+  },
+  {
+    "paper_title": "A real-time non-intrusive load monitoring system",
+    "venue": "2017 IEEE 12th International Conference on Industrial and Information Systems (ICIIS)",
+    "type": "Conference",
+    "doi": "https://doi.org/10.1109/ICIINFS.2017.8300344",
+    "publication_date": "2017-01-01",
+    "authors": [
+      "S. Welikala",
+      "C. Dinesh",
+      "M. P. B. Ekanayake",
+      "J. B. Ekanayake"
+    ],
+    "people": [],
+    "project": "NILM",
+    "id": "4779fec12d0c"
+  },
+  {
+    "paper_title": "Incorporating Appliance Usage Patterns for Non-Intrusive Load Monitoring and Load Forecasting",
+    "venue": "IEEE Transactions on Smart Grid",
+    "type": "Journal",
+    "doi": "https://doi.org/10.1109/TSG.2017.2754271",
+    "publication_date": "2017-01-01",
+    "authors": [
+      "S. Welikala",
+      "C. Dinesh",
+      "M. P. B. Ekanayake",
+      "J. B. Ekanayake"
+    ],
+    "people": [],
+    "project": "NILM",
+    "id": "64bd03859771"
+  },
+  {
+    "paper_title": "Real-time non-intrusive appliance load monitoring under supply voltage fluctuations",
+    "venue": "International Conference on Advances in ICT for Emerging Regions",
+    "type": "Conference",
+    "doi": "https://doi.org/10.1109/ICTER.2017.8257804",
+    "publication_date": "2017-01-01",
+    "authors": [
+      "Yasitha S. Liyanage",
+      "Shirantha Welikala",
+      "Chinthaka Dinesh",
+      "Mervyn Parakrama B. Ekanayake",
+      "Roshan Indika Godaliyadda",
+      "Janaka Ekanayake"
+    ],
+    "people": [],
+    "project": "NILM",
+    "id": "87768c586d00"
+  },
+  {
+    "paper_title": "Comparison of Appliance Signature Classification Methods for Non-Intrusive Load Monitoring",
+    "venue": "2024 4th International Conference on Electrical Engineering (EECon)",
+    "type": "Conference",
+    "doi": "https://doi.org/10.1109/EECon64470.2024.10841878",
+    "publication_date": "2024-01-01",
+    "authors": [
       "Keshawa Ratnayake",
       "Mahela Pandukabhaya",
       "Praveen Sumanasekara",
       "Uthpala Ratnayake",
       "Roshan Godaliyadda",
+      "Janaka Ekanayake",
+      "Parakrama Ekanayake",
+      "Vijitha Herath"
+    ],
+    "people": [],
+    "project": "NILM",
+    "id": "5ffab54c784f"
+  },
+  {
+    "paper_title": "Quality Assessment of Welding using Regression Analysis of Biomechanical Data",
+    "venue": "2024 Moratuwa Engineering Research Conference (MERCon)",
+    "type": "Conference",
+    "doi": "https://doi.org/10.1109/MERCon63886.2024.10689188",
+    "publication_date": "2024-01-01",
+    "authors": [
+      "Mahela Pandukabhaya",
+      "Tharaka Fonseka",
+      "Madhumini Kulathunge",
+      "Roshan Godaliyadda",
+      "Parakrama Ekanayake",
+      "Chanaka Senanayake",
+      "Pramila Gamage",
+      "Vijitha Herath"
+    ],
+    "people": [],
+    "project": "Biomechanics",
+    "id": "07db7ec5a36a"
+  },
+  {
+    "paper_title": "Performance Benchmarking of Psychomotor Skills Using Wearable Devices: An Application in Sport",
+    "venue": "IEEE Access",
+    "type": "Journal",
+    "doi": "https://doi.org/10.1109/ACCESS.2025.3536837",
+    "publication_date": "2025-01-01",
+    "authors": [
+      "Mahela Pandukabhaya",
+      "Tharaka Fonseka",
+      "Madhumini Kulathunge",
+      "Roshan Godaliyadda",
+      "Parakrama Ekanayake",
+      "Chanaka Senanayake",
+      "Vijitha Herath"
+    ],
+    "people": [],
+    "project": "Biomechanics",
+    "id": "4f83bb25d668"
+  },
+  {
+    "paper_title": "Estimation of Angle of Significance in Human Joint Angles Using Kalman Filter and Principal Component Analysis",
+    "venue": "2025 IEEE 19th International Conference on Industrial and Information Systems (ICIIS)",
+    "type": "Conference",
+    "doi": "https://doi.org/10.1109/ICIIS69028.2026.11450611",
+    "publication_date": "2025-01-01",
+    "authors": [
+      "Mahela Pandukabhaya",
+      "Nadeera Meghapathirana",
+      "Oshada Rathnayake",
+      "Roshan Godaliyadda",
+      "Parakrama Ekanayake",
+      "Vijitha Herath"
+    ],
+    "people": [],
+    "project": "Biomechanics",
+    "id": "3575b63d390b"
+  },
+  {
+    "paper_title": "A Wearable Inertial Sensing Platform for Personalized Health and Motion Monitoring",
+    "venue": "International Research Conference on Smart Computing and Systems Engineering 2026 (SCSE)",
+    "type": "Conference",
+    "doi": "https://scholar.google.com/scholar?q=A%20Wearable%20Inertial%20Sensing%20Platform%20for%20Personalized%20Health%20and%20Motion%20Monitoring",
+    "publication_date": "2026-01-01",
+    "authors": [
+      "Sachintha Adhikari",
+      "Praveen Rathnayaka",
+      "Sanjula Pathirana",
+      "Thevindu Dilmith Samarasekera",
+      "Roshan Godaliyadda",
+      "Parakrama Ekanayake",
+      "Chanaka Senanayake",
+      "Asela Ratnayake",
+      "Vijitha Herath"
+    ],
+    "people": [],
+    "project": "Gait and posture",
+    "id": "22eaf9650a59"
+  },
+  {
+    "paper_title": "Gait Coordination Analysis with Hilbert Transform Across Terrain Conditions Using IMU Wearable Technology",
+    "venue": "Moratuwa Engineering Research Conference 2026 (MERCon 2026)",
+    "type": "Conference",
+    "doi": "https://scholar.google.com/scholar?q=Gait%20Coordination%20Analysis%20with%20Hilbert%20Transform%20Across%20Terrain%20Conditions%20Using%20IMU%20Wearable%20Technology",
+    "publication_date": "2026-01-01",
+    "authors": [
+      "Madhumini Kulathunge",
+      "Tharinda Navarathne",
+      "Nadeera Meghapathirana",
+      "Muthuni De Alwis",
+      "A.M. Mohamed Rikas",
+      "Roshan Godaliyadda",
+      "Parakrama Ekanayake"
+    ],
+    "people": [],
+    "project": "Gait and posture",
+    "id": "4ba13191584f"
+  },
+  {
+    "paper_title": "SynIMU-Sport: Synchronized Multi-IMU Dataset for Joint-Angle Tracking in Sports Motion Analysis",
+    "venue": "IEEE DataPort",
+    "type": "Dataset",
+    "doi": "https://doi.org/10.21227/1mdb-ct53",
+    "publication_date": "2026-01-01",
+    "authors": [
+      "Thevindu Samarasekera",
+      "Praveen Rathnayaka",
+      "Sachintha Adhikari",
+      "Tharinda Navarathne",
+      "Mahela Pandukabhaya",
+      "Roshan Godaliyadda",
+      "Parakrama Ekanayake",
+      "Chanaka Senanayake",
+      "Vijitha Herath",
+      "Asela Ratnayake"
+    ],
+    "people": [],
+    "project": "Biomechanics",
+    "id": "2b43ce8af3fb"
+  },
+  {
+    "paper_title": "Denoising IMU Data Using EKF and UKF for Improved Joint Angle Estimation",
+    "venue": "International Conference on Advances in Technology and Computing 2024 (ICATC)",
+    "type": "Conference",
+    "doi": "https://doi.org/10.1109/ICATC64549.2024.11025235",
+    "publication_date": "2024-01-01",
+    "authors": [
+      "Nadeera Meghapathirana",
+      "Thisali S Rathnayake",
+      "Oshada Rathnayake",
+      "Sahan Wijethunga",
+      "Roshan Godaliyadda",
+      "Parakrama Ekanayake",
+      "Vijitha Herath"
+    ],
+    "people": [],
+    "project": "Biomechanics",
+    "id": "0d77f47d1ccf"
+  },
+  {
+    "paper_title": "A Synchronized Multi-IMU Wearable System for Tracking of Joint Angles in Sports Motion Analysis With Reference Based Validation and Dynamic Task Characterization",
+    "venue": "IEEE Transactions on Instrumentation and Measurement",
+    "type": "Journal",
+    "doi": "https://scholar.google.com/scholar?q=A%20Synchronized%20Multi-IMU%20Wearable%20System%20for%20Tracking%20of%20Joint%20Angles%20in%20Sports%20Motion%20Analysis%20With%20Reference%20Based%20Validation%20and%20Dynamic%20Task%20Characterization",
+    "publication_date": "2026-01-01",
+    "authors": [
+      "Thevindu Samarasekera",
+      "Praveen Rathnayaka",
+      "Sachintha Adhikari",
+      "Tharinda Navarathne",
+      "Mahela Pandukabhaya",
+      "Roshan Godaliyadda",
+      "Parakrama Ekanayake",
+      "Chanaka Senanayake",
+      "Vijitha Herath",
+      "Asela Rathnayake"
+    ],
+    "people": [],
+    "project": "Biomechanics",
+    "id": "c7aa6dd158de"
+  },
+  {
+    "paper_title": "Transfer-Entropy-Based Lower-Limb Joint Information Flow Under Different Terrain and Footwear Conditions",
+    "venue": "International Conference on Advances in ICT for Emerging Regions 2026 (ICTER)",
+    "type": "Conference",
+    "doi": "https://scholar.google.com/scholar?q=Transfer-Entropy-Based%20Lower-Limb%20Joint%20Information%20Flow%20Under%20Different%20Terrain%20and%20Footwear%20Conditions",
+    "publication_date": "2026-01-01",
+    "authors": [
+      "Tharinda Navarathne",
+      "Nadeera Meghapathirana",
+      "Madhumini Kulathunge",
+      "Roshan Godaliyadda",
+      "Parakrama Ekanayake",
+      "Vijitha Herath",
+      "Asanga Ratnaweera"
+    ],
+    "people": [],
+    "project": "Gait and posture",
+    "id": "e85d36aaaca8"
+  },
+  {
+    "paper_title": "Assessing the Impact of Shoe Parameters on Gait Using Wearable Sensors",
+    "venue": "Ceylon Journal",
+    "type": "Journal",
+    "doi": "https://scholar.google.com/scholar?q=Assessing%20the%20Impact%20of%20Shoe%20Parameters%20on%20Gait%20Using%20Wearable%20Sensors",
+    "publication_date": "2026-01-01",
+    "authors": [
+      "Nadeera Meghapathirana",
+      "Oshada Rathnayake",
+      "Thisali S Rathnayake",
+      "Roshan Godaliyadda",
+      "Parakrama Ekanayake",
+      "Vijitha Heratha"
+    ],
+    "people": [],
+    "project": "Gait and posture",
+    "id": "f10e446b8b5e"
+  },
+  {
+    "paper_title": "Pandemic Simulator: An Agent-Based Framework with Human Behavior Modeling for Pandemic-Impact Assessment to Build Sustainable Communities",
+    "venue": "MDPI Sustainability Volume 15 Issue 14 10.3390/su151411120",
+    "type": "Journal",
+    "doi": "https://doi.org/10.3390/su151411120",
+    "publication_date": "2023-01-01",
+    "authors": [
+      "Harshana Weligampola",
+      "Lakshitha Ramanayake",
+      "Yasiru Ranasinghe",
+      "Gayanthi Ilangarathna",
+      "Neranjan Senarath",
+      "Bhagya Samarakoon",
+      "Roshan Godaliyadda",
+      "Vijitha Herath",
+      "Parakrama Ekanayake",
+      "Janaka Ekanayake",
+      "Muthucumaru Maheswaran",
+      "Sandya Theminimulle",
+      "Anuruddhika Rathnayake",
+      "Samath Dharmaratne",
+      "Mallika Pinnawala",
+      "Sakunthala Yatigammana",
+      "Ganga Tilakaratne."
+    ],
+    "people": [],
+    "project": "ABM",
+    "id": "c801fb10f55e"
+  },
+  {
+    "paper_title": "Unveiling Motion Patterns Through Unsupervised Clustering",
+    "venue": "6th IEEE International Conference on Advancements in Computing 2026",
+    "type": "Conference",
+    "doi": "https://doi.org/10.1109/ICAC64487.2024.10851006",
+    "publication_date": "2026-01-01",
+    "authors": [
+      "Pandula Thennakoon",
+      "Ravindu Rodrigo",
+      "Kalana Jayasooriya",
+      "Thiksiga Ragulakaran",
+      "Roshan Godaliyadda",
+      "Vijitha Herath",
+      "Mervyn Parakrama Ekanayake",
       "Janaka Ekanayake"
     ],
-    "people":[
-      "dmu.praveen@gmail.com",
-      "e19328@eng.pdn.ac.lk",
-      "roshang@eng.pdn.ac.lk"
+    "people": [],
+    "project": "ABM",
+    "id": "0232bf95fbf0"
+  },
+  {
+    "paper_title": "Real World Data-Driven Agent-Based Modeling for Health Policy Insights During Epidemics",
+    "venue": "6th IEEE International Conference on Advancements in Computing 2026",
+    "type": "Conference",
+    "doi": "https://doi.org/10.1109/ICAC64487.2024.10851169",
+    "publication_date": "2026-01-01",
+    "authors": [
+      "Sashini Liyanage",
+      "Mahesha Viduranga",
+      "Mario De Silva",
+      "Roshan Godaliyadda",
+      "Mervyn Ekanayake",
+      "Vijitha Herath"
     ],
-    "project":"Implicit Neural Representation",
-    "id":2
+    "people": [],
+    "project": "ABM",
+    "id": "b4a47d23e47c"
+  },
+  {
+    "paper_title": "Quantitative assessment of adulteration of coconut oil using transmittance multispectral imaging",
+    "venue": "Journal of Food Science and Technology",
+    "type": "Journal",
+    "doi": "https://doi.org/10.1007/s13197-023-05697-0",
+    "publication_date": "2023-01-01",
+    "authors": [
+      "Sanjaya Herath",
+      "Hashan Kavinga Weerasooriya",
+      "Don Yasiru Lakshan Ranasinghe",
+      "Wele Gedara Chaminda Bandara",
+      "Vijitha Rohana Herath",
+      "Roshan Indika Godaliyadda",
+      "Mervyn Parakrama Bandara Ekanayake",
+      "Terrence Madhujith"
+    ],
+    "people": [],
+    "project": "Multispectral Imaging (MSI)",
+    "id": "71d2bbf8f827"
+  },
+  {
+    "paper_title": "Detection of fungal growth on food material using spectral imaging",
+    "venue": "12th Annual conference and scientific sessions 2023",
+    "type": "Conference",
+    "doi": "https://doi.org/10.4038/sljid.v13i5.8629",
+    "publication_date": "2023-01-01",
+    "authors": [
+      "HMD Udayanga",
+      "MDHM Kumari",
+      "DMSC Dassanayake",
+      "SPV Ashan",
+      "ADSNP Athukorala",
+      "GMRI Godaliyadda",
+      "VR Herath",
+      "MPB Ekanayake"
+    ],
+    "people": [],
+    "project": "Multispectral Imaging (MSI)",
+    "id": "f59fd3c67cf5"
+  },
+  {
+    "paper_title": "Deep learning for automated fish grading",
+    "venue": "Journal of Agriculture and Food Research",
+    "type": "Journal",
+    "doi": "https://doi.org/10.1016/j.jafr.2023.100711",
+    "publication_date": "2023-01-01",
+    "authors": [
+      "J.M.V.D.B. Jayasundara",
+      "R.M.L.S. Ramanayake",
+      "H.M.N.B. Senarath",
+      "H.M.S.L. Herath",
+      "G.M.R.I. Godaliyadda",
+      "M.P.B. Ekanayake",
+      "H.M.V.R. Herath",
+      "S. Ariyawansa"
+    ],
+    "people": [],
+    "project": "Multispectral Imaging (MSI)",
+    "id": "6e0302d9981a"
+  },
+  {
+    "paper_title": "Reflectance multispectral imaging for fungal growth level estimation",
+    "venue": "3rd International Conference on Control, Instrumentation, Energy & Communication (CIEC) 2024",
+    "type": "Conference",
+    "doi": "https://doi.org/10.1109/CIEC59440.2024.10468216",
+    "publication_date": "2024-01-01",
+    "authors": [
+      "Darsha Udayanga",
+      "MDHM Kumari",
+      "ADSNP Athukorala",
+      "Roshan Godaliyadda",
+      "HMVR Herath",
+      "Parakrama Ekanayake",
+      "HMPS Madushan",
+      "KK Abewickrama"
+    ],
+    "people": [],
+    "project": "Multispectral Imaging (MSI)",
+    "id": "a292b241aa4d"
+  },
+  {
+    "paper_title": "Dual-mode multispectral imaging system for food and agricultural product quality estimation",
+    "venue": "IEEE Transactions on Instrumentation and Measurement",
+    "type": "Journal",
+    "doi": "https://doi.org/10.1109/TIM.2024.3369129",
+    "publication_date": "2024-01-01",
+    "authors": [
+      "Darsha Udayanga",
+      "Ashan Serasinghe",
+      "Supun Dassanayake",
+      "Roshan Godaliyadda",
+      "Vijitha Herath",
+      "Mervyn Parakrama Ekanayake",
+      "Pasindu Malshan"
+    ],
+    "people": [],
+    "project": "Multispectral Imaging (MSI)",
+    "id": "9dc82507c49b"
+  },
+  {
+    "paper_title": "Aflatoxin contamination level estimation in food using reflectance multispectral imaging based system",
+    "venue": "Journal of Agriculture and Food Research",
+    "type": "Journal",
+    "doi": "https://doi.org/10.1016/j.jafr.2024.101401",
+    "publication_date": "2024-01-01",
+    "authors": [
+      "HMPS Madushan",
+      "HLP Malshan",
+      "KK Abewickrama",
+      "HMVR Herath",
+      "Roshan Godaliyadda",
+      "MPB Ekanayake",
+      "ADSNP Athukorala",
+      "MDHM Kumari",
+      "Darsha Udayanga"
+    ],
+    "people": [],
+    "project": "Multispectral Imaging (MSI)",
+    "id": "eebe0cdd05a2"
+  },
+  {
+    "paper_title": "Deep Learning for Soil Moisture Content Estimation via Reflectance Multispectral Imaging",
+    "venue": "9th International Conference on Advances in Technology and Computing (ICATC) 2024",
+    "type": "Conference",
+    "doi": "https://doi.org/10.1109/ICATC64549.2024.11025290",
+    "publication_date": "2024-01-01",
+    "authors": [
+      "Sandunika Ranasinghe",
+      "Senith Jayakody",
+      "Mario De Silva",
+      "Vijitha Herath",
+      "Roshan Godaliyadda",
+      "Mervyn Parakrama Ekanayake",
+      "Sinniah Navaratnarajah",
+      "Fadi Kizel",
+      "Gayathri Thilakarathne"
+    ],
+    "people": [],
+    "project": "Multispectral Imaging (MSI)",
+    "id": "ec1e178132b0"
+  },
+  {
+    "paper_title": "Multispectral Imaging and Machine Learning for Soil Classification through Moisture-Induced Spectral Dynamics",
+    "venue": "19th International Conference on Industrial and Information Systems (ICIIS) 2025",
+    "type": "Conference",
+    "doi": "https://doi.org/10.1109/ICIIS69028.2026.11450634",
+    "publication_date": "2025-01-01",
+    "authors": [
+      "Gayathri Thilakarathne",
+      "Shakthi Perera",
+      "Sandunika Ranasinghe",
+      "Senith Jayakody",
+      "Roshan Godaliyadda",
+      "Vijitha Herath",
+      "Mervyn Parakrama Ekanayake",
+      "Sinniah Navaratnarajah"
+    ],
+    "people": [],
+    "project": "Multispectral Imaging (MSI)",
+    "id": "4b8417870aef"
+  },
+  {
+    "paper_title": "Reflectance Multispectral Imaging for Soil Composition Estimation and USDA Texture Classification",
+    "venue": "IEEE Access",
+    "type": "Journal",
+    "doi": "https://doi.org/10.48550/arXiv.2602.22829",
+    "publication_date": "2026-01-01",
+    "authors": [
+      "G.A.S.L Ranasinghe",
+      "J.A.S.T. Jayakody",
+      "M.C.L. De Silva",
+      "G. Thilakarathne",
+      "G.M.R.I. Godaliyadda",
+      "H.M.V.R. Herath",
+      "M.P.B. Ekanayake",
+      "S.K. Navaratnarajah"
+    ],
+    "people": [],
+    "project": "Multispectral Imaging (MSI)",
+    "id": "d86e3bbe9bf6"
+  },
+  {
+    "paper_title": "Non-Destructive Quantification of Urea Adulteration in Bovine Milk Using Transmittance Multi-Spectral Imaging",
+    "venue": "12th international Moratuwa Engineering Research Conference 2026 (MERCon 2026)",
+    "type": "Conference",
+    "doi": "https://scholar.google.com/scholar?q=Non-Destructive%20Quantification%20of%20Urea%20Adulteration%20in%20Bovine%20Milk%20Using%20Transmittance%20Multi-Spectral%20Imaging",
+    "publication_date": "2026-01-01",
+    "authors": [
+      "Sharukshan Niranjan",
+      "Iresha Ranaweera",
+      "Tharindu Chandrarathne",
+      "Kalana Dissanayake",
+      "G.M.R.I. Godaliyadda",
+      "H.M.V.R. Herath",
+      "M.P.B. Ekanayake",
+      "J. K. Vidanarachchi"
+    ],
+    "people": [],
+    "project": "Multispectral Imaging (MSI)",
+    "id": "5165342e7051"
+  },
+  {
+    "paper_title": "Decoupling Morphology and Color: A Hierarchical Two-Stage Pipeline for Accurate Oil Palm Harvest Maturity Prediction",
+    "venue": "International Conference on Artificial Intelligence in Multidisciplinary Applications",
+    "type": "Conference",
+    "doi": "https://scholar.google.com/scholar?q=Decoupling%20Morphology%20and%20Color%3A%20A%20Hierarchical%20Two-Stage%20Pipeline%20for%20Accurate%20Oil%20Palm%20Harvest%20Maturity%20Prediction",
+    "publication_date": "2026-01-01",
+    "authors": [
+      "K.G.K.B. Dissanayaka",
+      "N.N.J. Gamage",
+      "B.E.P. Mendis",
+      "S.P. Nissanka",
+      "H.M.V.R. Herath",
+      "G.M.R.I. Godaliyadda",
+      "M.P.B. Ekanayake",
+      "R.P.N.P. Rajapakse"
+    ],
+    "people": [],
+    "project": "Multispectral Imaging (MSI)",
+    "id": "d28f200fa9b5"
+  },
+  {
+    "paper_title": "Multispectral Imaging and Deep Learning for Classification of Palm Oil Adulteration in Dairy Milk",
+    "venue": "Artificial Intelligence in Multidisciplinary Applications",
+    "type": "Conference",
+    "doi": "https://scholar.google.com/scholar?q=Multispectral%20Imaging%20and%20Deep%20Learning%20for%20Classification%20of%20Palm%20Oil%20Adulteration%20in%20Dairy%20Milk",
+    "publication_date": "2026-01-01",
+    "authors": [
+      "P. Ajendra",
+      "G. Thilakarathne",
+      "S. Perera",
+      "V. Herath",
+      "R. Godaliyadda",
+      "M.P. Ekanayake",
+      "J.K. Vidanarachchi"
+    ],
+    "people": [],
+    "project": "Multispectral Imaging (MSI)",
+    "id": "c3d1fbdee05a"
+  },
+  {
+    "paper_title": "Detection of sugar adulteration in black tea using multispectral imaging",
+    "venue": "Journal of the National Science Foundation of Sri Lanka",
+    "type": "Journal",
+    "doi": "https://doi.org/10.4038/jnsfsr.v54i1.12284",
+    "publication_date": "2026-01-01",
+    "authors": [
+      "W.A.N.D. Wickramasinghe",
+      "G. Thilakarathne",
+      "E.M.S.L.B. Ekanayake",
+      "A.D. Wijesinghe",
+      "K.A.S.T. Senarath",
+      "H.M.V.R. Herath",
+      "G.M.R.I. Godaliyadda",
+      "M.P.B. Ekanayake",
+      "T. Madhujith",
+      "K.M.M. Mohotti"
+    ],
+    "people": [],
+    "project": "Multispectral Imaging (MSI)",
+    "id": "a2ab34534c99"
+  },
+  {
+    "paper_title": "Reflectance Multispectral Imaging for Soil Grain-Size Composition Estimation and USDA Texture Classification",
+    "venue": "IEEE Access",
+    "type": "Journal",
+    "doi": "https://doi.org/10.1109/ACCESS.2026.3721276",
+    "publication_date": "2026-01-01",
+    "authors": [
+      "G.A.S.L. Ranasinghe",
+      "J.A.S.T. Jayakody",
+      "M.C.L. De Silva",
+      "G. Thilakarathne",
+      "G.M.R.I. Godaliyadda",
+      "H.M.V.R. Herath",
+      "M.P.B. Ekanayake",
+      "S.K. Navaratnarajah"
+    ],
+    "people": [],
+    "project": "Multispectral Imaging (MSI)",
+    "id": "c8e8f3ca08b4"
+  },
+  {
+    "paper_title": "Mamba-FCS: Joint Spatio-Frequency Feature Fusion, Change-Guided Attention, and SeK Inspired Loss for Enhanced Semantic Change Detection in Remote Sensing",
+    "venue": "IEEE Journal of Selected Topics in Applied Earth Observations and Remote Sensing",
+    "type": "Journal",
+    "doi": "https://doi.org/10.1109/JSTARS.2026.3663066",
+    "publication_date": "2026-01-01",
+    "authors": [
+      "Buddhi Wijenayake",
+      "Athulya Ratnayake",
+      "Praveen Sumanasekara",
+      "Roshan Godaliyadda",
+      "Parakrama Ekanayake",
+      "Vijitha Herath",
+      "Nichula Wasalathilaka"
+    ],
+    "people": [],
+    "project": "Change Detection",
+    "id": "0f8bc70497d7"
+  },
+  {
+    "paper_title": "Preprocessing Algorithm Leveraging Geometric Modeling for Scale Correction in Hyperspectral Images for Improved Unmixing Performance",
+    "venue": "IEEE Journal of Selected Topics in Applied Earth Observations and Remote Sensing",
+    "type": "Journal",
+    "doi": "https://doi.org/10.1109/JSTARS.2026.3687834",
+    "publication_date": "2026-01-01",
+    "authors": [
+      "Praveen Sumanasekara",
+      "Athulya Ratnayake",
+      "Buddhi Wijenayake",
+      "Keshawa Ratnayake",
+      "Roshan Godaliyadda",
+      "Parakrama Ekanayake",
+      "Vijitha Herath"
+    ],
+    "people": [],
+    "project": "Hyperspectral Unmixing",
+    "id": "7222ac97b80b"
+  },
+  {
+    "paper_title": "Enhanced scannet with cbam and dice loss for semantic change detection",
+    "venue": "Moratuwa Engineering Research Conference 2025",
+    "type": "Conference",
+    "doi": "https://doi.org/10.1109/MERCon67903.2025.11217111",
+    "publication_date": "2025-01-01",
+    "authors": [
+      "RMAMB Ratnayake",
+      "WMBSK Wijenayake",
+      "DMUP Sumanasekara",
+      "GMRI Godaliyadda",
+      "HMVR Herath",
+      "MPB Ekanayake"
+    ],
+    "people": [],
+    "project": "Change Detection",
+    "id": "284fefc3bdeb"
+  },
+  {
+    "paper_title": "Precision Spatio-Temporal Feature Fusion for Robust Remote Sensing Change Detection",
+    "venue": "International Conference on Industrial and Information Systems 2025",
+    "type": "Conference",
+    "doi": "https://doi.org/10.48550/arXiv.2507.11523",
+    "publication_date": "2025-01-01",
+    "authors": [
+      "Buddhi Wijenayake",
+      "Athulya Ratnayake",
+      "Praveen Sumanasekara",
+      "Nichula Wasalathilaka",
+      "Mathivathanan Piratheepan",
+      "Roshan Godaliyadda",
+      "Mervyn Ekanayake",
+      "Vijitha Herath"
+    ],
+    "people": [],
+    "project": "Change Detection",
+    "id": "3968a5b43c8c"
+  },
+  {
+    "paper_title": "Endmember Abundance Prediction in Hyperspectral Unmixing: The Impact of Endmember Extraction Algorithms and Self-Attention in Autoencoders",
+    "venue": "International Conference on Industrial and Information Systems 2023",
+    "type": "Conference",
+    "doi": "https://doi.org/10.1109/ICIIS58898.2023.10253564",
+    "publication_date": "2023-01-01",
+    "authors": [
+      "HMKD Wickramathilaka",
+      "RMKL Ratnayake",
+      "DMUP Sumanasekara",
+      "GMRI Godaliyadda",
+      "MPB Ekanayake",
+      "HMVR Herath"
+    ],
+    "people": [],
+    "project": "Hyperspectral Unmixing",
+    "id": "b5585122e35c"
+  },
+  {
+    "paper_title": "A Detailed Analysis of Datasets Used in HSI in the Context of Mixture Models for Unmixing",
+    "venue": "Moratuwa Engineering Research Conference 2024",
+    "type": "Conference",
+    "doi": "https://doi.org/10.1109/MERCon63886.2024.10689093",
+    "publication_date": "2024-01-01",
+    "authors": [
+      "DMUP Sumanasekara",
+      "RMKL Ratnayake",
+      "HMKD Wickramathilaka",
+      "GMRI Godaliyadda",
+      "MPB Ekanayake",
+      "HMVR Herath"
+    ],
+    "people": [],
+    "project": "Hyperspectral Unmixing",
+    "id": "3e6934716a2b"
+  },
+  {
+    "paper_title": "Hyperspectral unmixing with spatial context and endmember ensemble learning with attention mechanism",
+    "venue": "ISPRS Open Journal of Photogrammetry and Remote Sensing",
+    "type": "Journal",
+    "doi": "https://doi.org/10.1016/j.ophoto.2025.100086",
+    "publication_date": "2025-01-01",
+    "authors": [
+      "RMKL Ratnayake",
+      "DMUP Sumanasekara",
+      "HMKD Wickramathilaka",
+      "GMRI Godaliyadda",
+      "HMVR Herath",
+      "MPB Ekanayake"
+    ],
+    "people": [],
+    "project": "Hyperspectral Unmixing",
+    "id": "874760382c9c"
+  },
+  {
+    "paper_title": "GAUSS: Guided encoder-decoder Architecture for hyperspectral Unmixing with Spatial Smoothness",
+    "venue": "European Journal of Remote Sensing",
+    "type": "Journal",
+    "doi": "https://doi.org/10.1080/22797254.2023.2277213",
+    "publication_date": "2023-01-01",
+    "authors": [
+      "HMKD Wickramathilaka",
+      "D Fernando",
+      "D Jayasundara",
+      "D Wickramasinghe",
+      "DYL Ranasinghe",
+      "GMRI Godaliyadda",
+      "MPB Ekanayake",
+      "HMVR Herath",
+      "L Ramanayake",
+      "N Senarath",
+      "HMHK Weerasooriya"
+    ],
+    "people": [],
+    "project": "Hyperspectral Unmixing",
+    "id": "424b00edacb8"
+  },
+  {
+    "paper_title": "A Controlled Benchmark of Visual State-Space Backbones with Domain-Shift and Boundary Analysis for Remote-Sensing Segmentation",
+    "venue": "The International Geoscience and Remote Sensing Symposium (IGARSS) 2026",
+    "type": "Conference",
+    "doi": "https://doi.org/10.48550/arXiv.2604.18721",
+    "publication_date": "2026-01-01",
+    "authors": [
+      "Nichula Wasalathilaka",
+      "Dineth Perera",
+      "Oshadha Samarakoon",
+      "Buddhi Wijenayake",
+      "Roshan Godaliyadda",
+      "Vijitha Herath",
+      "Parakrama Ekanayake"
+    ],
+    "people": [],
+    "project": "Change Detection",
+    "id": "1d18d500b058"
+  },
+  {
+    "paper_title": "Mitigating Long-Tail Bias via Prompt-Controlled Diffusion Augmentation",
+    "venue": "The International Geoscience and Remote Sensing Symposium (IGARSS) 2026",
+    "type": "Conference",
+    "doi": "https://doi.org/10.48550/arXiv.2602.04749",
+    "publication_date": "2026-01-01",
+    "authors": [
+      "Buddhi Wijenayake",
+      "Nichula Wasalathilake",
+      "Roshan Godaliyadda",
+      "Vijitha Herath",
+      "Parakrama Ekanayake",
+      "Vishal M Patel"
+    ],
+    "people": [],
+    "project": "Change Detection",
+    "id": "36c5ef383e89"
+  },
+  {
+    "paper_title": "MambaRefine-CD: MambaVision with Region-Boundary Temporal Refinement",
+    "venue": "Moratuwa Engineering Research Conference 2026",
+    "type": "Conference",
+    "doi": "https://scholar.google.com/scholar?q=MambaRefine-CD%3A%20MambaVision%20with%20Region-Boundary%20Temporal%20Refinement",
+    "publication_date": "2026-01-01",
+    "authors": [
+      "Dineth Perera",
+      "Oshadha Samarakoon",
+      "Thariq Firdous",
+      "Roshan Godaliyadda",
+      "Vijitha Herath",
+      "Parakrama Ekanayake"
+    ],
+    "people": [],
+    "project": "Change Detection",
+    "id": "840692e16fc3"
+  },
+  {
+    "paper_title": "From Samples to Functions: Implicit Neural Representations for Continuous Modeling",
+    "venue": "19th International Conference on Industrial and Information Systems (ICIIS) 2025",
+    "type": "Conference",
+    "doi": "https://doi.org/10.1109/ICIIS69028.2026.11450769",
+    "publication_date": "2025-01-01",
+    "authors": [
+      "Buwaneka Epakanda",
+      "Mario De Silva",
+      "Avishka Ranasinghe",
+      "Pandula Thennakoon",
+      "Roshan Godaliyadda",
+      "Parakrama Ekanayake"
+    ],
+    "people": [],
+    "project": "Implicit Neural Representation",
+    "id": "4145eb7a73c1"
+  },
+  {
+    "paper_title": "COSMO-INR: Complex Sinusoidal Modulation for Implicit Neural Representations",
+    "venue": "The Fourteenth International Conference on Learning Representations (ICLR 2025)",
+    "type": "Conference",
+    "doi": "https://iclr.cc/virtual/2026/poster/10006571",
+    "publication_date": "2025-01-01",
+    "authors": [
+      "Pandula Thennakoon",
+      "Avishka Ranasinghe",
+      "Mario De Silva",
+      "Buwaneka Epakanda",
+      "Roshan Godaliyadda",
+      "Mervyn Ekanayake",
+      "Vijitha Herath"
+    ],
+    "people": [],
+    "project": "Implicit Neural Representation",
+    "id": "a05f55307f6c"
+  },
+  {
+    "paper_title": "ScaLe-INR: Scale and Learn Implicit Neural Representations",
+    "venue": "Forty-First AAAI Conference on Artificial Intelligence (AAAI-27)",
+    "type": "Conference",
+    "doi": "https://scholar.google.com/scholar?q=ScaLe-INR%3A%20Scale%20and%20Learn%20Implicit%20Neural%20Representations",
+    "publication_date": "2026-01-01",
+    "authors": [
+      "Buwaneka Epakanda",
+      "Athulya Rathnayaka",
+      "Pandula Thennakoon",
+      "Mario De Silva",
+      "Avishka Ranasinghe",
+      "Roshan Godaliyadda",
+      "Mervyn Ekanayake"
+    ],
+    "people": [],
+    "project": "Implicit Neural Representation",
+    "id": "d1a1809ca2c2"
+  },
+  {
+    "paper_title": "From Parallelism to Specialisation: SSA-Guided Multi-Branch Implicit Neural Representations",
+    "venue": "Forty-First AAAI Conference on Artificial Intelligence (AAAI-27)",
+    "type": "Conference",
+    "doi": "https://scholar.google.com/scholar?q=From%20Parallelism%20to%20Specialisation%3A%20SSA-Guided%20Multi-Branch%20Implicit%20Neural%20Representations",
+    "publication_date": "2026-01-01",
+    "authors": [
+      "Athulya Ratnayake",
+      "Buwaneka Epakanda",
+      "Sajana",
+      "Bogahawatta",
+      "Roshan Godaliyadda",
+      "Parakrama Ekanayake"
+    ],
+    "people": [],
+    "project": "Implicit Neural Representation",
+    "id": "b8ea812e19a4"
+  },
+  {
+    "paper_title": "Feature Conditioned Diffusion for Audio Generation",
+    "venue": "19th International Conference on Industrial and Information Systems (ICIIS) 2025",
+    "type": "Conference",
+    "doi": "https://doi.org/10.1109/ICIIS69028.2026.11450741",
+    "publication_date": "2025-01-01",
+    "authors": [
+      "Shakthi Perera",
+      "Sandunika Ranasinghe",
+      "Senith Jayakody",
+      "Buwaneka Epakanda",
+      "Roshan Godaliyadda",
+      "Mervyn Parakrama Ekanayake"
+    ],
+    "people": [],
+    "project": "Diffusion models",
+    "id": "b3ec1c33f7bf"
+  },
+  {
+    "paper_title": "Trace Energy Maching for HIgh Fidelity Image Generation",
+    "venue": "Forty-First AAAI Conference on Artificial Intelligence (AAAI-27)",
+    "type": "Conference",
+    "doi": "https://scholar.google.com/scholar?q=Trace%20Energy%20Maching%20for%20HIgh%20Fidelity%20Image%20Generation",
+    "publication_date": "2026-01-01",
+    "authors": [
+      "Sandunika Ranasinghe",
+      "Shakthi Perera",
+      "Dilum Fernando",
+      "Malshan",
+      "Pathum",
+      "Roshan Godaliyadda",
+      "Mervyn Parakrama Ekanayake"
+    ],
+    "people": [],
+    "project": "Diffusion models",
+    "id": "58d6b114d0f4"
+  },
+  {
+    "paper_title": "Discrete Diffusion for Single-Cell Gene Expression Imputation",
+    "venue": "Forty-First AAAI Conference on Artificial Intelligence (AAAI-27)",
+    "type": "Conference",
+    "doi": "https://scholar.google.com/scholar?q=Discrete%20Diffusion%20for%20Single-Cell%20Gene%20Expression%20Imputation",
+    "publication_date": "2026-01-01",
+    "authors": [
+      "Chandula Adhikari",
+      "Nethali Wijekoon",
+      "Sayumi Muthukumarana",
+      "Roshan Godaliyadda",
+      "Mervyn Parakrama Ekanayake"
+    ],
+    "people": [],
+    "project": "Diffusion models",
+    "id": "85e71a3e15a4"
+  },
+  {
+    "paper_title": "Prompt Sensitivity or Evaluation Artifact? A Task-Aware Analysis for Large Language Models",
+    "venue": "Moratuwa Engineering Research Conference (MERCon) 2026",
+    "type": "Conference",
+    "doi": "https://scholar.google.com/scholar?q=Prompt%20Sensitivity%20or%20Evaluation%20Artifact%3F%20A%20Task-Aware%20Analysis%20for%20Large%20Language%20Models",
+    "publication_date": "2026-01-01",
+    "authors": [
+      "Sayumi Muthukumarana",
+      "Buddhi Wijenayake",
+      "R. Godaliyadda",
+      "P. Ekanayake"
+    ],
+    "people": [],
+    "project": "LLMs",
+    "id": "20883c0c9df9"
+  },
+  {
+    "paper_title": "Beyond Overlap: Topology-Aware Evaluation for Biomedical Image Segmentation",
+    "venue": "IEEE 19th International Conference on Industrial and Information Systems (ICIIS)",
+    "type": "Conference",
+    "doi": "https://doi.org/10.1109/ICIIS69028.2026.11450668",
+    "publication_date": "2026-01-01",
+    "authors": [
+      "Minindu Liyanage",
+      "Mahesha Viduranga",
+      "Sanjula Senadeera",
+      "G M Roshan Indika Godaliyadda",
+      "Parakrama Ekanayake",
+      "Ruwan Jayasinghe"
+    ],
+    "people": [],
+    "project": "Stroke",
+    "id": "cb93551476d1"
+  },
+  {
+    "paper_title": "Multimodal Deep Convolutional Neural Network Pipeline for AI-Assisted Early Detection of Oral Cancer",
+    "venue": "IEEE Access",
+    "type": "Journal",
+    "doi": "https://scholar.google.com/scholar?q=Multimodal%20Deep%20Convolutional%20Neural%20Network%20Pipeline%20for%20AI-Assisted%20Early%20Detection%20of%20Oral%20Cancer",
+    "publication_date": "2026-01-01",
+    "authors": [
+      "GAI Devindi",
+      "DMDR Dissanayake",
+      "SN Liyanage",
+      "FBAH Francis",
+      "MBD Pavithya",
+      "NS Piyarathne",
+      "PVKS Hettiarachchi",
+      "RMSGK Rasnayaka",
+      "Ruwan Duminda Jayasinghe",
+      "Roshan G Ragel",
+      "Isuru Nawinne"
+    ],
+    "people": [],
+    "project": "Stroke",
+    "id": "c902b0e26f5f"
+  },
+  {
+    "paper_title": "Empirical Framework for Efficient Voxel-to-Point Transformation in Medical Imaging",
+    "venue": "IEEE 44th International conference on consumer electronics (ICCE) -flagship",
+    "type": "Conference",
+    "doi": "https://doi.org/10.1109/ICCE67443.2026.11449834",
+    "publication_date": "2026-01-01",
+    "authors": [
+      "Thiksiga R",
+      "Roshan G Ragel",
+      "Roshan Indika Godaliyadda",
+      "Mervyn Parakrama B Ekanayake"
+    ],
+    "people": [],
+    "project": "Stroke",
+    "id": "c0309d3cd2d5"
+  },
+  {
+    "paper_title": "Reassessing Speckle Noise in Cone-Beam Computed Tomography Through Physics-Based Analysis of Image Formation and Stochastic Degradation",
+    "venue": "RESCON 2026 ( Abstract only)",
+    "type": "Conference",
+    "doi": "https://scholar.google.com/scholar?q=Reassessing%20Speckle%20Noise%20in%20Cone-Beam%20Computed%20Tomography%20Through%20Physics-Based%20Analysis%20of%20Image%20Formation%20and%20Stochastic%20Degradation",
+    "publication_date": "2026-01-01",
+    "authors": [
+      "Thiksiga R",
+      "Roshan G Ragel",
+      "Roshan Indika Godaliyadda",
+      "Mervyn Parakrama B Ekanayake",
+      "Vijitha R Herath"
+    ],
+    "people": [],
+    "project": "Stroke",
+    "id": "2f96acb0d42e"
+  },
+  {
+    "paper_title": "Computer Vision-Based Remote Monitoring System for Phenotyping and Analysis of Tea",
+    "venue": "19th International Conference on Industrial and Information Systems (ICIIS) 2025",
+    "type": "Conference",
+    "doi": "https://doi.org/10.1109/ICIIS69028.2026.11450665",
+    "publication_date": "2025-01-01",
+    "authors": [
+      "B.A.B. Epakanda",
+      "J.M.T.R.B. Navarathne",
+      "T.D. Samarasekera",
+      "J.B. Ekanayake",
+      "G.M.R.I. Godaliyadda",
+      "M.P.B. Ekanayake"
+    ],
+    "people": [],
+    "project": "Agrovoltaics (Digital Twins)",
+    "id": "430f55491139"
+  },
+  {
+    "paper_title": "Structured Analysis and Taxonomy of Scene Graph Representations for Group Activity Understanding",
+    "venue": "Scene Graph for Structured Intelligence WACV Workshop 2026",
+    "type": "Conference",
+    "doi": "https://scholar.google.com/scholar?q=Structured%20Analysis%20and%20Taxonomy%20of%20Scene%20Graph%20Representations%20for%20Group%20Activity%20Understanding",
+    "publication_date": "2026-01-01",
+    "authors": [
+      "Narthana Sivalingam",
+      "Santhirarajah Sivasthigan",
+      "Thamayanthi Mahendranathan",
+      "Roshan Godaliyadda",
+      "Vijitha Herath",
+      "Parakrama Ekanayake"
+    ],
+    "people": [],
+    "project": "CV Action",
+    "id": "ec48eb41b37d"
+  },
+  {
+    "paper_title": "Efficient and Intrinsically Interpretable Spatiotemporal Transformer with Gated Fusion for Group Activity Recognition",
+    "venue": "Second International Workshop on AI-driven Skilled Activity Understanding, Assessment & Feedback Generation at CVPR 2026",
+    "type": "Conference",
+    "doi": "https://scholar.google.com/scholar?q=Efficient%20and%20Intrinsically%20Interpretable%20Spatiotemporal%20Transformer%20with%20Gated%20Fusion%20for%20Group%20Activity%20Recognition",
+    "publication_date": "2026-01-01",
+    "authors": [
+      "Narthana Sivalingam",
+      "Santhirarajah Sivasthigan",
+      "Roshan Godaliyadda",
+      "Vijitha Herath",
+      "Parakrama Ekanayake"
+    ],
+    "people": [],
+    "project": "CV Action",
+    "id": "c758841b76ab"
+  },
+  {
+    "paper_title": "LiteGAR: Input-Adaptive Fusion for Single-Stage Relational Reasoning in Group Activity Recognition",
+    "venue": "WACV2026",
+    "type": "Conference",
+    "doi": "https://scholar.google.com/scholar?q=LiteGAR%3A%20Input-Adaptive%20Fusion%20for%20Single-Stage%20Relational%20Reasoning%20in%20Group%20Activity%20Recognition",
+    "publication_date": "2026-01-01",
+    "authors": [
+      "Narthana Sivalingam",
+      "Santhirarajah Sivasthigan",
+      "Buddhi Wijenayake Roshan Godaliyadda",
+      "Vijitha Herath",
+      "Parakrama Ekanayake"
+    ],
+    "people": [],
+    "project": "CV Action",
+    "id": "5af64b3941bf"
+  },
+  {
+    "paper_title": "Ego Vehicle Speed Estimation Using Optical Flow Analysis",
+    "venue": "2024 5th IEEE Global Conference for Advancement in Technology (GCAT)",
+    "type": "Conference",
+    "doi": "https://doi.org/10.1109/GCAT62922.2024.10923928",
+    "publication_date": "2024-01-01",
+    "authors": [
+      "Oshada Rathnayake",
+      "Sanjula Vinosh Senadeera",
+      "Shakthi Perera",
+      "Roshan Godaliyadda",
+      "Parakrama Ekanayake",
+      "Vijitha Herath"
+    ],
+    "people": [],
+    "project": "CV Irradiance",
+    "id": "ad9d4e1a906d"
+  },
+  {
+    "paper_title": "FlowSegModel: Advancing Perception in Autonomous Driving Through Weather-Resilient Segmentation",
+    "venue": "2025 IEEE 19th International Conference on Industrial and Information Systems (ICIIS)",
+    "type": "Conference",
+    "doi": "https://doi.org/10.1109/ICIIS69028.2026.11450840",
+    "publication_date": "2025-01-01",
+    "authors": [
+      "Dilshara Herath",
+      "Thiwanka Alahakoon",
+      "Oshada Rathnayake",
+      "Sanjula Senadeera",
+      "Roshan Godaliyadda",
+      "Parakrama Ekanayake"
+    ],
+    "people": [],
+    "project": "CV Irradiance",
+    "id": "b8e71b6d203c"
+  },
+  {
+    "paper_title": "A Controlled Visual-Backbone Benchmark for Multimodal Short-Term Solar Irradiance Forecasting",
+    "venue": "12th international Moratuwa Engineering Research Conference 2026",
+    "type": "Conference",
+    "doi": "https://scholar.google.com/scholar?q=A%20Controlled%20Visual-Backbone%20Benchmark%20for%20Multimodal%20Short-Term%20Solar%20Irradiance%20Forecasting",
+    "publication_date": "2026-01-01",
+    "authors": [
+      "Oshadha Samarakoon",
+      "Dushan Herath",
+      "Ishara Ranmandala",
+      "Dilshara Herath",
+      "Roshan Godaliyadda",
+      "Parakrama Ekanayake",
+      "Vijitha R Herath"
+    ],
+    "people": [],
+    "project": "CV Irradiance",
+    "id": "817832c156d0"
+  },
+  {
+    "paper_title": "Data-Driven Seasonality Discovery in Elephant Movement via PCA-Enhanced Spectral Clustering",
+    "venue": "Moratuwa Engineering Research Conference 2026",
+    "type": "Conference",
+    "doi": "https://scholar.google.com/scholar?q=Data-Driven%20Seasonality%20Discovery%20in%20Elephant%20Movement%20via%20PCA-Enhanced%20Spectral%20Clustering",
+    "publication_date": "2026-01-01",
+    "authors": [
+      "Narthana Sivalingam",
+      "Santhirarajah Sivasthigan",
+      "Thamayanthi Mahendranathan",
+      "Roshan Godaliyadda",
+      "Vijitha Herath",
+      "Parakrama Ekanayake"
+    ],
+    "people": [],
+    "project": "ABM",
+    "id": "58f69f871e7d"
+  },
+  {
+    "paper_title": "Lighting the Way for a Sustainable Future: Overcoming Challenges in Light-Based IoT and Data-Energy Networking",
+    "venue": "IEEE Communications Magazine",
+    "type": "Journal",
+    "doi": "https://doi.org/10.1109/MCOM.001.2400187",
+    "publication_date": "2025-01-01",
+    "authors": [
+      "Amila Perera",
+      "Roshan Godaliyadda",
+      "Juha Hakkinen",
+      "Marcos Katz"
+    ],
+    "people": [],
+    "project": "Energy Networking",
+    "id": "00fa6a79b023"
+  },
+  {
+    "paper_title": "LSTM-Based MPPT algorithm for efficient energy harvesting of a solar PV system under different operating conditions",
+    "venue": "Electronics",
+    "type": "Journal",
+    "doi": "https://doi.org/10.3390/electronics13244875",
+    "publication_date": "2024-01-01",
+    "authors": [
+      "Anushka Bandara",
+      "Keshawa Ratnayake",
+      "Ramitha Dissanayake",
+      "Harith Udawatte",
+      "Roshan Godaliyadda",
+      "Parakrama Ekanayake",
+      "Janaka Ekanayake"
+    ],
+    "people": [],
+    "project": "NILM",
+    "id": "ba10c43ce28a"
+  },
+  {
+    "paper_title": "LSTM based Model for Weather-based Solar Irradiance Prediction for Long-Term PV Energy Planning",
+    "venue": "2025 IEEE 19th International Conference on Industrial and Information Systems (ICIIS)",
+    "type": "Conference",
+    "doi": "https://doi.org/10.1109/ICIIS69028.2026.11450779",
+    "publication_date": "2025-01-01",
+    "authors": [
+      "Anushka Bandara",
+      "Mahela Pandukabhaya",
+      "Keshawa Ratnayake",
+      "Roshan Godaliyadda",
+      "Parakrama Ekanayake",
+      "Janaka Ekanayake"
+    ],
+    "people": [],
+    "project": "CV Irradiance",
+    "id": "46e62ce1f0bc"
+  },
+  {
+    "paper_title": "Evaluating Lung-Sound Extraction Techniques for Cardiac-Interference Suppression and Wheeze Preservation",
+    "venue": "2026 International Conference on Electrical and Information Technology (IEIT)",
+    "type": "Conference",
+    "doi": "https://scholar.google.com/scholar?q=Evaluating%20Lung-Sound%20Extraction%20Techniques%20for%20Cardiac-Interference%20Suppression%20and%20Wheeze%20Preservation",
+    "publication_date": "2026-01-01",
+    "authors": [
+      "Umesha Tilakarathna",
+      "Poorna Ajendra",
+      "Theekshana Dineth",
+      "G. M. R. I. Godaliyadda",
+      "M. P. B. Ekanayake"
+    ],
+    "people": [],
+    "project": "Lung sound analysis",
+    "id": "96bc98075721"
+  },
+  {
+    "paper_title": "Multimodal Deep Learning for Ischemic Stroke Outcome Prediction: A Sri Lankan Pilot Study",
+    "venue": "Asia Pacific Stroke Conference (APSC) 2026",
+    "type": "Conference",
+    "doi": "https://scholar.google.com/scholar?q=Multimodal%20Deep%20Learning%20for%20Ischemic%20Stroke%20Outcome%20Prediction%3A%20A%20Sri%20Lankan%20Pilot%20Study",
+    "publication_date": "2026-01-01",
+    "authors": [
+      "Sasmitha Waidyatilleke",
+      "Niduwara Gamage",
+      "Mario de Silva",
+      "Umesha Tilakarathna",
+      "Aruna Shantha",
+      "Jeevani Udupihille",
+      "Parakrama Ekanayake",
+      "Roshan Godaliyadda",
+      "Manoji Pathirage"
+    ],
+    "people": [],
+    "project": "Stroke",
+    "id": "478d871c2e52"
   }
 ]
