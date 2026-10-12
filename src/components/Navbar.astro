@@ -314,6 +314,28 @@ const isActive = (href: string) => {
         to { --marc-border-angle: 360deg; }
     }
 
+    .marc-nav-tab-active::before {
+        content: "";
+        position: absolute;
+        inset: -7px;
+        border-radius: inherit;
+        background: conic-gradient(
+            from var(--marc-border-angle),
+            transparent 0deg,
+            transparent 250deg,
+            rgba(0, 74, 173, 0.48) 280deg,
+            rgba(81, 112, 255, 0.58) 305deg,
+            rgba(217, 169, 211, 0.48) 330deg,
+            rgba(124, 14, 36, 0.42) 350deg,
+            transparent 360deg
+        );
+        filter: blur(9px);
+        opacity: 0.8;
+        pointer-events: none;
+        z-index: -1;
+        animation: marc-border-travel 1.2s linear infinite;
+    }
+
     :global(html[data-theme="marc-dark"]) .marc-nav-rail {
         background: rgba(20, 24, 38, 0.42);
         border-color: rgba(255, 255, 255, 0.14);
