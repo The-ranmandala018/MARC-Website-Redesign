@@ -265,7 +265,35 @@ const otherProjects = projects.filter((p) => !areaTitles.has(norm(p.data.researc
         transition: transform 280ms ease, box-shadow 280ms ease, border-color 280ms ease;
     }
 
-    .research-area-card:hover {
+    .research-area-card {
+        animation: research-card-enter 650ms cubic-bezier(0.2, 0.75, 0.25, 1) both;
+        animation-delay: calc(var(--card-index, 0) * 70ms);
+        will-change: transform, opacity;
+    }
+
+    .research-area-card:nth-child(1) { --card-index: 0; }
+    .research-area-card:nth-child(2) { --card-index: 1; }
+    .research-area-card:nth-child(3) { --card-index: 2; }
+    .research-area-card:nth-child(4) { --card-index: 3; }
+    .research-area-card:nth-child(5) { --card-index: 4; }
+    .research-area-card:nth-child(6) { --card-index: 5; }
+    .research-area-card:nth-child(7) { --card-index: 6; }
+    .research-area-card:nth-child(8) { --card-index: 7; }
+    .research-area-card:nth-child(9) { --card-index: 8; }
+    .research-area-card:nth-child(10) { --card-index: 9; }
+
+    @keyframes research-card-enter {
+        from {
+            opacity: 0;
+            transform: translateY(22px) scale(0.985);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+    }
+
+        .research-area-card:hover {
         transform: translateY(-3px);
         border-color: rgba(255, 255, 255, 0.5);
         box-shadow: 0 25px 55px -30px rgba(15, 23, 42, 0.55);
@@ -401,7 +429,11 @@ const otherProjects = projects.filter((p) => !areaTitles.has(norm(p.data.researc
         .research-area-card,
         .research-carousel-button,
         .research-card-cta,
-        .research-card-cta span { transition: none; }
+        .research-card-cta span {
+            transition: none;
+            animation: none;
+            will-change: auto;
+        }
         .research-area-card:hover,
         .research-carousel-button:hover { transform: none; }
     }
