@@ -422,3 +422,35 @@ html[data-theme="marc-dark"] .glass {
         transition-duration: 0.001ms !important;
     }
 }
+
+
+/* MARC Explore CTA: global rules ensure the gradient is applied consistently
+   across Astro component boundaries and every page. */
+a.marc-cta-pill--explore,
+span.marc-cta-pill--explore {
+    border: 2px solid transparent !important;
+    background:
+        linear-gradient(135deg, #ffffff 0%, #f4f7ff 62%, #fff5f7 100%) padding-box,
+        linear-gradient(100deg, #004AAD 0%, #5170FF 38%, #9BACF4 65%, #7C0E24 100%) border-box !important;
+    box-shadow: 0 5px 18px rgba(0, 74, 173, 0.12), 0 0 10px rgba(81, 112, 255, 0.10) !important;
+    color: #12315f !important;
+}
+
+.marc-cta-pill--explore .marc-cta-icon--explore {
+    background: linear-gradient(135deg, #004AAD 0%, #5170FF 58%, #7C0E24 125%) !important;
+    color: #ffffff !important;
+}
+
+a.marc-cta-pill--explore:hover,
+span.marc-cta-pill--explore:hover {
+    box-shadow: 0 8px 24px rgba(0, 74, 173, 0.24), 0 0 18px rgba(81, 112, 255, 0.22) !important;
+    transform: translateY(-2px);
+}
+
+html[data-theme="marc-dark"] a.marc-cta-pill--explore,
+html[data-theme="marc-dark"] span.marc-cta-pill--explore {
+    background:
+        linear-gradient(135deg, #141f39 0%, #1a1c30 65%, #39182a 100%) padding-box,
+        linear-gradient(100deg, #5170FF 0%, #9BACF4 45%, #7C0E24 100%) border-box !important;
+    color: #f8faff !important;
+}
