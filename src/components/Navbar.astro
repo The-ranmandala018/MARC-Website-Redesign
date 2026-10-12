@@ -286,13 +286,14 @@ const isActive = (href: string) => {
         padding: 2px;
         background: conic-gradient(
             from 0deg,
-            transparent 0deg 285deg,
-            #4285F4 300deg,
-            #8AB4F8 312deg,
-            #C58AF9 324deg,
-            #D96570 336deg,
-            #F9AB00 346deg,
-            transparent 356deg 360deg
+            transparent 0deg,
+            transparent 300deg,
+            #004AAD 316deg,
+            #5170FF 330deg,
+            #9BACF4 340deg,
+            #D9A9D3 350deg,
+            #7C0E24 356deg,
+            transparent 360deg
         );
         -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
         -webkit-mask-composite: xor;
@@ -301,10 +302,10 @@ const isActive = (href: string) => {
         pointer-events: none;
         opacity: 1;
         z-index: 1;
-        animation: marc-gemini-ring-spin 1.8s linear infinite;
+        animation: marc-border-beam 2.4s linear infinite;
     }
 
-    @keyframes marc-gemini-ring-spin {
+    @keyframes marc-border-beam {
         from { transform: rotate(0deg); }
         to { transform: rotate(360deg); }
     }
