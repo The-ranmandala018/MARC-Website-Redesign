@@ -287,17 +287,15 @@ const isActive = (href: string) => {
     .marc-nav-tab-active::after {
         content: "";
         position: absolute;
-        inset: -1.5px;
+        inset: -2px;
         border-radius: inherit;
-        padding: 1.5px;
+        padding: 2px;
         background: conic-gradient(
             from var(--marc-beam-angle),
-            transparent 0deg 315deg,
-            #004AAD 327deg,
-            #5170FF 338deg,
-            #9BACF4 347deg,
-            #D9A9D3 354deg,
-            #7C0E24 358deg,
+            transparent 0deg 320deg,
+            #ff3434 332deg,
+            #ff5a36 342deg,
+            #ff3434 350deg,
             transparent 360deg
         );
         -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
