@@ -284,31 +284,25 @@ const isActive = (href: string) => {
         border-radius: inherit;
         padding: 1.5px;
         background: conic-gradient(
-            from var(--marc-border-angle, 0deg),
-            rgba(0, 74, 173, 0.10) 0deg,
-            rgba(0, 74, 173, 0.95) 70deg,
-            rgba(81, 112, 255, 0.95) 145deg,
-            rgba(217, 169, 211, 0.9) 220deg,
-            rgba(124, 14, 36, 0.8) 285deg,
-            rgba(0, 74, 173, 0.10) 360deg
+            rgba(0, 74, 173, 0.12) 0deg,
+            rgba(0, 74, 173, 0.98) 65deg,
+            rgba(81, 112, 255, 1) 145deg,
+            rgba(217, 169, 211, 0.95) 220deg,
+            rgba(124, 14, 36, 0.9) 285deg,
+            rgba(0, 74, 173, 0.12) 360deg
         );
         -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
         -webkit-mask-composite: xor;
         mask-composite: exclude;
         pointer-events: none;
-        opacity: 0.9;
-        animation: marc-border-rotate 4.5s linear infinite;
-    }
-
-    @property --marc-border-angle {
-        syntax: "<angle>";
-        initial-value: 0deg;
-        inherits: false;
+        opacity: 0.95;
+        transform-origin: center;
+        animation: marc-border-rotate 3s linear infinite;
     }
 
     @keyframes marc-border-rotate {
         to {
-            --marc-border-angle: 360deg;
+            transform: rotate(360deg);
         }
     }
 
