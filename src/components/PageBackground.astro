@@ -27,12 +27,6 @@ const { innerPage = false } = Astro.props;
         pointer-events: none;
     }
 
-    /* Keep the global homepage blobs out from behind the navbar.
-       The hero's own background remains untouched. */
-    .page-bg:not(.page-bg-inner) {
-        clip-path: inset(96px 0 0 0);
-    }
-
     /* Preserve the existing homepage instance; apply the shared warm base only to inner pages. */
     .page-bg-inner {
         background-color: #FAF8F3;
