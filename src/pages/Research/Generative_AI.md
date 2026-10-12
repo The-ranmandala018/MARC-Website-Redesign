@@ -1,6 +1,6 @@
 ---
 layout: ../../layouts/ResearchArea.astro
-title: Generative AI
+title: Generative AI (GenAI)
 coverImage: Gen_AI_Cover.jpg
 short: >
   Generative artificial intelligence (Generative AI, GenAI, or GAI) is

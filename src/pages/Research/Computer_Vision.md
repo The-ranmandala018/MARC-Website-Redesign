@@ -1,6 +1,6 @@
 ---
 layout: ../../layouts/ResearchArea.astro
-title: Computer Vision
+title: Computer Vision (CV)
 coverImage: Computer_Vision_Cover.jpg
 short: >
     Computer vision tasks include methods for acquiring, processing,

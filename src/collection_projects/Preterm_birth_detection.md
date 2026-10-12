@@ -5,7 +5,7 @@ projectMembers:
 supervisors: 
  - "roshang@eng.pdn.ac.lk"
  - Parakrama
-researchArea: Biomedical Engineering and Wearables
+researchArea: Biomedical Engineering & Bio-imaging
 researchPillars: 
  - "AI in Engineering"
 coverImage: ./cover_images/cover_dummy.jpg

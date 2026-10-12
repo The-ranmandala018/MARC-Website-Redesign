@@ -5,7 +5,7 @@ projectMembers:
  - "e19328@eng.pdn.ac.lk"
 supervisors: 
  - "roshang@eng.pdn.ac.lk"
-researchArea: Generative AI
+researchArea: Generative AI (GenAI)
 researchPillars: 
  - "AI in Engineering"
 coverImage: ./cover_images/INR.png
