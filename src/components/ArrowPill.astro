@@ -24,7 +24,7 @@ const linkProps = href
     class={`marc-cta-pill ${isExplore ? "marc-cta-pill--explore" : "marc-cta-pill--standard"} group/cta inline-flex items-center gap-3 rounded-full px-5 py-2.5 text-sm font-semibold transition-all duration-300 hover:gap-4 group-hover:gap-4 ${extra}`}
 >
     <span class="relative z-10">{label}</span>
-    <span class="marc-cta-icon grid h-7 w-7 shrink-0 place-items-center rounded-full text-white transition-transform duration-300 group-hover/cta:translate-x-0.5">
+    <span class={`marc-cta-icon ${isExplore ? "marc-cta-icon--explore" : "marc-cta-icon--standard"} grid h-7 w-7 shrink-0 place-items-center rounded-full text-white transition-transform duration-300 group-hover/cta:translate-x-0.5`}>
         {
             external ? (
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
@@ -62,9 +62,9 @@ const linkProps = href
         content: "";
         position: absolute;
         inset: -1px;
-        z-index: -1;
+        z-index: 1;
         border-radius: inherit;
-        padding: 1px;
+        padding: 1.5px;
         background: linear-gradient(110deg, #004AAD, #5170FF 38%, #9BACF4 63%, #7C0E24);
         opacity: 0.7;
         -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
@@ -75,9 +75,26 @@ const linkProps = href
         transition: opacity 250ms ease;
     }
 
-    .marc-cta-icon {
+    .marc-cta-pill--explore > span {
+        position: relative;
+        z-index: 2;
+    }
+
+    .marc-cta-icon--explore {
+        position: relative;
+        z-index: 2;
         background: linear-gradient(135deg, #004AAD 0%, #5170FF 58%, #7C0E24 125%);
         box-shadow: 0 3px 9px rgba(0, 74, 173, 0.28);
+    }
+
+    .marc-cta-icon--standard {
+        background: rgba(100, 116, 139, 0.16);
+        color: #334155;
+    }
+
+    :global(html[data-theme="marc-dark"]) .marc-cta-icon--standard {
+        background: rgba(255, 255, 255, 0.12);
+        color: #f8faff;
     }
 
     .marc-cta-pill:hover {
