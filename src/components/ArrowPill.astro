@@ -53,38 +53,27 @@ const linkProps = href
 
     /* Use the distinctive MARC gradient-outline treatment only on Explore CTAs. */
     .marc-cta-pill--explore {
-        border-color: rgba(81, 112, 255, 0.26);
-        background: linear-gradient(135deg, rgba(255, 255, 255, 0.94), rgba(247, 249, 255, 0.84) 60%, rgba(255, 246, 248, 0.9));
-        box-shadow: 0 5px 16px -8px rgba(0, 74, 173, 0.28), inset 0 1px 0 rgba(255, 255, 255, 0.95);
+        border: 1.5px solid transparent;
+        background:
+            linear-gradient(135deg, rgba(255, 255, 255, 0.97), rgba(247, 249, 255, 0.92) 60%, rgba(255, 246, 248, 0.96)) padding-box,
+            linear-gradient(110deg, #004AAD 0%, #5170FF 38%, #9BACF4 63%, #7C0E24 100%) border-box;
+        box-shadow: 0 6px 20px -8px rgba(0, 74, 173, 0.38), 0 0 12px rgba(81, 112, 255, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.95);
     }
 
     .marc-cta-pill--explore::before {
-        content: "";
-        position: absolute;
-        inset: -1px;
-        z-index: 1;
-        border-radius: inherit;
-        padding: 1.5px;
-        background: linear-gradient(110deg, #004AAD, #5170FF 38%, #9BACF4 63%, #7C0E24);
-        opacity: 0.7;
-        -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-        -webkit-mask-composite: xor;
-        mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-        mask-composite: exclude;
-        pointer-events: none;
-        transition: opacity 250ms ease;
+        content: none;
     }
 
     .marc-cta-pill--explore > span {
         position: relative;
-        z-index: 2;
+        z-index: 1;
     }
 
     .marc-cta-icon--explore {
         position: relative;
-        z-index: 2;
+        z-index: 1;
         background: linear-gradient(135deg, #004AAD 0%, #5170FF 58%, #7C0E24 125%);
-        box-shadow: 0 3px 9px rgba(0, 74, 173, 0.28);
+        box-shadow: 0 3px 9px rgba(0, 74, 173, 0.32), 0 0 10px rgba(81, 112, 255, 0.18);
     }
 
     .marc-cta-icon--standard {
@@ -99,15 +88,13 @@ const linkProps = href
 
     .marc-cta-pill:hover {
         transform: translateY(-2px);
-        border-color: rgba(81, 112, 255, 0.48);
-        box-shadow:
-            0 10px 24px -10px rgba(0, 74, 173, 0.42),
-            0 0 16px rgba(81, 112, 255, 0.13),
-            inset 0 1px 0 rgba(255, 255, 255, 0.98);
     }
 
-    .marc-cta-pill--explore:hover::before {
-        opacity: 1;
+    .marc-cta-pill--explore:hover {
+        background:
+            linear-gradient(135deg, rgba(255, 255, 255, 0.99), rgba(241, 245, 255, 0.96) 60%, rgba(255, 242, 246, 0.98)) padding-box,
+            linear-gradient(110deg, #004AAD 0%, #5170FF 38%, #9BACF4 63%, #7C0E24 100%) border-box;
+        box-shadow: 0 10px 26px -8px rgba(0, 74, 173, 0.48), 0 0 18px rgba(81, 112, 255, 0.22), inset 0 1px 0 rgba(255, 255, 255, 0.98);
     }
 
     :global(html[data-theme="marc-dark"]) .marc-cta-pill {
@@ -118,12 +105,14 @@ const linkProps = href
     }
 
     :global(html[data-theme="marc-dark"]) .marc-cta-pill--explore {
-        border-color: rgba(156, 181, 255, 0.24);
-        background: linear-gradient(135deg, rgba(20, 31, 57, 0.94), rgba(26, 28, 48, 0.9) 65%, rgba(57, 24, 42, 0.88));
+        border: 1.5px solid transparent;
+        background:
+            linear-gradient(135deg, rgba(20, 31, 57, 0.97), rgba(26, 28, 48, 0.94) 65%, rgba(57, 24, 42, 0.92)) padding-box,
+            linear-gradient(110deg, #5170FF 0%, #9BACF4 45%, #7C0E24 100%) border-box;
     }
 
-    :global(html[data-theme="marc-dark"]) .marc-cta-pill:hover {
-        box-shadow: 0 10px 26px -10px rgba(0, 0, 0, 0.75), 0 0 18px rgba(81, 112, 255, 0.2);
+    :global(html[data-theme="marc-dark"]) .marc-cta-pill--explore:hover {
+        box-shadow: 0 10px 26px -10px rgba(0, 0, 0, 0.75), 0 0 20px rgba(81, 112, 255, 0.28);
     }
 
     @media (prefers-reduced-motion: reduce) {
