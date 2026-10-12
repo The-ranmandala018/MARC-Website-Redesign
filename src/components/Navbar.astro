@@ -64,7 +64,7 @@ const isActive = (href: string) => {
                  ===================================================== -->
 
             <nav
-                class="marc-nav-rail relative z-20 hidden lg:flex items-center gap-1 shrink-0"
+                class="marc-nav-rail relative z-20 hidden lg:flex items-center gap-1.5 shrink-0"
             >
                 {
                     links.map((link) => (
@@ -76,13 +76,13 @@ const isActive = (href: string) => {
                                 inline-flex
                                 items-center
                                 justify-center
-                                px-4
-                                py-2.5
-                                min-h-11
+                                px-5
+                                py-3
+                                min-h-12
                                 rounded-full
-                                text-[13px]
+                                text-sm
                                 font-medium
-                                tracking-[0.01em]
+                                tracking-[0.005em]
                                 transition-all
                                 duration-300
                                 ${isActive(link.href)
@@ -245,7 +245,7 @@ const isActive = (href: string) => {
 
 <style>
     .marc-nav-rail {
-        padding: 5px;
+        padding: 6px;
         border: 1px solid rgba(255, 255, 255, 0.7);
         border-radius: 999px;
         background: rgba(255, 255, 255, 0.34);
