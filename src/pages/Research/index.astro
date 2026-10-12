@@ -358,6 +358,32 @@ const otherProjects = projects.filter((p) => !areaTitles.has(norm(p.data.researc
         color: #fff;
     }
 
+    .research-search {
+        border: 1.5px solid transparent;
+        background:
+            linear-gradient(rgba(255, 255, 255, 0.96), rgba(247, 249, 255, 0.92)) padding-box,
+            linear-gradient(100deg, #004AAD 0%, #5170FF 38%, #9BACF4 65%, #7C0E24 100%) border-box;
+        box-shadow: 0 5px 18px rgba(0, 74, 173, 0.14), inset 0 1px 0 rgba(255, 255, 255, 0.95);
+        transition: box-shadow 220ms ease, background 220ms ease, transform 220ms ease;
+    }
+
+    .research-search:focus-within {
+        box-shadow: 0 8px 24px rgba(0, 74, 173, 0.22), 0 0 16px rgba(81, 112, 255, 0.2);
+        transform: translateY(-1px);
+    }
+
+    .research-search input {
+        background: transparent;
+        outline: none;
+        border: 0;
+    }
+
+    :global(html[data-theme="marc-dark"]) .research-search {
+        background:
+            linear-gradient(rgba(20, 31, 57, 0.96), rgba(26, 28, 48, 0.94)) padding-box,
+            linear-gradient(100deg, #5170FF 0%, #9BACF4 45%, #7C0E24 100%) border-box;
+    }
+
     .research-card-cta {
         display: inline-flex;
         align-items: center;
