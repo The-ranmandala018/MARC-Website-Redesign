@@ -70,13 +70,24 @@ const otherProjects = projects.filter((p) => !areaTitles.has(norm(p.data.researc
 
     <!-- Research areas — immersive image cards -->
     <section class="research-gallery mt-12 lg:mt-16" aria-labelledby="research-gallery-title">
-        <div class="mb-6 flex flex-wrap items-end justify-between gap-4">
+        <div class="research-gallery-heading mb-6">
             <div>
                 <p class="eyebrow">Discover what we do</p>
                 <h2 id="research-gallery-title" class="mt-2 font-display text-2xl sm:text-3xl text-base-content">
                     Explore our research
                 </h2>
             </div>
+            <label class="research-search" for="research-area-search">
+                <svg aria-hidden="true" viewBox="0 0 24 24" fill="none">
+                    <circle cx="10.8" cy="10.8" r="6.8" stroke="currentColor" stroke-width="1.8"></circle>
+                    <path d="m16 16 4.2 4.2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"></path>
+                </svg>
+                <input id="research-area-search" type="search" placeholder="Search research areas..." autocomplete="off" aria-controls="research-card-track" />
+                <button type="button" id="research-search-clear" class="research-search-clear" aria-label="Clear search" hidden>×</button>
+            </label>
+        </div>
+        <div class="research-gallery-toolbar">
+            <p id="research-search-status" class="research-search-status" aria-live="polite">Showing all {areas.length} research areas</p>
             <div class="research-carousel-controls" aria-label="Research card controls">
                 <button type="button" class="research-carousel-button" data-scroll="previous" aria-label="Scroll to previous research areas">←</button>
                 <button type="button" class="research-carousel-button" data-scroll="next" aria-label="Scroll to next research areas">→</button>
@@ -85,7 +96,7 @@ const otherProjects = projects.filter((p) => !areaTitles.has(norm(p.data.researc
 
         <div class="research-card-track" id="research-card-track">
             {areas.map((a) => (
-                <article id={a.id} class="research-area-card group scroll-mt-28">
+                <article id={a.id} data-search-text={`${a.title} ${a.short} ${a.projects.map((p) => p.data.project).join(" ")}`} class="research-area-card group scroll-mt-28">
                     <a href={a.url} class="research-card-link" aria-label={`Explore ${a.title}`}>
                         {a.image && (
                             <Image
@@ -119,11 +130,42 @@ const otherProjects = projects.filter((p) => !areaTitles.has(norm(p.data.researc
 
     <script>
         const track = document.querySelector<HTMLElement>("#research-card-track");
+        const searchInput = document.querySelector<HTMLInputElement>("#research-area-search");
+        const clearButton = document.querySelector<HTMLButtonElement>("#research-search-clear");
+        const searchStatus = document.querySelector<HTMLElement>("#research-search-status");
+        const researchCards = Array.from(document.querySelectorAll<HTMLElement>(".research-area-card"));
+
+        const applyResearchSearch = () => {
+            const query = (searchInput?.value ?? "").trim().toLocaleLowerCase();
+            let visibleCount = 0;
+            researchCards.forEach((card) => {
+                const searchableText = (card.dataset.searchText ?? card.innerText).toLocaleLowerCase();
+                const matches = !query || searchableText.includes(query);
+                card.hidden = !matches;
+                if (matches) visibleCount += 1;
+            });
+            if (clearButton) clearButton.hidden = !query;
+            if (searchStatus) {
+                searchStatus.textContent = query
+                    ? `Showing ${visibleCount} of ${researchCards.length} research areas`
+                    : `Showing all ${researchCards.length} research areas`;
+            }
+            if (track) track.scrollTo({ left: 0, behavior: "smooth" });
+        };
+
+        searchInput?.addEventListener("input", applyResearchSearch);
+        clearButton?.addEventListener("click", () => {
+            if (!searchInput) return;
+            searchInput.value = "";
+            applyResearchSearch();
+            searchInput.focus();
+        });
+
         document.querySelectorAll<HTMLButtonElement>(".research-carousel-button").forEach((button) => {
             button.addEventListener("click", () => {
                 if (!track) return;
                 const direction = button.dataset.scroll === "next" ? 1 : -1;
-                const card = track.querySelector<HTMLElement>(".research-area-card");
+                const card = track.querySelector<HTMLElement>(".research-area-card:not([hidden])");
                 const distance = card ? card.offsetWidth + 24 : 380;
                 track.scrollBy({ left: direction * distance * 2, behavior: "smooth" });
             });
@@ -354,5 +396,98 @@ const otherProjects = projects.filter((p) => !areaTitles.has(norm(p.data.researc
         .research-card-cta span { transition: none; }
         .research-area-card:hover,
         .research-carousel-button:hover { transform: none; }
+    }
+
+    .research-gallery-heading {
+        display: flex;
+        align-items: end;
+        justify-content: space-between;
+        gap: 1.25rem;
+        flex-wrap: wrap;
+    }
+
+    .research-search {
+        display: flex;
+        align-items: center;
+        gap: 0.7rem;
+        width: min(100%, 23rem);
+        min-height: 3.1rem;
+        padding: 0.55rem 0.8rem 0.55rem 1rem;
+        border: 1px solid rgba(255, 255, 255, 0.88);
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.64);
+        box-shadow: 0 10px 28px -22px rgba(38, 62, 120, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.9);
+        color: #334155;
+        backdrop-filter: blur(18px) saturate(140%);
+        -webkit-backdrop-filter: blur(18px) saturate(140%);
+    }
+
+    .research-search svg {
+        width: 1.15rem;
+        height: 1.15rem;
+        flex: 0 0 auto;
+        color: #64748b;
+    }
+
+    .research-search input {
+        min-width: 0;
+        width: 100%;
+        border: 0;
+        outline: 0;
+        background: transparent;
+        color: #172033;
+        font: inherit;
+        font-size: 0.9rem;
+    }
+
+    .research-search input::placeholder { color: #7b8496; }
+    .research-search input:focus-visible { outline: none; }
+    .research-search:focus-within {
+        border-color: rgba(81, 112, 255, 0.58);
+        box-shadow: 0 0 0 3px rgba(81, 112, 255, 0.12), 0 10px 28px -22px rgba(38, 62, 120, 0.4);
+    }
+
+    .research-search-clear {
+        flex: 0 0 auto;
+        width: 1.7rem;
+        height: 1.7rem;
+        border-radius: 50%;
+        background: rgba(100, 116, 139, 0.12);
+        color: #475569;
+        font-size: 1.2rem;
+        line-height: 1;
+    }
+
+    .research-search-clear[hidden] { display: none; }
+
+    .research-gallery-toolbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+        margin: 0 0 0.9rem;
+    }
+
+    .research-search-status {
+        color: var(--color-base-content);
+        opacity: 0.58;
+        font-size: 0.8rem;
+    }
+
+    .research-area-card[hidden] { display: none; }
+
+    :global(html[data-theme="marc-dark"]) .research-search {
+        border-color: rgba(255, 255, 255, 0.16);
+        background: rgba(20, 29, 49, 0.72);
+        color: #f8fafc;
+    }
+
+    :global(html[data-theme="marc-dark"]) .research-search input { color: #f8fafc; }
+    :global(html[data-theme="marc-dark"]) .research-search input::placeholder { color: #a1aabe; }
+    :global(html[data-theme="marc-dark"]) .research-search-clear { color: #f8fafc; background: rgba(255,255,255,0.12); }
+
+    @media (max-width: 639px) {
+        .research-search { width: 100%; }
+        .research-gallery-toolbar { align-items: center; }
     }
 </style>
