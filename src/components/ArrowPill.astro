@@ -60,6 +60,26 @@ const linkProps = href
         box-shadow: 0 6px 20px -8px rgba(0, 74, 173, 0.38), 0 0 12px rgba(81, 112, 255, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.95);
     }
 
+    /* Reuse the same outline on other CTA pills such as Contact us,
+       without changing navbar navigation tabs. */
+    .marc-cta-pill--standard {
+        border: 1.5px solid transparent;
+        background:
+            linear-gradient(rgba(255, 255, 255, 0.96), rgba(247, 249, 255, 0.92)) padding-box,
+            linear-gradient(110deg, #004AAD 0%, #5170FF 38%, #9BACF4 63%, #7C0E24 100%) border-box;
+        box-shadow: 0 5px 18px rgba(0, 74, 173, 0.14), inset 0 1px 0 rgba(255, 255, 255, 0.95);
+    }
+
+    .marc-cta-icon--standard {
+        background: linear-gradient(135deg, #004AAD 0%, #5170FF 58%, #7C0E24 125%);
+        color: #ffffff;
+        box-shadow: 0 3px 9px rgba(0, 74, 173, 0.28);
+    }
+
+    .marc-cta-pill--standard:hover {
+        box-shadow: 0 8px 24px rgba(0, 74, 173, 0.24), 0 0 16px rgba(81, 112, 255, 0.16);
+    }
+
     .marc-cta-pill--explore::before {
         content: none;
     }
@@ -82,8 +102,15 @@ const linkProps = href
     }
 
     :global(html[data-theme="marc-dark"]) .marc-cta-icon--standard {
-        background: rgba(255, 255, 255, 0.12);
-        color: #f8faff;
+        background: linear-gradient(135deg, #5170FF 0%, #9BACF4 58%, #7C0E24 125%);
+        color: #ffffff;
+    }
+
+    :global(html[data-theme="marc-dark"]) .marc-cta-pill--standard {
+        border: 1.5px solid transparent;
+        background:
+            linear-gradient(rgba(20, 31, 57, 0.96), rgba(26, 28, 48, 0.94)) padding-box,
+            linear-gradient(110deg, #5170FF 0%, #9BACF4 45%, #7C0E24 100%) border-box;
     }
 
     .marc-cta-pill:hover {
