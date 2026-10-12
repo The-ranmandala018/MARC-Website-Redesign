@@ -278,26 +278,56 @@ const isActive = (href: string) => {
         }
     }
 
-    @property --marc-beam-angle {
-        syntax: "<angle>";
-        inherits: false;
-        initial-value: 0deg;
+    .marc-nav-tab-active {
+        position: relative;
+        isolation: isolate;
+        background: linear-gradient(135deg, rgba(255, 255, 255, 0.98), rgba(244, 247, 255, 0.96) 65%, rgba(255, 241, 246, 0.94));
+        border-color: rgba(255, 255, 255, 0.96);
+        box-shadow: 0 2px 8px rgba(35, 55, 100, 0.12), 0 0 0 1px rgba(81, 112, 255, 0.12), inset 0 1px 2px rgba(255, 255, 255, 0.98);
+        animation: marc-active-tab-glow 3.2s ease-in-out infinite;
+        will-change: box-shadow;
+    }
+
+    .marc-nav-tab-active::before {
+        content: "";
+        position: absolute;
+        inset: -5px;
+        border-radius: inherit;
+        background: linear-gradient(
+            100deg,
+            transparent 0%,
+            rgba(255, 65, 95, 0.12) 12%,
+            rgba(255, 65, 95, 0.85) 28%,
+            rgba(255, 115, 145, 1) 38%,
+            rgba(255, 65, 95, 0.75) 48%,
+            rgba(255, 65, 95, 0.12) 62%,
+            transparent 76%
+        );
+        background-size: 220% 100%;
+        filter: blur(7px);
+        opacity: 0.9;
+        pointer-events: none;
+        z-index: -1;
+        animation: marc-full-button-glow 2.4s linear infinite;
     }
 
     .marc-nav-tab-active::after {
         content: "";
         position: absolute;
-        inset: -2px;
+        inset: -1.5px;
         border-radius: inherit;
-        padding: 2px;
-        background: conic-gradient(
-            from var(--marc-beam-angle),
-            transparent 0deg 320deg,
-            #ff3434 332deg,
-            #ff5a36 342deg,
-            #ff3434 350deg,
-            transparent 360deg
+        padding: 1.5px;
+        background: linear-gradient(
+            100deg,
+            transparent 0%,
+            transparent 18%,
+            #ff3434 35%,
+            #ff8b8b 44%,
+            #ff3434 53%,
+            transparent 70%,
+            transparent 100%
         );
+        background-size: 220% 100%;
         -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
         -webkit-mask-composite: xor;
         mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
@@ -305,11 +335,17 @@ const isActive = (href: string) => {
         pointer-events: none;
         opacity: 1;
         z-index: 1;
-        animation: marc-beam-orbit 2.2s linear infinite;
+        animation: marc-full-button-beam 2.4s linear infinite;
     }
 
-    @keyframes marc-beam-orbit {
-        to { --marc-beam-angle: 360deg; }
+    @keyframes marc-full-button-beam {
+        from { background-position: 100% 0; }
+        to { background-position: -120% 0; }
+    }
+
+    @keyframes marc-full-button-glow {
+        from { background-position: 100% 0; }
+        to { background-position: -120% 0; }
     }
 
     :global(html[data-theme="marc-dark"]) .marc-nav-rail {
