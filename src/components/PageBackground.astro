@@ -32,6 +32,21 @@ const { innerPage = false } = Astro.props;
         background-color: #FAF8F3;
     }
 
+    /*
+     * Inner-page backgrounds sit behind long scrolling content. Keep the same
+     * colour composition, but stop animating ten blurred layers and remove the
+     * expensive full-screen turbulence texture while scrolling.
+     */
+    .page-bg-inner :global(.blob) {
+        animation: none !important;
+        will-change: auto;
+        filter: blur(8px) !important;
+    }
+
+    .page-bg-inner :global(.grain) {
+        display: none;
+    }
+
     /* Keep the background subtle behind dark-theme content. */
     :global(html[data-theme="marc-dark"]) .page-bg {
         opacity: 0.3;
@@ -41,6 +56,10 @@ const { innerPage = false } = Astro.props;
     @media (max-width: 640px) {
         .page-bg-inner {
             opacity: 0.85;
+        }
+
+        .page-bg-inner :global(.blob) {
+            filter: blur(5px) !important;
         }
     }
 
