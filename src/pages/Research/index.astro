@@ -109,9 +109,6 @@ const otherProjects = projects.filter((p) => !areaTitles.has(norm(p.data.researc
                         <div class="research-card-shade"></div>
                         <span class="area-index-badge">{a.index}</span>
                         <div class="research-card-content">
-                            <div class="research-card-meta">
-                                {a.projects.length} {a.projects.length === 1 ? "project" : "projects"}
-                            </div>
                             <h3 class="font-display text-2xl sm:text-[1.7rem] leading-tight text-white">
                                 {a.title}
                             </h3>
@@ -354,19 +351,6 @@ const otherProjects = projects.filter((p) => !areaTitles.has(norm(p.data.researc
         align-items: flex-start;
         padding: 1.35rem;
         color: #fff;
-    }
-
-    .research-card-meta {
-        margin-bottom: 0.75rem;
-        padding: 0.35rem 0.65rem;
-        border: 1px solid rgba(255, 255, 255, 0.25);
-        border-radius: 999px;
-        background: rgba(255, 255, 255, 0.14);
-        color: rgba(255, 255, 255, 0.92);
-        font-size: 0.72rem;
-        font-weight: 600;
-        backdrop-filter: blur(12px);
-        -webkit-backdrop-filter: blur(12px);
     }
 
     .research-card-cta {
