@@ -454,3 +454,39 @@ html[data-theme="marc-dark"] span.marc-cta-pill--explore {
         linear-gradient(100deg, #5170FF 0%, #9BACF4 45%, #7C0E24 100%) border-box !important;
     color: #f8faff !important;
 }
+
+
+/* MARC navigation links: gradient outline for links that move between pages.
+   Excludes the navbar tabs, inline text links, and CTA buttons already styled. */
+a[href]:not(.marc-nav-tab):not(.marc-cta-pill):not(.research-card-link):not(.research-card-cta):not(.publication-link):not(.project-card-link):not(.people-card-link):not(.news-card-link):not([class*="inline"]):not([class*="text-"]):not([class*="underline"]):not([class*="logo"]):not([class*="social"]) {
+    transition: border-color 220ms ease, box-shadow 220ms ease, background-color 220ms ease, transform 220ms ease;
+}
+
+a.marc-page-nav,
+button.marc-page-nav {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    border: 1.5px solid transparent;
+    border-radius: 999px;
+    background:
+        linear-gradient(rgba(255, 255, 255, 0.96), rgba(247, 249, 255, 0.92)) padding-box,
+        linear-gradient(100deg, #004AAD 0%, #5170FF 38%, #9BACF4 63%, #7C0E24 100%) border-box;
+    box-shadow: 0 5px 18px rgba(0, 74, 173, 0.14), inset 0 1px 0 rgba(255, 255, 255, 0.95);
+    color: #12315f;
+    transition: box-shadow 220ms ease, transform 220ms ease;
+}
+
+a.marc-page-nav:hover,
+button.marc-page-nav:hover {
+    box-shadow: 0 8px 24px rgba(0, 74, 173, 0.24), 0 0 16px rgba(81, 112, 255, 0.18);
+    transform: translateY(-1px);
+}
+
+html[data-theme="marc-dark"] a.marc-page-nav,
+html[data-theme="marc-dark"] button.marc-page-nav {
+    background:
+        linear-gradient(rgba(20, 31, 57, 0.96), rgba(26, 28, 48, 0.94)) padding-box,
+        linear-gradient(110deg, #5170FF 0%, #9BACF4 45%, #7C0E24 100%) border-box;
+    color: #f8faff;
+}
