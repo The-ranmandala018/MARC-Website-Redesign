@@ -1,0 +1,176 @@
+media:
+  input: public/uploads
+  output: /uploads
+
+content:
+  - name: people
+    label: Team Members
+    type: collection
+    path: src/collection_people
+    format: yaml-frontmatter
+    exclude:
+      - README.md
+    view:
+      primary: name
+      fields: [name, post, email]
+      sort: [name]
+    fields:
+      - name: name
+        label: Full Name
+        type: string
+        required: true
+      - name: post
+        label: Role
+        type: string
+        required: true
+      - name: email
+        label: Email
+        type: string
+        required: true
+      - name: photo
+        label: Photo Path
+        type: string
+        description: Keep the existing relative image path unless you also update the Astro image setup.
+
+  - name: projects
+    label: Research Projects
+    type: collection
+    path: src/collection_projects
+    format: yaml-frontmatter
+    exclude:
+      - README.md
+    view:
+      primary: project
+      fields: [project, researchArea]
+      sort: [project]
+    fields:
+      - name: project
+        label: Project Name
+        type: string
+        required: true
+      - name: researchArea
+        label: Research Area
+        type: string
+        required: true
+      - name: projectMembers
+        label: Project Members
+        type: string
+        list: true
+      - name: supervisors
+        label: Supervisors
+        type: string
+        list: true
+      - name: researchPillars
+        label: Research Pillars
+        type: string
+        list: true
+      - name: coverImage
+        label: Cover Image Path
+        type: string
+        required: true
+        description: Keep the existing relative image path unless you also update the Astro image setup.
+
+  - name: news
+    label: News Articles
+    type: collection
+    path: src/collection_news
+    format: yaml-frontmatter
+    exclude:
+      - social_news.json
+      - README.md
+    view:
+      primary: title
+      fields: [title, date, short]
+      sort: [date]
+      order: desc
+    fields:
+      - name: title
+        label: Title
+        type: string
+        required: true
+      - name: date
+        label: Publication Date
+        type: date
+        required: true
+      - name: cover
+        label: Cover Image Path
+        type: string
+        description: Keep the existing relative image path unless you also update the Astro image setup.
+      - name: short
+        label: Short Summary
+        type: text
+        required: true
+      - name: body
+        label: Article Content
+        type: rich-text
+
+  - name: social_news
+    label: Social News Links
+    type: file
+    path: src/collection_news/social_news.json
+    format: json
+    list: true
+    fields:
+      - name: title
+        label: Title
+        type: string
+        required: true
+      - name: date
+        label: Date
+        type: date
+        required: true
+      - name: source
+        label: Source
+        type: select
+        options:
+          values: [Facebook, LinkedIn, Web, Twitter]
+        required: true
+      - name: url
+        label: Link URL
+        type: string
+        required: true
+      - name: thumbnail
+        label: Thumbnail Path
+        type: string
+      - name: embed
+        label: Embed Code
+        type: text
+
+  - name: publications
+    label: Publications
+    type: file
+    path: src/collection_publications/publications.json
+    format: json
+    list: true
+    fields:
+      - name: paper_title
+        label: Paper Title
+        type: string
+        required: true
+      - name: venue
+        label: Venue
+        type: string
+        required: true
+      - name: type
+        label: Publication Type
+        type: string
+        required: true
+      - name: doi
+        label: DOI URL
+        type: string
+        required: true
+      - name: authors
+        label: Authors
+        type: string
+        list: true
+      - name: publication_date
+        label: Publication Date
+        type: date
+        required: true
+      - name: people
+        label: People Emails
+        type: string
+        list: true
+      - name: project
+        label: Related Project
+        type: string
