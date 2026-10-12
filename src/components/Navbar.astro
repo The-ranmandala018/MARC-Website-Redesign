@@ -282,22 +282,25 @@ const isActive = (href: string) => {
         position: absolute;
         inset: -2px;
         border-radius: inherit;
-        padding: 1.5px;
+        padding: 2px;
         background: conic-gradient(
-            rgba(0, 74, 173, 0.12) 0deg,
-            rgba(0, 74, 173, 0.98) 65deg,
-            rgba(81, 112, 255, 1) 145deg,
-            rgba(217, 169, 211, 0.95) 220deg,
-            rgba(124, 14, 36, 0.9) 285deg,
-            rgba(0, 74, 173, 0.12) 360deg
+            from 0deg,
+            transparent 0deg,
+            transparent 35deg,
+            #004AAD 75deg,
+            #5170FF 135deg,
+            #D9A9D3 190deg,
+            #7C0E24 235deg,
+            transparent 285deg,
+            transparent 360deg
         );
         -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
         -webkit-mask-composite: xor;
         mask-composite: exclude;
         pointer-events: none;
-        opacity: 0.95;
-        transform-origin: center;
-        animation: marc-border-rotate 3s linear infinite;
+        opacity: 1;
+        z-index: 1;
+        animation: marc-border-rotate 2.8s linear infinite;
     }
 
     @keyframes marc-border-rotate {
