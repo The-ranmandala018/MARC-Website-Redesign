@@ -278,12 +278,6 @@ const isActive = (href: string) => {
         }
     }
 
-    @property --marc-border-angle {
-        syntax: "<angle>";
-        inherits: false;
-        initial-value: 0deg;
-    }
-
     .marc-nav-tab-active::after {
         content: "";
         position: absolute;
@@ -291,13 +285,13 @@ const isActive = (href: string) => {
         border-radius: inherit;
         padding: 2px;
         background: conic-gradient(
-            from var(--marc-border-angle),
+            from 0deg,
             transparent 0deg,
-            transparent 250deg,
-            #004AAD 280deg,
-            #5170FF 305deg,
+            transparent 275deg,
+            #004AAD 292deg,
+            #5170FF 310deg,
             #9BACF4 325deg,
-            #D9A9D3 342deg,
+            #D9A9D3 340deg,
             #7C0E24 352deg,
             transparent 360deg
         );
@@ -307,11 +301,12 @@ const isActive = (href: string) => {
         pointer-events: none;
         opacity: 1;
         z-index: 1;
-        animation: marc-border-travel 1.2s linear infinite;
+        animation: marc-border-light 2.4s linear infinite;
     }
 
-    @keyframes marc-border-travel {
-        to { --marc-border-angle: 360deg; }
+    @keyframes marc-border-light {
+        from { transform: rotate(0deg); }
+        to { transform: rotate(360deg); }
     }
 
     :global(html[data-theme="marc-dark"]) .marc-nav-rail {
