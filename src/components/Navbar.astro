@@ -247,17 +247,38 @@ const isActive = (href: string) => {
 <style>
     .marc-nav-rail {
         position: relative;
-        border: 1px solid transparent;
+        border: 1px solid rgba(81, 112, 255, 0.5);
         border-radius: 9999px;
+        /* Keep the existing rail background unchanged; the gradient is drawn only on the outline. */
         background: transparent;
         box-shadow:
-            0 0 0 1px rgba(81, 112, 255, 0.10),
-            0 0 12px rgba(0, 74, 173, 0.12),
-            0 0 24px rgba(81, 112, 255, 0.08);
-        background-image: linear-gradient(110deg, #004AAD 0%, #5170FF 30%, #9BACF4 55%, #7C0E24 78%, #004AAD 100%);
-        background-origin: border-box;
-        background-clip: border-box;
-        animation: marc-nav-outline-flow 8s linear infinite;
+            0 0 0 1px rgba(81, 112, 255, 0.14),
+            0 0 10px rgba(0, 74, 173, 0.22),
+            0 0 20px rgba(81, 112, 255, 0.16);
+    }
+
+    .marc-nav-rail::after {
+        content: "";
+        position: absolute;
+        inset: -1px;
+        z-index: 1;
+        padding: 1.5px;
+        border-radius: inherit;
+        background: linear-gradient(
+            110deg,
+            #004AAD 0%,
+            #5170FF 28%,
+            #9BACF4 52%,
+            #7C0E24 76%,
+            #004AAD 100%
+        );
+        background-size: 220% 100%;
+        -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+        -webkit-mask-composite: xor;
+        mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+        mask-composite: exclude;
+        pointer-events: none;
+        animation: marc-nav-outline-flow 5s linear infinite;
     }
 
     .marc-nav-rail::before {
@@ -273,8 +294,8 @@ const isActive = (href: string) => {
     }
 
     @keyframes marc-nav-outline-flow {
-        from { background-position: 0 0, 100% 0; }
-        to { background-position: 0 0, -120% 0; }
+        from { background-position: 100% 0; }
+        to { background-position: -120% 0; }
     }
 
     .marc-nav-tab {
@@ -379,10 +400,11 @@ const isActive = (href: string) => {
     }
 
     :global(html[data-theme="marc-dark"]) .marc-nav-rail {
+        border-color: rgba(156, 181, 255, 0.45);
         box-shadow:
-            0 0 0 1px rgba(81, 112, 255, 0.12),
-            0 0 14px rgba(0, 74, 173, 0.16),
-            0 0 26px rgba(81, 112, 255, 0.10);
+            0 0 0 1px rgba(81, 112, 255, 0.16),
+            0 0 12px rgba(0, 74, 173, 0.24),
+            0 0 22px rgba(81, 112, 255, 0.18);
     }
 
     :global(html[data-theme="marc-dark"]) .marc-nav-tab-active {
@@ -406,7 +428,7 @@ const isActive = (href: string) => {
             transition: none;
         }
 
-        .marc-nav-rail,
+        .marc-nav-rail::after,
         .marc-nav-tab-active,
         .marc-nav-tab-active::after {
             animation: none;
