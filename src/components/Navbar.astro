@@ -285,34 +285,28 @@ const isActive = (href: string) => {
         border-radius: inherit;
         padding: 2px;
         background: conic-gradient(
-            from var(--gemini-glow-angle, 0deg),
-            transparent 0deg,
-            transparent 285deg,
+            from 0deg,
+            transparent 0deg 285deg,
             #4285F4 300deg,
             #8AB4F8 312deg,
             #C58AF9 324deg,
             #D96570 336deg,
             #F9AB00 346deg,
-            transparent 356deg,
-            transparent 360deg
+            transparent 356deg 360deg
         );
         -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
         -webkit-mask-composite: xor;
+        mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
         mask-composite: exclude;
         pointer-events: none;
-        opacity: 0.95;
+        opacity: 1;
         z-index: 1;
-        animation: gemini-style-border-spin 2.8s linear infinite;
+        animation: marc-gemini-ring-spin 1.8s linear infinite;
     }
 
-    @property --gemini-glow-angle {
-        syntax: "<angle>";
-        inherits: false;
-        initial-value: 0deg;
-    }
-
-    @keyframes gemini-style-border-spin {
-        to { --gemini-glow-angle: 360deg; }
+    @keyframes marc-gemini-ring-spin {
+        from { transform: rotate(0deg); }
+        to { transform: rotate(360deg); }
     }
 
     :global(html[data-theme="marc-dark"]) .marc-nav-rail {
