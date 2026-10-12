@@ -20,37 +20,37 @@ const aboutLinks = [
 const year = new Date().getFullYear();
 ---
 
-<footer class="bg-secondary text-secondary-content mt-24">
-    <div class="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16">
-        <div class="grid grid-cols-1 md:grid-cols-12 gap-12">
+<footer class="marc-footer mt-16 sm:mt-20">
+    <div class="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-9 sm:py-11">
+        <div class="grid grid-cols-1 gap-7 sm:gap-8 md:grid-cols-12">
             <!-- Brand -->
-            <div class="md:col-span-5 space-y-5">
+            <div class="md:col-span-5 space-y-3">
                 <div class="flex items-center gap-3">
                     <Image
                         src={logo}
                         alt="MARC logo"
-                        class="w-12 h-12 rounded-full ring-1 ring-white/20"
+                        class="w-9 h-9 rounded-full ring-1 ring-white/20"
                     />
                     <div>
-                        <div class="font-semibold text-lg">MARC</div>
-                        <div class="text-xs opacity-70">
+                        <div class="font-semibold text-base tracking-wide">MARC</div>
+                        <div class="text-[11px] opacity-70">
                             Multidisciplinary AI Research Centre
                         </div>
                     </div>
                 </div>
-                <p class="text-sm opacity-75 max-w-sm leading-relaxed">
+                <p class="text-xs sm:text-sm opacity-75 max-w-sm leading-relaxed">
                     A research centre at the Faculty of Engineering, University
                     of Peradeniya, advancing AI through interdisciplinary
                     collaboration in collaboration with DEEE & DMIE.
                 </p>
 
-                <div class="flex items-center gap-2 pt-2">
+                <div class="flex items-center gap-2 pt-1">
                     <a
                         href={linkedinUrl}
                         target="_blank"
                         rel="noopener"
                         aria-label="LinkedIn"
-                        class="w-9 h-9 grid place-items-center rounded-full bg-white/5 hover:bg-white/15 transition"
+                        class="marc-footer-social w-8 h-8 grid place-items-center rounded-full transition"
                     >
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
@@ -107,14 +107,14 @@ const year = new Date().getFullYear();
 
             <!-- Explore -->
             <div class="md:col-span-3">
-                <h4 class="eyebrow mb-4 opacity-60">Explore</h4>
-                <ul class="space-y-3">
+                <h4 class="text-[11px] font-semibold uppercase tracking-[0.16em] mb-3 opacity-65">Explore</h4>
+                <ul class="space-y-2">
                     {
                         exploreLinks.map((l) => (
                             <li>
                                 <a
                                     href={l.href}
-                                    class="text-sm hover:text-primary transition-colors"
+                                    class="marc-footer-link text-xs sm:text-sm transition-colors"
                                 >
                                     {l.label}
                                 </a>
@@ -135,7 +135,7 @@ const year = new Date().getFullYear();
                                     href={l.href}
                                     target={l.external ? "_blank" : undefined}
                                     rel={l.external ? "noopener" : undefined}
-                                    class="text-sm hover:text-primary transition-colors inline-flex items-center gap-1"
+                                    class="marc-footer-link text-xs sm:text-sm transition-colors inline-flex items-center gap-1"
                                 >
                                     {l.label}
                                     {l.external && (
@@ -162,9 +162,50 @@ const year = new Date().getFullYear();
             </div>
         </div>
 
-        <div class="mt-14 pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between gap-4 text-xs opacity-60">
+        <div class="mt-8 sm:mt-9 pt-5 border-t flex flex-col md:flex-row justify-between gap-2 text-[11px] opacity-65">
             <p>© {year} Multidisciplinary AI Research Centre.</p>
             <p>Faculty of Engineering, University of Peradeniya, Sri Lanka.</p>
         </div>
     </div>
+
+    <style>
+        .marc-footer {
+            color: #eaf0ff;
+            background:
+                radial-gradient(ellipse at 12% 0%, rgba(81, 112, 255, 0.24), transparent 38%),
+                radial-gradient(ellipse at 88% 100%, rgba(124, 14, 36, 0.20), transparent 34%),
+                linear-gradient(120deg, #07172f 0%, #10264b 52%, #151b35 100%);
+            border-top: 1px solid rgba(156, 181, 255, 0.26);
+        }
+
+        .marc-footer-link {
+            color: rgba(234, 240, 255, 0.76);
+            text-decoration: none;
+            transition: color 180ms ease;
+        }
+
+        .marc-footer-link:hover {
+            color: #ffffff;
+        }
+
+        .marc-footer-social {
+            color: #eaf0ff;
+            border: 1px solid rgba(156, 181, 255, 0.24);
+            background: rgba(255, 255, 255, 0.055);
+        }
+
+        .marc-footer-social:hover {
+            border-color: transparent;
+            background: linear-gradient(135deg, #004AAD, #5170FF 58%, #7C0E24 125%);
+            box-shadow: 0 0 14px rgba(81, 112, 255, 0.22);
+            transform: translateY(-1px);
+        }
+
+        html[data-theme="marc-dark"] .marc-footer {
+            background:
+                radial-gradient(ellipse at 12% 0%, rgba(81, 112, 255, 0.2), transparent 38%),
+                radial-gradient(ellipse at 88% 100%, rgba(124, 14, 36, 0.18), transparent 34%),
+                linear-gradient(120deg, #050b18 0%, #0b1530 52%, #130e20 100%);
+        }
+    </style>
 </footer>
