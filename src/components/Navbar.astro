@@ -423,6 +423,28 @@ const isActive = (href: string) => {
         }
     }
 
+    /* MARC gradient outline for the light/dark mode control only. */
+    #theme-toggle {
+        border: 1.5px solid transparent !important;
+        background:
+            linear-gradient(rgba(255, 255, 255, 0.96), rgba(247, 249, 255, 0.92)) padding-box,
+            linear-gradient(110deg, #004AAD 0%, #5170FF 38%, #9BACF4 63%, #7C0E24 100%) border-box !important;
+        box-shadow: 0 4px 14px rgba(0, 74, 173, 0.14), 0 0 10px rgba(81, 112, 255, 0.1);
+        transition: box-shadow 220ms ease, transform 220ms ease;
+    }
+
+    #theme-toggle:hover {
+        box-shadow: 0 7px 20px rgba(0, 74, 173, 0.24), 0 0 16px rgba(81, 112, 255, 0.2);
+        transform: translateY(-1px);
+    }
+
+    :global(html[data-theme="marc-dark"]) #theme-toggle {
+        background:
+            linear-gradient(rgba(20, 31, 57, 0.96), rgba(26, 28, 48, 0.94)) padding-box,
+            linear-gradient(110deg, #5170FF 0%, #9BACF4 45%, #7C0E24 100%) border-box !important;
+        color: #f8faff;
+    }
+
     @media (prefers-reduced-motion: reduce) {
         .marc-nav-tab {
             transition: none;
