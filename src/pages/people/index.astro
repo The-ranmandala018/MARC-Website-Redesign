@@ -66,18 +66,6 @@ const plural = (role: string, n: number) => (n === 1 ? role : `${role}s`);
             <span class="text-gradient">behind MARC.</span>
         </Fragment>
 
-        <nav slot="after" class="mt-10 flex flex-wrap gap-2" aria-label="Roles">
-            {
-                sortedRoles.map((role) => (
-                    <a href={`#${roleId(role)}`} class="glass-chip">
-                        {plural(role, groupedPeople[role].length)}
-                        <span class="tabular-nums text-[#5170FF] font-semibold">
-                            {groupedPeople[role].length}
-                        </span>
-                    </a>
-                ))
-            }
-        </nav>
     </PageHeader>
 
     <!-- ===================================================== -->
@@ -153,4 +141,10 @@ const plural = (role: string, n: number) => (n === 1 ? role : `${role}s`);
             })
         }
     </div>
+    <style>
+        /* Hide only the decorative dot grid on the People page. */
+        :global(.page-bg .dots) {
+            display: none;
+        }
+    </style>
 </BaseLayout>
