@@ -157,13 +157,9 @@ export default function PublicationsList({ publications }: Props) {
                     </select>
                 </div>
 
-                {/* Results count & reset */}
-                <div class="mt-4 flex items-center justify-between px-1 text-sm">
-                    <span class="text-base-content/60">
-                        Showing <strong class="text-base-content">{filteredPubs.length}</strong>{" "}
-                        {filteredPubs.length === 1 ? "publication" : "publications"}
-                    </span>
-                    {hasFilters && (
+                {/* Filter reset only; omit the publication count. */}
+                {hasFilters && (
+                    <div class="mt-4 flex justify-end px-1 text-sm">
                         <button
                             type="button"
                             onClick={resetFilters}
@@ -171,8 +167,8 @@ export default function PublicationsList({ publications }: Props) {
                         >
                             Clear filters
                         </button>
-                    )}
-                </div>
+                    </div>
+                )}
             </div>
 
             {/* --- RESULTS --- */}
