@@ -33,16 +33,7 @@ const stats = [
             <span class="text-gradient">publications.</span>
         </Fragment>
 
-        <div slot="after" class="mt-10 grid grid-cols-3 gap-3 sm:max-w-xl sm:gap-4">
-            {
-                stats.map((s) => (
-                    <div class="glass-card !rounded-3xl px-4 py-4 sm:px-5">
-                        <p class="font-display text-3xl sm:text-4xl text-base-content tabular-nums">{s.value}</p>
-                        <p class="mt-1 text-xs sm:text-sm text-base-content/60">{s.label}</p>
-                    </div>
-                ))
-            }
-        </div>
+
     </PageHeader>
 
     <div class="mt-14">
