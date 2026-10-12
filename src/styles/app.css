@@ -490,3 +490,46 @@ html[data-theme="marc-dark"] button.marc-page-nav {
         linear-gradient(110deg, #5170FF 0%, #9BACF4 45%, #7C0E24 100%) border-box;
     color: #f8faff;
 }
+
+/* Shared MARC gradient outline and focus glow for search fields. */
+.marc-search-wrap {
+    position: relative;
+    display: block;
+    padding: 1.5px;
+    border: 1px solid transparent;
+    border-radius: 1rem;
+    background:
+        linear-gradient(rgba(255, 255, 255, 0.96), rgba(247, 249, 255, 0.92)) padding-box,
+        linear-gradient(100deg, #004AAD 0%, #5170FF 38%, #9BACF4 65%, #7C0E24 100%) border-box;
+    box-shadow: 0 5px 18px rgba(0, 74, 173, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.9);
+    transition: box-shadow 220ms ease, transform 220ms ease;
+}
+
+.marc-search-wrap:focus-within {
+    box-shadow: 0 8px 24px rgba(0, 74, 173, 0.22), 0 0 16px rgba(81, 112, 255, 0.2);
+    transform: translateY(-1px);
+}
+
+.marc-search-wrap input[type="search"] {
+    border: 0;
+    outline: none;
+    box-shadow: none;
+    background: rgba(255, 255, 255, 0.72);
+}
+
+.marc-search-wrap input[type="search"]:focus {
+    border: 0;
+    outline: none;
+    box-shadow: none;
+}
+
+html[data-theme="marc-dark"] .marc-search-wrap {
+    background:
+        linear-gradient(rgba(20, 31, 57, 0.96), rgba(26, 28, 48, 0.94)) padding-box,
+        linear-gradient(100deg, #5170FF 0%, #9BACF4 45%, #7C0E24 100%) border-box;
+}
+
+html[data-theme="marc-dark"] .marc-search-wrap input[type="search"] {
+    background: rgba(20, 31, 57, 0.78);
+}
+
