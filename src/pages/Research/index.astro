@@ -107,7 +107,6 @@ const otherProjects = projects.filter((p) => !areaTitles.has(norm(p.data.researc
                             />
                         )}
                         <div class="research-card-shade"></div>
-                        <span class="area-index-badge">{a.index}</span>
                         <div class="research-card-content">
                             <h3 class="font-display text-2xl sm:text-[1.7rem] leading-tight text-white">
                                 {a.title}
@@ -366,8 +365,10 @@ const otherProjects = projects.filter((p) => !areaTitles.has(norm(p.data.researc
         margin-top: 1.2rem;
         padding: 0.55rem 0.95rem;
         border-radius: 999px;
-        background: rgba(255, 255, 255, 0.96);
-        color: #111827;
+        background: linear-gradient(110deg, #004AAD 0%, #5170FF 62%, #7C0E24 135%);
+        color: #ffffff;
+        border: 1px solid rgba(255, 255, 255, 0.48);
+        box-shadow: 0 8px 22px -10px rgba(0, 74, 173, 0.58), inset 0 1px 0 rgba(255, 255, 255, 0.28);
         font-size: 0.82rem;
         font-weight: 650;
         transition: background 200ms ease, transform 200ms ease;
@@ -378,8 +379,9 @@ const otherProjects = projects.filter((p) => !areaTitles.has(norm(p.data.researc
     }
 
     .research-area-card:hover .research-card-cta {
-        background: #fff;
+        background: linear-gradient(110deg, #5170FF 0%, #004AAD 62%, #7C0E24 135%);
         transform: translateY(-1px);
+        box-shadow: 0 10px 24px -10px rgba(0, 74, 173, 0.7);
     }
 
     .research-area-card:hover .research-card-cta span {
