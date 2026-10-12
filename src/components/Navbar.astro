@@ -291,21 +291,23 @@ const isActive = (href: string) => {
     .marc-nav-tab-active::before {
         content: "";
         position: absolute;
-        inset: -4px;
+        inset: -3px;
         border-radius: inherit;
         background: linear-gradient(
             100deg,
             transparent 0%,
-            rgba(0, 45, 112, 0.06) 18%,
-            rgba(0, 58, 145, 0.26) 34%,
-            rgba(54, 91, 190, 0.32) 43%,
-            rgba(155, 172, 244, 0.20) 52%,
-            rgba(124, 14, 36, 0.07) 63%,
-            transparent 78%
+            transparent 20%,
+            rgba(0, 52, 119, 0.03) 31%,
+            rgba(0, 74, 173, 0.12) 39%,
+            rgba(81, 112, 255, 0.18) 46%,
+            rgba(155, 172, 244, 0.12) 52%,
+            rgba(217, 169, 211, 0.04) 59%,
+            transparent 70%,
+            transparent 100%
         );
         background-size: 220% 100%;
-        filter: blur(8px);
-        opacity: 0.72;
+        filter: blur(5px);
+        opacity: 0.58;
         pointer-events: none;
         z-index: -1;
         animation: marc-full-button-glow 3.2s linear infinite;
@@ -314,19 +316,19 @@ const isActive = (href: string) => {
     .marc-nav-tab-active::after {
         content: "";
         position: absolute;
-        inset: -1.5px;
+        inset: -1px;
         border-radius: inherit;
-        padding: 1.5px;
+        padding: 1px;
         background: linear-gradient(
             100deg,
             transparent 0%,
-            transparent 20%,
+            transparent 23%,
             #003477 34%,
-            #004AAD 43%,
-            #5170FF 50%,
-            #9BACF4 57%,
-            #7C0E24 64%,
-            transparent 78%,
+            #004AAD 41%,
+            #5170FF 47%,
+            #9BACF4 52%,
+            #D9A9D3 58%,
+            transparent 68%,
             transparent 100%
         );
         background-size: 220% 100%;
@@ -335,7 +337,7 @@ const isActive = (href: string) => {
         mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
         mask-composite: exclude;
         pointer-events: none;
-        opacity: 0.85;
+        opacity: 0.58;
         z-index: 1;
         animation: marc-full-button-beam 3.2s linear infinite;
     }
