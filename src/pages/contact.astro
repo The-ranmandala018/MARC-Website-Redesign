@@ -43,10 +43,6 @@ const socials = [
     </PageHeader>
 
     <div class="mt-14 grid grid-cols-1 gap-6 lg:grid-cols-12 lg:gap-8">
-        <!-- ===================================================== -->
-        <!-- INFO -->
-        <!-- ===================================================== -->
-
         <div class="space-y-6 lg:col-span-5">
             <section class="glass-card p-7 sm:p-8">
                 <span class="grid h-12 w-12 place-items-center rounded-2xl bg-gradient-to-br from-[#3f6bf5] to-[#7a84f0] text-white shadow-[0_12px_30px_-12px_rgba(63,107,245,0.7)]">
@@ -90,10 +86,6 @@ const socials = [
             </section>
         </div>
 
-        <!-- ===================================================== -->
-        <!-- FORM -->
-        <!-- ===================================================== -->
-
         <section class="glass-card p-7 sm:p-9 lg:col-span-7 lg:p-10">
             <h2 class="font-display text-3xl text-base-content">Send us a message</h2>
             <p class="mt-2 text-base-content/60">Tell us a little about your inquiry.</p>
@@ -135,34 +127,37 @@ const socials = [
 
     <style>
         .marc-contact-submit {
-            border: 1.5px solid transparent;
-            color: #12315f;
-            background:
-                linear-gradient(rgba(255, 255, 255, 0.97), rgba(247, 249, 255, 0.94)) padding-box,
-                linear-gradient(100deg, #004AAD 0%, #5170FF 38%, #9BACF4 63%, #7C0E24 100%) border-box;
-            box-shadow: 0 5px 18px rgba(0, 74, 173, 0.16), inset 0 1px 0 rgba(255, 255, 255, 0.95);
+            border: 1px solid rgba(255, 255, 255, 0.42);
+            color: #ffffff;
+            background: linear-gradient(112deg, #004AAD 0%, #4167E8 48%, #7465D9 76%, #7C0E24 135%);
+            box-shadow: 0 7px 20px -7px rgba(0, 74, 173, 0.42), inset 0 1px 0 rgba(255, 255, 255, 0.22);
+            transition: transform 220ms ease, box-shadow 220ms ease, filter 220ms ease;
         }
 
         .marc-contact-submit svg {
-            color: #5170FF;
-            transition: transform 220ms ease, color 220ms ease;
+            color: #ffffff;
+            transition: transform 220ms ease;
         }
 
         .marc-contact-submit:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 24px rgba(0, 74, 173, 0.28), 0 0 16px rgba(81, 112, 255, 0.2);
+            filter: saturate(1.08) brightness(1.05);
+            box-shadow: 0 11px 28px -8px rgba(0, 74, 173, 0.52), 0 0 16px rgba(81, 112, 255, 0.2);
         }
 
         .marc-contact-submit:hover svg {
             transform: translateX(3px);
-            color: #7C0E24;
+        }
+
+        .marc-contact-submit:focus-visible {
+            outline: 3px solid rgba(81, 112, 255, 0.48);
+            outline-offset: 3px;
         }
 
         :global(html[data-theme="marc-dark"]) .marc-contact-submit {
-            color: #f8faff;
-            background:
-                linear-gradient(rgba(20, 31, 57, 0.97), rgba(26, 28, 48, 0.94)) padding-box,
-                linear-gradient(110deg, #5170FF 0%, #9BACF4 45%, #7C0E24 100%) border-box;
+            color: #ffffff;
+            background: linear-gradient(112deg, #174A9D 0%, #5369D8 48%, #7664C9 76%, #7C0E24 135%);
+            box-shadow: 0 7px 22px -8px rgba(0, 0, 0, 0.62), inset 0 1px 0 rgba(255, 255, 255, 0.16);
         }
     </style>
 </BaseLayout>
