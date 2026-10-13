@@ -1,4 +1,5 @@
 ---
+import { withBase } from "../../utils/url";
 import { getCollection } from "astro:content";
 import { Image } from "astro:assets";
 import BaseLayout from "../../layouts/BaseLayout.astro";
@@ -55,7 +56,7 @@ const plural = (role: string, n: number) => (n === 1 ? role : `${role}s`);
     description="Meet the researchers and team behind the Multidisciplinary AI Research Centre."
 >
     <Breadcrumb>
-        <li><a href="/">Home</a></li>
+        <li><a href={withBase("/")}>Home</a></li>
         <li>People</li>
     </Breadcrumb>
 
@@ -95,7 +96,7 @@ const plural = (role: string, n: number) => (n === 1 ? role : `${role}s`);
                             {groupedPeople[role].map((person) => (
                                 <li>
                                     <a
-                                        href={`/people/${person.id}/`}
+                                        href={withBase(`/people/${person.id}/`)}
                                         class={`group glass-card glass-hover flex h-full p-3 ${
                                             isLead ? "flex-col sm:flex-row sm:items-center sm:gap-6" : "flex-col"
                                         }`}

@@ -1,4 +1,5 @@
 ---
+import { withBase } from "../utils/url";
 import { Image } from "astro:assets";
 import logo from "../assets/logo.png";
 
@@ -9,12 +10,12 @@ const youtubeUrl = "https://www.youtube.com/@MARCUoP";
 const facultyUrl = "https://eng.pdn.ac.lk/";
 
 const exploreLinks = [
-    { href: "/Research", label: "Research & projects" },
-    { href: "/publications", label: "Publications" },
+    { href: withBase("/Research"), label: "Research & projects" },
+    { href: withBase("/publications"), label: "Publications" },
 ];
 const aboutLinks = [
-    { href: "/people", label: "People" },
-    { href: "/news", label: "News" },
+    { href: withBase("/people"), label: "People" },
+    { href: withBase("/news"), label: "News" },
     { href: facultyUrl, label: "Faculty of Engineering", external: true },
 ];
 const year = new Date().getFullYear();

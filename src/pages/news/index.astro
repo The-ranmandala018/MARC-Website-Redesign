@@ -1,4 +1,5 @@
 ---
+import { withBase } from "../../utils/url";
 import { getCollection } from "astro:content";
 import { Image } from "astro:assets";
 import BaseLayout from "../../layouts/BaseLayout.astro";
@@ -31,7 +32,7 @@ const sourceColor: Record<string, string> = {
     description="Discover MARC's latest research milestones, awards, and community activities."
 >
     <Breadcrumb>
-        <li><a href="/">Home</a></li>
+        <li><a href={withBase("/")}>Home</a></li>
         <li>News</li>
     </Breadcrumb>
 
@@ -53,7 +54,7 @@ const sourceColor: Record<string, string> = {
     {
         featured && (
             <a
-                href={`/news/${featured.id}`}
+                href={withBase(`/news/${featured.id}`)}
                 class="group glass-card glass-hover mt-14 grid gap-6 p-3 lg:grid-cols-[1.25fr_1fr] lg:items-center lg:gap-10"
             >
                 <div class="relative aspect-[16/10] overflow-hidden rounded-[1.4rem] bg-base-content/5">
@@ -94,7 +95,7 @@ const sourceColor: Record<string, string> = {
                 <h2 class="mb-6 font-display text-3xl sm:text-4xl text-base-content">More stories</h2>
                 <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
                     {moreStories.map((item) => (
-                        <a href={`/news/${item.id}`} class="group glass-card glass-hover flex flex-col p-3">
+                        <a href={withBase(`/news/${item.id}`)} class="group glass-card glass-hover flex flex-col p-3">
                             <div class="aspect-[16/10] overflow-hidden rounded-[1.25rem] bg-base-content/5">
                                 {item.data.cover && (
                                     <Image

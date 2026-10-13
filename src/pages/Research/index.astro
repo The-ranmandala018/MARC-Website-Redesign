@@ -1,4 +1,5 @@
 ---
+import { withBase } from "../../utils/url";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import "../../styles/app.css";
 import Breadcrumb from "../../components/Breadcrumb.astro";
@@ -49,7 +50,7 @@ const otherProjects = projects.filter((p) => !areaTitles.has(norm(p.data.researc
     description="MARC's research areas and projects — foundational AI and applied research across critical domains where intelligence meets impact."
 >
     <Breadcrumb>
-        <li><a href="/">Home</a></li>
+        <li><a href={withBase("/")}>Home</a></li>
         <li>Research</li>
     </Breadcrumb>
 
@@ -191,7 +192,7 @@ const otherProjects = projects.filter((p) => !areaTitles.has(norm(p.data.researc
                 <h2 class="mb-6 font-display text-3xl sm:text-4xl text-base-content">Other projects</h2>
                 <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
                     {otherProjects.map((p) => (
-                        <a href={`/projects/${p.id}`} data-project-search-card data-search-text={JSON.stringify(p.data)} class="group glass-card glass-hover flex items-center gap-4 p-3">
+                        <a href={withBase(`/projects/${p.id}`)} data-project-search-card data-search-text={JSON.stringify(p.data)} class="group glass-card glass-hover flex items-center gap-4 p-3">
                             <div class="h-16 w-20 shrink-0 overflow-hidden rounded-xl bg-base-content/5">
                                 {p.data.coverImage && (
                                     <Image src={p.data.coverImage} alt="" width={160} class="h-full w-full object-cover" />

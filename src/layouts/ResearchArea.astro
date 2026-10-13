@@ -1,4 +1,5 @@
 ---
+import { withBase } from "../utils/url";
 import "../styles/app.css";
 import BaseLayout from "./BaseLayout.astro";
 import Breadcrumb from "../components/Breadcrumb.astro";
@@ -28,8 +29,8 @@ const otherAreas = getResearchAreas().filter((a) => a.title !== frontmatter.titl
 
 <BaseLayout title={frontmatter.title} description={frontmatter.short?.slice(0, 155)}>
     <Breadcrumb>
-        <li><a href="/">Home</a></li>
-        <li><a href="/Research">Research</a></li>
+        <li><a href={withBase("/")}>Home</a></li>
+        <li><a href={withBase("/Research")}>Research</a></li>
         <li>{frontmatter.title}</li>
     </Breadcrumb>
 
@@ -86,12 +87,12 @@ const otherAreas = getResearchAreas().filter((a) => a.title !== frontmatter.titl
             <section class="mt-16">
                 <div class="mb-6 flex items-end justify-between gap-4">
                     <h2 class="font-display text-3xl sm:text-4xl text-base-content">Projects in this area</h2>
-                    <ArrowPill label="All research" href="/Research" class="hidden sm:inline-flex" />
+                    <ArrowPill label="All research" href={withBase("/Research")} class="hidden sm:inline-flex" />
                 </div>
 
                 <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
                     {relatedProjects.map((project) => (
-                        <a href={`/projects/${project.id}`} class="group glass-card glass-hover flex flex-col p-3">
+                        <a href={withBase(`/projects/${project.id}`)} class="group glass-card glass-hover flex flex-col p-3">
                             <div class="aspect-[16/10] overflow-hidden rounded-[1.25rem] bg-base-content/5">
                                 {project.data.coverImage && (
                                     <Image

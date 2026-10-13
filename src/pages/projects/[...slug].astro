@@ -1,4 +1,5 @@
 ---
+import { withBase } from "../../utils/url";
 import { getCollection, render } from "astro:content";
 import { Image } from "astro:assets";
 import BaseLayout from "../../layouts/BaseLayout.astro";
@@ -54,8 +55,8 @@ const otherProjects = (await getCollection("projects"))
     description={excerpt(project.body, 155) || `${project.data.project} — a MARC research project.`}
 >
     <Breadcrumb>
-        <li><a href="/">Home</a></li>
-        <li><a href="/Research">Research</a></li>
+        <li><a href={withBase("/")}>Home</a></li>
+        <li><a href={withBase("/Research")}>Research</a></li>
         {areaUrl && <li><a href={areaUrl}>{project.data.researchArea}</a></li>}
         <li class="truncate max-w-[220px]">{project.data.project}</li>
     </Breadcrumb>
@@ -178,7 +179,7 @@ const otherProjects = (await getCollection("projects"))
                                                 return (
                                                     <li>
                                                         <Tag
-                                                            {...(person ? { href: `/people/${person.id}/` } : {})}
+                                                            {...(person ? { href: withBase(`/people/${person.id}/`) } : {})}
                                                             class="-mx-2 flex items-center gap-3 rounded-2xl p-2 transition-colors hover:bg-white/60 dark:hover:bg-white/5"
                                                         >
                                                             <Image
@@ -234,12 +235,12 @@ const otherProjects = (await getCollection("projects"))
             <section class="mt-20">
                 <div class="mb-6 flex items-end justify-between gap-4">
                     <h2 class="font-display text-3xl sm:text-4xl text-base-content">More projects</h2>
-                    <ArrowPill label="All research" href="/Research" />
+                    <ArrowPill label="All research" href={withBase("/Research")} />
                 </div>
 
                 <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
                     {otherProjects.map((p) => (
-                        <a href={`/projects/${p.id}`} class="group glass-card glass-hover flex items-center gap-4 p-3">
+                        <a href={withBase(`/projects/${p.id}`)} class="group glass-card glass-hover flex items-center gap-4 p-3">
                             <div class="h-20 w-24 shrink-0 overflow-hidden rounded-2xl bg-base-content/5">
                                 {p.data.coverImage && (
                                     <Image

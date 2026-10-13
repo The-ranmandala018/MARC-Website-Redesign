@@ -1,14 +1,15 @@
 ---
+import { withBase } from "../utils/url";
 import logo from "../assets/MARC_Logo.png";
 import { Image } from "astro:assets";
 
 const links = [
-    { href: "/#about", label: "About" },
-    { href: "/Research", label: "Research" },
-    { href: "/publications", label: "Publications" },
-    { href: "/people", label: "People" },
-    { href: "/news", label: "News" },
-    { href: "/contact", label: "Contact" },
+    { href: withBase("/#about"), label: "About" },
+    { href: withBase("/Research"), label: "Research" },
+    { href: withBase("/publications"), label: "Publications" },
+    { href: withBase("/people"), label: "People" },
+    { href: withBase("/news"), label: "News" },
+    { href: withBase("/contact"), label: "Contact" },
 ];
 
 const path =
@@ -38,7 +39,7 @@ const isActive = (href: string) => {
      ===================================================== -->
 
 <a
-    href="/"
+    href={withBase("/")}
     class="relative z-20 flex items-center gap-2 shrink-0"
     aria-label="MARC Home"
 >
