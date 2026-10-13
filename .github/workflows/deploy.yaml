@@ -2,7 +2,7 @@ name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: [ main ]
+    branches: [ website-redesign ]
   repository_dispatch:
     types: [content-update]
   workflow_dispatch:
